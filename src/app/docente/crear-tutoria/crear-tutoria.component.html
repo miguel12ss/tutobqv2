@@ -1,0 +1,108 @@
+<div class="container">
+    <h4 class="text-center">Tutorias pendientes por dictar</h4>
+    <div class="container-button d-flex justify-content-end">
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Crear tutoria
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear tutoria</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Tema a tratar</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Modulo</label>
+                  <input type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" 
+                  class="form-label">Numero de salon </label>
+                  <input type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" 
+                  class="form-label">Programa </label>
+                  <input type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" 
+                  class="form-label">Sede </label>
+                  <select class="form-control" name="sede" id="sede">
+                    <option value="barranquilla">Barranquilla</option>
+                    <option value="barranquilla">Soledad</option>
+                    
+                  </select>
+                </div>
+              
+
+
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" 
+                  class="form-label">Fecha</label>
+                  <input type="date" class="form-control" id="exampleInputPassword1">
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" 
+                  class="form-label">Hora</label>
+                  <input type="time" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" 
+                  class="form-label">Hora Fin</label>
+                  <input type="time" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+                  <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+              </div>
+              </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    </div>
+    <table class="table mt-2">
+        <thead>
+          <tr>
+            <th scope="col">Tema a tratar</th>
+            <th scope="col">fecha</th>
+            <th scope="col">tiempo</th>
+            <th scope="col"> Cupos
+            </th>
+<th scope="col">salon</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+           
+            <td scope="row">Poo</td>
+            <td scope="row">23/06/23</td>
+            <td scope="row">2horas</td>
+            <td  scope="row">25</td>
+            <td scope="row">18</td>
+           
+          </tr>
+          
+        </tbody>
+      </table>
+
+
+
+</div>

@@ -1,0 +1,109 @@
+<div class="container-form">
+  <form class="row" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
+    <div class="col-md-4 text-center d-flex align-items-center">
+      <div>
+        <img
+          src="../../../assets/userMiguelSuarez.png"
+          class="img-fluid w-75"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4 mt-2">
+      <div class="form-group">
+        <label for="nombre">Nombres</label>
+        <input
+          required
+          class="form-control"
+          formControlName="nombres"
+          type="text"
+          name="nombre"
+          id="nombre"
+          readonly
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="apellido">Apellidos</label>
+        <input
+          class="form-control"
+          type="text"
+          name="apellido"
+          id="apellido"
+          readonly
+          formControlName="apellidos"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="tipo">Tipo de documento</label>
+        <select
+          name="tipo"
+          formControlName="tipoDocumento"
+          id="tipo"
+         
+          class="form-control"
+        >
+          <option>Tarjeta de identidad</option>
+          <option>Cedula de ciudadania</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="tipo">Numero de documento</label>
+        <input
+          readonly
+          name="numeroDocumento"
+          formControlName="numeroDocumento"
+          id="numeroDocumento"
+          type="number"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="col-md-4 mt-2">
+      <div class="form-group">
+        <label for="facultad">Facultad</label>
+        <select
+          
+          formControlName="facultad"
+          name="facultad"
+          id="facultad"
+          class="form-control"
+        >
+          <option selected value="">Facultad de ingenierias</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Numero de telefono</label>
+        <input
+          readonly
+          class="form-control"
+          type="number"
+          name="numeroTelefono"
+          formControlName="numeroTelefono"
+          id="numeroTelefono"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="correo">Correo</label>
+        <input
+          readonly
+          class="form-control"
+          type="email"
+          name="correo"
+          id="correo"
+          formControlName="correo"
+          required
+        />
+      </div>
+    </div>
+    <div class="container-button">
+      <button class="btn btn-primary">Enviar</button>
+    </div>
+  </form>
+</div>

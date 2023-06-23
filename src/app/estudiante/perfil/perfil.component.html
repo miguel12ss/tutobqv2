@@ -1,0 +1,103 @@
+<div class="container-form">
+
+        <form class="row" [formGroup]="contactForm"   (ngSubmit)="onSubmit($event)">
+            <div class="col-md-4 text-center d-flex align-items-center ">
+                <div >
+                    <img src="./././assets/userMiguelSuarez.png" class="img  " />
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <div class="form-group">
+                    <label for="nombre">Nombres</label>
+                    <input required class="form-control" formControlName="nombres"  type="text" name="nombre" id="nombre" readonly [ngClass]="{'is-invalid':submitted && contactForm.get('nombres')?.errors} " />
+                </div>
+                <span class="text-danger" *ngIf="submitted && contactForm.get('nombres')?.errors">no ha cumplido el
+                    minimo de caracteres</span>
+
+                <div class="form-group">
+                    <label for="apellido">Apellidos</label>
+                    <input  class="form-control" type="text" name="apellido" id="apellido" readonly  formControlName="apellidos"  [ngClass]="{'is-invalid':submitted && contactForm.get('apellidos')?.errors} "
+                        required />
+                </div>
+                <span class="text-danger" *ngIf="submitted && contactForm.get('apellidos')?.errors">no ha cumplido el
+                    minimo de caracteres</span>
+
+                <div class="form-group">
+                    <label for="tipo">Tipo de documento</label>
+                    <select  name="tipo" formControlName="tipoDocumento" id="tipo" [disabled]="true" class="form-control" [ngClass]="{'is-invalid':submitted && contactForm.get('tipo')?.errors} " >
+                        <option >Tarjeta de identidad</option>
+                        <option>Cedula de ciudadania</option>
+                    </select>
+                   
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo">Numero de documento</label>
+                    <input readonly  name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number" class="form-control" [ngClass]="{'is-invalid':submitted && contactForm.get('numeroDocumento')?.errors} " />
+                        
+                
+                   
+                </div>
+
+                
+               
+               
+            </div>
+            <div class="col-md-4 mt-2">
+
+                <div class="form-group">
+                    <label for="facultad">Facultad</label>
+                    <select [disabled]="true"   formControlName="facultad" name="facultad" id="facultad" class="form-control"  >
+                        <option selected value="" >
+                            Facultad de ingenierias
+                        </option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="programa">Programa perteneciente</label>
+                    <select readonly   formControlName="programa" name="programa" id="programa" class="form-control"  >
+                        <option selected value="">
+                            tecnico profesional en mantenimiento en sistemas informaticos
+                        </option>
+                    </select>
+                </div>
+               
+               
+                <div class="form-group">
+                    <label for="telefono">Numero de telefono</label>
+                    <input  readonly class="form-control" type="number" name="numeroTelefono" formControlName="numeroTelefono" 
+                    [ngClass]="{'is-invalid':submitted && contactForm.get('numeroTelefono')?.errors} " id="numeroTelefono"  
+                      required />
+                </div>
+                <span class="text-danger"
+                    *ngIf="submitted && contactForm.get('numeroTelefono')?.errors?.['maxlength']">no ha cumplido el
+                    minimo de caracteres</span>
+
+                <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input readonly class="form-control" type="email" name="correo" id="correo" formControlName="correo"  [ngClass]="{'is-invalid':submitted && contactForm.get('correo')?.errors} "
+                        (input)="validarCorreo()"   required />
+
+                </div>
+                <span class="text-danger" *ngIf="submitted && contactForm.get('correo')?.errors">debe terminar
+                    @unibarranquilla.edu.co</span>
+              
+
+             
+               
+
+              
+
+
+
+
+
+
+            </div>
+           <div class="container-button  "><button class="btn btn-primary "  >Enviar</button></div>
+        </form>
+   
+</div>

@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Poppins:wght@500&display=swap');
+
+.hero{
+    width: 100%;
+    height: 100vh;
+    background-image:url("https://th.bing.com/th/id/R.1f809b676481b502652ae32cf616e198?rik=34nmL7uVTl0%2b6w&pid=ImgRaw&r=0");
+   background-repeat: no-repeat;
+   background-size: cover ;
+   background-position: center;
+  
+}
+.container-hero{
+    width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  font-family: 'Open Sans';
+ 
+  
+  
+}
+
+
+.btn{
+    border-radius: 30px;
+    padding: 10px 40px ;
+}
+
+.text-white{
+   color: #000;
+   font-weight: 600;
+   font-size: 40px;
+}
+a{
+    font-weight: 600;
+}
+
+@media screen and (max-width:862px) {
+    .color{
+        color: white;
+    }
+    h1{
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+}
+
+
