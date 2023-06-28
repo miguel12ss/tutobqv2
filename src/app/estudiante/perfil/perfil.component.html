@@ -3,9 +3,14 @@
         <form class="row" [formGroup]="contactForm"   (ngSubmit)="onSubmit($event)">
             <div class="col-md-4 text-center d-flex align-items-center ">
                 <div >
-                    <img src="./././assets/userMiguelSuarez.png" class="img  " />
+                    <img src="https://lanavedeteseo.files.wordpress.com/2018/03/estudiante-icono.png" class="img  " loading="lazy" />
+                    <div class="container-button d-flex">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Cambiar foto</button>
+                    </div>
+
                 </div>
             </div>
+            
 
             <div class="col-md-4 mt-2">
                 <div class="form-group">
@@ -101,3 +106,29 @@
         </form>
    
 </div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar foto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Imagen</label>
+              <input type="file" class="form-control" id="recipient-name">
+            </div>
+            
+          
+        
+        <div class="modal-footer d-flex">
+        
+          <button type="button" class="btn btn-primary">Send message</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>

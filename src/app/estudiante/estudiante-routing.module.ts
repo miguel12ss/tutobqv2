@@ -13,7 +13,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'perfil', pathMatch: 'full' },
       { path: 'perfil', loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule) },
       {path:'tutoriasPendientes',loadChildren:()=>import('./tutorias-pendientes/tutorias-pendientes.module').then(m=>m.TutoriasPendientesModule)},
-      {path:'buscarTutoria',loadChildren:()=>import('./buscar/buscar.module').then(m=>m.BuscarModule)}
+      {path:'buscarTutoria',loadChildren:()=>import('./buscar/buscar.module').then(m=>m.BuscarModule)},
+      {path:'registroTutoria',loadChildren:()=>import('./registro-tutoria/registro-tutoria.module').then(m=>m.RegistroTutoriaModule)},
     ]
   },
 

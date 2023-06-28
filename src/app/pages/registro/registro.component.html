@@ -1,6 +1,6 @@
 <div class="container-main">
     <div class="container">
-        <form class="row" [formGroup]="contactForm"   (ngSubmit)="onSubmit($event)">
+        <form class="row"  [formGroup]="contactForm"   (ngSubmit)="onSubmit($event)">
             <div class="col-md-4 container-img">
                 <div class="container-img">
                     <img src="https://www.unibarranquilla.edu.co/images/logo.png" class="img-fluid" />
@@ -10,7 +10,7 @@
             <div class="col-md-4 mt-2">
                 <div class="form-group">
                     <label for="nombre">Nombres</label>
-                    <input required class="form-control" formControlName="nombres"  type="text" name="nombre" id="nombre"  [ngClass]="{'is-invalid':submitted && contactForm.get('nombres')?.errors} " />
+                    <input required class="form-control" formControlName="nombres"   type="text" name="nombre" id="nombre"  [ngClass]="{'is-invalid':submitted && contactForm.get('nombres')?.errors} " />
                 </div>
                 <span class="text-danger" *ngIf="submitted && contactForm.get('nombres')?.errors">no ha cumplido el
                     minimo de caracteres</span>

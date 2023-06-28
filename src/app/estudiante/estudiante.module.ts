@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TutoriasPendientesComponent } from './tutorias-pendientes/tutorias-pendientes.component';
 import { BuscarComponent } from './buscar/buscar.component';
+import { RegistroTutoriaComponent } from './registro-tutoria/registro-tutoria.component';
 
 @NgModule({
   declarations: [ 
@@ -16,6 +17,7 @@ import { BuscarComponent } from './buscar/buscar.component';
     EstudianteComponent,
     TutoriasPendientesComponent,
     BuscarComponent,
+    RegistroTutoriaComponent,
     
   ],
   imports: [
