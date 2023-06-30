@@ -1,14 +1,22 @@
 import { HttpClient } from "@angular/common/http";
 import {Observable} from "rxjs"
 import {Injectable} from "@angular/core"
+import { Estudiante } from "../shared/interfaces/Estudiante.interface";
 @Injectable()
 export class ApiService{
 
-    private readonly url="http://localhost:5000/api/data/v2"
+    private  url="http://localhost:5000/registro"
 constructor(private readonly httpClient:HttpClient){
 
 }
-    getData():Observable<any>{
-        return this.httpClient.get(this.url)
+    insertData(estudiante:Estudiante){
+        console.log('entras');
+        
+      this.httpClient.post(this.url,estudiante).subscribe(
+        (response)=>{
+            console.log(response);
+            
+        }
+      )
     } 
 }

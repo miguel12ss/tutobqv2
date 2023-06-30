@@ -15,6 +15,7 @@ const routes: Routes = [
       {path:'tutoriasPendientes',loadChildren:()=>import('./tutorias-pendientes/tutorias-pendientes.module').then(m=>m.TutoriasPendientesModule)},
       {path:'buscarTutoria',loadChildren:()=>import('./buscar/buscar.module').then(m=>m.BuscarModule)},
       {path:'registroTutoria',loadChildren:()=>import('./registro-tutoria/registro-tutoria.module').then(m=>m.RegistroTutoriaModule)},
+      {path:'horario',loadChildren:()=>import('./horario/horario.module').then(m=>m.HorarioModule)}
     ]
   },
 

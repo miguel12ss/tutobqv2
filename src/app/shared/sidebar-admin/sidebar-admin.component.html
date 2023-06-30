@@ -1,56 +1,3 @@
-<!-- 
-<nz-layout class="app-layout ">
-    <nz-sider class="menu-sidebar"
-              nzCollapsible
-              nzWidth="256px"
-              nzBreakpoint="md"
-              [(nzCollapsed)]="isCollapsed"
-              [nzTrigger]="null">
-      <div class="sidebar-logo">
-        <a href="https://ng.ant.design/" target="_blank">
-          <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-          <h1>Lourdes de avila</h1>
-        </a>
-      </div>
-      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="perfil">Perfil</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="crearTutoria">Tutorias pendientes por dictar</a>
-            </li>
-          </ul>
-        </li>
-        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>Basic Form</a>
-            </li>
-          </ul>
-        </li>
-        
-      </ul>
-    </nz-sider>
-    <nz-layout>
-      <nz-header>
-        <div class="app-header">
-          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-              <span class="trigger"
-                 nz-icon
-                 [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-              ></span>
-          </span>
-        </div>
-      </nz-header>
-      <nz-content>
-        <div class="inner-content "  >
-          <router-outlet></router-outlet>
-        </div>
-      </nz-content>
-    </nz-layout>
-  </nz-layout> -->
 
   <nz-layout class="app-layout ">
     <nz-sider class="menu-sidebar"
@@ -66,25 +13,89 @@
         </a>
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-submenu nzOpen nzTitle="Usuarios" nzIcon="dashboard">
+       <li nz-submenu nzOpen nzTitle="Usuarios" nzIcon="dashboard">
           <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="actualizar" >Actualizar</a>
+            <!-- <li nz-menu-item nzMatchRouter>
+              <a routerLink="actualizar" >Crear Agendamiento</a>
+            </li> -->
+            <li nz-submenu nzClose nzTitle="Estudiante" nzIcon="user">
+              <ul>
+                <li nz-menu-item >
+                  <a routerLink="agregar/estudiante" >Agregar Estudiante</a>
+                </li>
+                <li nz-menu-item >
+                  <a routerLink="deshabilitar-estudiante" >Deshabilitar Estudiante</a>
+                </li>
+                <li nz-menu-item >
+                  <a routerLink="modificar-estudiante" >Modificar Estudiante</a>
+                </li>
+                
+    
+               
+              </ul>
+              
             </li>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="agregar" >Agregar</a>
+            <li nz-submenu nzClose nzTitle="Docente" nzIcon="user">
+              <ul>
+                <li nz-menu-item >
+                  <a routerLink="agregar/docente" >Agregar Docente</a>
+                </li>
+                <li nz-menu-item >
+                  <a routerLink="deshabilitar-docente" >Deshabilitar-docente</a>
+                </li>
+                <li nz-menu-item >
+                  <a routerLink="modificar-docente" >Modificar-docente</a>
+                </li>
+                
+    
+               
+              </ul>
+              
             </li>
-
            
           </ul>
+
+
+
         </li>
-        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+        <li nz-submenu nzOpen nzTitle="Tutorias" nzIcon="dashboard">
+          <ul>
+            
+            
+              <ul>
+                <li nz-menu-item >
+                  <a routerLink="agregar/tutorias" >Agregar Tutorias</a>
+                </li>
+                <li nz-menu-item >
+                  <a routerLink="modificarTutoria" >Modificar Tutorias</a>
+                </li>
+                <li nz-menu-item >
+                  <a routerLink="deshabilitarTutoria" >Deshabilitar Tutorias</a>
+                </li>
+                
+    
+               
+              </ul>
+             
+           
+           
+          </ul>
+
+
+
+        </li>
+      <!-- <li nz-submenu nzOpen nzTitle="Tutorias" nzIcon="dashboard">
+
+
+
+        </li> -->
+        <!-- <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
           <ul>
             <li nz-menu-item nzMatchRouter>
               <a>Basic Form</a>
             </li>
           </ul>
-        </li>
+        </li> --> 
         
       </ul>
     </nz-sider>

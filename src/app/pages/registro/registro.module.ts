@@ -13,6 +13,9 @@ import { RegistroComponent } from './registro.component';
     FormsModule,
     ReactiveFormsModule,RegistroRoutingModule
  
+  ],
+  exports:[
+    RegistroComponent
   ]
 })
 export class RegistroModule { }

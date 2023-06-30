@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
+import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -11,7 +14,7 @@ export class RegistroComponent  implements OnInit{
   contactForm!: FormGroup
   public showAlertDanger = false
   submitted = false
-  constructor(public fb: FormBuilder) {
+  constructor(public fb: FormBuilder,private apiService:ApiService,private router:Router) {
     
 
 
@@ -30,29 +33,40 @@ export class RegistroComponent  implements OnInit{
 
   initForm():FormGroup{
     return this.fb.group({
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      tipoDocumento: [ '',Validators.required],
-      contraseña: ['', [Validators.required, Validators.minLength(7)]],
-      programa: ['', Validators.required],
-      numeroTelefono: ['', Validators.required,],
-      correo: ['', Validators.email], 
-      nuevaContraseña: ['', [Validators.required, Validators.minLength(7)]],
-      politica:['',Validators.requiredTrue],
-      numeroDocumento:['',Validators.required,Validators.maxLength(10)],
-      facultad:['',Validators.required]
+      nombres: [null, ],
+      apellidos: [null, ],
+      tipoDocumento: [ null,Validators.required],
+      contraseña: [null, ],
+      programa: [null, ],
+      numeroTelefono: [null, ],
+      correo: [null, Validators.email], 
+      nuevaContraseña: [null, ],
+      politica:[null,],
+      numeroDocumento:[null,],  
+      facultad:[null,]
     })
   }
   onSubmit(event:Event) {
-    this.submitted=true
-
-   
-    if (this.contactForm.invalid) {
-     console.log('formulario valido');
-     
-
-     return
+  
+    if (this.contactForm.valid) {
+      console.log(this.contactForm.value);
       
+    let estudiante:Estudiante={
+
+      nombres: this.contactForm.value.nombres,
+      apellidos:this.contactForm.value.apellidos,
+      tipoDocumento: this.contactForm.value.tipoDocumento,
+      numeroDocumento: this.contactForm.value.numeroDocumento,
+      numeroTelefono: this.contactForm.value.numeroTelefono,
+      facultad: this.contactForm.value.facultad,
+      programa: this.contactForm.value.programa,
+      correo: this.contactForm.value.correo,
+      contraseña: this.contactForm.value.contraseña,
+    }
+     this.apiService.insertData(estudiante)
+      Swal.fire("registro existoso","el registro ha sido exitoso","success")
+     
+      this.router.navigate(['/auth/login'])
     }
    
 

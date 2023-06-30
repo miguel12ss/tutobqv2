@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TutoriasPendientesComponent } from './tutorias-pendientes/tutorias-pendientes.component';
 import { BuscarComponent } from './buscar/buscar.component';
 import { RegistroTutoriaComponent } from './registro-tutoria/registro-tutoria.component';
+import { NgZorroAntdModule } from '../ngZorroAntdModule';
 
 @NgModule({
   declarations: [ 
@@ -23,7 +24,7 @@ import { RegistroTutoriaComponent } from './registro-tutoria/registro-tutoria.co
   imports: [
     CommonModule,
     EstudianteRouting,
-  ReactiveFormsModule,SharedModule
+  ReactiveFormsModule,SharedModule,NgZorroAntdModule
   ]
 })
 export class EstudianteModule { }
