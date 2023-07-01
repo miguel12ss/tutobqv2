@@ -8,20 +8,20 @@ import Swal from 'sweetalert2';
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegistroComponent  implements OnInit{
+export class RegistroComponent implements OnInit {
   contactForm!: FormGroup
   public showAlertDanger = false
   submitted = false
-  constructor(public fb: FormBuilder,private apiService:ApiService,private router:Router) {
-    
+  constructor(public fb: FormBuilder, private apiService: ApiService, private router: Router) {
 
 
-    
+
+
   }
   ngOnInit(): void {
-    this.contactForm=this.initForm()
+    this.contactForm = this.initForm()
   }
   validarCorreo() {
     if (!this.contactForm.get('correo')?.invalid) {
@@ -31,60 +31,67 @@ export class RegistroComponent  implements OnInit{
     }
   }
 
-  initForm():FormGroup{
+  initForm(): FormGroup {
     return this.fb.group({
-      nombres: [null, ],
-      apellidos: [null, ],
-      tipoDocumento: [ null,Validators.required],
-      contraseña: [null, ],
-      programa: [null, ],
-      numeroTelefono: [null, ],
-      correo: [null, Validators.email], 
-      nuevaContraseña: [null, ],
-      politica:[null,],
-      numeroDocumento:[null,],  
-      facultad:[null,]
+      nombres: [null,],
+      apellidos: [null,],
+      tipoDocumento: [null, Validators.required],
+      contraseña: [null,],
+      programa: [null,],
+      numeroTelefono: [null,],
+      correo: [null, Validators.email],
+      nuevaContraseña: [null,],
+      politica: [null,],
+      numeroDocumento: [null,],
+      facultad: [null,]
     })
   }
-  onSubmit(event:Event) {
-  
-    if (this.contactForm.valid) {
+  onSubmit(event: Event) {
+    console.log(this.contactForm.get('contraseña'),this.contactForm.get('nuevaContraseña'));
+    
+    if (this.contactForm.valid && this.contactForm.get('contraseña')?.value === this.contactForm.get('nuevaContraseña')?.value) {
       console.log(this.contactForm.value);
-      
-    let estudiante:Estudiante={
 
-      nombres: this.contactForm.value.nombres,
-      apellidos:this.contactForm.value.apellidos,
-      tipoDocumento: this.contactForm.value.tipoDocumento,
-      numeroDocumento: this.contactForm.value.numeroDocumento,
-      numeroTelefono: this.contactForm.value.numeroTelefono,
-      facultad: this.contactForm.value.facultad,
-      programa: this.contactForm.value.programa,
-      correo: this.contactForm.value.correo,
-      contraseña: this.contactForm.value.contraseña,
-    }
-     this.apiService.insertData(estudiante)
-      Swal.fire("registro existoso","el registro ha sido exitoso","success")
-     
+
+
+      let estudiante: Estudiante = {
+
+        nombres: this.contactForm.value.nombres,
+        apellidos: this.contactForm.value.apellidos,
+        tipoDocumento: this.contactForm.value.tipoDocumento,
+        numeroDocumento: this.contactForm.value.numeroDocumento,
+        numeroTelefono: this.contactForm.value.numeroTelefono,
+        facultad: this.contactForm.value.facultad,
+        programa: this.contactForm.value.programa,
+        correo: this.contactForm.value.correo,
+        contraseña: this.contactForm.value.contraseña,
+      }
+      this.apiService.insertData(estudiante)
+      Swal.fire("registro existoso", "el registro ha sido exitoso", "success")
+
       this.router.navigate(['/auth/login'])
+    } else {
+      console.log('invalido');
+      alert('deben coincidir las contraseñas')
     }
-   
 
-    console.log('invalido');
-    
-    
-    
-     
-   
+
+
+
+
+
+
 
 
 
 
   }
-  showAlert(){
-alert('la politica es requerida')
+  showAlert() {
+    alert('la politica es requerida')
   }
- 
+
+
+
 
 }
 

@@ -1,6 +1,6 @@
 <div class="container-main">
   <div class="container">
-    <form class="row" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
+    <form class="row" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">  
       <div class="col-md-4 container-img">
         <div class="container-img">
           <img
@@ -158,6 +158,7 @@
             type="text"
             name="contraseña"
             id="contraseña"
+            
             formControlName="contraseña"
             [ngClass]="{
               'is-invalid': submitted && contactForm.get('contraseña')?.errors
@@ -188,6 +189,7 @@
             type="checkbox"
             name="politica"
             formControlName="politica"
+            
             [ngClass]="{
               'is-invalid': submitted && contactForm.get('politica')?.errors
             }"
@@ -211,7 +213,7 @@
         
       </div>
      <div class="container-button">
-      <button class="btn btn-primary" [disabled]="contactForm.invalid ">Enviar</button>
+      <button class="btn btn-primary" [disabled]="contactForm.invalid || contactForm.get('contraseña')==contactForm.get('nuevaContraseña')  ">Enviar</button>
     </div>
     </form>
 

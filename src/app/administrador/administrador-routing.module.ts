@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: AdministradorComponent,
     children: [
-      { path: '', redirectTo: 'agregar', pathMatch: 'full' },
+      { path: '', redirectTo: 'deshabilitar-docente', pathMatch: 'full' },
       {
         path: 'agregar',
         loadChildren: () =>
@@ -41,6 +41,7 @@ const routes: Routes = [
             (m) => m.ModificarEstudianteModule
           ),
       },
+      {path:'**',redirectTo:'deshabilitar-docente'}
 
   
       // {path:'crearTutoria',loadChildren:()=>import('./crear-tutoria/crear-tutoria.module').then(m=>m.CrearTutoriaModule)},

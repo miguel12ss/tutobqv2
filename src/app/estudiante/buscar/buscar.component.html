@@ -1,4 +1,6 @@
-    <div class="container-fluid">
+  
+ 
+  <div class="container-fluid">
   
       <form class="d-flex w-50" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -19,4 +21,12 @@
         </div>
     </div>
       </div> -->
+      <br><br>
+
+      <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
+        <nz-card-meta nzTitle="Europe Street beat" nzDescription="www.instagram.com"></nz-card-meta>
+      </nz-card>
+      <ng-template #coverTemplate>
+        <img alt="example" loading="lazy" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+      </ng-template>
 

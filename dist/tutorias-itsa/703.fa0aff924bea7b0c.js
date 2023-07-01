@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunktutoriasItsa=self.webpackChunktutoriasItsa||[]).push([[703],{1703:(D,u,t)=>{t.r(u),t.d(u,{EstudianteModule:()=>_});var n=t(6895),E=t(3732),o=t(7364),d=t(433),s=t(4650);let _=(()=>{class a{}return a.\u0275fac=function(M){return new(M||a)},a.\u0275mod=s.oAB({type:a}),a.\u0275inj=s.cJS({imports:[n.ez,E.D,d.UX,o.m]}),a})()}}]);

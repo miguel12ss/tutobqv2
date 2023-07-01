@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent {
 contactForm!:FormGroup
 showAlert=false
 submitted=false
-constructor(public fb:FormBuilder,private router:Router){
+constructor(public fb:FormBuilder,private router:Router,private apiservice:ApiService){
 
   this.contactForm=fb.group({
     email:['',[Validators.email,Validators.required]],
@@ -29,31 +30,19 @@ validarInput() {
 }
 
 onSubmit(form:any):void{
-  alert('entras')
-  
-  let email="miguel@unibarranquilla.edu.co"
-  let password="miguel123"
 
-  let emailDocente="lourdes@unibarranquilla.edu.co"
-  let passwordDocente="lourdes"
+  console.log(form);
   
-  let emailAdmin="joshua@unibarranquilla.edu.co"
-  let passwordAdmin="joshua123"
+ 
   
   this.submitted=true
 
-  // if(this.contactForm.invalid){
-  //   return 
-  // }
-  if(email==form.email && password==form.password ){
-    this.router.navigate(['/estudiante'])
-  }
-  if(emailDocente==form.email && passwordDocente==form.password ){
-    this.router.navigate(['/docente'])
-  }
-  if(emailAdmin==form.email && passwordAdmin==form.password ){
-    this.router.navigate(['/admin'])
-  }
+if(this.contactForm.valid){
+ let token= this.apiservice.loginService(form.email,form.password)
+ 
+}
+
+ 
   
 
   
