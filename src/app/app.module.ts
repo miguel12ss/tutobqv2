@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { ApiService } from './services/api.service';
 import { HeroComponent } from './components/hero/hero.component';
 import { ServiciosComponent } from './components/servicios/servicios.component';
@@ -16,6 +16,10 @@ import { IconsProviderModule } from './icons-provider.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { DocenteModule } from './docente/docente.module';
 import { EstudianteModule } from './estudiante/estudiante.module';
+import { NgZorroAntdModule } from './ngZorroAntdModule';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { spinnerService } from './services-interceptor/spinner.service';
+import { InterceptorService } from './services-interceptor/interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,10 +31,13 @@ import { EstudianteModule } from './estudiante/estudiante.module';
     BrowserAnimationsModule,
     SharedModule,
     FormsModule,
-    DocenteModule
+    DocenteModule,
+    NgxSpinnerModule.forRoot()
+    
   ],
   exports: [],
-  providers: [ApiService, NavbarServices],
+  providers: [ApiService, NavbarServices,spinnerService,{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

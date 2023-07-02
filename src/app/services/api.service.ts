@@ -5,14 +5,15 @@ import { Estudiante } from "../shared/interfaces/Estudiante.interface";
 import { Router } from "@angular/router";
 @Injectable()
 export class ApiService{
-    private urlGlobal='http://localhost:5000/'
-    private  url="http://localhost:5000/registro"
+    private urlGlobal='http://127.0.0.1:5000/'
+    private  url="http://127.0.0.1:5000/registro"
     private token=""
 constructor(private readonly httpClient:HttpClient,private router:Router){
 
 }
     insertData(estudiante:Estudiante){
         console.log('entras');
+        console.log(estudiante);
         
       this.httpClient.post(this.url,estudiante).subscribe(
         (response)=>{

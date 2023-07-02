@@ -66,8 +66,10 @@ export class RegistroComponent implements OnInit {
         correo: this.contactForm.value.correo,
         contraseña: this.contactForm.value.contraseña,
       }
+      console.log('el estudiante es',estudiante);
+      
       this.apiService.insertData(estudiante)
-      Swal.fire("registro existoso", "el registro ha sido exitoso", "success")
+      // Swal.fire("registro existoso", "el registro ha sido exitoso", "success")
 
       this.router.navigate(['/auth/login'])
     } else {
