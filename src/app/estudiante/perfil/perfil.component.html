@@ -1,134 +1,142 @@
-<div class="container-form">
+<h3 class="text-center">PERFIL DEL USUARIO</h3>
+<form class="row" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
+    <div class="col-md-4 text-center d-flex align-items-center ">
+        <div>
+            <img src="https://lanavedeteseo.files.wordpress.com/2018/03/estudiante-icono.png" class="img  "
+                loading="lazy" />
+            <div class="container-button d-flex">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    data-bs-whatever="@mdo">Cambiar foto</button>
+            </div>
 
-        <form class="row" [formGroup]="contactForm"   (ngSubmit)="onSubmit($event)">
-            <div class="col-md-4 text-center d-flex align-items-center ">
-                <div >
-                    <img src="https://lanavedeteseo.files.wordpress.com/2018/03/estudiante-icono.png" class="img  " loading="lazy" />
-                    <div class="container-button d-flex">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Cambiar foto</button>
+        </div>
+    </div>
+
+
+    <div class="col-md-4 mt-2">
+        <div class="form-group">
+            <label for="nombre"><b>Nombres</b></label>
+            <input required class="form-control" formControlName="nombres" type="text" name="nombre" id="nombre"
+                readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="tipo"><b>Tipo de documento</b></label>
+            <input required class="form-control" formControlName="tipo" type="text" name="tipo" id="tipo" readonly />
+
+        </div>
+
+        <div class="form-group">
+            <label for="facultad"><b>Facultad</b></label>
+            <input required class="form-control" formControlName="facultad" type="text" name="facultad" id="facultad"
+                readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="correo"><b>Correo</b></label>
+            <input class="form-control" type="email" name="correo" id="correo" formControlName="correo" readonly />
+
+        </div>
+    </div>
+
+    <div class="col-md-4 mt-2">
+        <div class="form-group">
+            <label for="apellido"><b>Apellidos</b></label>
+            <input class="form-control" type="text" name="apellido" id="apellido" readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="tipo"><b>Numero de documento</b></label>
+            <input name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number"
+                class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="programa"><b>Programa perteneciente</b></label>
+            <input name="programa" formControlName="programa" id="programa" type="text" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="telefonocelular"><b>Telefono celular</b></label>
+            <input name="telefonocelular" formControlName="telefonocelular" id="telefonocelular" type="number"
+                class="form-control" readonly />
+        </div>
+    </div>
+
+    <div class="container-button d-md-flex justify-content-md-center">
+        <button type="button btn-primary " class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">
+            Cambiar contraseña
+        </button>
+    </div>
+
+</form>
+
+<!-- modal para cambio de contraseña-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Cambiar contraseña de usuario</b></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ">
+                <form class="row justify-content-md-center">
+                    <div class="col-md-10">
+                        <div class="mb-2">
+                            <label for="contraseña_actual" class="form-label"><b>Contraseña actual</b></label>
+                            <input type="password" class="form-control" id="contraseña_actual"
+                                aria-describedby="contraseña actual">
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="nueva_contraseña" class="form-label"><b>Nueva contraseña</b></label>
+                            <input type="password" class="form-control" id="nueva_contraseña"
+                                aria-describedby="nueva contraseña">
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="confirmar_contraseña" class="form-label"><b>Confirmar contraseña</b></label>
+                            <input type="password" class="form-control" id="confirmar_contraseña"
+                                aria-describedby="confirmar contraseña">
+                        </div>
+
                     </div>
-
-                </div>
+                </form>
             </div>
-            
-
-            <div class="col-md-4 mt-2">
-                <div class="form-group">
-                    <label for="nombre">Nombres</label>
-                    <input required class="form-control" formControlName="nombres"  type="text" name="nombre" id="nombre" readonly [ngClass]="{'is-invalid':submitted && contactForm.get('nombres')?.errors} " />
-                </div>
-                <span class="text-danger" *ngIf="submitted && contactForm.get('nombres')?.errors">no ha cumplido el
-                    minimo de caracteres</span>
-
-                <div class="form-group">
-                    <label for="apellido">Apellidos</label>
-                    <input  class="form-control" type="text" name="apellido" id="apellido" readonly  formControlName="apellidos"  [ngClass]="{'is-invalid':submitted && contactForm.get('apellidos')?.errors} "
-                        required />
-                </div>
-                <span class="text-danger" *ngIf="submitted && contactForm.get('apellidos')?.errors">no ha cumplido el
-                    minimo de caracteres</span>
-
-                <div class="form-group">
-                    <label for="tipo">Tipo de documento</label>
-                    <select  name="tipo" formControlName="tipoDocumento" id="tipo" [disabled]="true" class="form-control" [ngClass]="{'is-invalid':submitted && contactForm.get('tipo')?.errors} " >
-                        <option >Tarjeta de identidad</option>
-                        <option>Cedula de ciudadania</option>
-                    </select>
-                   
-                </div>
-
-                <div class="form-group">
-                    <label for="tipo">Numero de documento</label>
-                    <input readonly  name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number" class="form-control" [ngClass]="{'is-invalid':submitted && contactForm.get('numeroDocumento')?.errors} " />
-                        
-                
-                   
-                </div>
-
-                
-               
-               
+            <div class="modal-footer">
+                <button type="button" class="linea btn btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
+                <button type="button" class="linea btn btn-primary btn-sm">Cambiar</button>
             </div>
-            <div class="col-md-4 mt-2">
-
-                <div class="form-group">
-                    <label for="facultad">Facultad</label>
-                    <select [disabled]="true"   formControlName="facultad" name="facultad" id="facultad" class="form-control"  >
-                        <option selected value="" >
-                            Facultad de ingenierias
-                        </option>
-                    </select>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="programa">Programa perteneciente</label>
-                    <select readonly   formControlName="programa" name="programa" id="programa" class="form-control"  >
-                        <option selected value="">
-                            tecnico profesional en mantenimiento en sistemas informaticos
-                        </option>
-                    </select>
-                </div>
-               
-               
-                <div class="form-group">
-                    <label for="telefono">Numero de telefono</label>
-                    <input  readonly class="form-control" type="number" name="numeroTelefono" formControlName="numeroTelefono" 
-                    [ngClass]="{'is-invalid':submitted && contactForm.get('numeroTelefono')?.errors} " id="numeroTelefono"  
-                      required />
-                </div>
-                <span class="text-danger"
-                    *ngIf="submitted && contactForm.get('numeroTelefono')?.errors?.['maxlength']">no ha cumplido el
-                    minimo de caracteres</span>
-
-                <div class="form-group">
-                    <label for="correo">Correo</label>
-                    <input readonly class="form-control" type="email" name="correo" id="correo" formControlName="correo"  [ngClass]="{'is-invalid':submitted && contactForm.get('correo')?.errors} "
-                        (input)="validarCorreo()"   required />
-
-                </div>
-                <span class="text-danger" *ngIf="submitted && contactForm.get('correo')?.errors">debe terminar
-                    @unibarranquilla.edu.co</span>
-              
-
-             
-               
-
-              
-
-
-
-
-
-
-            </div>
-           <div class="container-button  "><button class="btn btn-primary "  >Enviar</button></div>
-        </form>
-   
+        </div>
+    </div>
 </div>
 
 
+
+<!-- modal para cambio de foto-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar foto</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Imagen</label>
-              <input type="file" class="form-control" id="recipient-name">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Cambiar foto</b></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
-          
-        
-        <div class="modal-footer d-flex">
-        
-          <button type="button" class="btn btn-primary">Send message</button>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label"><b>Imagen</b></label>
+                        <input type="file" class="form-control" id="recipient-name">
+                    </div>
+
+
+
+                    <div class="modal-footer d-flex">
+
+                        <button type="button" class="btn btn-primary">Cargar foto</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
-      </div>
     </div>
-  </div>
