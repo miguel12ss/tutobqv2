@@ -2,6 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavbarServices } from 'src/app/services/navbar.service';
+import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
+import { EstudianteService } from '../services/estudiante.service';
+import { ComponentService } from 'src/app/components/services/components.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-perfil',
@@ -11,9 +15,11 @@ import { NavbarServices } from 'src/app/services/navbar.service';
 export class PerfilComponent implements OnInit {
   
   contactForm!: FormGroup
+  estudiante!:Estudiante
+  indice!:number
   public showAlertDanger = false
   submitted = false
-  constructor(public fb: FormBuilder) {
+  constructor(public fb: FormBuilder,private estudianteservice:EstudianteService,private componentService:ComponentService) {
     
 
 
@@ -21,6 +27,27 @@ export class PerfilComponent implements OnInit {
   }
   ngOnInit(): void {
     this.contactForm=this.initForm()
+    this.indice=this.componentService.getId
+    console.log(this.indice);
+    
+    this.estudianteservice.getDataForId(this.indice).pipe(
+      tap((res:Estudiante)=>{
+        console.log(res);
+        
+        this.contactForm.patchValue({
+          nombres:res.nombre ,
+          apellidos:res.apellido ,
+          tipoDocumento:res.tipoDocumento ,
+          contraseña:res.contraseña ,
+          programa: res.programa,
+          numeroTelefono:res.numeroTelefono ,
+          correo:res.correo, 
+          numeroDocumento:res.numeroDocumento,
+          facultad:res.facultad
+
+        })
+      })
+    ).subscribe()
   }
   validarCorreo() {
     if (!this.contactForm.get('correo')?.invalid) {
@@ -35,13 +62,13 @@ export class PerfilComponent implements OnInit {
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
       tipoDocumento: [ '',Validators.required,],
-      contraseña: ['', [Validators.required, Validators.minLength(7)]],
+     
       programa: ['', Validators.required],
       numeroTelefono: ['', Validators.required,],
       correo: ['', Validators.email], 
-      nuevaContraseña: ['', [Validators.required, Validators.minLength(7)]],
-      politica:['',Validators.requiredTrue],
-      numeroDocumento:['',Validators.required,Validators.maxLength(10)],
+      
+    
+      numeroDocumento:['',[Validators.required,Validators.maxLength(10)]],
       facultad:['',Validators.required]
     })
   }
@@ -71,6 +98,13 @@ export class PerfilComponent implements OnInit {
   }
   showAlert(){
 alert('la politica es requerida')
+  }
+
+
+  cambiarCamposEstudiante():void{
+    this.contactForm.patchValue({
+      
+    })
   }
  
  

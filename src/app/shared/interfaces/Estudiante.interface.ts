@@ -1,6 +1,7 @@
 export interface Estudiante{
-    nombres:string
-    apellidos:string
+    
+    nombre:string
+    apellido:string
     tipoDocumento:string
     numeroDocumento:string
     numeroTelefono:string

@@ -20,6 +20,7 @@ import { NgZorroAntdModule } from './ngZorroAntdModule';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { spinnerService } from './services-interceptor/spinner.service';
 import { InterceptorService } from './services-interceptor/interceptor.service';
+import { ComponentService } from './components/services/components.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,7 @@ import { InterceptorService } from './services-interceptor/interceptor.service';
     
   ],
   exports: [],
-  providers: [ApiService, NavbarServices,spinnerService,{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
+  providers: [ApiService, NavbarServices,spinnerService,ComponentService,{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
   
   bootstrap: [AppComponent]
 })

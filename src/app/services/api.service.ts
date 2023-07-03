@@ -3,12 +3,14 @@ import {Observable} from "rxjs"
 import {Injectable} from "@angular/core"
 import { Estudiante } from "../shared/interfaces/Estudiante.interface";
 import { Router } from "@angular/router";
+import { ComponentService } from "../components/services/components.service";
 @Injectable()
 export class ApiService{
     private urlGlobal='http://127.0.0.1:5000/'
     private  url="http://127.0.0.1:5000/registro"
     private token=""
-constructor(private readonly httpClient:HttpClient,private router:Router){
+    private id_usuario:number=0
+constructor(private readonly httpClient:HttpClient, private componentService:ComponentService,private router:Router){
 
 }
     insertData(estudiante:Estudiante){
@@ -36,13 +38,19 @@ constructor(private readonly httpClient:HttpClient,private router:Router){
           if(response.rol==1){
            this.router.navigate(['estudiante'])
            this.token=response.token
-            
+          
+           this.id_usuario=response.usuario
+           console.log(this.id_usuario);
+           
+            this.componentService.setId(this.id_usuario)
           }
         }
       )
     }
 
     getToken(){
+      console.log(this.token);
+      
       return this.token
     }
 

@@ -26,8 +26,8 @@
             [ngClass]="{
               'is-invalid': submitted && contactForm.get('tipo')?.errors
             }">
-            <option value="tarjeta de identidad">Tarjeta de identidad</option>
-            <option value="cedula de ciudadania">Cedula de ciudadania</option>
+            <option value="{{tipo}}" *ngFor="let tipo of tipoDocumento">{{tipo}}</option>
+           
           </select>
         </div>
 
@@ -80,8 +80,8 @@
         <div class="form-group">
           <label for="programa"><b>Programa perteneciente</b></label>
           <select formControlName="programa" name="programa" id="programa" class="form-control">
-            <option>
-              tecnico profesional en mantenimiento en sistemas informaticos
+            <option value="{{programaa}}" *ngFor="let programaa of programas">
+            {{programaa}}
             </option>
           </select>
         </div>

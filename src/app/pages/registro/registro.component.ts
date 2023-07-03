@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
+import { ComponentService } from 'src/app/components/services/components.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
 import Swal from 'sweetalert2';
@@ -14,7 +16,9 @@ export class RegistroComponent implements OnInit {
   contactForm!: FormGroup
   public showAlertDanger = false
   submitted = false
-  constructor(public fb: FormBuilder, private apiService: ApiService, private router: Router) {
+  programas:Array<string> =[]
+  tipoDocumento:Array<string> =[]
+  constructor(public fb: FormBuilder, private apiService: ApiService, private router: Router,private componentService:ComponentService) {
 
 
 
@@ -22,6 +26,23 @@ export class RegistroComponent implements OnInit {
   }
   ngOnInit(): void {
     this.contactForm = this.initForm()
+    this.componentService.getPrograms.pipe(
+      tap((res:any)=>{
+        let json= JSON.stringify(res)
+        console.log(json)
+this.programas=res
+      })
+    ).subscribe()
+
+    this.componentService.getTipoDocumento.pipe(
+      tap((res:any)=>{
+        let json= JSON.stringify(res)
+        console.log(json)
+this.tipoDocumento=res
+      })
+    ).subscribe()
+
+
   }
   validarCorreo() {
     if (!this.contactForm.get('correo')?.invalid) {
@@ -55,9 +76,9 @@ export class RegistroComponent implements OnInit {
 
 
       let estudiante: Estudiante = {
-
-        nombres: this.contactForm.value.nombres,
-        apellidos: this.contactForm.value.apellidos,
+        
+        nombre: this.contactForm.value.nombres,
+        apellido: this.contactForm.value.apellidos,
         tipoDocumento: this.contactForm.value.tipoDocumento,
         numeroDocumento: this.contactForm.value.numeroDocumento,
         numeroTelefono: this.contactForm.value.numeroTelefono,

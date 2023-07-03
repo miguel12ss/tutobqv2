@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <label for="tipo"><b>Tipo de documento</b></label>
-            <input required class="form-control" formControlName="tipo" type="text" name="tipo" id="tipo" readonly />
+            <input required class="form-control" formControlName="tipoDocumento" type="text" name="tipo" id="tipo" readonly />
 
         </div>
 
@@ -42,7 +42,7 @@
     <div class="col-md-4 mt-2">
         <div class="form-group">
             <label for="apellido"><b>Apellidos</b></label>
-            <input class="form-control" type="text" name="apellido" id="apellido" readonly />
+            <input class="form-control" type="text" name="apellido" id="apellido" formControlName="apellidos" readonly />
         </div>
 
         <div class="form-group">
@@ -58,7 +58,7 @@
 
         <div class="form-group">
             <label for="telefonocelular"><b>Telefono celular</b></label>
-            <input name="telefonocelular" formControlName="telefonocelular" id="telefonocelular" type="number"
+            <input name="telefonocelular" formControlName="numeroTelefono" id="telefonocelular" type="number"
                 class="form-control" readonly />
         </div>
     </div>
