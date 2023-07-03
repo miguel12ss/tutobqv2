@@ -9,16 +9,18 @@ import { SidebarDocenteComponent } from '../shared/sidebar-docente/sidebar-docen
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DocenteComponent } from './docente.component';
+import { HorarioComponent } from './horario/horario.component';
+import { NgZorroAntdModule } from '../ngZorroAntdModule';
 
 
 @NgModule({
   declarations: [
     PerfilComponent,
-    CrearTutoriaComponent,DocenteComponent
+    CrearTutoriaComponent,DocenteComponent,HorarioComponent
   ],
   imports: [
     CommonModule,
-    DocenteRoutingModule,ReactiveFormsModule,SharedModule
+    DocenteRoutingModule,ReactiveFormsModule,SharedModule,NgZorroAntdModule
   ]
 })
 export class DocenteModule { }

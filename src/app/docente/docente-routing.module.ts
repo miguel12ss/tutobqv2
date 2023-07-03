@@ -7,6 +7,7 @@ const routes: Routes = [
     {path:'',redirectTo:'crearTutoria',pathMatch:'full'},
     {path:'perfilDocente',loadChildren:()=>import('./perfil/perfil.module').then(m=>m.PerfilModule)},
     {path:'crearTutoria',loadChildren:()=>import('./crear-tutoria/crear-tutoria.module').then(m=>m.CrearTutoriaModule)},
+    {path:'historial-tutoria',loadChildren:()=>import('./horario/horario.module').then(m=>m.HorarioModule)}
   
   
   ]}
