@@ -19,5 +19,11 @@ export class EstudianteService {
     return this.httpClient.get(url)
   }
 
+  getPasswordForId(id_usuario:number,data:any):Observable<any>{
+    const url=`http://127.0.0.1:5000/cambiar-contraseña/${id_usuario}`
+
+    return this.httpClient.post(url,data)
+  }
+
 
 }
