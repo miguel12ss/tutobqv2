@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CrearTutoriaComponent } from './crear-tutoria.component';
 
 const routes: Routes = [
-  {path:'',component:CrearTutoriaComponent}
+  {path:'',component:CrearTutoriaComponent},
+  
 ];
 
 @NgModule({
