@@ -1,107 +1,127 @@
 <div class="container">
-    <h4 class="text-center">Tutorias pendientes por dictar</h4>
-    <div class="container-button d-flex justify-content-end">
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Crear tutoria
-  </button>
+  <h3 class="text-center">TUTORIAS ACÁDEMICAS PENDIENTES</h3>
+
+  <div class="container-button d-flex justify-content-end">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Crear horario
+    </button>
+  </div>
   
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Facultad</th>
+        <th scope="col">Programa</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Tema</th>
+        <th scope="col">Sede</th>
+        <th scope="col">Salón</th>
+        <th scope="col">Capacidad</th>
+        <th scope="col">Cupos</th>
+        <th scope="col">Docente</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Hora inicio</th>
+        <th scope="col">Hora terminación</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+
+
+
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear tutoria</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Crear horario tutoria acádemica</b></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Tema a tratar</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Modulo</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" 
-                  class="form-label">Numero de salon </label>
-                  <input type="text" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" 
-                  class="form-label">Programa </label>
-                  <input type="text" class="form-control" id="exampleInputPassword1">
-                </div>
+          <form class="row">
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="facultad" class="form-label"><b>Facultad</b> </label>
+                <input type="text" class="form-control" id="facultad" aria-describedby="facultad" readonly>
               </div>
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" 
-                  class="form-label">Sede </label>
-                  <select class="form-control" name="sede" id="sede">
-                    <option value="barranquilla">Barranquilla</option>
-                    <option value="barranquilla">Soledad</option>
-                    
-                  </select>
-                </div>
+
+              <div class="mb-3">
+                <label for="tema" class="form-label"><b>Tema</b></label>
+                <input type="text" class="form-control" id="tema"required>
+              </div>
+
+              <div class="mb-3">
+                <label for="capacidad" class="form-label"><b>Capacidad</b></label>
+                <input type="text" class="form-control" id="capacidad" required>
+              </div>
               
-
-
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" 
-                  class="form-label">Fecha</label>
-                  <input type="date" class="form-control" id="exampleInputPassword1">
-                </div>
-
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" 
-                  class="form-label">Hora</label>
-                  <input type="time" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" 
-                  class="form-label">Hora Fin</label>
-                  <input type="time" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
-                  <button type="submit" class="btn btn-primary">Añadir</button>
-                </div>
+              <div class="mb-3">
+                <label for="hora_inicio" class="form-label">Hora de inicio</label>
+                <input type="time" class="form-control" id="hora_inicio" required>
               </div>
-              </form>
+            </div>
+
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="programa" class="form-label"><b>Programa</b></label>
+                <input type="text" class="form-control" id="programa" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="sede" class="form-label"><b>Sede</b> </label>
+                <input type="text" class="form-control" id="sede" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="docente" class="form-label"><b>Docente</b> </label>
+                <input type="text" class="form-control" id="docente" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="hora_finalizacion" class="form-label"><b>Hora de finalización</b></label>
+                <input type="time" class="form-control" id="hora_finalizacion" required>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="materia" class="form-label"><b>Materia</b></label>
+                <input type="text" class="form-control" id="materia" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="salon" class="form-label"><b>Salón</b></label>
+                <input type="text" class="form-control" id="salon" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="fecha" class="form-label"><b>Fecha</b></label>
+                <input type="date" class="form-control" id="fecha" required>
+              </div>
+
+             
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
+              <button type="button" class="linea btn bmodal btn-primary btn-sm">Cambiar</button>
+          </div>
+          </form>
         </div>
-        
+
       </div>
     </div>
   </div>
-    </div>
-    <table class="table mt-2">
-        <thead>
-          <tr>
-            <th scope="col">Tema a tratar</th>
-            <th scope="col">fecha</th>
-            <th scope="col">tiempo</th>
-            <th scope="col"> Cupos
-            </th>
-<th scope="col">salon</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-           
-            <td scope="row">Poo</td>
-            <td scope="row">23/06/23</td>
-            <td scope="row">2horas</td>
-            <td  scope="row">25</td>
-            <td scope="row">18</td>
-           
-          </tr>
-          
-        </tbody>
-      </table>
+
 
 
 
