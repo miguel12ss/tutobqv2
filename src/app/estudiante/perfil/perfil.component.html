@@ -82,33 +82,32 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body ">
-                <form class="row justify-content-md-center">
+                <form class="row justify-content-md-center" [formGroup]="passwordForm" (ngSubmit)="cambiarPassword()" >
                     <div class="col-md-10">
                         <div class="mb-2">
                             <label for="contraseña_actual" class="form-label"><b>Contraseña actual</b></label>
                             <input type="password" class="form-control" id="contraseña_actual"
-                                aria-describedby="contraseña actual">
+                            formControlName="contraseña"
+                                aria-describedby="contraseña actual" [required]="true">
                         </div>
 
                         <div class="mb-2">
                             <label for="nueva_contraseña" class="form-label"><b>Nueva contraseña</b></label>
                             <input type="password" class="form-control" id="nueva_contraseña"
-                                aria-describedby="nueva contraseña">
+                            formControlName="nuevaContraseña"
+                                aria-describedby="nueva contraseña" [required]="true">
                         </div>
 
-                        <div class="mb-2">
-                            <label for="confirmar_contraseña" class="form-label"><b>Confirmar contraseña</b></label>
-                            <input type="password" class="form-control" id="confirmar_contraseña"
-                                aria-describedby="confirmar contraseña">
-                        </div>
+                       
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="linea btn btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
+                        <button type="submit" class="linea btn btn-primary btn-sm" [disabled]="passwordForm.invalid">Cambiar</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="linea btn btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-                <button type="button" class="linea btn btn-primary btn-sm">Cambiar</button>
-            </div>
+           
         </div>
     </div>
 </div>
