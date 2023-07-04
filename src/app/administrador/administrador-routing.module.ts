@@ -41,10 +41,11 @@ const routes: Routes = [
             (m) => m.ModificarEstudianteModule
           ),
       },
+      {path:'crear-tutoria',loadChildren:()=>import('./crear-tutoria/crear-tutoria.module').then(m=>m.CrearTutoriaModule)},
       {path:'**',redirectTo:'deshabilitar-docente'}
 
   
-      // {path:'crearTutoria',loadChildren:()=>import('./crear-tutoria/crear-tutoria.module').then(m=>m.CrearTutoriaModule)},
+      
     ],
   },
 ];
