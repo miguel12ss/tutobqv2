@@ -1,5 +1,5 @@
 
-<form class="row"  [formGroup]="contactForm"   (ngSubmit)="onSubmit($event)">
+<form class="row"  [formGroup]="contactForm"   (ngSubmit)="onSubmit()">
            
 
     <div class="col-md-6 col-sm-12 mt-2">
@@ -21,8 +21,7 @@
         <div class="form-group">
             <label for="tipo">Tipo de documento</label>
             <select name="tipo" formControlName="tipoDocumento" id="tipo" class="form-control" [ngClass]="{'is-invalid':submitted && contactForm.get('tipo')?.errors} " >
-                <option selected value="">Tarjeta de identidad</option>
-                <option>Cedula de ciudadania</option>
+                <option *ngFor="let tipo of tipoTarjeta " [value]="tipo">{{tipo}}</option>
             </select>
            
         </div>
@@ -49,7 +48,7 @@
         <div class="form-group">
             <label for="facultad">Facultad</label>
             <select  formControlName="facultad" name="facultad" id="facultad" class="form-control"  >
-                <option selected value="" >
+                <option selected value="facultad de ingenierias" >
                     Facultad de ingenierias
                 </option>
             </select>
@@ -91,6 +90,6 @@
 
 
     </div>
-   <div class="container-button " ><button class="btn btn-primary">Enviar</button></div>
+   <div class="container-button " ><button class="btn btn-primary" [disabled]="contactForm.invalid">Enviar</button></div>
 </form>
 

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/api.service';
+import { DocenteService } from '../services/docente.service';
+import { Docente } from 'src/app/shared/interfaces/docente.interface';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-perfil',
@@ -13,7 +17,7 @@ export class PerfilComponent implements OnInit {
   contactForm!: FormGroup
   public showAlertDanger = false
   submitted = false
-  constructor(public fb: FormBuilder) {
+  constructor(public fb: FormBuilder,private docenteService:DocenteService) {
 
 
 
@@ -22,6 +26,23 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.contactForm=this.initForm()
+    this.docenteService.getDataDocente().pipe(
+      tap((docente:Docente)=>{
+        this.contactForm.patchValue({
+          nombres:docente.nombre ,
+          apellidos: docente.apellido,
+          tipoDocumento:docente.tipoDocumento ,
+          numeroTelefono:docente.numeroDocumento ,
+          correo: docente.correo,
+          numeroDocumento: docente.numeroDocumento,
+          facultad:docente.facultad 
+        })
+        
+      }
+
+
+      )
+    ).subscribe()
   }
 
   validarCorreo() {
@@ -39,10 +60,16 @@ export class PerfilComponent implements OnInit {
       tipoDocumento: ['', Validators.required,],
       numeroTelefono: ['', Validators.required,],
       correo: ['', Validators.email],
-      numeroDocumento: ['', Validators.required, Validators.maxLength(10)],
+      numeroDocumento: ['',[ Validators.required, Validators.maxLength(10)]],
       facultad: ['', Validators.required]
     })
   }
+
+  initCambioContraseña(){
+
+  }
+
+  
   onSubmit(event: Event) {
     this.submitted = true
 

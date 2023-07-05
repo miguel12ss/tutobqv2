@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core"
 import { Estudiante } from "../shared/interfaces/Estudiante.interface";
 import { Router } from "@angular/router";
 import { ComponentService } from "../components/services/components.service";
+import { Docente } from "../shared/interfaces/docente.interface";
 @Injectable()
 export class ApiService {
   private urlGlobal = 'http://127.0.0.1:5000/'
@@ -46,7 +47,23 @@ export class ApiService {
            
 
           this.componentService.setId(this.id_usuario)
+        }else if(response.rol==2){
+          this.router.navigate(['docente'])
+          this.token=response.token
+          localStorage.setItem('token',this.token)
+          this.id_usuario = response.usuario
         }
+      }
+    )
+  }
+
+
+  insertDocente(docente:Docente){
+    const url=this.urlGlobal+`agregar-docente`
+    this.httpClient.post(url, docente).subscribe(
+      (response) => {
+        console.log(response);
+
       }
     )
   }

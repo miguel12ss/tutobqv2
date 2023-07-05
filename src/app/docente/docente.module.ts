@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DocenteComponent } from './docente.component';
 import { HorarioComponent } from './horario/horario.component';
 import { NgZorroAntdModule } from '../ngZorroAntdModule';
+import { DocenteService } from './services/docente.service';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NgZorroAntdModule } from '../ngZorroAntdModule';
   imports: [
     CommonModule,
     DocenteRoutingModule,ReactiveFormsModule,SharedModule,NgZorroAntdModule
-  ]
+  ],
+  providers:[DocenteService]
 })
 export class DocenteModule { }

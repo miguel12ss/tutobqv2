@@ -5,7 +5,7 @@ import { NavbarServices } from 'src/app/services/navbar.service';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
 import { EstudianteService } from '../services/estudiante.service';
 import { ComponentService } from 'src/app/components/services/components.service';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -117,13 +117,18 @@ export class PerfilComponent implements OnInit {
       let form=this.passwordForm.value;
       console.log(this.indice);
       
-      this.estudianteservice.getPasswordForId(this.indice,form).pipe(
-        tap((password:string)=>{
-          console.log(password);
+        this.estudianteservice.getPasswordForId(this.indice,form).pipe(
+          tap((message:any)=>{
+            
+            if(message=="la contraseña ha sido cambiada"){
+              return alert("La contraseña ha sido cambiada")
+            }else{
+              return alert("La contraseña no ha sido cambiada")
+            }
+          }),
           
-        })
-        
-      ).subscribe()
+          
+        ).subscribe()
     }
   
   }
