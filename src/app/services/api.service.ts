@@ -38,7 +38,7 @@ export class ApiService {
         if (response.rol == 1) {
           this.router.navigate(['estudiante'])
           this.token = response.token
-
+          localStorage.setItem('token',this.token)
           this.id_usuario = response.usuario
           
 
@@ -52,8 +52,7 @@ export class ApiService {
   }
 
   getToken() {
-    console.log(this.token);
-
+  
     return this.token
   }
 

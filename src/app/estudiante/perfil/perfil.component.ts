@@ -6,6 +6,7 @@ import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
 import { EstudianteService } from '../services/estudiante.service';
 import { ComponentService } from 'src/app/components/services/components.service';
 import { tap } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
@@ -32,7 +33,7 @@ export class PerfilComponent implements OnInit {
     this.indice = this.componentService.getId
     console.log(this.indice);
 
-    this.estudianteservice.getDataForId(this.indice).pipe(
+    this.estudianteservice.getDataForId().pipe(
       tap((res: Estudiante) => {
         console.log(res);
 

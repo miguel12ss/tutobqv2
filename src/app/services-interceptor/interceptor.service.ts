@@ -5,23 +5,27 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable,finalize,tap } from 'rxjs';
+import { Observable, finalize, tap } from 'rxjs';
 import { spinnerService } from './spinner.service';
 import { ApiService } from '../services/api.service';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(private spinnerService:spinnerService,private api:ApiService) {}
+  constructor(private spinnerService: spinnerService, private api: ApiService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+
+    const token = this.api.getToken(); // Obtén el token de autenticación desde tu servicio de autenticación
     
-  this.spinnerService.callSpinner()
-  
-   return next.handle(request).pipe(
-    finalize(()=>{
-      this.spinnerService.stopSpinner()
-    })
-   )
+    
+      this.spinnerService.callSpinner()
+
+      return next.handle(request).pipe(
+        finalize(() => {
+          this.spinnerService.stopSpinner()
+        })
+      )
+    }
   }
-}
+
