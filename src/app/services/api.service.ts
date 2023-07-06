@@ -52,6 +52,8 @@ export class ApiService {
           this.token=response.token
           localStorage.setItem('token',this.token)
           this.id_usuario = response.usuario
+        }else{
+          alert('usuario o contraseña  incorrectos')
         }
       }
     )

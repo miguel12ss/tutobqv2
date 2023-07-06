@@ -29,7 +29,7 @@ export class PerfilComponent implements OnInit {
             nombres: docente.nombre,
             apellidos: docente.apellido,
             tipoDocumento: docente.tipoDocumento,
-            numeroTelefono: docente.numeroDocumento,
+            numeroTelefono: docente.numeroTelefono,
             correo: docente.correo,
             numeroDocumento: docente.numeroDocumento,
             facultad: docente.facultad,
@@ -69,7 +69,7 @@ export class PerfilComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.contactForm.invalid && this.passwordForm.get('nuevaContraseña')?.value===this.passwordForm.get('confirmarContraseña')?.value) {
+    if (this.contactForm.valid && this.passwordForm.get('nuevaContraseña')?.value===this.passwordForm.get('confirmarContraseña')?.value) {
      const form=this.passwordForm.value
      this.estudianteservice.getPasswordForId(form).pipe(
       tap((message:any)=>{
