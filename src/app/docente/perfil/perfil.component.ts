@@ -4,45 +4,39 @@ import { ApiService } from 'src/app/services/api.service';
 import { DocenteService } from '../services/docente.service';
 import { Docente } from 'src/app/shared/interfaces/docente.interface';
 import { tap } from 'rxjs';
+import { EstudianteService } from 'src/app/estudiante/services/estudiante.service';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss']
+  styleUrls: ['./perfil.component.scss'],
 })
 export class PerfilComponent implements OnInit {
-
-
-
-  contactForm!: FormGroup
-  public showAlertDanger = false
-  submitted = false
-  constructor(public fb: FormBuilder,private docenteService:DocenteService) {
-
-
-
-
-  }
+  contactForm!: FormGroup;
+  passwordForm!:FormGroup;
+  public showAlertDanger = false;
+  submitted = false;
+  constructor(public fb: FormBuilder, private docenteService: DocenteService,private estudianteservice:EstudianteService) {}
 
   ngOnInit(): void {
-    this.contactForm=this.initForm()
-    this.docenteService.getDataDocente().pipe(
-      tap((docente:Docente)=>{
-        this.contactForm.patchValue({
-          nombres:docente.nombre ,
-          apellidos: docente.apellido,
-          tipoDocumento:docente.tipoDocumento ,
-          numeroTelefono:docente.numeroDocumento ,
-          correo: docente.correo,
-          numeroDocumento: docente.numeroDocumento,
-          facultad:docente.facultad 
+    this.contactForm = this.initForm();
+    this.passwordForm=this.initCambioContraseña()
+    this.docenteService
+      .getDataDocente()
+      .pipe(
+        tap((docente: Docente) => {
+          this.contactForm.patchValue({
+            nombres: docente.nombre,
+            apellidos: docente.apellido,
+            tipoDocumento: docente.tipoDocumento,
+            numeroTelefono: docente.numeroDocumento,
+            correo: docente.correo,
+            numeroDocumento: docente.numeroDocumento,
+            facultad: docente.facultad,
+          });
         })
-        
-      }
-
-
       )
-    ).subscribe()
+      .subscribe();
   }
 
   validarCorreo() {
@@ -57,49 +51,41 @@ export class PerfilComponent implements OnInit {
     return this.fb.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
-      tipoDocumento: ['', Validators.required,],
-      numeroTelefono: ['', Validators.required,],
+      tipoDocumento: ['', Validators.required],
+      numeroTelefono: ['', Validators.required],
       correo: ['', Validators.email],
-      numeroDocumento: ['',[ Validators.required, Validators.maxLength(10)]],
-      facultad: ['', Validators.required]
-    })
+      numeroDocumento: ['', [Validators.required, Validators.maxLength(10)]],
+      facultad: ['', Validators.required],
+    });
   }
 
-  initCambioContraseña(){
+  initCambioContraseña() {
+    return this.fb.group({
+      contraseña: ['', Validators.required],
+      nuevaContraseña: ['', Validators.required],
+      confirmarContraseña: ['', Validators.required],
+    });
 
   }
 
-  
-  onSubmit(event: Event) {
-    this.submitted = true
+  onSubmit() {
+    if (this.contactForm.invalid && this.passwordForm.get('nuevaContraseña')?.value===this.passwordForm.get('confirmarContraseña')?.value) {
+     const form=this.passwordForm.value
+     this.estudianteservice.getPasswordForId(form).pipe(
+      tap((message:any)=>{
+        if(message.message==="la contraseña ha sido cambiada"){
+          return alert("La contraseña ha sido cambiada")
+        }else{
+          return alert("La contraseña no ha sido cambiada")
+        }
+        
+      })
+     ).subscribe()
+      
 
-
-    if (this.contactForm.invalid) {
-      console.log('formulario valido');
-
-
-      return
-
+      return;
     }
 
-
-    console.log('invalido');
-
-
-
-
-
-
-
-
-
+    alert('las contraseñas no coinciden ')
   }
-  showAlert() {
-    alert('la politica es requerida')
-  }
-
-
-
 }
-
-

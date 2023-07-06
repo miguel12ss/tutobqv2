@@ -28,8 +28,7 @@ export class RegistroComponent implements OnInit {
     this.contactForm = this.initForm()
     this.componentService.getPrograms.pipe(
       tap((res:any)=>{
-        let json= JSON.stringify(res)
-        console.log(json)
+        
 this.programas=res
       })
     ).subscribe()

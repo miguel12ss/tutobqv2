@@ -32,7 +32,7 @@ export class EstudianteService {
     return this.httpClient.get(url,httpOptions)
   }
 
-  getPasswordForId(id_usuario:number,data:any):Observable<any>{
+  getPasswordForId(data:any):Observable<any>{
     const token=localStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({

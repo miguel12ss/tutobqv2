@@ -84,6 +84,7 @@ export class PerfilComponent implements OnInit {
     return this.fb.group({
       contraseña:['',Validators.required],
       nuevaContraseña:['',Validators.required],
+      confirmarContraseña:['',Validators.required]
     })
   }
 
@@ -113,14 +114,15 @@ export class PerfilComponent implements OnInit {
   }
 
   cambiarPassword(){
-    if(this.passwordForm.valid){
+    if(this.passwordForm.valid && this.passwordForm.get('nuevaContraseña')?.value==this.passwordForm.get('confirmarContraseña')?.value){
       let form=this.passwordForm.value;
-      console.log(this.indice);
       
-        this.estudianteservice.getPasswordForId(this.indice,form).pipe(
+      
+        this.estudianteservice.getPasswordForId(form).pipe(
           tap((message:any)=>{
+            console.log(message);
             
-            if(message=="la contraseña ha sido cambiada"){
+            if(message.message==="la contraseña ha sido cambiada"){
               return alert("La contraseña ha sido cambiada")
             }else{
               return alert("La contraseña no ha sido cambiada")
@@ -129,6 +131,8 @@ export class PerfilComponent implements OnInit {
           
           
         ).subscribe()
+    }else{
+      alert('las nueva contraseña debe ser confirmada')
     }
   
   }
