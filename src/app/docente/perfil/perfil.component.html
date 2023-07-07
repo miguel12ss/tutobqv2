@@ -4,8 +4,8 @@
     <div class="col-md-4 text-center d-flex align-items-center">
       <div>
         <img
-          loading="lazy"
-          src="https://acsilat.org/images/2020/05/06/teacher.png"
+        [src]="foto"
+       
           class="img-fluid w-75"
         />
         <div class="container-button d-flex">
@@ -15,6 +15,7 @@
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             data-bs-whatever="@mdo"
+            
           >
             Cambiar foto
           </button>
@@ -234,12 +235,12 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label"
               ><b>Imagen</b></label
             >
-            <input type="file" class="form-control" id="recipient-name" />
+            <input type="file"  class="form-control" id="recipient-name" />
           </div>
 
           <div class="modal-footer d-flex">

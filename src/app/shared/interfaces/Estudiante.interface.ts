@@ -9,5 +9,5 @@ export interface Estudiante{
     programa:string
     correo:string
     contraseña:string
-   
+    
 }

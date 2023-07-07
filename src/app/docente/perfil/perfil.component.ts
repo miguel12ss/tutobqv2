@@ -14,6 +14,7 @@ import { EstudianteService } from 'src/app/estudiante/services/estudiante.servic
 export class PerfilComponent implements OnInit {
   contactForm!: FormGroup;
   passwordForm!:FormGroup;
+  foto!:string
   public showAlertDanger = false;
   submitted = false;
   constructor(public fb: FormBuilder, private docenteService: DocenteService,private estudianteservice:EstudianteService) {}
@@ -24,7 +25,8 @@ export class PerfilComponent implements OnInit {
     this.docenteService
       .getDataDocente()
       .pipe(
-        tap((docente: Docente) => {
+        tap((docente:any) => {
+          this.foto=docente.foto
           this.contactForm.patchValue({
             nombres: docente.nombre,
             apellidos: docente.apellido,
@@ -87,5 +89,10 @@ export class PerfilComponent implements OnInit {
     }
 
     alert('las contraseñas no coinciden ')
+  }
+
+  subirFoto(event:any){
+    console.log(event);
+    
   }
 }

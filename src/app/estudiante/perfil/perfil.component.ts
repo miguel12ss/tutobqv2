@@ -7,6 +7,7 @@ import { EstudianteService } from '../services/estudiante.service';
 import { ComponentService } from 'src/app/components/services/components.service';
 import { catchError, of, tap } from 'rxjs';
 import Swal from 'sweetalert2';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-perfil',
@@ -17,11 +18,14 @@ export class PerfilComponent implements OnInit {
 
   contactForm!: FormGroup
   passwordForm!:FormGroup
+  fileForm!:FormGroup
   estudiante!: Estudiante
   indice!: number
+  selectFile!:File
+  foto:any=null
   public showAlertDanger = false
   submitted = false
-  constructor(public fb: FormBuilder, private estudianteservice: EstudianteService, private componentService: ComponentService) {
+  constructor(public fb: FormBuilder, private estudianteservice: EstudianteService, private componentService: ComponentService,private http:HttpClient) {
 
 
 
@@ -30,13 +34,13 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.contactForm = this.initForm()
     this.passwordForm=this.initFormContraseña()
+    this.fileForm=this.initFileForm()
     this.indice = this.componentService.getId
     console.log(this.indice);
 
     this.estudianteservice.getDataForId().pipe(
-      tap((res: Estudiante) => {
-        console.log(res);
-
+      tap((res: any) => {
+        this.foto=res.foto
         this.contactForm.patchValue({
           nombres: res.nombre,
           apellidos: res.apellido,
@@ -79,7 +83,11 @@ export class PerfilComponent implements OnInit {
       facultad: ['', Validators.required]
     })
   }
-
+initFileForm():FormGroup{
+  return this.fb.group({
+    foto:['',Validators.required]
+  })
+}
   initFormContraseña(){
     return this.fb.group({
       contraseña:['',Validators.required],
@@ -137,7 +145,32 @@ export class PerfilComponent implements OnInit {
   
   }
 
-
+  subirFoto(event:any){  
+    
+    
+    this.selectFile=event.target.files[0]
+  }
+  subirImagen(){
+    const formData = new FormData();
+    formData.append('file', this.selectFile);
+    const token=localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true'
+      })
+    };
+    const url="http://127.0.0.1:5000/upload"
+    this.http.post(url,formData,httpOptions).pipe(
+      tap((res:any)=>{
+        console.log(res.imgPath);
+        
+       this.foto='http://localhost:5000/static/uploads/'+res.imgPath
+        
+      })
+    ).subscribe()
+  }
 
 
 }

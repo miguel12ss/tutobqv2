@@ -2,12 +2,13 @@
 <form class="row" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
     <div class="col-md-4 text-center d-flex align-items-center ">
         <div>
-            <img src="https://lanavedeteseo.files.wordpress.com/2018/03/estudiante-icono.png" class="img  "
-                loading="lazy" />
+            <img   [src]="foto" class="img  "
+                 />
             <div class="container-button d-flex">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                     data-bs-whatever="@mdo">Cambiar foto</button>
             </div>
+            
 
         </div>
     </div>
@@ -128,17 +129,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form  >
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label"><b>Imagen</b></label>
-                        <input type="file" class="form-control" id="recipient-name">
+                        <input  (change)="subirFoto($event)" type="file" class="form-control" id="upload-file" >
                     </div>
 
 
 
                     <div class="modal-footer d-flex">
 
-                        <button type="button" class="btn btn-primary">Cargar foto</button>
+                        <button type="button" (click)="subirImagen()"  class="btn btn-primary">Enviar</button>
                     </div>
                 </form>
             </div>
