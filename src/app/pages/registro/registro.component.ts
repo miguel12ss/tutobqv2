@@ -94,7 +94,7 @@ this.tipoDocumento=res
       this.router.navigate(['/auth/login'])
     } else {
       console.log('invalido');
-      alert('deben coincidir las contraseñas')
+      
     }
 
 

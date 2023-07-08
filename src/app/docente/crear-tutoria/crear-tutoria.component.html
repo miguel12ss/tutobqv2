@@ -48,72 +48,90 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="row">
+          <form class="row" [formGroup]="horarioForm" (ngSubmit)="onSubmit()">
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                <input type="text" class="form-control" id="facultad" aria-describedby="facultad" readonly>
+                <input type="text" class="form-control" id="facultad" formControlName="facultad" aria-describedby="facultad" readonly>
               </div>
 
               <div class="mb-3">
                 <label for="tema" class="form-label"><b>Tema</b></label>
-                <input type="text" class="form-control" id="tema"required>
+                
+            <input type="text" 
+            formControlName="tema"
+            class="form-control" id="tema"required >
               </div>
 
               <div class="mb-3">
                 <label for="capacidad" class="form-label"><b>Capacidad</b></label>
-                <input type="text" class="form-control" id="capacidad" required>
+                <input type="text"
+                formControlName="capacidad" class="form-control" id="capacidad" required>
               </div>
               
               <div class="mb-3">
-                <label for="hora_inicio" class="form-label">Hora de inicio</label>
-                <input type="time" class="form-control" id="hora_inicio" required>
+                <label for="hora_inicio" class="form-label"><b> Hora de inicio</b></label>
+                <input type="time"
+                formControlName="horaInicio" class="form-control" id="hora_inicio" required>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="programa" class="form-label"><b>Programa</b></label>
-                <input type="text" class="form-control" id="programa" required>
+                <input type="text" class="form-control" 
+                formControlName="programa"
+                id="programa" required>
               </div>
 
               <div class="mb-3">
                 <label for="sede" class="form-label"><b>Sede</b> </label>
-                <input type="text" class="form-control" id="sede" required>
+                <input type="text" 
+                formControlName="sede"
+                class="form-control" id="sede" required>
               </div>
 
               <div class="mb-3">
                 <label for="docente" class="form-label"><b>Docente</b> </label>
-                <input type="text" class="form-control" id="docente" required>
+                <input type="text" class="form-control"
+                formControlName="docente"
+                id="docente" required>
               </div>
 
               <div class="mb-3">
                 <label for="hora_finalizacion" class="form-label"><b>Hora de finalización</b></label>
-                <input type="time" class="form-control" id="hora_finalizacion" required>
+                <input type="time" 
+                formControlName="horaFin"
+                class="form-control" id="hora_finalizacion" required>
               </div>
             </div>
             
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="materia" class="form-label"><b>Materia</b></label>
-                <input type="text" class="form-control" id="materia" required>
+                <input type="text" 
+                formControlName="materia"
+                class="form-control" id="materia" required>
               </div>
 
               <div class="mb-3">
                 <label for="salon" class="form-label"><b>Salón</b></label>
-                <input type="text" class="form-control" id="salon" required>
+                <input type="text" class="form-control"                 formControlName="salon"
+                id="salon" required>
               </div>
 
               <div class="mb-3">
                 <label for="fecha" class="form-label"><b>Fecha</b></label>
-                <input type="date" class="form-control" id="fecha" required>
+                <input type="date" 
+                formControlName="fecha"
+                class="form-control" [min]="fechaHoy"  id="fecha"   required>
               </div>
 
              
             </div>
             <div class="modal-footer">
               <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-              <button type="button" class="linea btn bmodal btn-primary btn-sm">Cambiar</button>
+              <button type="submit" class="linea btn bmodal btn-primary btn-sm">Crear</button>
           </div>
           </form>
         </div>

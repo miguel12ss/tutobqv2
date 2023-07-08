@@ -1,64 +1,64 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
-import { NavbarServices } from 'src/app/services/navbar.service';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
 import { EstudianteService } from '../services/estudiante.service';
 import { ComponentService } from 'src/app/components/services/components.service';
-import { catchError, of, tap } from 'rxjs';
-import Swal from 'sweetalert2';
+import { tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss']
+  styleUrls: ['./perfil.component.scss'],
 })
 export class PerfilComponent implements OnInit {
-
-  contactForm!: FormGroup
-  passwordForm!:FormGroup
-  fileForm!:FormGroup
-  estudiante!: Estudiante
-  indice!: number
-  selectFile!:File
-  foto:any=null
-  public showAlertDanger = false
-  submitted = false
-  constructor(public fb: FormBuilder, private estudianteservice: EstudianteService, private componentService: ComponentService,private http:HttpClient) {
-
-
-
-
+  contactForm!: FormGroup;
+  passwordForm!: FormGroup;
+  fileForm!: FormGroup;
+  estudiante!: Estudiante;
+  indice!: number;
+  showAlertPassword=false
+  selectFile!: File;
+  foto2 = '';
+  alertSuccess = false
+  alertPasswordBd=false
+  foto: any = null;
+  public showAlertDanger = false;
+  submitted = false;
+  constructor(
+    public fb: FormBuilder,
+    private estudianteservice: EstudianteService,
+    private componentService: ComponentService,
+    private http: HttpClient
+  ) {
+    this.contactForm = this.initForm();
+    this.passwordForm = this.initFormContraseña();
+    
   }
   ngOnInit(): void {
-    this.contactForm = this.initForm()
-    this.passwordForm=this.initFormContraseña()
-    this.fileForm=this.initFileForm()
-    this.indice = this.componentService.getId
-    console.log(this.indice);
+   
 
-    this.estudianteservice.getDataForId().pipe(
-      tap((res: any) => {
-        this.foto=res.foto
-        this.contactForm.patchValue({
-          nombres: res.nombre,
-          apellidos: res.apellido,
-          tipoDocumento: res.tipoDocumento,
-          contraseña: res.contraseña,
-          programa: res.programa,
-          numeroTelefono: res.numeroTelefono,
-          correo: res.correo,
-          numeroDocumento: res.numeroDocumento,
-          facultad: res.facultad
-
+    this.estudianteservice
+      .getDataForId()
+      .pipe(
+        tap((res: any) => {
+          
+          this.contactForm.patchValue({
+            nombres: res.nombre,
+            apellidos: res.apellido,
+            tipoDocumento: res.tipoDocumento,
+            contraseña: res.contraseña,
+            programa: res.programa,
+            numeroTelefono: res.numeroTelefono,
+            correo: res.correo,
+            numeroDocumento: res.numeroDocumento,
+            facultad: res.facultad,
+          });
+          this.foto='http://localhost:5000/static/uploads/'+res.foto
         })
-      })
-    ).subscribe()
-
-
-
-
+        
+      )
+      .subscribe();
   }
   validarCorreo() {
     if (!this.contactForm.get('correo')?.invalid) {
@@ -72,105 +72,103 @@ export class PerfilComponent implements OnInit {
     return this.fb.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
-      tipoDocumento: ['', Validators.required,],
+      tipoDocumento: ['', Validators.required],
 
       programa: ['', Validators.required],
-      numeroTelefono: ['', Validators.required,],
+      numeroTelefono: ['', Validators.required],
       correo: ['', Validators.email],
 
-
       numeroDocumento: ['', [Validators.required, Validators.maxLength(10)]],
-      facultad: ['', Validators.required]
-    })
+      facultad: ['', Validators.required],
+    });
   }
-initFileForm():FormGroup{
-  return this.fb.group({
-    foto:['',Validators.required]
-  })
-}
-  initFormContraseña(){
+  initFileForm(): FormGroup {
     return this.fb.group({
-      contraseña:['',Validators.required],
-      nuevaContraseña:['',Validators.required],
-      confirmarContraseña:['',Validators.required]
-    })
+      foto: ['', Validators.required],
+    });
+  }
+  initFormContraseña() {
+    return this.fb.group({
+      contraseña: ['', Validators.required],
+      nuevaContraseña: ['', Validators.required],
+      confirmarContraseña: ['', Validators.required],
+    });
   }
 
   onSubmit(event: Event) {
-    this.submitted = true
-
+    this.submitted = true;
 
     if (this.contactForm.invalid) {
       console.log('formulario valido');
 
-
-      return
-
+      return;
     }
-
 
     console.log('invalido');
-
-
-
-
-
-
-
-
-
   }
 
-  cambiarPassword(){
-    if(this.passwordForm.valid && this.passwordForm.get('nuevaContraseña')?.value==this.passwordForm.get('confirmarContraseña')?.value){
-      let form=this.passwordForm.value;
-      
-      
-        this.estudianteservice.getPasswordForId(form).pipe(
-          tap((message:any)=>{
+  cambiarPassword() {
+    if (
+      this.passwordForm.valid &&
+      this.passwordForm.get('nuevaContraseña')?.value ==
+        this.passwordForm.get('confirmarContraseña')?.value
+    ) {
+      let form = this.passwordForm.value;
+
+      this.estudianteservice
+        .getPasswordForId(form)
+        .pipe(
+          tap((message: any) => {
             console.log(message);
-            
-            if(message.message==="la contraseña ha sido cambiada"){
-              return alert("La contraseña ha sido cambiada")
-            }else{
-              return alert("La contraseña no ha sido cambiada")
+
+            if (message.message === 'la contraseña ha sido cambiada') {
+              this.alertSuccess=true    
+              this.showAlertPassword=false 
+              this.alertPasswordBd=false
+        
+            } else {
+              this.alertSuccess=false    
+
+              this.alertPasswordBd=true
+              this.showAlertPassword=false
+
+              
             }
-          }),
-          
-          
-        ).subscribe()
-    }else{
-      alert('las nueva contraseña debe ser confirmada')
+          })
+        )
+        .subscribe();
+    } else {
+      this.alertSuccess=false  
+      this.showAlertPassword=true
     }
-  
   }
 
-  subirFoto(event:any){  
-    
-    
-    this.selectFile=event.target.files[0]
+  subirFoto(event: any) {
+    this.selectFile = event.target.files[0];
   }
-  subirImagen(){
+  subirImagen() {
     const formData = new FormData();
     formData.append('file', this.selectFile);
-    const token=localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token,
+        Authorization: 'Bearer ' + token,
         'Access-Control-Allow-Origin': 'http://localhost:4200',
-        'Access-Control-Allow-Credentials': 'true'
-      })
+        'Access-Control-Allow-Credentials': 'true',
+      }),
     };
-    const url="http://127.0.0.1:5000/upload"
-    this.http.post(url,formData,httpOptions).pipe(
-      tap((res:any)=>{
-        console.log(res.imgPath);
-        
-       this.foto='http://localhost:5000/static/uploads/'+res.imgPath
-        
-      })
-    ).subscribe()
+    const url = 'http://127.0.0.1:5000/upload';
+    this.http
+      .post(url, formData, httpOptions)
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+          
+          this.foto='http://localhost:5000/static/uploads/'+res.imgPath
+         
+        })
+      )
+      .subscribe();
+     
   }
-
-
 }

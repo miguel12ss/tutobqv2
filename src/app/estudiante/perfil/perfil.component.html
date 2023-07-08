@@ -6,7 +6,7 @@
                  />
             <div class="container-button d-flex">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                    data-bs-whatever="@mdo">Cambiar foto</button>
+                    data-bs-whatever="@mdo" >Cambiar foto</button>
             </div>
             
 
@@ -91,6 +91,7 @@
                             formControlName="contraseña"
                                 aria-describedby="contraseña actual" [required]="true">
                         </div>
+                        <nz-alert nzType="error" nzMessage="La contraseña actual no se encuentra en el sistema" *ngIf="alertPasswordBd" nzShowIcon></nz-alert>
 
                         <div class="mb-2">
                             <label for="nueva_contraseña" class="form-label"><b>Nueva contraseña</b></label>
@@ -103,8 +104,12 @@
                             <input type="password" class="form-control" id="confirmar_contraseña"
                                 aria-describedby="confirmar contraseña" formControlName="confirmarContraseña">
                         </div>
+                        <!-- <div *ngIf="showAlertPassword" class="alert alert-danger">
+                            las contraseñas no son iguales
+                        </div> -->
 
-                       
+                        <nz-alert nzType="error" nzMessage="Las contraseñas deben coincidir" *ngIf="showAlertPassword" nzShowIcon></nz-alert>
+                        <nz-alert nzType="success" *ngIf="alertSuccess" nzMessage="la contraseña ha sido cambiada "  nzShowIcon></nz-alert>
 
                     </div>
                     <div class="modal-footer">
