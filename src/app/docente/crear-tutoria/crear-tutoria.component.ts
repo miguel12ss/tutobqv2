@@ -1,45 +1,23 @@
-import { Component } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { DocenteService } from '../services/docente.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-crear-tutoria',
   templateUrl: './crear-tutoria.component.html',
   styleUrls: ['./crear-tutoria.component.scss']
 })
-export class CrearTutoriaComponent {
-horarioForm!: FormGroup;
-fechaHoy=''
-
-constructor(public fb:FormBuilder){
-  const dateToday=new Date();
-  this.fechaHoy = dateToday.toISOString().substring(0, 10);
-  console.log(this.fechaHoy);
-  this.horarioForm=this.initForm()
-
-}
-
-
-onSubmit(){
-console.log(this.horarioForm.value);
-
-}
-
-initForm():FormGroup{
-  return this.fb.group({
-    facultad:[null,Validators.required],
-    tema:[null,Validators.required],
-    capacidad:[null,Validators.required],
-    horaInicio:[null,Validators.required],
-    programa:[null,Validators.required],
-    sede:[null,Validators.required],
-    docente:[null,Validators.required],
-    horaFin:[null,Validators.required],
-    materia:[null,Validators.required],
-    salon:[null,Validators.required],
-    fecha:[null,Validators.required],
-
-  })
-}
-
-
+export class CrearTutoriaComponent implements OnInit  {
+  public horario:any
+  constructor(private docenteService:DocenteService){}
+  ngOnInit(): void {
+    this.docenteService.getHorario().pipe(
+      tap((res:any)=>{
+        this.horario=res.data
+        console.log(this.horario);
+        
+        
+      })
+    ).subscribe()
+  }
 }

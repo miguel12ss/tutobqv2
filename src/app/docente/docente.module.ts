@@ -12,12 +12,13 @@ import { DocenteComponent } from './docente.component';
 import { HorarioComponent } from './horario/horario.component';
 import { NgZorroAntdModule } from '../ngZorroAntdModule';
 import { DocenteService } from './services/docente.service';
+import { ModalCreartutoriaComponent } from './components/modal-creartutoria/modal-creartutoria.component';
 
 
 @NgModule({
   declarations: [
     PerfilComponent,
-    CrearTutoriaComponent,DocenteComponent,HorarioComponent
+    CrearTutoriaComponent,DocenteComponent,HorarioComponent, ModalCreartutoriaComponent
   ],
   imports: [
     CommonModule,

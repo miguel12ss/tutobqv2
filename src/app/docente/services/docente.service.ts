@@ -9,6 +9,7 @@ export class DocenteService{
     constructor(private readonly http:HttpClient){}
 
     url="http://localhost:5000/perfil-docente"
+    urlGlobal="http://localhost:5000/"
 
     getDataDocente():Observable<Docente>{
         const token=localStorage.getItem('token')
@@ -22,6 +23,101 @@ export class DocenteService{
         };
        return  this.http.get<Docente>(this.url,httpOptions)
     }
+
+    getSalones(){
+      const token=localStorage.getItem('token')
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4200',
+          'Access-Control-Allow-Credentials': 'true'
+        })
+      };
+     return  this.http.get(`${this.urlGlobal}salon`,httpOptions)
+  }
+
+  getMaterias(){
+    const token=localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true'
+      })
+    };
+   return  this.http.get(`${this.urlGlobal}materias`,httpOptions)
+}
+
+getSedes(){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+ return  this.http.get(`${this.urlGlobal}sedes`,httpOptions)
+}
+
+
+getDataForId(){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+ return  this.http.get(`${this.urlGlobal}horario`,httpOptions)
+}
+
+
+crearHorario(horario:any){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return  this.http.post(`${this.urlGlobal}agregarHorario`,horario,httpOptions)
+
+}
+
+obtenerCapacidadPorSalon(salon:string){
+  let salonJson={"salon":salon}
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return  this.http.post(`${this.urlGlobal}obtenerCapacidad`,salonJson,httpOptions)
+}
+getHorario(){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return  this.http.get(`${this.urlGlobal}mostrarHorario`,httpOptions)
+}
+
 
 
 
