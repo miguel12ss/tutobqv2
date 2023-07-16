@@ -15,8 +15,8 @@ export class CrearTutoriaComponent implements OnInit  {
       tap((res:any)=>{
         this.horario=res.data
         console.log(this.horario);
-        
-        
+        this.docenteService
+        this.docenteService.getHorario()
       })
     ).subscribe()
   }
