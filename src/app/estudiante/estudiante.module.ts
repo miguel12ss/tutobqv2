@@ -10,6 +10,7 @@ import { TutoriasPendientesComponent } from './tutorias-pendientes/tutorias-pend
 import { BuscarComponent } from './buscar/buscar.component';
 import { RegistroTutoriaComponent } from './registro-tutoria/registro-tutoria.component';
 import { NgZorroAntdModule } from '../ngZorroAntdModule';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [ 
@@ -19,6 +20,7 @@ import { NgZorroAntdModule } from '../ngZorroAntdModule';
     TutoriasPendientesComponent,
     BuscarComponent,
     RegistroTutoriaComponent,
+    CardComponent,
     
   ],
   imports: [

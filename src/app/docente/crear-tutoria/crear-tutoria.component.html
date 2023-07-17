@@ -114,22 +114,10 @@
       </div>
     </div>
   </div>
-  <table class="table">
+   <!-- <table class="table">
     <thead>
       <tr>
-        <!-- <th scope="col">Facultad</th>
-        <th scope="col">Programa</th>
-        <th scope="col">Materia</th>
-        <th scope="col">Tema</th>
-        <th scope="col">Sede</th>
-        <th scope="col">Salón</th>
-        <th scope="col">Capacidad</th>
-        <th scope="col">Cupos</th>
-        <th scope="col">Docente</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Hora inicio</th>
-        <th scope="col">Hora terminación</th>
-        <th scope="col">Estado</th> -->
+     
         <th scope="col">cupos</th>
         <th scope="col">facultad</th>
         <th scope="col">fecha</th>
@@ -165,5 +153,47 @@
 
       </tr>
     </tbody>
-  </table>
+  </table> -->
+  <nz-table #headerTable [nzData]="horario" [nzPageSize]="4" [nzScroll]="{ y: '300px' }">
+    <thead>
+      <tr>
+        <th >cupos</th>
+        <th >facultad</th>
+        <th >fecha</th>
+        <th >fecha_generacion_tutoria</th>
+
+        <th >horaInicio</th>
+        <th >horaFin</th>
+
+        <th >programa</th>
+        <th >materia</th>
+
+        <th >salon</th>
+        <th >sede</th>
+
+        <th >tema</th>
+        <th >estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of headerTable.data">
+        <!-- <td>{{ data.name }}</td>
+        <td>{{ data.age }}</td>
+        <td>{{ data.address }}</td> -->
+        <td>{{ h.cupos }}</td>
+        <td>{{h.facultad}}</td>   
+        <td>{{h.fecha}}</td>
+        <td>{{h.fecha_generacion_tutoria}}</td>
+        <td>{{h.horaInicio}}</td>
+        <td>{{h.horaFin}}</td>
+        <td>{{h.programa}}</td>
+        <td>{{h.materia}}</td>
+        <td>{{h.salon}}</td>
+        <td>{{h.sede}}</td>
+      <td>{{h.tema}}</td>
+      <td>{{h.id_estado_tutoria}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  
 </div>

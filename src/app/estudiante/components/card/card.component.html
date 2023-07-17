@@ -1,0 +1,14 @@
+
+    <nz-card style="width:300px; margin-top: 20px;box-shadow: .5px 2px 3px rgba(0,0,0,.5);"  [nzBordered]="true" nzTitle="Programacion orientada a objetos" [nzExtra]="extraTemplate">
+      <p>Docente: {{horario.nombre}} {{horario.apellido}}</p>
+ 
+      <p>Card content</p>
+      <div class="container-actions d-flex justify-space-between gap-4">
+      <button nz-button style="border-radius: 15px;"  nzType="primary" >Agendar</button>
+      <button nz-button style="border-radius: 15px; " nzType="primary">Descripcion</button>
+    </div>
+    </nz-card>
+
+  <ng-template #extraTemplate>
+    <!-- <a>More</a> -->
+  </ng-template>

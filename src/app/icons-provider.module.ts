@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(es);
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
 import {
   MenuFoldOutline,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-buscar',
@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class BuscarComponent {
 
+  public horario:Object[]=[
+    {nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},
+    
+  ]
 }

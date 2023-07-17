@@ -1,32 +1,11 @@
 <h3 class="text-center">AGENDAMIENTO DE TUTORIAS ACÁDEMICAS</h3>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Buscar</th>
-    </tr>
-    <tr>
-      <th scope="col">Facultad</th>
-      <th scope="col">Programa</th>
-      <th scope="col">Materia</th>
-      <th scope="col">Sede</th>
-      <th scope="col">Salón</th>
-      <th scope="col">Capacidad</th>
-      <th scope="col">Docente</th>
-      <th scope="col">Tema</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Hora inicio</th>
-      <th scope="col">Hora terminación</th>
-      <th scope="col">Cupos</th>
-      <th scope="col">Estado</th>
-      <th scope="col">Acción</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      
-    </tr>
-    
-  </tbody>
-</table>
+<nz-table  #headerTable [nzData]="horario" [nzPageSize]="6 "  >
+
+
+
+ <div class="row">
+<app-card class="col-md-4"  *ngFor="let horario of headerTable.data" [horario]="horario"/>
+</div>
+</nz-table>
 
 
