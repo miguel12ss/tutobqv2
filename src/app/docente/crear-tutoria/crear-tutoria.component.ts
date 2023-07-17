@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DocenteService } from '../services/docente.service';
 import { tap } from 'rxjs';
+import { ComponentService } from 'src/app/components/services/components.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-tutoria',
@@ -9,15 +11,106 @@ import { tap } from 'rxjs';
 })
 export class CrearTutoriaComponent implements OnInit  {
   public horario:any
-  constructor(private docenteService:DocenteService){}
+  horarioForm!: FormGroup;
+  fechaHoy=''
+  salones:string[]=[]
+  materias:string[]=[]
+  sedes:string[]=[]
+  programas:string[]=[]
+  data:string[]=[]
+  constructor(public fb:FormBuilder,private docenteService:DocenteService,
+    private componentService:ComponentService){
+      const dateToday=new Date();
+      this.fechaHoy = dateToday.toISOString().substring(0, 10);
+      console.log(this.fechaHoy);
+      this.horarioForm=this.initForm()
+
+
+
+    }
+   
   ngOnInit(): void {
     this.docenteService.getHorario().pipe(
       tap((res:any)=>{
         this.horario=res.data
         console.log(this.horario);
-        this.docenteService
-        this.docenteService.getHorario()
+        
       })
     ).subscribe()
+    this.docenteService.getSalones().pipe(
+      tap((res:any) => {
+        this.salones=res
+      })
+    ).subscribe()
+
+    this.docenteService.getMaterias().pipe(
+      tap((res:any) => {
+        this.materias=res
+      })
+    ).subscribe()
+
+    this.docenteService.getSedes().pipe(
+      tap((res:any) => {
+        this.sedes=res
+      })
+    ).subscribe()
+    this.componentService.getPrograms.pipe(
+      tap((res:any) => {
+        this.programas=res
+      })
+    ).subscribe()
+      this.docenteService.getDataForId().pipe(
+        tap((res:any)=>{
+         
+         this.horarioForm.patchValue({
+          facultad:res.data.facultad,
+          docente:res.data.nombre
+         })
+        })
+      ).subscribe()
+    
   }
+  initForm():FormGroup{
+    return this.fb.group({
+      facultad:[null,Validators.required],
+      tema:[null,Validators.required],
+      capacidad:[null,Validators.required],
+      horaInicio:[null,Validators.required],
+      programa:[null,Validators.required],
+      sede:[null,Validators.required],
+      docente:[null,Validators.required],
+      horaFin:[null,Validators.required],
+      materia:[null,Validators.required],
+      salon:[null,Validators.required],
+      fecha:[null,Validators.required],
+  
+    })
+  
+}
+onSelect(event:any){
+  const salon=event.target.value
+  this.docenteService.obtenerCapacidadPorSalon(salon).pipe(
+    tap((res:any)=>{
+    this.horarioForm.patchValue({
+      capacidad:res.capacidad
+    })
+    })
+  ).subscribe()
+}
+onSubmit(){
+  const horario=this.horarioForm.value
+  this.docenteService.crearHorario(horario).pipe(
+    tap((res:any)=>{
+      this.docenteService.getHorario().pipe(
+        tap((res:any)=>{
+          this.horario=res.data
+
+          console.log(res.data);
+         
+        })
+      ).subscribe()
+    })
+  ).subscribe()
+}
+
 }

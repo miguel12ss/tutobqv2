@@ -5,6 +5,7 @@ import { DocenteService } from '../services/docente.service';
 import { Docente } from 'src/app/shared/interfaces/docente.interface';
 import { tap } from 'rxjs';
 import { EstudianteService } from 'src/app/estudiante/services/estudiante.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-perfil',
@@ -17,7 +18,8 @@ export class PerfilComponent implements OnInit {
   foto!:string
   public showAlertDanger = false;
   submitted = false;
-  constructor(public fb: FormBuilder, private docenteService: DocenteService,private estudianteservice:EstudianteService) {}
+  selectFile:any
+  constructor(public fb: FormBuilder, private docenteService: DocenteService,private estudianteservice:EstudianteService,private http:HttpClient) {}
 
   ngOnInit(): void {
     this.contactForm = this.initForm();
@@ -26,7 +28,6 @@ export class PerfilComponent implements OnInit {
       .getDataDocente()
       .pipe(
         tap((docente:any) => {
-          this.foto=docente.foto
           this.contactForm.patchValue({
             nombres: docente.nombre,
             apellidos: docente.apellido,
@@ -36,6 +37,8 @@ export class PerfilComponent implements OnInit {
             numeroDocumento: docente.numeroDocumento,
             facultad: docente.facultad,
           });
+          this.foto='http://localhost:5000/static/uploads/'+docente.foto
+
         })
       )
       .subscribe();
@@ -91,8 +94,39 @@ export class PerfilComponent implements OnInit {
     alert('las contraseñas no coinciden ')
   }
 
+  onChange(event:any){
+      this.selectFile = event.target.files[0];
+    console.log('entras')
+  }
+
   subirFoto(event:any){
-    console.log(event);
+    console.log('ebtras a subir foto');
+    
+    const formData = new FormData();
+    formData.append('file', this.selectFile);
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true',
+      }),
+    };
+    const url = 'http://127.0.0.1:5000/upload';
+    this.http
+      .post(url, formData, httpOptions)
+      .pipe(
+        tap((res: any) => {
+          console.log(res);
+          
+          this.foto='http://localhost:5000/static/uploads/'+res.imgPath
+         
+        })
+      )
+      .subscribe();
+     
+  }
     
   }
-}
+

@@ -235,16 +235,16 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="onSubmit()">
+        <form >
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label"
               ><b>Imagen</b></label
             >
-            <input type="file"  class="form-control" id="recipient-name" />
+            <input type="file" (change)="onChange($event)" class="form-control" id="recipient-name" />
           </div>
 
           <div class="modal-footer d-flex">
-            <button type="button" class="btn btn-primary">Send message</button>
+            <button (click)="subirFoto($event)" type="button" class="btn btn-primary">Send message</button>
           </div>
         </form>
       </div>

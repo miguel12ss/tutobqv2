@@ -152,7 +152,8 @@ export class PerfilComponent implements OnInit {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
+        'Authorization': 'Bearer ' + token,
+        
         'Access-Control-Allow-Origin': 'http://localhost:4200',
         'Access-Control-Allow-Credentials': 'true',
       }),
