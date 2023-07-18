@@ -1,40 +1,222 @@
-<p>crear works joshua</p>
+<h3 class="text-center">CREAR TUTORIA ACÁDEMICA</h3>
+<div class="container-button d-flex justify-content-end m-1">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Crear horario
+    </button>
+</div>
+<div class="table-responsive">
+    <nz-table #nzTable [nzData]="listOfDisplayData||estudiante" nzTableLayout="fixed">
+        <thead>
+            <tr>
+                <th nzCustomFilter>
+                    Buscar
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
+                        [nzDropdownMenu]="menu">
+                        <span nz-icon nzType="search"></span>
+                    </nz-filter-trigger>
+                </th>
+                <th>Facultad</th>
+                <th>Correo</th>
+                <th>Docente</th>
+                <th>Modificar</th>
+                <th>Estado</th>
 
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td>{{ data.id_facultad}}</td>
+                <td>{{ data.id_programa}}</td>
+                <td>{{data.id_usuario}}</td>
+                <td>{{data.id_usuario}}</td>
+                <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#modalmodificar">
+                        Modificar
+                    </button></td>
+                <td><button nz-button nzType="primary" class="btn btnc btn-primary"
+                        (click)="deshabilitar()">Deshabilitar</button></td>
+            </tr>
+        </tbody>
+    </nz-table>
 
-asdfñ
-asd
-fa
-sdf
-as
-df
-asd
-fas
-df
-asdf
-as
-dfa
-sf
-sa
-dfas
-df
-asdf
-as
-dfas
-df
-asdfasdf
-as
-df
-asdf
-asdf
-asdf
-asdf
-asf
-fs
-af
-sadf
-sadg
-af
-as
-df
-asdsf
-asfd
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+        <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+                <input type="text" nz-input placeholder="Buscar" [(ngModel)]="searchValue" />
+                <button nz-button nzSize="small" nzType="primary" (click)="search()"
+                    class="search-button">Buscar</button>
+                <button nz-button nzSize="small" (click)="reset()">Reset</button>
+            </div>
+        </div>
+    </nz-dropdown-menu>
+
+  <!-- Modal crear tutoria -->
+  <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Crear horario tutoria acádemica</b></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row">
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="facultad" class="form-label"><b>Facultad</b> </label>
+              <input type="text" class="form-control" id="facultad" aria-describedby="facultad"  readonly>
+            </div>
+
+            <div class="mb-3">
+              <label for="tema" class="form-label"><b>Tema</b></label>
+              <input type="text" class="form-control" id="tema" autocomplete="off"required>
+            </div>
+
+            <div class="mb-3">
+              <label for="capacidad" class="form-label"><b>Capacidad</b></label>
+              <input type="text" class="form-control" id="capacidad" autocomplete="off" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="hora_inicio" class="form-label">Hora de inicio</label>
+              <input type="time" class="form-control" id="hora_inicio" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="programa" class="form-label"><b>Programa</b></label>
+              <input type="text" class="form-control" id="programa" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="sede" class="form-label"><b>Sede</b> </label>
+              <input type="text" class="form-control" id="sede" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="docente" class="form-label"><b>Docente</b> </label>
+              <input type="text" class="form-control" id="docente" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="hora_finalizacion" class="form-label"><b>Hora de finalización</b></label>
+              <input type="time" class="form-control" id="hora_finalizacion" autocomplete="off" required>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="materia" class="form-label"><b>Materia</b></label>
+              <input type="text" class="form-control" id="materia" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="salon" class="form-label"><b>Salón</b></label>
+              <input type="text" class="form-control" id="salon" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="fecha" class="form-label"><b>Fecha</b></label>
+              <input type="date" class="form-control" id="fecha" autocomplete="off" required>
+            </div>
+
+           
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
+            <button type="button" class="linea btn bmodal btn-primary btn-sm">Cambiar</button>
+        </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- modal modificar datos--> 
+<div class="modal fade modal-lg" id="modalmodificar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar horario tutoria acádemica</b></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row">
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="facultad" class="form-label"><b>Facultad</b> </label>
+              <input type="text" class="form-control" id="facultad" aria-describedby="facultad"  readonly>
+            </div>
+
+            <div class="mb-3">
+              <label for="tema" class="form-label"><b>Tema</b></label>
+              <input type="text" class="form-control" id="tema" autocomplete="off"required>
+            </div>
+
+            <div class="mb-3">
+              <label for="capacidad" class="form-label"><b>Capacidad</b></label>
+              <input type="text" class="form-control" id="capacidad" autocomplete="off" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="hora_inicio" class="form-label">Hora de inicio</label>
+              <input type="time" class="form-control" id="hora_inicio" autocomplete="off" required>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="programa" class="form-label"><b>Programa</b></label>
+              <input type="text" class="form-control" id="programa" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="sede" class="form-label"><b>Sede</b> </label>
+              <input type="text" class="form-control" id="sede" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="docente" class="form-label"><b>Docente</b> </label>
+              <input type="text" class="form-control" id="docente" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="hora_finalizacion" class="form-label"><b>Hora de finalización</b></label>
+              <input type="time" class="form-control" id="hora_finalizacion" autocomplete="off" required>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label for="materia" class="form-label"><b>Materia</b></label>
+              <input type="text" class="form-control" id="materia" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="salon" class="form-label"><b>Salón</b></label>
+              <input type="text" class="form-control" id="salon" autocomplete="off" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="fecha" class="form-label"><b>Fecha</b></label>
+              <input type="date" class="form-control" id="fecha" autocomplete="off" required>
+            </div>
+
+           
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
+            <button type="button" class="linea btn bmodal btn-primary btn-sm">Cambiar</button>
+        </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>

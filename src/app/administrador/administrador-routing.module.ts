@@ -28,17 +28,29 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'deshabilitar-docente',
+        path: 'modificar-docente',
         loadChildren: () =>
           import('./modificar-docente/modificar-docente.module').then(
             (m) => m.ModificarDocenteModule
           ),
       },
       {
-        path: 'deshabilitar-estudiante',
+        path: 'modificar-estudiante',
         loadChildren: () =>
           import('./modificar-estudiante/modificar-estudiante.module').then(
             (m) => m.ModificarEstudianteModule
+          ),
+      },{
+        path: 'tablafacultades',
+        loadChildren: () =>
+          import('./tablafacultades/tablafacultades.module').then(
+            (m) => m.TablafacultadesModule
+          ),
+      },{
+        path: 'historial-tutorias',
+        loadChildren: () =>
+          import('./historial-tutorias/historial-tutorias.module').then(
+            (m) => m.HistorialTutoriasModule
           ),
       },
       {path:'crear-tutoria',loadChildren:()=>import('./crear-tutoria/crear-tutoria.module').then(m=>m.CrearTutoriaModule)},

@@ -6,89 +6,69 @@
       <h1>TUTOBQ</h1>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Usuarios" nzIcon="dashboard">
+      <li nz-submenu nzOpen nzTitle="Usuarios" nzIcon="user">
         <ul>
-          <!-- <li nz-menu-item nzMatchRouter>
-              <a routerLink="actualizar" >Crear Agendamiento</a>
-            </li> -->
           <li nz-submenu nzClose nzTitle="Estudiante" nzIcon="user">
             <ul>
               <li nz-menu-item>
                 <a routerLink="agregar/estudiante">Agregar Estudiante</a>
               </li>
               <li nz-menu-item>
-                <a routerLink="deshabilitar-estudiante">Deshabilitar Estudiante</a>
+                <a routerLink="modificar-estudiante">Administrar Estudiante</a>
               </li>
-              <li nz-menu-item>
-                <a routerLink="modificar-estudiante">Modificar Estudiante</a>
-              </li>
-
-
-
             </ul>
-
           </li>
+
           <li nz-submenu nzClose nzTitle="Docente" nzIcon="user">
             <ul>
               <li nz-menu-item>
                 <a routerLink="agregar/docente">Agregar Docente</a>
               </li>
               <li nz-menu-item>
-                <a routerLink="deshabilitar-docente">Deshabilitar-docente</a>
+                <a routerLink="modificar-docente">Administrar Docente</a>
               </li>
-              <li nz-menu-item>
-                <a routerLink="modificar-docente">Modificar-docente</a>
-              </li>
-
-
-
             </ul>
-
           </li>
-
         </ul>
-
-
-
       </li>
-      <li nz-submenu nzOpen nzTitle="Tutorias" nzIcon="dashboard">
+
+      <li nz-submenu nzOpen nzTitle="Tutorias" nzIcon="calendar">
         <ul>
-
-
           <ul>
             <li nz-menu-item>
-              <a routerLink="crear-tutoria">Agregar Tutorias</a>
+              <a routerLink="crear-tutoria">Administrar Tutorias</a>
             </li>
             <li nz-menu-item>
-              <a routerLink="modificarTutoria">Modificar Tutorias</a>
+              <a routerLink="historial-tutorias">Historial Tutorias</a>
             </li>
-            <li nz-menu-item>
-              <a routerLink="deshabilitarTutoria">Deshabilitar Tutorias</a>
-            </li>
-
-
-
           </ul>
-
-
-
         </ul>
-
-
-
       </li>
-      <!-- <li nz-submenu nzOpen nzTitle="Tutorias" nzIcon="dashboard">
 
-
-
-        </li> -->
-      <!-- <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="Administratablas" nzIcon="table">
+        <ul>
           <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>Basic Form</a>
+            <li nz-menu-item>
+              <a routerLink="tablafacultades">Facultades</a>
+            </li>
+            <li nz-menu-item>
+              <a routerLink="modificarTutoria">Programas</a>
+            </li>
+            <li nz-menu-item>
+              <a routerLink="Historialtutorias">Estado</a>
+            </li>
+            <li nz-menu-item>
+              <a routerLink="Historialtutorias">Estado Tutorias</a>
             </li>
           </ul>
-        </li> -->
+        </ul>
+      </li>
+
+      <div class="sidebar-cerrar">
+        <img src="../../../assets/logout.png" alt="cerrar">
+        <h1>Cerrar sesión</h1>
+      </div>
+
 
     </ul>
   </nz-sider>
