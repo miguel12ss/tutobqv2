@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import Swal from 'sweetalert2';
+import { Component,Input } from '@angular/core';
+
 interface DataItem {
   id_tutoria:string
   id_facultad:string
@@ -17,11 +17,11 @@ interface DataItem {
   fecha_generacion_tutoria:string
 }
 @Component({
-  selector: 'app-crear-tutoria',
-  templateUrl: './crear-tutoria.component.html',
-  styleUrls: ['./crear-tutoria.component.scss']
+  selector: 'app-historial-tutorias',
+  templateUrl: './historial-tutorias.component.html',
+  styleUrls: ['./historial-tutorias.component.scss']
 })
-export class CrearTutoriaComponent {
+export class HistorialTutoriasComponent {
   @Input() estudiante!:DataItem[]
 
   searchValue = '';
@@ -71,28 +71,6 @@ search(): void {
   this.visible = false;
   this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.id_usuario.indexOf(this.searchValue) !== -1);
 }
-
-
-deshabilitar(){
-  Swal.fire({
-    title: 'Estas seguro de deshabilitar este docente',
-    text: "esta accion se puede revertir",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'si, deshabilito'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire(
-        'Deshabilitado',
-        'el docente ha sido deshabilitado',
-        'success'
-      )
-    }
-  })
-}}
+}
   
 
-
-  

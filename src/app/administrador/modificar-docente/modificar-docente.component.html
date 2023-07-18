@@ -1,44 +1,121 @@
-
+<h3 class="text-center">ADMINISTRAR DOCENTES</h3>
 <div class="table-responsive">
   <nz-table #nzTable [nzData]="listOfDisplayData||estudiante" nzTableLayout="fixed">
     <thead>
       <tr>
         <th nzCustomFilter>
-          Name
+          Buscar
           <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
             <span nz-icon nzType="search"></span>
           </nz-filter-trigger>
         </th>
         <th>Facultad</th>
-        <th>Telefono</th>
-        <th>Numero de cedula</th>
         <th>Correo</th>
+        <th>Telefono</th>
+        <th>Modificar</th>
         <th>Estado</th>
-        
+
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of nzTable.data">
         <td>{{ data.nombre}}</td>
         <td>{{ data.facultad }}</td>
-        <td>{{ data.telefono }}</td>
-        <td>{{data.numeroCedula}}</td>
         <td>{{data.correo}}</td>
-        <td ><button nz-button nzType="primary" (click)="deshabilitar()">Deshabilitar</button></td>
+        <td>{{data.numeroCedula}}</td>
+        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Modificar
+          </button></td>
+        <td><button nz-button nzType="primary" class="btn btnc btn-primary"(click)="deshabilitar()">Deshabilitar</button></td>
       </tr>
     </tbody>
   </nz-table>
+
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <div class="ant-table-filter-dropdown">
       <div class="search-box">
-        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
-        <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+        <input type="text" nz-input placeholder="Buscar" [(ngModel)]="searchValue" />
+        <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Buscar</button>
         <button nz-button nzSize="small" (click)="reset()">Reset</button>
       </div>
     </div>
   </nz-dropdown-menu>
 
+  <!-- Modal -->
+  <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos del usuario</b></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row">
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="nombres" class="form-label"><b>Nombres</b></label>
+                <input type="text" class="form-control" id="nombres" autocomplete="off" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="numerodocumento" class="form-label"><b>Numero de documento</b></label>
+                <input type="number" class="form-control" id="numerodocumento" autocomplete="off" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="correo" class="form-label"><b>Correo</b></label>
+                <input type="email" class="form-control" id="correo" autocomplete="off" required>
+              </div>
+
+            </div>
+
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="apellidos" class="form-label"><b>Apellidos</b></label>
+                <input type="text" class="form-control" id="apellidos" autocomplete="off" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="facultad" class="form-label"><b>Facultad</b></label>
+                <input type="text" class="form-control" id="facultad" autocomplete="off" required>
+              </div>
+
+              <div class="mb-3">
+                <br>
+                <div class="container-button d-md-flex justify-content-md-center p-2">
+                  <button type="button btn-primary " class="btn bcambiar btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    Cambiar contraseña
+                  </button>
+                </div>
+              </div>
 
 
+            </div>
 
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="tipodocumento" class="form-label"><b>Tipo de documento</b></label>
+                <input type="text" class="form-control" id="tipodocumento" autocomplete="off" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="telefono" class="form-label"><b>Numero de telefono</b></label>
+                <input type="number" class="form-control" id="telefono" autocomplete="off" required>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="linea btn bmodal btn-primary btn-sm">Guardar</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  
 </div>

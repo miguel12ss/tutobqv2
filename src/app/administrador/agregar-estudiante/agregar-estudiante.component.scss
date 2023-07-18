@@ -9,9 +9,8 @@
 }
 
 .container{
-    
+
     width: 1000px;
-  
     
     margin-top: 20px;
     height: 600px;
@@ -39,8 +38,6 @@ img{
 
 }
 
-
-
 .form-group{
     display: flex;
     flex-direction: column;
@@ -52,15 +49,15 @@ label{
 }
 .container-button{
     display: flex;
-    margin-top: 20px;
+    margin-top: 10px;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     
     
 }
 
 .btn{
-    padding: 10px 90px 10px 90px;
+    padding: 10px 30px 10px 30px;
     border-radius: 20px;
 }
 

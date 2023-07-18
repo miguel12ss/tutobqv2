@@ -1,95 +1,79 @@
 
-<form class="row"  [formGroup]="contactForm"   (ngSubmit)="onSubmit()">
-           
-
-    <div class="col-md-6 col-sm-12 mt-2">
+<form class="row d-md-flex justify-content-md-center" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-5 col-sm-12">
         <div class="form-group">
-            <label for="nombre">Nombres</label>
-            <input required class="form-control" formControlName="nombres"   type="text" name="nombre" id="nombre"  [ngClass]="{'is-invalid':submitted && contactForm.get('nombres')?.errors} " />
+            <label for="nombre"><b>Nombres</b></label>
+            <input required class="form-control" formControlName="nombres" type="text" name="nombre" id="nombre"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('nombres')?.errors} " autocomplete="off" required  />
         </div>
         <span class="text-danger" *ngIf="submitted && contactForm.get('nombres')?.errors">no ha cumplido el
             minimo de caracteres</span>
 
+
+
         <div class="form-group">
-            <label for="apellido">Apellidos</label>
-            <input class="form-control" type="text" name="apellido" id="apellido" formControlName="apellidos"  [ngClass]="{'is-invalid':submitted && contactForm.get('apellidos')?.errors} "
-                required />
+            <label for="tipo"><b>Tipo de documento</b></label>
+            <select name="tipo" formControlName="tipoDocumento" id="tipo" class="form-control"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('tipo')?.errors} ">
+                <option *ngFor="let tipo of tipoTarjeta " [value]="tipo">{{tipo}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="telefono"><b>Numero de telefono</b></label>
+            <input class="form-control" type="number" name="numeroTelefono" formControlName="numeroTelefono"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('numeroTelefono')?.errors} " id="numeroTelefono"
+                autocomplete="off" required  />
+        </div>
+
+        <div class="form-group">
+            <label for="correo"><b>Correo</b></label>
+            <input class="form-control" type="email" name="correo" id="correo" formControlName="correo"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('correo')?.errors} " (input)="validarCorreo()"
+                autocomplete="off" required  />
+
+        </div>
+
+        <div class="form-group">
+            <label for="contraseña"><b>Confirmar contraseña</b></label>
+            <input class="form-control" type="text" name="contraseña" id="contraseña" #newPassword
+                formControlName="nuevaContraseña"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('nuevaContraseña')?.errors} " autocomplete="off" required  />
+        </div>
+
+    </div>
+    <div class="col-md-5 col-sm-12">
+        <div class="form-group">
+            <label for="apellido"><b>Apellidos</b></label>
+            <input class="form-control" type="text" name="apellido" id="apellido" formControlName="apellidos"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('apellidos')?.errors} " autocomplete="off" required />
         </div>
         <span class="text-danger" *ngIf="submitted && contactForm.get('apellidos')?.errors">no ha cumplido el
             minimo de caracteres</span>
 
         <div class="form-group">
-            <label for="tipo">Tipo de documento</label>
-            <select name="tipo" formControlName="tipoDocumento" id="tipo" class="form-control" [ngClass]="{'is-invalid':submitted && contactForm.get('tipo')?.errors} " >
-                <option *ngFor="let tipo of tipoTarjeta " [value]="tipo">{{tipo}}</option>
-            </select>
-           
+            <label for="tipo"><b>Numero de documento</b></label>
+            <input name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number"
+                class="form-control"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('numeroDocumento')?.errors} " />
         </div>
 
-        <div class="form-group">
-            <label for="tipo">Numero de documento</label>
-            <input name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number" class="form-control" [ngClass]="{'is-invalid':submitted && contactForm.get('numeroDocumento')?.errors} " />
-                
-        
-           
-        </div>
-
-        
-        <div class="form-group">
-            <label for="telefono">Numero de telefono</label>
-            <input class="form-control" type="number" name="numeroTelefono" formControlName="numeroTelefono" 
-            [ngClass]="{'is-invalid':submitted && contactForm.get('numeroTelefono')?.errors} " id="numeroTelefono"  
-              required />
-        </div>
-       
-    </div>
-    <div class="col-md-6 col-sm-12 mt-2">
 
         <div class="form-group">
-            <label for="facultad">Facultad</label>
-            <select  formControlName="facultad" name="facultad" id="facultad" class="form-control"  >
-                <option selected value="facultad de ingenierias" >
+            <label for="facultad"><b>Facultad</b></label>
+            <select formControlName="facultad" name="facultad" id="facultad" class="form-control">
+                <option selected value="facultad de ingenierias">
                     Facultad de ingenierias
                 </option>
             </select>
         </div>
 
-
-        
-       
-       
-
-        
-
         <div class="form-group">
-            <label for="correo">Correo</label>
-            <input class="form-control" type="email" name="correo" id="correo" formControlName="correo"  [ngClass]="{'is-invalid':submitted && contactForm.get('correo')?.errors} "
-                (input)="validarCorreo()"   required />
-
+            <label for="contraseña"><b>Contraseña</b></label>
+            <input class="form-control" type="text" name="contraseña" id="contraseña" formControlName="contraseña"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('contraseña')?.errors} " autocomplete="off" required  />
         </div>
-       
-        <div class="form-group">
-            <label for="contraseña">Contraseña</label>
-            <input class="form-control" type="text" name="contraseña" id="contraseña" 
-                formControlName="contraseña"  [ngClass]="{'is-invalid':submitted && contactForm.get('contraseña')?.errors} "  required />
-        </div>
-        
-
-        <div class="form-group gap-2">
-            <label for="contraseña">Confirmar Contraseña</label>
-            <input class="form-control" type="text" name="contraseña" id="contraseña" #newPassword
-                formControlName="nuevaContraseña"  [ngClass]="{'is-invalid':submitted && contactForm.get('nuevaContraseña')?.errors} " required />
-        </div>
- 
-
-      
-
-
-
-
-
-
     </div>
-   <div class="container-button " ><button class="btn btn-primary" [disabled]="contactForm.invalid">Enviar</button></div>
+    <div class="container-button "><button class="btn btn-primary" [disabled]="contactForm.invalid">Registrar</button>
+    </div>
 </form>
-

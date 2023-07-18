@@ -12,13 +12,15 @@ import { CrearTutoriaComponent } from './crear-tutoria/crear-tutoria.component';
 import { ModificarEstudianteComponent } from './modificar-estudiante/modificar-estudiante.component';
 import { ModificarDocenteComponent } from './modificar-docente/modificar-docente.component';
 import { NgZorroAntdModule } from '../ngZorroAntdModule';
+import { TablafacultadesComponent } from './tablafacultades/tablafacultades.component';
+import { HistorialTutoriasComponent } from './historial-tutorias/historial-tutorias.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent
   ],
   imports: [
     CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule

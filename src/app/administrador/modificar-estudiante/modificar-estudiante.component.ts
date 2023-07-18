@@ -16,28 +16,28 @@ export class ModificarEstudianteComponent {
   estudiante: DataEstudiante[] = [
     {
       nombre: 'Miguel Suarez',
-      programa: 'tecnologo en sistemas informaticos',
+      programa: 'ingenieria',
       telefono: '3158245114',
       numeroCedula:'1024771216',
       correo:'miguel@unibarranquilla.edu.co'
     },
     {
       nombre: 'lucho arrieta',
-      programa: 'tecnologo en sistemas informaticos',
+      programa: 'ingenieria',
       telefono: '3158245114',
       numeroCedula:'1024771216',
       correo:'lucho @unibarranquilla.edu.co'
     },
     {
       nombre: 'Joshua cafronni',
-      programa: 'tecnologo en sistemas informaticos',
+      programa: 'ingenieria',
       telefono: '3158245114',
       numeroCedula:'1024771216',
       correo:'joshua@unibarranquilla.edu.co'
     },
     {
       nombre: 'Alan guerra',
-      programa: 'tecnologo en sistemas informaticos',
+      programa: 'ingenieria',
       telefono: '3158245114',
       numeroCedula:'1024771216',
       correo:'Alang@unibarranquilla.edu.co'
