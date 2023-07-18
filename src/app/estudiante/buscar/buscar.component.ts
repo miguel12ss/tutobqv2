@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { EstudianteService } from '../services/estudiante.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-buscar',
@@ -7,8 +9,16 @@ import { Component, Input } from '@angular/core';
 })
 export class BuscarComponent {
 
-  public horario:Object[]=[
-    {nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},{nombre:"miguel",apellido:"suarez"},
-    
-  ]
+  constructor(private estudianteService:EstudianteService){}
+
+  public horario:Object[]=[]
+  ngOnInit(): void {
+    this.estudianteService.getHorarios().pipe(
+      tap((res:any)=>{
+        
+        
+        this.horario=res.data
+      })
+    ).subscribe()
+  }
 }

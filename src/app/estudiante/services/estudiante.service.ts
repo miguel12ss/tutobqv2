@@ -11,6 +11,7 @@ import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
   providedIn: 'root'
 })
 export class EstudianteService {
+  private url="http://127.0.0.1:5000/"
   constructor(private httpClient:HttpClient,private loginservice:ApiService) { }
 
  
@@ -56,5 +57,29 @@ export class EstudianteService {
 
   // }
 
+getHorarios(){
+  const token=localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true'
+      })
+    };
+  return this.httpClient.get(`${this.url}mostrarHorarios`,httpOptions)
+}
 
+getHorarioForId(id:number){
+  const token=localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true'
+      })
+    };
+  return this.httpClient.get(`${this.url}mostrarHorariosId/${id}`,httpOptions)
+}
 }
