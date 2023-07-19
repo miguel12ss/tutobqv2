@@ -80,6 +80,6 @@ getHorarioForId(id:number){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-  return this.httpClient.get(`${this.url}mostrarHorariosId/${id}`,httpOptions)
+ return this.httpClient.get(`${this.url}mostrarHorariosId/${id}`,httpOptions)
 }
 }

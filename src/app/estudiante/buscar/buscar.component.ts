@@ -10,15 +10,29 @@ import { tap } from 'rxjs';
 export class BuscarComponent {
 
   constructor(private estudianteService:EstudianteService){}
-
-  public horario:Object[]=[]
+public datosModal:any={}
+  public horarios:any[]=[]
   ngOnInit(): void {
     this.estudianteService.getHorarios().pipe(
       tap((res:any)=>{
         
         
-        this.horario=res.data
+        this.horarios=res.data
       })
     ).subscribe()
+  }
+   descripcion(horario: any) {
+ console.log(horario);
+ 
+    this.estudianteService.getHorarioForId(horario).pipe(
+      tap((res:any)=>{
+       
+        this.datosModal =res.data; 
+        
+      })
+    ).subscribe()
+ 
+     
+
   }
 }

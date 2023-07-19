@@ -1,29 +1,46 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, NgZone, OnInit} from '@angular/core';
 import { EstudianteService } from '../../services/estudiante.service';
 import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
+  
 })
 export class CardComponent {
   @Input() horario!:any
+  public datosModa:any
+  public datosModal:any={}
+  mostrar:boolean=true
+  indice=0
+  constructor(private estudianteService: EstudianteService,private changeDetectorRef: ChangeDetectorRef,private ngZone: NgZone){
 
-  constructor(private estudianteService:EstudianteService){
-    console.log(this.horario);
-    
   }
 
-  descripcion(id_tutoria:number){
-    console.log(id_tutoria);
+  // ngOnInit(): void {
     
-   this.estudianteService.getHorarioForId(id_tutoria).pipe(
-    tap((res:any)=>{
-      console.log(res);
-      
-    })
-   ).subscribe()
-    
-  }
+  // }
+  // ngAfterViewInit(): void {
+  //  this.indice=this.horario.id_tutoria
+
+   
+  // }
+
+
+  // descripcion(horario: any) {
+ 
+  //   this.estudianteService.getHorarioForId(this.indice).pipe(
+  //     tap((res:any)=>{
+       
+  //       this.datosModal =res.data; 
+  //       this.mostrar=false
+  //     })
+  //   ).subscribe()
+ 
+     
+
+  // }
+
+
 }
