@@ -1,25 +1,124 @@
 <h3 class="text-center">TUTORIAS ACÁDEMICAS PENDIENTES</h3>
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Facultad</th>
-        <th scope="col">Programa</th>
-        <th scope="col">Materia</th>
-        <th scope="col">Sede</th>
-        <th scope="col">Salón</th>
-        <th scope="col">Capacidad</th>
-        <th scope="col">Docente</th>
-        <th scope="col">Tema</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Hora inicio</th>
-        <th scope="col">Hora terminación</th>
-        <th scope="col">Estado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        
-      </tr>
+<nz-table #headerTable [nzData]="horario" [nzPageSize]="4" [nzScroll]="{ y: '300px' }">
+  <thead>
+    <tr  >
+      <!-- <th >fecha</th> -->
+      <th >horaInicio</th>
+
+      <th >horaFin</th>
       
-    </tbody>
-  </table>
+      <th >materia</th>
+      <th >salon</th>
+      <th>Descripcion</th>
+      <th>Cancelar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let h of headerTable.data">
+      <!-- <td>{{ data.name }}</td>
+      <td>{{ data.age }}</td>
+      <td>{{ data.address }}</td> -->
+   
+      <!-- <td>{{h.fecha}}</td> -->
+
+      <td>{{h.horaInicio}}</td>
+      <td>{{h.horaFin}}</td>
+     
+      <td>{{h.materia}}</td>
+      <td>{{h.salon}}</td>
+   
+    <td><button nz-button nzType="primary"
+      data-bs-toggle="modal"
+      data-bs-target="#modaldescripcion"
+      (click)="descripcion(h.id_tutoria)"
+      >Descripcion</button></td>
+      <td><button nz-button nzType="primary"
+nzDanger      
+        (click)="cancelarTutoria(h.id_tutoria)"
+        >Cancelar tutoria</button></td>
+    </tr>
+  </tbody>
+</nz-table>
+
+
+
+
+
+<div class="modal fade modal-lg" id="modaldescripcion" data-bs-backdrop="static" data-bs-keyboard="false"
+tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Datos de la tutoria acádemica</b>
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row">
+                <div class="table-responsive" >
+                    <nz-table #nzTable [nzData]="datosModal" nzTableLayout="fixed">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                           
+                              <tr >
+                                <td><b>Facultad</b></td>
+                                <td >{{datosModal.facultad }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Materia</b></td>
+                                <td >{{datosModal.materia }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>programa</b></td>
+                                <td >{{datosModal.programa }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Sede</b></td>
+                                <td >{{datosModal.sede }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Salon</b></td>
+                                <td  >{{datosModal.salon }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Capacidad</b></td>
+                                <td >{{datosModal.capacidad }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Cupos</b></td>
+                                <td >{{ datosModal.cupos }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Tema</b></td>
+                                <td >{{datosModal.tema }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Fecha</b></td>
+                                <td >{{datosModal.fecha }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Hora de inicio</b></td>
+                                <td >{{datosModal.horaInicio }}</td>
+                              </tr>
+                              <tr >
+                                <td><b>Hora de finalizacion</b></td>
+                                <td >{{datosModal.horaFin }}</td>
+                              </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="linea btn bmodal btn-danger btn-sm"
+                        data-bs-dismiss="modal">Salir</button>
+                    <button type="button" class="linea btn bmodal btn-primary btn-sm">Cambiar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

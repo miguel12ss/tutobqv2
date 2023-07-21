@@ -1,5 +1,5 @@
 <!-- <h3 class="text-center">AGENDAMIENTO DE TUTORIAS ACÁDEMICAS</h3> -->
-<nz-table   #headerTable [nzData]="horarios" [nzPageSize]="4 "  >
+<nz-table   #headerTable [nzData]="horarios" [nzPageSize]="6"  >
 
 
 
@@ -11,16 +11,18 @@
       width: 280px;
       box-shadow: 0.5px 2px 3px rgba(0, 0, 0, 0.5);
     " 
-    *ngFor="let horario of horarios"
+    *ngFor="let horario of headerTable.data"
     [nzBordered]="true"
     nzTitle="{{horario.tema}}"
    
   >
     <p>Docente: {{ horario.nombres }} {{ horario.apellidos }}</p>
     <p>Materia: {{ horario.materia }}</p>
-    <p>Salon: {{ horario.salon }}</p>
+    <!-- <p>Salon: {{ horario.salon }}</p> -->
+    <p>Cupos: {{ horario.cupos }}</p>
+
     <div class="container-actions d-flex justify-space-between gap-4">
-      <button nz-button style="border-radius: 15px" nzType="primary">
+      <button nz-button style="border-radius: 15px" nzType="primary" (click)="agendarTutoria(horario.id_tutoria,horario.id_estado_tutoria)">
         Agendar
       </button>
       <button

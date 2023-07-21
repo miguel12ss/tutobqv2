@@ -82,4 +82,70 @@ getHorarioForId(id:number){
     };
  return this.httpClient.get(`${this.url}mostrarHorariosId/${id}`,httpOptions)
 }
+
+
+getHorarioForIdEstudiante(){
+  const token=localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true'
+      })
+    };
+ return this.httpClient.get(`${this.url}mostrarHorariosEstudiante`,httpOptions)
 }
+
+agendarTutorias(id_tutoria:number,id_estado_tutoria:number){
+  let id_agendar={"id_tutoria":id_tutoria, "id_estado_tutoria":id_estado_tutoria}
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+return this.httpClient.post(`${this.url}agendar`,id_agendar,httpOptions)
+}
+
+obtenerTutoriasEstudiante(){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+return this.httpClient.get(`${this.url}mostrarTutoriasEstudiante`,httpOptions)
+}
+
+
+cancelarTutoria(id_tutoria:string){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+ this.httpClient.post(`${this.url}cancelarTutoria`,id_tutoria,httpOptions).pipe(
+  tap((res:any)=>{
+    console.log(res);
+    
+  })
+ ).subscribe()
+}
+
+}
+
+
+
+
+
