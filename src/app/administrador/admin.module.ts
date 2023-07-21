@@ -14,13 +14,18 @@ import { ModificarDocenteComponent } from './modificar-docente/modificar-docente
 import { NgZorroAntdModule } from '../ngZorroAntdModule';
 import { TablafacultadesComponent } from './tablafacultades/tablafacultades.component';
 import { HistorialTutoriasComponent } from './historial-tutorias/historial-tutorias.component';
+import { TablaRolesComponent } from './tabla-roles/tabla-roles.component';
+import { TablaTipoDocumentosComponent } from './tabla-tipo-documentos/tabla-tipo-documentos.component';
+import { TablaHorasComponent } from './tabla-horas/tabla-horas.component';
+import { TablaProgramasComponent } from './tabla-programas/tabla-programas.component';
+import { TablaMateriasComponent } from './tabla-materias/tabla-materias.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent
   ],
   imports: [
     CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule

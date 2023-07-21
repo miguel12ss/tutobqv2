@@ -63,7 +63,7 @@ search(): void {
 
 deshabilitar(){
   Swal.fire({
-    title: 'Estas seguro de deshabilitar este docente',
+    title: '¿Estas seguro de deshabilitar este estudiante?',
     text: "esta accion se puede revertir",
     icon: 'warning',
     showCancelButton: true,
@@ -74,7 +74,7 @@ deshabilitar(){
     if (result.isConfirmed) {
       Swal.fire(
         'Deshabilitado',
-        'el docente ha sido deshabilitado',
+        'El estudiante ha sido deshabilitado',
         'success'
       )
     }

@@ -1,4 +1,4 @@
-<h3 class="text-center">CREAR TUTORIA ACÁDEMICA</h3>
+<h5 class="text-center">ADMINISTRAR TUTORIAS ACÁDEMICAS</h5>
 <div class="container-button d-flex justify-content-end m-1">
     <!-- Button trigger modal -->
     <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -10,13 +10,13 @@
         <thead>
             <tr>
                 <th nzCustomFilter>
-                    Buscar
+                  Facultad
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
-                        <span nz-icon nzType="search"></span>
+                        <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
                 </th>
-                <th>Facultad</th>
+                <th>Programa</th>
                 <th>Correo</th>
                 <th>Docente</th>
                 <th>Modificar</th>
@@ -57,7 +57,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Crear horario tutoria acádemica</b></h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Crear horario de tutoria acádemica</b></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -126,7 +126,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-            <button type="button" class="linea btn bmodal btn-primary btn-sm">Cambiar</button>
+            <button type="button" class="linea btn bmodal btn-primary btn-sm">Crear</button>
         </div>
         </form>
       </div>
@@ -141,7 +141,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar horario tutoria acádemica</b></h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar horario de tutoria acádemica</b></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -210,7 +210,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-            <button type="button" class="linea btn bmodal btn-primary btn-sm">Cambiar</button>
+            <button type="button" class="linea btn bmodal btn-primary btn-sm">Modificar</button>
         </div>
         </form>
       </div>

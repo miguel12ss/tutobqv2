@@ -45,30 +45,62 @@
         </ul>
       </li>
 
-      <li nz-submenu nzOpen nzTitle="Administratablas" nzIcon="table">
+      <li nz-submenu nzOpen nzTitle="Administrar tablas" nzIcon="table">
         <ul>
-          <ul>
-            <li nz-menu-item>
-              <a routerLink="tablafacultades">Facultades</a>
-            </li>
-            <li nz-menu-item>
-              <a routerLink="modificarTutoria">Programas</a>
-            </li>
-            <li nz-menu-item>
-              <a routerLink="Historialtutorias">Estado</a>
-            </li>
-            <li nz-menu-item>
-              <a routerLink="Historialtutorias">Estado Tutorias</a>
-            </li>
-          </ul>
+          <li nz-menu-item>
+            <a routerLink="tabla-roles">Roles</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="tabla-tipo-documentos">Tipos de documentos</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="tabla-horas">Horas</a>
+          </li>
+          <li nz-submenu nzClose nzTitle="Modulo de administración" nzIcon="table">
+            <ul>
+              <li nz-menu-item>
+                <a routerLink="tablafacultades">Facultades</a>
+              </li>
+              <li nz-menu-item>
+                <a routerLink="tabla-programas">Programas</a>
+              </li>
+              <li nz-menu-item>
+                <a routerLink="tabla-materias">Materias</a>
+              </li>
+              <li nz-menu-item>
+                <a routerLink="">Sedes</a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu nzClose nzTitle="Tablas salones" nzIcon="table">
+            <ul>
+              <li nz-menu-item>
+                <a routerLink="">Capacidades</a>
+              </li>
+              <li nz-menu-item>
+                <a routerLink="">Salones</a>
+              </li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzClose nzTitle="Tablas de estados" nzIcon="table">
+            <ul>
+              <li nz-menu-item>
+                <a routerLink="">Estados</a>
+              </li>
+              <li nz-menu-item>
+                <a routerLink="">Estados tutoria</a>
+              </li>
+            </ul>
+          </li>
         </ul>
+
       </li>
 
       <div class="sidebar-cerrar">
         <img src="../../../assets/logout.png" alt="cerrar">
         <h1>Cerrar sesión</h1>
       </div>
-
 
     </ul>
   </nz-sider>

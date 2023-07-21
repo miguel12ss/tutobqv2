@@ -1,12 +1,12 @@
-<h3 class="text-center">ADMINISTRAR DOCENTES</h3>
+<h5 class="text-center">ADMINISTRAR DOCENTES</h5>
 <div class="table-responsive">
   <nz-table #nzTable [nzData]="listOfDisplayData||estudiante" nzTableLayout="fixed">
     <thead>
       <tr>
         <th nzCustomFilter>
-          Buscar
+          Nombres
           <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-            <span nz-icon nzType="search"></span>
+            <span nz-icon nzType="search">Buscar </span>
           </nz-filter-trigger>
         </th>
         <th>Facultad</th>

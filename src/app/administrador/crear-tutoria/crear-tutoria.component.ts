@@ -25,7 +25,7 @@ export class CrearTutoriaComponent {
   @Input() estudiante!:DataItem[]
 
   searchValue = '';
-visible = false;
+  visible = false;
 listOfData: DataItem[] = [
   {
     id_tutoria:"1",
@@ -75,7 +75,7 @@ search(): void {
 
 deshabilitar(){
   Swal.fire({
-    title: 'Estas seguro de deshabilitar este docente',
+    title: '¿Estas seguro de deshabilitar este horario de tutoria?',
     text: "esta accion se puede revertir",
     icon: 'warning',
     showCancelButton: true,
@@ -86,7 +86,7 @@ deshabilitar(){
     if (result.isConfirmed) {
       Swal.fire(
         'Deshabilitado',
-        'el docente ha sido deshabilitado',
+        'La tutoria ha sido deshabilitada',
         'success'
       )
     }
