@@ -47,15 +47,6 @@
 
       <li nz-submenu nzOpen nzTitle="Administrar tablas" nzIcon="table">
         <ul>
-          <li nz-menu-item>
-            <a routerLink="tabla-roles">Roles</a>
-          </li>
-          <li nz-menu-item>
-            <a routerLink="tabla-tipo-documentos">Tipos de documentos</a>
-          </li>
-          <li nz-menu-item>
-            <a routerLink="tabla-horas">Horas</a>
-          </li>
           <li nz-submenu nzClose nzTitle="Modulo de administración" nzIcon="table">
             <ul>
               <li nz-menu-item>
@@ -68,17 +59,26 @@
                 <a routerLink="tabla-materias">Materias</a>
               </li>
               <li nz-menu-item>
-                <a routerLink="">Sedes</a>
+                <a routerLink="tabla-sedes">Sedes</a>
+              </li>
+              <li nz-menu-item>
+                <a routerLink="tabla-roles">Roles</a>
+              </li>
+              <li nz-menu-item>
+                <a routerLink="tabla-tipo-documentos">Tipos de documentos</a>
+              </li>
+              <li nz-menu-item>
+                <a routerLink="tabla-horas">Horas</a>
               </li>
             </ul>
           </li>
           <li nz-submenu nzClose nzTitle="Tablas salones" nzIcon="table">
             <ul>
               <li nz-menu-item>
-                <a routerLink="">Capacidades</a>
+                <a routerLink="tabla-capacidades">Capacidades</a>
               </li>
               <li nz-menu-item>
-                <a routerLink="">Salones</a>
+                <a routerLink="tabla-salones">Salones</a>
               </li>
             </ul>
           </li>
@@ -86,10 +86,10 @@
           <li nz-submenu nzClose nzTitle="Tablas de estados" nzIcon="table">
             <ul>
               <li nz-menu-item>
-                <a routerLink="">Estados</a>
+                <a routerLink="tabla-estados">Estados</a>
               </li>
               <li nz-menu-item>
-                <a routerLink="">Estados tutoria</a>
+                <a routerLink="tabla-estados-tutorias">Estados tutoria</a>
               </li>
             </ul>
           </li>

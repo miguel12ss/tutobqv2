@@ -1,5 +1,4 @@
 import { Component,Input } from '@angular/core';
-import Swal from 'sweetalert2';
 interface DataItem {
   id_facultad:String
   facultad:String

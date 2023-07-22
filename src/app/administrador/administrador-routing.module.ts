@@ -82,6 +82,36 @@ const routes: Routes = [
           import('./tabla-materias/tabla-materias.module').then(
             (m) => m.TablaMateriasModule
           ),
+      },{
+        path: 'tabla-sedes',
+        loadChildren: () =>
+          import('./tabla-sedes/tabla-sedes.module').then(
+            (m) => m.TablaSedesModule
+          ),
+      },{
+        path: 'tabla-capacidades',
+        loadChildren: () =>
+          import('./tabla-capacidades/tabla-capacidades.module').then(
+            (m) => m.TablaCapacidadesModule
+          ),
+      },{
+        path: 'tabla-salones',
+        loadChildren: () =>
+          import('./tabla-salones/tabla-salones.module').then(
+            (m) => m.TablaSalonesModule
+          ),
+      },{
+        path: 'tabla-estados',
+        loadChildren: () =>
+          import('./tabla-estados/tabla-estados.module').then(
+            (m) => m.TablaEstadosModule
+          ),
+      },{
+        path: 'tabla-estados-tutorias',
+        loadChildren: () =>
+          import('./tabla-estados-tutorias/tabla-estados-tutorias.module').then(
+            (m) => m.TablaEstadosTutoriasModule
+          ),
       },
       {path:'crear-tutoria',loadChildren:()=>import('./crear-tutoria/crear-tutoria.module').then(m=>m.CrearTutoriaModule)},
       {path:'**',redirectTo:'deshabilitar-docente'}

@@ -1,4 +1,4 @@
-<h5 class="text-center">ADMINISTRAR TABLA DE PROGRAMAS</h5>
+<h5 class="text-center">ADMINISTRAR TABLA DE SALONES</h5>
 <div class="container-button d-flex justify-content-end m-1">
     <!-- Button trigger modal -->
     <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -6,24 +6,28 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="listOfDisplayData||programas" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="listOfDisplayData||salones" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>
-                    Id programa
+                    Id salón
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
                 </th>
-                <th>Programa</th>
+                <th>Capacidad</th>
+                <th>Salón</th>
+                <th>Sede</th>
                 <th>Modificar</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_programa}}</td>
-                <td>{{ data.programa}}</td>
+                <td>{{ data.id_salon}}</td>
+                <td>{{ data.id_capacidad}}</td>
+                <td>{{ data.salon}}</td>
+                <td>{{ data.id_sede}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar">
                         Modificar
@@ -43,21 +47,29 @@
         </div>
     </nz-dropdown-menu>
 
-    <!-- Modal crear programa -->
+    <!-- Modal crear -->
     <div class="modal fade modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Agregar programa en la tabla de programas</b></h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Agregar salón en la tabla de salones</b></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row d-flex justify-content-center">
                         <div class="col-md-5 ">
                             <div class="mb-4">
-                                <label for="programa" class="form-label"><b>Programa</b> </label>
-                                <input type="text" class="form-control" id="programa" aria-describedby="programa" autocomplete="off">
+                                <label for="salon" class="form-label"><b>Salón</b> </label>
+                                <input type="text" class="form-control" id="salon" aria-describedby="salon" autocomplete="off">
+                            </div>
+                            <div class="mb-4">
+                                <label for="capacidad" class="form-label"><b>Capacidad</b> </label>
+                                <input type="text" class="form-control" id="capacidad" aria-describedby="capacidad" autocomplete="off">
+                            </div>
+                            <div class="mb-4">
+                                <label for="sede" class="form-label"><b>Sede</b> </label>
+                                <input type="text" class="form-control" id="sede" aria-describedby="sede" autocomplete="off">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -78,19 +90,30 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos de la tabla de programas</b></h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos de la tabla de capacidades</b></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row d-flex justify-content-center">
                         <div class="col-md-5">
                             <div class="mb-4">
-                                <label for="id_programa" class="form-label"><b>Id programa</b> </label>
-                                <input type="number" class="form-control" id="id_programa" aria-describedby="id_programa" autocomplete="off" readonly>
+                                <label for="id_salon" class="form-label"><b>Id salón</b> </label>
+                                <input type="number" class="form-control" id="id_salon" aria-describedby="id_salon" autocomplete="off" readonly>
                             </div>
                             <div class="mb-4">
-                                <label for="programa" class="form-label"><b>Programa</b> </label>
-                                <input type="text" class="form-control" id="programa" aria-describedby="programa" autocomplete="off">
+                                <label for="id_capacidad" class="form-label"><b>Id capacidad</b> </label>
+                                <input type="number" class="form-control" id="id_capacidad" aria-describedby="id_capacidad" autocomplete="off" readonly>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-5">
+                            <div class="mb-4">
+                                <label for="salon" class="form-label"><b>Salón</b> </label>
+                                <input type="text" class="form-control" id="salon" aria-describedby="salon" autocomplete="off">
+                            </div>
+                            <div class="mb-4">
+                                <label for="capacidad" class="form-label"><b>Capacidad</b> </label>
+                                <input type="text" class="form-control" id="capacidad" aria-describedby="capacidad" autocomplete="off">
                             </div>
                         </div>
 
@@ -108,3 +131,4 @@
     </div>
 
 </div>
+

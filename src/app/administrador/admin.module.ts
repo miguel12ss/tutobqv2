@@ -19,13 +19,18 @@ import { TablaTipoDocumentosComponent } from './tabla-tipo-documentos/tabla-tipo
 import { TablaHorasComponent } from './tabla-horas/tabla-horas.component';
 import { TablaProgramasComponent } from './tabla-programas/tabla-programas.component';
 import { TablaMateriasComponent } from './tabla-materias/tabla-materias.component';
+import { TablaSedesComponent } from './tabla-sedes/tabla-sedes.component';
+import { TablaCapacidadesComponent } from './tabla-capacidades/tabla-capacidades.component';
+import { TablaSalonesComponent } from './tabla-salones/tabla-salones.component';
+import { TablaEstadosComponent } from './tabla-estados/tabla-estados.component';
+import { TablaEstadosTutoriasComponent } from './tabla-estados-tutorias/tabla-estados-tutorias.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent
   ],
   imports: [
     CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule
