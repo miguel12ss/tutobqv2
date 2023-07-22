@@ -277,7 +277,7 @@
               <label for="salon" class="form-label"><b>Salón</b></label>
               <select class="form-control"                 formControlName="salon"
               id="salon" (change)="onSelectUpdate($event)"  required>
-            <option   *ngFor="let salon of salonesActualizar" [value]="salon">{{salon}}</option>
+            <option *ngFor="let salon of salones" [value]="salon"    >{{salon}}</option>
             </select>
             </div>
 
@@ -288,7 +288,15 @@
               class="form-control" [min]="fechaHoy"  id="fecha"   required>
             </div>
 
+            <div class="mb-3">
+              <!-- <label for="tutoria" class="form-label"><b>numero de tutoria</b></label> -->
+              <input type="hidden" 
+              formControlName="id_tutoria"
+              class="form-control"   id="tutoria"   required>
+            </div>
+
            
+            
             
            
           </div>

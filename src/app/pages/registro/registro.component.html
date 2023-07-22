@@ -49,7 +49,7 @@
 
         <div class="form-group">
           <label for="contraseña"><b>Contraseña</b></label>
-          <input class="form-control" type="text" name="contraseña" id="contraseña" formControlName="contraseña"
+          <input class="form-control" type="password" name="contraseña" id="contraseña" formControlName="contraseña"
             [ngClass]="{
                 'is-invalid': submitted && contactForm.get('contraseña')?.errors
               }" required />
@@ -98,7 +98,7 @@
 
         <div class="form-group gap-2">
           <label for="contraseña"><b>Confirmar Contraseña</b></label>
-          <input class="form-control" type="text" name="nuevaContraseña" id="nuevaContraseña" #newPassword
+          <input class="form-control" type="password" name="nuevaContraseña" id="nuevaContraseña" #newPassword
             formControlName="nuevaContraseña" [ngClass]="{
               'is-invalid':
                 submitted && contactForm.get('nuevaContraseña')?.errors

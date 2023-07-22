@@ -5,7 +5,6 @@ import { tap } from 'rxjs';
 import { ComponentService } from 'src/app/components/services/components.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
-import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',

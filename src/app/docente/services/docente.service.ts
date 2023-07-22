@@ -148,4 +148,22 @@ getEstadosTutoria(){
   return  this.http.get(`${this.urlGlobal}estadoTutoria`,httpOptions)
 }
 
+actualizarHorario(horario:any){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  this.http.post(`${this.urlGlobal}/actualizar/${horario.id_tutoria}`,horario,httpOptions).subscribe(
+    res=>{
+      console.log(res);
+      
+    }
+  )
+}
+
 }
