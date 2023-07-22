@@ -121,6 +121,31 @@ getHorario(){
 
 
 
+getDataForUpdate(id_tutoria:string){
 
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return  this.http.get(`${this.urlGlobal}obtenerTutoria/${id_tutoria}`,httpOptions)
+}
+
+getEstadosTutoria(){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return  this.http.get(`${this.urlGlobal}estadoTutoria`,httpOptions)
+}
 
 }

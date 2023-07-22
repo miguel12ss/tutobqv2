@@ -12,23 +12,42 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CrearTutoriaComponent implements OnInit  {
   public horario:any
   horarioForm!: FormGroup;
+  horarioFormUpdate!: FormGroup;
   fechaHoy=''
   salones:string[]=[]
   materias:string[]=[]
   sedes:string[]=[]
   programas:string[]=[]
   data:string[]=[]
+  salonesActualizar:string[]=[]
+  select=""
+  estado:any
   constructor(public fb:FormBuilder,private docenteService:DocenteService,
     private componentService:ComponentService){
       const dateToday=new Date();
       this.fechaHoy = dateToday.toISOString().substring(0, 10);
       console.log(this.fechaHoy);
       this.horarioForm=this.initForm()
-
+      this.horarioFormUpdate=this.initFormUpdate()
 
 
     }
-   
+   initFormUpdate():FormGroup{
+    return this.fb.group({
+      facultad:[null,Validators.required],
+      tema:[null,Validators.required],
+      capacidad:[null,Validators.required],
+      horaInicio:[null,Validators.required],
+      programa:[null,Validators.required],
+      sede:[null,Validators.required],
+      docente:[null,Validators.required],
+      horaFin:[null,Validators.required],
+      materia:[null,Validators.required],
+      salon:[null,Validators.required],
+      fecha:[null,Validators.required],
+      estadoTutoria:[null,Validators.required],
+    })
+   }
   ngOnInit(): void {
     this.docenteService.getHorario().pipe(
       tap((res:any)=>{
@@ -91,9 +110,34 @@ onSelect(event:any){
   const salon=event.target.value
   this.docenteService.obtenerCapacidadPorSalon(salon).pipe(
     tap((res:any)=>{
+      
+      console.log(res);
+      
+      console.log(res.data.capacidad);
+      
     this.horarioForm.patchValue({
-      capacidad:res.capacidad
+      capacidad:res.data.capacidad,
+      sede:res.data.sede
     })
+   
+    })
+  ).subscribe()
+}
+
+onSelectUpdate(event:any){
+  const salon=event.target.value
+  this.docenteService.obtenerCapacidadPorSalon(salon).pipe(
+    tap((res:any)=>{
+      
+      console.log(res);
+      
+      console.log(res.data.capacidad);
+      
+    this.horarioFormUpdate.patchValue({
+      capacidad:res.data.capacidad,
+      sede:res.data.sede
+    })
+   
     })
   ).subscribe()
 }
@@ -105,7 +149,6 @@ onSubmit(){
         tap((res:any)=>{
           this.horario=res.data
 
-          console.log(res.data);
          
         })
       ).subscribe()
@@ -113,4 +156,56 @@ onSubmit(){
   ).subscribe()
 }
 
+onSubmitUpdate(){
+  console.log(this.horarioFormUpdate.value);
+  
 }
+
+
+getData(id_tutoria:string){{
+this.docenteService.getEstadosTutoria().pipe(
+  tap((res:any)=>{
+    console.log(res)
+    this.estado=res
+    this.docenteService.getSalones().pipe(
+      tap((res:any)=>{
+        console.log(res);
+        
+        this.salonesActualizar=res
+        
+    this.docenteService.getDataForUpdate(id_tutoria).pipe(
+      tap((res:any)=>{
+        console.log(res.data.estado_tutoria);
+        this.select=res.data.estado_tutoria
+        
+      this.horarioFormUpdate.patchValue({
+        facultad:res.data.facultad,
+          tema:res.data.tema,
+          capacidad:res.data.capacidad,
+          horaInicio:res.data.horaInicio,
+          programa:res.data.programa,
+          docente:res.data.nombres,
+          horaFin:res.data.horaFin,
+          materia:res.data.materia,
+                fecha:res.data.fecha,
+          estadoTutoria:res.data.estado_tutoria,
+      })
+     
+      
+       
+      })
+    ).subscribe()
+      })
+    ).subscribe()
+  })
+).subscribe()
+
+
+
+}}
+
+
+
+}
+
+
