@@ -1,4 +1,4 @@
-<h5 class="text-center">ADMINISTRAR TABLA DE FACULTADES</h5>
+<h5 class="text-center">ADMINISTRAR TABLA DE HORAS</h5>
 <div class="container-button d-flex justify-content-end m-1">
     <!-- Button trigger modal -->
     <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -6,24 +6,27 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="listOfDisplayData||tablafacultades" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="listOfDisplayData||horas" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>
-                    Id facultad
+                    Id hora
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
                 </th>
-                <th>Facultad</th>
+                <th>Hora</th>
+                <th>Uso horario</th>
                 <th>Modificar</th>
+
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_facultad}}</td>
-                <td>{{ data.facultad}}</td>
+                <td>{{ data.id_hora}}</td>
+                <td>{{ data.hora}}</td>
+                <td>{{ data.uso_horario}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar">
                         Modificar
@@ -43,21 +46,25 @@
         </div>
     </nz-dropdown-menu>
 
-    <!-- Modal crear tutoria -->
+    <!-- Modal crear -->
     <div class="modal fade modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Agregar facultad en la tabla de facultades</b></h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Agregar hora en la tabla de horas</b></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row d-flex justify-content-center">
                         <div class="col-md-5 ">
                             <div class="mb-4">
-                                <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                                <input type="text" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off">
+                                <label for="hora" class="form-label"><b>Hora</b> </label>
+                                <input type="text" class="form-control" id="hora" aria-describedby="hora" autocomplete="off">
+                            </div>
+                            <div class="mb-4">
+                                <label for="uso_horario" class="form-label"><b>Uso horario</b> </label>
+                                <input type="text" class="form-control" id="uso_horario" aria-describedby="uso_horario" autocomplete="off">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -78,19 +85,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos de la tabla de facultades</b></h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos de la tabla de horas</b></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row d-flex justify-content-center">
                         <div class="col-md-5">
                             <div class="mb-4">
-                                <label for="id_facultad" class="form-label"><b>Id facultad</b> </label>
-                                <input type="number" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" readonly>
+                                <label for="id_hora" class="form-label"><b>Id hora</b> </label>
+                                <input type="number" class="form-control" id="id_hora" aria-describedby="id_hora" autocomplete="off" readonly>
                             </div>
                             <div class="mb-4">
-                                <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                                <input type="text" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off">
+                                <label for="hora" class="form-label"><b>Hora</b> </label>
+                                <input type="text" class="form-control" id="hora" aria-describedby="hora" autocomplete="off">
+                            </div>
+                            <div class="mb-4">
+                                <label for="uso_horario" class="form-label"><b>Uso horario</b> </label>
+                                <input type="text" class="form-control" id="uso_horario" aria-describedby="uso_horario" autocomplete="off">
                             </div>
                         </div>
 
@@ -108,3 +119,5 @@
     </div>
 
 </div>
+
+

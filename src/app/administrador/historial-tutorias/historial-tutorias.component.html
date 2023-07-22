@@ -1,18 +1,18 @@
-<h3 class="text-center">HISTORIAL DE TUTORIAS ACÁDEMICAS</h3>
+<h5 class="text-center">HISTORIAL DE TUTORIAS ACÁDEMICAS</h5>
 <div class="table-responsive">
     <nz-table #nzTable [nzData]="listOfDisplayData||estudiante" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>
-                    Nombres
+                    Facultad
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
-                        <span nz-icon nzType="search"></span>
+                        <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
                 </th>
-                <th>Facultad</th>
-                <th>Correo</th>
+                <th>Programa</th>
                 <th>Docente</th>
+                <th>Hora generacion</th>
                 <th>Descripción</th>
                 <th>Lista Estudiantes</th>
 
@@ -23,7 +23,7 @@
                 <td>{{ data.id_facultad}}</td>
                 <td>{{ data.id_programa}}</td>
                 <td>{{data.id_usuario}}</td>
-                <td>{{data.id_usuario}}</td>
+                <td>{{ data.fecha_generacion_tutoria}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modaldescripcion">
                         Descripción
@@ -100,12 +100,13 @@
     </div>
 
     <!-- modal lista estudiantes-->
-    <div class="modal fade modal-xl" id="modallista" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade modal-xl" id="modallista" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Lista de estudiantes de tutoria acádemica</b>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Lista de estudiantes de tutoria
+                            acádemica</b>
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -126,7 +127,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </nz-table>
                         </div>

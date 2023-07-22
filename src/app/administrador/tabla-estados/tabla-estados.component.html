@@ -1,4 +1,4 @@
-<h5 class="text-center">ADMINISTRAR TABLA DE FACULTADES</h5>
+<h5 class="text-center">ADMINISTRAR TABLA DE ESTADOS</h5>
 <div class="container-button d-flex justify-content-end m-1">
     <!-- Button trigger modal -->
     <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -6,24 +6,24 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="listOfDisplayData||tablafacultades" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="listOfDisplayData||estados" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>
-                    Id facultad
+                    Id estado
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
                 </th>
-                <th>Facultad</th>
+                <th>Estado</th>
                 <th>Modificar</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_facultad}}</td>
-                <td>{{ data.facultad}}</td>
+                <td>{{ data.id_estado}}</td>
+                <td>{{ data.estado}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar">
                         Modificar
@@ -43,21 +43,21 @@
         </div>
     </nz-dropdown-menu>
 
-    <!-- Modal crear tutoria -->
+    <!-- Modal crear -->
     <div class="modal fade modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Agregar facultad en la tabla de facultades</b></h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Agregar estado en la tabla de estados</b></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row d-flex justify-content-center">
                         <div class="col-md-5 ">
                             <div class="mb-4">
-                                <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                                <input type="text" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off">
+                                <label for="estado" class="form-label"><b>Estado</b> </label>
+                                <input type="text" class="form-control" id="estado" aria-describedby="estado" autocomplete="off">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -78,19 +78,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos de la tabla de facultades</b></h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos de la tabla de roles</b></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row d-flex justify-content-center">
                         <div class="col-md-5">
                             <div class="mb-4">
-                                <label for="id_facultad" class="form-label"><b>Id facultad</b> </label>
-                                <input type="number" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" readonly>
+                                <label for="id_estado" class="form-label"><b>Id estado</b> </label>
+                                <input type="number" class="form-control" id="id_estado" aria-describedby="id_estado" autocomplete="off" readonly>
                             </div>
                             <div class="mb-4">
-                                <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                                <input type="text" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off">
+                                <label for="estado" class="form-label"><b>Estado</b> </label>
+                                <input type="text" class="form-control" id="estado" aria-describedby="estado" autocomplete="off">
                             </div>
                         </div>
 
@@ -108,3 +108,4 @@
     </div>
 
 </div>
+
