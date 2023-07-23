@@ -34,11 +34,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./docente/docente.module').then((m) => m.DocenteModule),
   },
-
   {
-path: 'admin',
+    path: 'admin',
     loadChildren: () =>
       import('./administrador/admin.module').then((m) => m.AdminModule),
+  },{
+    path: 'auth/recuperar',
+    loadChildren: () =>
+      import('./pages/recuperar/recuperar.module').then((m) => m.RecuperarModule),
   },
   {
     path: '**',

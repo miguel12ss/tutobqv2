@@ -11,12 +11,13 @@ import { HeroComponent } from '../components/hero/hero.component';
 import { ServiciosComponent } from '../components/servicios/servicios.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { HeaderComponent } from '../shared/header/header.component';
+import { RecuperarComponent } from './recuperar/recuperar.component';
 
 
 @NgModule({
     declarations: [
         PagesComponent,
-        WelcomeComponent, HeroComponent,ServiciosComponent,ContactComponent
+        WelcomeComponent, HeroComponent,ServiciosComponent,ContactComponent, RecuperarComponent
     ],
     imports: [
         CommonModule,

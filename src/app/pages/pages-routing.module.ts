@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'registro',
         loadChildren: () =>
           import('./registro/registro.module').then((m) => m.RegistroModule),
+      },{
+        path: 'recuperar',
+        loadChildren: () =>
+          import('./recuperar/recuperar.module').then((m) => m.RecuperarModule),
       },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

@@ -1,46 +1,43 @@
-
 <div class="container-form">
-    <form class="form"  [formGroup]="contactForm"     (ngSubmit)="onSubmit(contactForm.value)" >
+    <form class="form" [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
         <div class="container-img">
-        <img src="https://www.unibarranquilla.edu.co/images/logo.png" alt="logo unibarranquilla" class="img-fluid">
-    </div>
-    <div class="alert alert-danger" *ngIf="showAlertError">
-        correo y/o contraseña incorrectos
-    </div>
+            <img src="https://www.unibarranquilla.edu.co/images/logo.png" alt="logo unibarranquilla" class="img-fluid">
+        </div>
+        <div class="alert alert-danger" *ngIf="showAlertError">
+            correo y/o contraseña incorrectos
+        </div>
         <div class="form-group">
             <label for="correo">Correo</label>
 
-            <input type="email" class="form-control" name="email" id="email" 
-            placeholder="email" 
-            [ngClass]="{'is-invalid':submitted && contactForm.get('email')?.errors} "
-             required formControlName="email" > 
-             
+            <input type="email" class="form-control" name="email" id="email" placeholder="email"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('email')?.errors} " required
+                formControlName="email">
 
-            
+
+
         </div>
 
         <div class="form-group">
             <label for="contraseña">Contraseña</label>
 
-               <input type="password" class="form-control" name="password" id="password" 
-                placeholder="Password" 
-                [ngClass]="{'is-invalid':submitted && contactForm.get('password')?.errors} "
-                 required formControlName="password" > 
-              <div class="links d-flex flex-row gap-4 justify-content-center align-items-center    ">
-                    <a routerLink="forgot" class="forgot" >Olvide mi clave</a>
-                    <a routerLink="/auth/registro" class="createAccount"  >Crear cuenta</a>
-                </div>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password"
+                [ngClass]="{'is-invalid':submitted && contactForm.get('password')?.errors} " required
+                formControlName="password">
+            <div class="links d-flex flex-row gap-4 justify-content-center align-items-center    ">
+                <a routerLink="/auth/recuperar" class="forgot">Olvide mi clave</a>
+                <a routerLink="/auth/registro" class="createAccount">Crear cuenta</a>
+            </div>
 
         </div>
 
-       <div class="alert alert-danger text-center" *ngIf="showAlert ">
-        el correo es incorrecto
-       </div>
+        <div class="alert alert-danger text-center" *ngIf="showAlert ">
+            el correo es incorrecto
+        </div>
         <div class="form-button">
             <button type="submit" class="btn btn-primary">Login</button>
 
         </div>
 
-        
+
     </form>
 </div>
