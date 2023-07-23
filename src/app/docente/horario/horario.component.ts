@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from "@fullcalendar/daygrid"
+import { DocenteService } from '../services/docente.service';
+import { tap } from 'rxjs';
 interface Person {
   key: string;
   name: string;
@@ -17,32 +19,30 @@ interface Person {
 
 
 
-export class HorarioComponent  {
-  listOfData: Person[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      horaInicio:'7:00am',
-      horaFin:'9:00am'
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      horaInicio:'7:00am',
-      horaFin:'9:00am'
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',horaInicio:'7:00am',
-      horaFin:'9:00am'
-    }
-  ];
+export class HorarioComponent implements OnInit {
+datosModal: any={}
+horario:any
+
+constructor(private docenteService:DocenteService){}
+
+ngOnInit(): void {
+  this.docenteService.getHorarioForEstado().pipe(
+
+    tap((res:any)=>{
+    console.log(res);
+    
+      this.horario=res.data
+    })
+  ).subscribe()
+}
+ descripcion(id_tutoria:string){
+this.docenteService.getHorarioForId(id_tutoria).pipe(
+  tap((res:any)=>{
+    this.datosModal=res.data
+  })
+).subscribe()
+
+ }
 }
 
 

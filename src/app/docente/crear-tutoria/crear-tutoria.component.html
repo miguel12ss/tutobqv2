@@ -178,7 +178,7 @@
         <td>{{h.fecha}}</td>
         <td>{{h.fecha_generacion_tutoria}}</td>
         <td>{{h.horaInicio}}</td>
-        <td><button type="button" nz-button nzType="primary"  data-bs-toggle="modal" data-bs-target="#actualizar" (click)="getData(h.id_tutoria)">
+        <td><button type="button" nz-button nzType="primary"  data-bs-toggle="modal" data-bs-target="#actualizar"  (click)="getData(h.id_tutoria)">
           Actualizar
         </button> </td>
         
@@ -302,7 +302,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-            <button type="submit" class="linea btn bmodal btn-primary btn-sm">Actualizar</button>
+            <button type="submit" class="linea btn bmodal btn-primary btn-sm" data-bs-dismiss="modal">Actualizar</button>
         </div>
         </form>
       </div>

@@ -22,7 +22,6 @@ this.horario=res.data
   }
 
   descripcion(id_tutoria:any){
-    console.log(id_tutoria);
     
 this.estudianteService.getHorarioForId(id_tutoria).pipe(
   tap((res:any)=>{

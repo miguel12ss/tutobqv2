@@ -77,6 +77,19 @@ getDataForId(){
  return  this.http.get(`${this.urlGlobal}horario`,httpOptions)
 }
 
+getHorarioForId(id_tutoria:string){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return  this.http.get(`${this.urlGlobal}obtenerTutoria/${id_tutoria}`,httpOptions)
+}
+
 
 crearHorario(horario:any){
   const token=localStorage.getItem('token')
@@ -119,7 +132,18 @@ getHorario(){
   return  this.http.get(`${this.urlGlobal}mostrarHorario`,httpOptions)
 }
 
-
+getHorarioForEstado(){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return  this.http.get(`${this.urlGlobal}mostrarHorarioEstado`,httpOptions)
+}
 
 getDataForUpdate(id_tutoria:string){
 

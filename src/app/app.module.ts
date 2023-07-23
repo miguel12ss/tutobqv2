@@ -21,6 +21,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { spinnerService } from './services-interceptor/spinner.service';
 import { InterceptorService } from './services-interceptor/interceptor.service';
 import { ComponentService } from './components/services/components.service';
+import { LocaleModule } from './locale-module.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,7 @@ import { ComponentService } from './components/services/components.service';
     SharedModule,
     FormsModule,
     DocenteModule,
-    NgxSpinnerModule.forRoot()
+    NgxSpinnerModule.forRoot(),LocaleModule
     
   ],
   exports: [],

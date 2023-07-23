@@ -4,7 +4,7 @@
 
 
 
- <div class="d-flex  gap-4 justify-content-between flex-wrap">
+ <div class="d-flex justify-content-between  gap-4  flex-wrap">
     <nz-card  
     class="col-md-4"
     style="
@@ -21,7 +21,7 @@
     <!-- <p>Salon: {{ horario.salon }}</p> -->
     <p>Cupos: {{ horario.cupos }}</p>
 
-    <div class="container-actions d-flex justify-space-between gap-4">
+    <div class="container-actions d-flex justify-content-around gap-4">
       <button nz-button style="border-radius: 15px" nzType="primary" (click)="agendarTutoria(horario.id_tutoria,horario.id_estado_tutoria)">
         Agendar
       </button>

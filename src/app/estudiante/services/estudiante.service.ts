@@ -142,9 +142,23 @@ cancelarTutoria(id_tutoria:string){
   })
  ).subscribe()
 }
+obtenerTutoriasPendientes(){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+
+return this.httpClient.get(`${this.url}obtenerTutoriasPendientes`,httpOptions)
+
 
 }
 
+}
 
 
 
