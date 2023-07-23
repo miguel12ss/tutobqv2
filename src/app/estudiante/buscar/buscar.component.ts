@@ -48,6 +48,13 @@ public datosModal:any={}
         }else if(res.errorCupos="los cupos estan completos :("){
           Swal.fire('agendamiento de tutorias',"los cupos estan completos :(", 'error');
         }
+        this.estudianteService.getHorarios().pipe(
+          tap((res:any)=>{
+            
+            
+            this.horarios=res.data
+          })
+        ).subscribe()
 
       })
     ).subscribe()    

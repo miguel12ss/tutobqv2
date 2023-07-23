@@ -157,10 +157,15 @@ onSubmit(){
 
 onSubmitUpdate(){
   const horarioActualizar=this.horarioFormUpdate.value
-  console.log(horarioActualizar);
-  
-
   this.docenteService.actualizarHorario(horarioActualizar)
+  this.docenteService.getHorario().pipe(
+    tap((res:any)=>{
+      console.log(res);
+      
+      this.horario=res.data
+
+    })
+  ).subscribe()
 
   
 }
@@ -183,7 +188,7 @@ this.docenteService.getEstadosTutoria().pipe(
     
 this.docenteService.getDataForUpdate(id_tutoria).pipe(
   tap((res:any)=>{
-    console.log(res.data.salon);
+  
     
     
   this.horarioFormUpdate.patchValue({
@@ -200,8 +205,9 @@ this.docenteService.getDataForUpdate(id_tutoria).pipe(
       salon:res.data.salon,
       sede:res.data.sede,
       id_tutoria:res.data.id_tutoria
+      
   })
- 
+  
   
    
   })

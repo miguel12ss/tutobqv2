@@ -48,6 +48,13 @@ cancelarTutoria(id_tutoria:any){
         'La tutoria ha sido cancelada',
         'success'
       )
+      this.estudianteService.obtenerTutoriasEstudiante().pipe(
+        tap((res:any)=>{
+  this.horario=res.data
+  
+        })
+      ).subscribe()
+      
     }
   })
   
