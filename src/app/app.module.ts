@@ -10,7 +10,7 @@ import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { SharedModule } from './shared/shared.module';
 import { NavbarServices } from './services/navbar.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesModule } from './pages/pages.module';
 import { IconsProviderModule } from './icons-provider.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -33,6 +33,7 @@ import { LocaleModule } from './locale-module.module';
     BrowserAnimationsModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     DocenteModule,
     NgxSpinnerModule.forRoot(),LocaleModule
     
