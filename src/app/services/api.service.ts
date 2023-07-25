@@ -51,4 +51,9 @@ export class ApiService {
     return this.token
   }
 
+
+  forgot(email:string){
+return this.httpClient.post(`${this.urlGlobal}forgot`,email)
+  }
+
 }

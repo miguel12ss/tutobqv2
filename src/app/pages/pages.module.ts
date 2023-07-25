@@ -17,12 +17,12 @@ import { RecuperarComponent } from './recuperar/recuperar.component';
 @NgModule({
     declarations: [
         PagesComponent,
-        WelcomeComponent, HeroComponent,ServiciosComponent,ContactComponent, RecuperarComponent
+        WelcomeComponent, HeroComponent,ServiciosComponent,ContactComponent, 
     ],
     imports: [
         CommonModule,
         PagesRoutingModule,SharedModule
-        
+        ,FormsModule
     ]
 })
 export class PagesModule { }
