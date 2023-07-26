@@ -22,6 +22,7 @@ interface Person {
 export class HorarioComponent implements OnInit {
 datosModal: any={}
 horario:any
+estudiantes:any[]=[]
 
 constructor(private docenteService:DocenteService){}
 
@@ -43,6 +44,22 @@ this.docenteService.getHorarioForId(id_tutoria).pipe(
 ).subscribe()
 
  }
+
+ listado(id_tutoria:string){
+  this.docenteService.getListado(id_tutoria).pipe(
+    tap((res:any)=>{
+    
+      
+
+      this.estudiantes=res.estudiante
+      console.log(this.estudiantes);
+      
+    })
+  ).subscribe()
+}
+
+
+
 }
 
 

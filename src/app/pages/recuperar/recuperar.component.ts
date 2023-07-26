@@ -19,8 +19,14 @@ constructor(private fb:FormBuilder, private apiService:ApiService){
 onSubmit(){
 this.apiService.forgot(this.forgot.value).pipe(
   tap((res:any)=>{
-   if(res.success="la contraseña ha sido cambiada"){
+    console.log(res);
+    
+   if(res.success=="la contraseña ha sido cambiada"){
     Swal.fire("recuperacion de contraseña","la contraseña ha sido cambiada",'success')
+   }else if(res.message=="correo invalido"){
+    Swal.fire("Recuperacion de contraseña","la contraseña es invalida",'error')
+   }else if(res.message=="el correo no existe en el sistema"){
+    Swal.fire("Recuperacion de contraseña","el correo no existe en el sistema","error")
    }
   })
 ).subscribe()

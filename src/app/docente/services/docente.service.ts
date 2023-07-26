@@ -190,4 +190,17 @@ actualizarHorario(horario:any){
   )
 }
 
+getListado(id_tutoria:string){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+ return this.http.get(`${this.urlGlobal}/listado/${id_tutoria}`,httpOptions)
+}
+
 }

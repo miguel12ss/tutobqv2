@@ -22,6 +22,7 @@ export class CrearTutoriaComponent implements OnInit  {
   salonesActualizar:string[]=[]
   select=""
   estado:any
+  public estudiantes:any=[]
   constructor(public fb:FormBuilder,private docenteService:DocenteService,
     private componentService:ComponentService){
       const dateToday=new Date();
@@ -170,6 +171,18 @@ onSubmitUpdate(){
   
 }
 
+listado(id_tutoria:string){
+  this.docenteService.getListado(id_tutoria).pipe(
+    tap((res:any)=>{
+    
+      
+
+      this.estudiantes=res.estudiante
+      console.log(this.estudiantes);
+      
+    })
+  ).subscribe()
+}
 
 getData(id_tutoria:string){{
 this.docenteService.getEstadosTutoria().pipe(
