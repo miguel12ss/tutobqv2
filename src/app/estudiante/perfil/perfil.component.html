@@ -1,4 +1,4 @@
-<h3 class="text-center">PERFIL DEL USUARIO</h3>
+<h5 class="text-center">PERFIL DEL USUARIO</h5>
 <form class="row" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
     <div class="col-md-4 text-center d-flex align-items-center ">
         <div>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="linea btn btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-                        <button type="submit" class="linea btn btn-primary btn-sm" [disabled]="passwordForm.invalid">Cambiar</button>
+                        <button type="submit" class="linea btn btn-success btn-sm" [disabled]="passwordForm.invalid">Cambiar</button>
                     </div>
                 </form>
             </div>
