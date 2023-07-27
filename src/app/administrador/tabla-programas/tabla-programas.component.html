@@ -6,7 +6,9 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="listOfDisplayData||programas" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="programas"  
+        [nzPageSize]="4"
+    nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>
@@ -25,7 +27,10 @@
                 <td>{{ data.id_programa}}</td>
                 <td>{{ data.programa}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalmodificar">
+                        data-bs-target="#modalmodificar"
+                        
+                        (click)="modificar(data.id_programa)">
+                        
                         Modificar
                     </button></td>
             </tr>
@@ -53,17 +58,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row d-flex justify-content-center">
+                    <form class="row d-flex justify-content-center" [formGroup]="programaAgregar" (ngSubmit)="agregar()">
                         <div class="col-md-5 ">
                             <div class="mb-4">
                                 <label for="programa" class="form-label"><b>Programa</b> </label>
-                                <input type="text" class="form-control" id="programa" aria-describedby="programa" autocomplete="off">
+                                <input type="text" class="form-control" id="programa" aria-describedby="programa" autocomplete="off" formControlName="programa">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="linea btn bmodal btn-danger btn-sm"
                                 data-bs-dismiss="modal">Salir</button>
-                            <button type="button" class="linea btn bmodal btn-primary btn-sm">Agregar</button>
+                            <button type="submit" class="linea btn bmodal btn-primary btn-sm" >Agregar</button>
                         </div>
                     </form>
                 </div>
@@ -82,15 +87,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row d-flex justify-content-center">
+                    <form class="row d-flex justify-content-center" (ngSubmit)="onSubmit()" [formGroup]="programaForm">
                         <div class="col-md-5">
                             <div class="mb-4">
                                 <label for="id_programa" class="form-label"><b>Id programa</b> </label>
-                                <input type="number" class="form-control" id="id_programa" aria-describedby="id_programa" autocomplete="off" readonly>
+                                <input type="number" class="form-control" id="id_programa" aria-describedby="id_programa" autocomplete="off" readonly formControlName="id_programa">
                             </div>
                             <div class="mb-4">
                                 <label for="programa" class="form-label"><b>Programa</b> </label>
-                                <input type="text" class="form-control" id="programa" aria-describedby="programa" autocomplete="off">
+                                <input  type="text" class="form-control" id="programa" formControlName="programa" aria-describedby="programa" autocomplete="off" >
                             </div>
                         </div>
 
@@ -98,7 +103,7 @@
                         <div class="modal-footer">
                             <button type="button" class="linea btn bmodal btn-danger btn-sm"
                                 data-bs-dismiss="modal">Salir</button>
-                            <button type="button" class="linea btn bmodal btn-primary btn-sm">Modificar</button>
+                            <button type="submit" class="linea btn bmodal btn-primary btn-sm">Modificar</button>
                         </div>
                     </form>
                 </div>
