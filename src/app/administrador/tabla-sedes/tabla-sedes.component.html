@@ -6,7 +6,7 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="listOfDisplayData||sedes" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="sedes" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>
@@ -25,7 +25,9 @@
                 <td>{{ data.id_sede}}</td>
                 <td>{{ data.sede}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalmodificar">
+                        data-bs-target="#modalmodificar"
+                        (click)="modificar(data.id_sede)"
+                        >
                         Modificar
                     </button></td>
             </tr>
@@ -53,17 +55,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row d-flex justify-content-center">
+                    <form class="row d-flex justify-content-center" [formGroup]="sedeAgregar" (ngSubmit)="agregar()">
                         <div class="col-md-5 ">
                             <div class="mb-4">
                                 <label for="sede" class="form-label"><b>Sede</b> </label>
-                                <input type="text" class="form-control" id="sede" aria-describedby="sede" autocomplete="off">
+                                <input type="text" class="form-control" id="sede" formControlName="sede" aria-describedby="sede" autocomplete="off">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="linea btn bmodal btn-danger btn-sm"
                                 data-bs-dismiss="modal">Salir</button>
-                            <button type="button" class="linea btn bmodal btn-primary btn-sm">Agregar</button>
+                            <button type="submit" class="linea btn bmodal btn-primary btn-sm">Agregar</button>
                         </div>
                     </form>
                 </div>
@@ -82,15 +84,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row d-flex justify-content-center">
+                    <form class="row d-flex justify-content-center" [formGroup]="sedeForm"(ngSubmit)="onSubmit()">
                         <div class="col-md-5 ">
                             <div class="mb-4">
                                 <label for="id_sede" class="form-label"><b>Id sede</b> </label>
-                                <input type="number" class="form-control" id="id_sede" aria-describedby="id_sede" autocomplete="off" readonly>
+                                <input type="number" class="form-control" id="id_sede" aria-describedby="id_sede" formControlName="id_sede" autocomplete="off" readonly>
                             </div>
                             <div class="mb-4">
                                 <label for="sede" class="form-label"><b>Sede</b> </label>
-                                <input type="text" class="form-control" id="sede" aria-describedby="sede" autocomplete="off">
+                                <input type="text" class="form-control" id="sede"  
+                                formControlName="sede"
+                                aria-describedby="sede" autocomplete="off">
                             </div>
                         </div>
 
@@ -98,7 +102,7 @@
                         <div class="modal-footer">
                             <button type="button" class="linea btn bmodal btn-danger btn-sm"
                                 data-bs-dismiss="modal">Salir</button>
-                            <button type="button" class="linea btn bmodal btn-primary btn-sm">Modificar</button>
+                            <button type="submit" class="linea btn bmodal btn-primary btn-sm">Modificar</button>
                         </div>
                     </form>
                 </div>

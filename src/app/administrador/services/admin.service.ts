@@ -8,6 +8,7 @@ export class AdminService {
 
   constructor(private http:HttpClient) { }
   url="http://localhost:5000/admin/"
+  url2="http://localhost:5000/"
 
   getFacultades(){
     const httpOptions = {
@@ -29,6 +30,19 @@ export class AdminService {
     };
     return this.http.post(`${this.url}actualizar`,facultad,httpOptions)
   }
+
+  actualizarSedes(sedes:any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true'
+      })
+    };
+    return this.http.post(`${this.url}actualizarSede`,sedes,httpOptions)
+  }
+
+
 
 
   getDataForIdFacultad(id_facultad:string){
@@ -70,6 +84,37 @@ export class AdminService {
     };
     return this.http.get(`${this.url}obtenerProgramas`,httpOptions)
   }
+
+  getSedes(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true'
+      })
+    };
+    return this.http.get(`${this.url}getSedes`,httpOptions)
+  }
+
+  getDataForIdSede(id_sede:string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:4200',
+        'Access-Control-Allow-Credentials': 'true'
+      })
+    };
+    return this.http.get(`${this.url}getDataForIdSede/${id_sede}`,httpOptions)
+
+  }
+
+
+
+
+
+
+
+
   actualizarPrograma(programa:any){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -160,13 +205,52 @@ export class AdminService {
     return this.http.post(`${this.url}agregarMateria`,materia,httpOptions)
   }
 
+setSede(sede:any){
+  const sedeObject={
+    "sede":sede.sede
+  }
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}setSede`,sedeObject,httpOptions)
+}
 
 
+getSalones(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getSalones`,httpOptions)
+}
 
 
-
-
-
+getDataForIdSalon(id_salon:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getSalonForId/${id_salon}`,httpOptions)
+}
 
 
 }
+
+
+
+
+
+
+
+
+
