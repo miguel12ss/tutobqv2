@@ -1,6 +1,6 @@
 <div class="container-main">
   <div class="container">
-    <form class="row" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
+    <form class="row" [formGroup]="contactForm" autocomplete="off" (ngSubmit)="onSubmit($event)">
       <div class="col-md-4 container-img">
         <div class="container-img">
           <img src="https://www.unibarranquilla.edu.co/images/logo.png" class="img-fluid" />
@@ -34,7 +34,7 @@
         <div class="form-group">
           <label for="facultad"><b>Facultad</b></label>
           <select formControlName="facultad" name="facultad" id="facultad" class="form-control">
-            <option selected value="facultad de ingenierias">Facultad de ingenierias</option>
+            <option *ngFor="let facultad of facultades" selected value="{{facultad}}">{{facultad}}</option>
           </select>
         </div>
 

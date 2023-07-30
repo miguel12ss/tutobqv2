@@ -1,8 +1,13 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdminService } from '../services/admin.service';
+import { tap } from 'rxjs';
+import Swal from 'sweetalert2';
 
 interface DataItem {
-  id_rol:String
-  rol:String
+  id_rol: String
+  rol: String
 }
 
 @Component({
@@ -11,27 +16,149 @@ interface DataItem {
   styleUrls: ['./tabla-roles.component.scss']
 })
 export class TablaRolesComponent {
-  @Input() roles!:DataItem[]
   searchValue = '';
   visible = false;
   listOfData: DataItem[] = [
-    {
-      id_rol:"1",
-      rol:"Docente"
-    },
-    {
-      id_rol:"2",
-      rol:"Estudiante "
-    }
+
   ];
   listOfDisplayData = [...this.listOfData];
+  rol: any[] = []
+  roles: any[] = []
+  rolForm!: FormGroup
+  rolAgregar!: FormGroup
+
+  constructor(private service: AdminService, public fb: FormBuilder) {
+    this.rolForm = this.initForm()
+    this.rolAgregar = this.initFormRol()
+  }
+
+
+  initForm(): FormGroup {
+    return this.fb.group({
+      rol: ['', Validators.required],
+      id_rol: ['', Validators.required]
+    })
+  }
+
+  initFormRol(): FormGroup {
+    return this.fb.group({
+      rol: ['', Validators.required],
+
+    })
+  }
+
   reset(): void {
     this.searchValue = '';
     this.search();
   }
-  
+
   search(): void {
     this.visible = false;
     this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.rol.indexOf(this.searchValue) !== -1);
   }
+
+  ngOnInit(): void {
+    this.service.getRoles().pipe(
+      tap((res: any) => {
+        console.log(res);
+
+        this.roles = res.data
+      }
+      )).subscribe()
+  }
+
+
+  agregar() {
+    const rol = this.rolAgregar.value
+    console.log(rol);
+
+    this.service.setRol(rol).pipe(
+      tap((res: any) => {
+        console.log(res);
+
+        if (res.error) {
+          Swal.fire("Error al agregar el rol", res.error, "error")
+        } else if (res.data) {
+          Swal.fire("Añadido exitosamente", "El rol ha sido Añadido con exito", "success")
+        }
+
+        this.service.getRoles().pipe(
+          tap((res: any) => {
+            this.roles = res.data
+          })
+        ).subscribe()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      })
+    ).subscribe()
+  }
+
+  modificar(id_rol: string) {
+
+    this.service.getDataForIdRol(id_rol).pipe(
+      tap((res: any) => {
+        console.log(res);
+
+        this.rolForm.patchValue({
+          rol: res.data.rol,
+          id_rol: res.data.id_rol
+        })
+      })
+    ).subscribe()
+
+
+
+  }
+
+  onSubmit() {
+    const facultades = this.rolForm.value
+    this.service.actualizarRol(facultades).pipe(tap((res: any) => {
+      console.log(res);
+
+      if (res.error) {
+        Swal.fire("Error al actualizar", res.error, "error")
+      } else if (res.success) {
+        Swal.fire("Actualizacion exitosa", res.success, "success")
+
+
+
+
+      }
+
+
+      this.service.getRoles().pipe(
+        tap((res: any) => {
+          this.roles = res.data
+        })
+      ).subscribe()
+
+
+    })
+
+
+
+
+
+    ).subscribe()
+
+
+
+
+
+  }
+
+
+
 }

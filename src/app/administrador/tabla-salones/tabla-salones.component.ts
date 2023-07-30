@@ -97,6 +97,12 @@ onSubmit(){
 }
 
 agregar(){
-
+const salon=this.salonForm.value
+this.service.setSalon(salon).pipe(
+  tap((res:any)=>{
+    console.log(res);
+    
+  })
+).subscribe()
 }
 }

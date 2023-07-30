@@ -219,6 +219,24 @@ setSede(sede:any){
   return this.http.post(`${this.url}setSede`,sedeObject,httpOptions)
 }
 
+setSalon(salon:any){
+  const salonObject={
+    "salon":salon.salon,
+    "sede":salon.sede,
+    "capacidad":salon.capacidad
+  }
+  console.log(salonObject);
+  
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}setSalon`,salonObject,httpOptions)
+}
+
 
 getSalones(){
   const httpOptions = {
@@ -242,6 +260,273 @@ getDataForIdSalon(id_salon:string){
   };
   return this.http.get(`${this.url}getSalonForId/${id_salon}`,httpOptions)
 }
+getRoles(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getRoles`,httpOptions)
+}
+
+getDataForIdRol(id_rol:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getRolForId/${id_rol}`,httpOptions)
+}
+
+setRol(rol:any){
+  const rolObject={
+    "rol":rol.rol,
+      }
+  
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}setRol`,rolObject,httpOptions)
+}
+
+
+actualizarRol(roles:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}actualizarRol`,roles,httpOptions)
+
+
+}
+
+getTipo(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getTipo`,httpOptions)
+}
+
+
+actualizarTipo(tipo:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}actualizarTipo`,tipo,httpOptions)
+
+
+}
+
+
+setTipo(tipo:any){
+  const tipos={
+    "tipo_documento":tipo.tipo_documento
+  }
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}setTipo`,tipos,httpOptions)
+}
+
+getDataForIdTipo(id_tipo:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getTipoForId/${id_tipo}`,httpOptions)
+}
+
+
+
+getEstado(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getEstado`,httpOptions)
+}
+
+
+actualizarEstado(estado:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}actualizarEstado`,estado,httpOptions)
+
+
+}
+
+
+setEstado(estado:any){
+  const estados={
+    "estado":estado.estado
+  }
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}setEstado`,estados,httpOptions)
+}
+
+getDataForIdEstado(id_estado:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getEstadoForId/${id_estado}`,httpOptions)
+}
+
+
+
+
+
+
+getEstadoTutoria(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getEstadoTutoria`,httpOptions)
+}
+
+
+actualizarEstadoTutoria(estado:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}actualizarEstadoTutoria`,estado,httpOptions)
+
+
+}
+
+
+setEstadoTutoria(estado:any){
+  const estados={
+    "estado_tutoria":estado.estado_tutoria
+  }
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}setEstadoTutoria`,estados,httpOptions)
+}
+
+getDataForIdEstadoTutoria(id_estado_tutoria:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getEstadoTutoriaForId/${id_estado_tutoria}`,httpOptions)
+}
+
+
+getCapacidad(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getCapacidad`,httpOptions)
+}
+
+
+actualizarCapacidad(capacidad:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}actualizarCapacidad`,capacidad,httpOptions)
+
+
+}
+
+
+setCapacidad(capacidad:any){
+  const capacidades={
+    "capacidad":capacidad.capacidad
+  }
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}setCapacidad`,capacidades,httpOptions)
+}
+
+getDataForIdCapacidad(id_capacidad:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getCapacidadForId/${id_capacidad}`,httpOptions)
+}
+
+
+
+
+
 
 
 }

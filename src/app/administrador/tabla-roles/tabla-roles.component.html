@@ -1,12 +1,14 @@
 <h5 class="text-center">ADMINISTRAR TABLA DE ROLES</h5>
 <div class="container-button d-flex justify-content-end m-1">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    
+    >
         Agregar
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="listOfDisplayData||roles" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="roles" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>
@@ -25,7 +27,9 @@
                 <td>{{ data.id_rol}}</td>
                 <td>{{ data.rol}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalmodificar">
+                        data-bs-target="#modalmodificar"
+                        (click)="modificar(data.id_rol)"
+                        >
                         Modificar
                     </button></td>
             </tr>
@@ -53,17 +57,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row d-flex justify-content-center">
+                    <form class="row d-flex justify-content-center" [formGroup]="rolAgregar" (ngSubmit)="agregar()">
                         <div class="col-md-5 ">
                             <div class="mb-4">
                                 <label for="rol" class="form-label"><b>Rol</b> </label>
-                                <input type="text" class="form-control" id="rol" aria-describedby="rol" autocomplete="off">
+                                <input type="text" class="form-control" id="rol"
+                                formControlName="rol" aria-describedby="rol" autocomplete="off">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="linea btn bmodal btn-danger btn-sm"
                                 data-bs-dismiss="modal">Salir</button>
-                            <button type="button" class="linea btn bmodal btn-primary btn-sm">Agregar</button>
+                            <button type="submit" class="linea btn bmodal btn-primary btn-sm" >Agregar</button>
                         </div>
                     </form>
                 </div>
@@ -82,15 +87,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row d-flex justify-content-center">
+                    <form class="row d-flex justify-content-center" [formGroup]="rolForm" (ngSubmit)="onSubmit()">
                         <div class="col-md-5">
                             <div class="mb-4">
                                 <label for="id_rol" class="form-label"><b>Id rol</b> </label>
-                                <input type="number" class="form-control" id="id_rol" aria-describedby="id_rol" autocomplete="off" readonly>
+                                <input  
+                                formControlName="id_rol"
+                                type="number" class="form-control" id="id_rol" aria-describedby="id_rol" autocomplete="off" readonly>
                             </div>
                             <div class="mb-4">
                                 <label for="rol" class="form-label"><b>Rol</b> </label>
-                                <input type="text" class="form-control" id="rol" aria-describedby="rol" autocomplete="off">
+                                <input formControlName="rol" type="text" class="form-control" id="rol" aria-describedby="rol" autocomplete="off">
                             </div>
                         </div>
 
@@ -98,7 +105,7 @@
                         <div class="modal-footer">
                             <button type="button" class="linea btn bmodal btn-danger btn-sm"
                                 data-bs-dismiss="modal">Salir</button>
-                            <button type="button" class="linea btn bmodal btn-primary btn-sm">Modificar</button>
+                            <button type="submit" class="linea btn bmodal btn-primary btn-sm">Modificar</button>
                         </div>
                     </form>
                 </div>

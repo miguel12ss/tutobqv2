@@ -15,6 +15,11 @@ get getPrograms():Observable<Object>{
 
 }
 
+getFacultades(){
+    return this.httpClient.get(`${this.url}facultades`)
+  }
+
+
 get getTipoDocumento():Observable<Object>{
     return this.httpClient.get(`${this.url}tipo-documento`)
 

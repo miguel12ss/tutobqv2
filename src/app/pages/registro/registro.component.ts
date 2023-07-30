@@ -16,6 +16,7 @@ export class RegistroComponent implements OnInit {
   public showAlertDanger = false
   submitted = false
   programas:Array<string> =[]
+  facultades:Array<string> =[]
   tipoDocumento:Array<string> =[]
   constructor(public fb: FormBuilder, private apiService: ApiService, private router: Router,private componentService:ComponentService) {
 
@@ -40,7 +41,11 @@ this.tipoDocumento=res
       })
     ).subscribe()
 
-
+this.componentService.getFacultades().pipe(
+  tap((res:any)=>{
+    this.facultades=res
+  })
+).subscribe()
   }
   validarCorreo() {
     if (!this.contactForm.get('correo')?.invalid) {

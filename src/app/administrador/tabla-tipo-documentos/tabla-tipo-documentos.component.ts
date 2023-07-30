@@ -1,4 +1,9 @@
 import { Component,Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdminService } from '../services/admin.service';
+import { tap } from 'rxjs';
+import { ComponentService } from 'src/app/components/services/components.service';
+import Swal from 'sweetalert2';
 
 interface DataItem {
   id_tipo_documento:String
@@ -11,24 +16,138 @@ interface DataItem {
   styleUrls: ['./tabla-tipo-documentos.component.scss']
 })
 export class TablaTipoDocumentosComponent {
-  @Input() tipos_documento!:DataItem[]
   searchValue = '';
   visible = false;
   listOfData: DataItem[] = [
-    {
-      id_tipo_documento:"1",
-      tipo_documento:"T.I."
-    },
-    {
-      id_tipo_documento:"2",
-      tipo_documento:"C.C. "
-    }
   ];
   listOfDisplayData = [...this.listOfData];
+  tipos_documento:any[]=[]
+  tipo:any[]=[]
+  tipoForm!:FormGroup
+  tipoAgregar!:FormGroup
+
   reset(): void {
     this.searchValue = '';
     this.search();
   }
+
+
+  constructor(private service:AdminService,public fb:FormBuilder,private serviceComponent:ComponentService){
+    this.tipoForm=this.initForm()
+    this.tipoAgregar=this.initFormTipo()
+  }
+  initFormTipo():FormGroup{
+    return this.fb.group({
+      tipo_documento:['',Validators.required],
+      
+    })
+  }
+
+  initForm():FormGroup{
+    return this.fb.group({
+      tipo_documento:['',Validators.required],
+      id_tipo_documento:['',Validators.required]
+    })
+  }
+
+
+  ngOnInit(): void {
+    this.service.getTipo().pipe(
+      tap((res:any)=>{
+       
+        
+this.tipos_documento=res.data
+      }
+    )).subscribe()
+  }
+
+  onSubmit(){
+
+    const tipo=this.tipoForm.value
+    this.service.actualizarTipo(tipo).pipe(tap((res:any)=>{
+      console.log(res);
+      
+        if(res.error){
+          Swal.fire("Error al actualizar",res.error,"error")
+      }else if(res.success){
+        Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
+        
+
+
+
+      }
+
+
+      this.service.getTipo().pipe(
+        tap((res:any)=>{
+          this.tipos_documento=res.data
+        })
+      ).subscribe()
+
+
+    })
+
+
+
+
+    
+  ).subscribe()
+
+
+
+  }
+  agregar(){
+
+    const tipo=this.tipoAgregar.value
+    console.log(tipo);
+    
+    this.service.setTipo(tipo).pipe(
+      tap((res:any)=>{
+        console.log(res);
+        
+        if(res.error){
+          Swal.fire("Error al agregar el programa",res.error,"error")
+      }else if(res.data){
+        Swal.fire("Añadido exitosamente","El programa ha sido Añadido con exito","success")
+      }
+      
+      this.service.getTipo().pipe(
+        tap((res:any)=>{
+          this.tipos_documento=res.data
+        })
+      ).subscribe()
+
+
+
+
+
+
+
+
+
+      
+
+
+
+      
+    })
+    ).subscribe()
+  }
+  modificar(id_tipo_documento:string){
+
+    this.service.getDataForIdTipo(id_tipo_documento).pipe(
+      tap((res:any)=>{
+        this.tipoForm.patchValue({
+          tipo_documento:res.data.tipo_documento,
+          id_tipo_documento:res.data.id_tipo_documento
+        })
+      })
+    ).subscribe()
+
+
+  }
+
+  
   
   search(): void {
     this.visible = false;
