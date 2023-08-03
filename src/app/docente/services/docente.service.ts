@@ -173,6 +173,8 @@ getEstadosTutoria(){
 }
 
 actualizarHorario(horario:any){
+  console.log(horario.id_tutoria);
+  
   const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
@@ -202,5 +204,6 @@ getListado(id_tutoria:string){
   };
  return this.http.get(`${this.urlGlobal}/listado/${id_tutoria}`,httpOptions)
 }
+
 
 }

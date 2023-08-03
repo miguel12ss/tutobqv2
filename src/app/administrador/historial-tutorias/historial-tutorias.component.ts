@@ -1,66 +1,33 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
+import { AdminService } from '../services/admin.service';
+import { tap } from 'rxjs';
+import { DocenteService } from 'src/app/docente/services/docente.service';
 
-interface DataItem {
-  id_tutoria:string
-  id_facultad:string
-  id_programa:string
-  id_materia:string
-  id_sede:string
-  id_salon:string
-  id_usuario:string
-  id_estado_tutoria: string
-  cupos:string
-  tema:string
-  fecha:string
-  hora_inicial:string
-  hora_final:string
-  fecha_generacion_tutoria:string
-}
+
 @Component({
   selector: 'app-historial-tutorias',
   templateUrl: './historial-tutorias.component.html',
   styleUrls: ['./historial-tutorias.component.scss']
 })
-export class HistorialTutoriasComponent {
-  @Input() estudiante!:DataItem[]
+export class HistorialTutoriasComponent implements OnInit {
+
 
   searchValue = '';
 visible = false;
-listOfData: DataItem[] = [
-  {
-    id_tutoria:"1",
-    id_facultad:"ingenieria",
-    id_programa:"sistemas",
-    id_materia: "base de datos",
-    id_sede:"barranquilla",
-    id_salon:"Sala de informatica 18",
-    id_usuario:"Evelio arrieta",
-    id_estado_tutoria:"pendiente",
-    cupos:"25",
-    tema:"consultas SQL",
-    fecha:"17/06/2023",
-    hora_inicial:"7:00 am",
-    hora_final:"10:00 am",
-    fecha_generacion_tutoria:"16/06/2023 8:00 pm"
-  },
-  {
-    id_tutoria:"2",
-    id_facultad:"ingenieria",
-    id_programa:"sistemas",
-    id_materia: "diseño de aplicaciones",
-    id_sede:"barranquilla",
-    id_salon:"Sala de informatica 2",
-    id_usuario:"Lourdes de avila",
-    id_estado_tutoria:"pendiente",
-    cupos:"25",
-    tema:"Documentacion del proyecto",
-    fecha:"18/06/2023",
-    hora_inicial:"7:00 am",
-    hora_final:"10:00 am",
-    fecha_generacion_tutoria:"15/06/2023 5:00 pm"
-  }
+listOfData: any[] = [
+  
 ];
-listOfDisplayData = [...this.listOfData];
+datosModal:any={}
+data = [...this.listOfData];
+tutorias:any[]=[]
+  estudiantes: any[]=[];
+constructor(private service:AdminService,private docenteService:DocenteService){
+
+
+
+
+  }
+
 
 reset(): void {
   this.searchValue = '';
@@ -69,8 +36,43 @@ reset(): void {
 
 search(): void {
   this.visible = false;
-  this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.id_usuario.indexOf(this.searchValue) !== -1);
+  this.data = this.listOfData.filter((item: any) => item.id_usuario.indexOf(this.searchValue) !== -1);
 }
+
+ngOnInit(){
+  this.service.getHorarioFinished().pipe(
+    tap((res:any)=>{
+      this.tutorias=res.data
+      
+      
+    })
+  ).subscribe()
+}
+descripcion(id_tutoria:string){
+  console.log(id_tutoria)
+  this.docenteService.getHorarioForId(id_tutoria).pipe(
+    tap((res:any)=>{
+      this.datosModal=res.data
+    })
+  ).subscribe()
+  
+
+
+}
+
+listado(id_tutoria:string){
+  this.docenteService.getListado(id_tutoria).pipe(
+    tap((res:any)=>{
+    
+      
+
+      this.estudiantes=res.estudiante
+      console.log(this.estudiantes);
+      
+    })
+  ).subscribe()
+}
+
 }
   
 

@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../services/admin.service';
 import { tap } from 'rxjs';
@@ -16,7 +16,7 @@ interface DataItem {
   styleUrls: ['./tabla-salones.component.scss']
   
 })
-export class TablaSalonesComponent {
+export class TablaSalonesComponent implements OnInit  {
   searchValue = '';
   visible = false;
   listOfData: DataItem[] = [
@@ -29,10 +29,13 @@ export class TablaSalonesComponent {
   salonAgregar!:FormGroup
 
   listOfDisplayData = [...this.listOfData];
+  capacidades: any[]=[];
+  sedes:any[]=[]
   reset(): void {
     this.searchValue = '';
     this.search();
   }
+
   
   search(): void {
     this.visible = false;
@@ -87,22 +90,80 @@ ngOnInit(): void {
       console.log(res);
       
 this.salones=res.data
+
+    }
+  )).subscribe()
+
+  this.service.getSedes().pipe(
+    tap((res:any)=>{
+this.sedes=res.data      
+    }
+  )).subscribe()
+  
+  this.service.getCapacidad().pipe(
+    tap((res:any)=>{
+this.capacidades=res.data      
     }
   )).subscribe()
 }
 
 
 onSubmit(){
+  const salon=this.salonForm.value
+  this.service.actualizarSalon(salon).pipe(tap((res:any)=>{
+    console.log(res);
+    
+      if(res.error){
+        Swal.fire("Error al actualizar",res.error,"error")
+    }else if(res.success){
+      Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
+      
 
+
+
+    }
+
+
+    this.service.getSalones().pipe(
+      tap((res:any)=>{
+        this.salones=res.data
+      })
+    ).subscribe()
+
+
+  })
+
+
+
+
+  
+).subscribe()
 }
 
 agregar(){
-const salon=this.salonForm.value
+const salon=this.salonAgregar.value
+console.log(salon);
+
 this.service.setSalon(salon).pipe(
   tap((res:any)=>{
-    console.log(res);
-    
-  })
+    if (res.error) {
+      Swal.fire("Error al agregar la capacidad", res.error, "error")
+    } else if (res.data) {
+      Swal.fire("Añadido exitosamente", "la capacidad ha sido Añadido con exito", "success")
+    }
+    this.service.getSalones().pipe(
+      tap((res: any) => {
+        this.salones= res.data
+      })
+    ).subscribe()
+
+  }
+  
+  
+  
+  )
+  
 ).subscribe()
 }
 }
+

@@ -1,67 +1,189 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-interface DataItem {
-  id_tutoria:string
-  id_facultad:string
-  id_programa:string
-  id_materia:string
-  id_sede:string
-  id_salon:string
-  id_usuario:string
-  id_estado_tutoria: string
-  cupos:string
-  tema:string
-  fecha:string
-  hora_inicial:string
-  hora_final:string
-  fecha_generacion_tutoria:string
-}
+import { AdminService } from '../services/admin.service';
+import { forkJoin, tap } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DocenteService } from 'src/app/docente/services/docente.service';
+
 @Component({
   selector: 'app-crear-tutoria',
   templateUrl: './crear-tutoria.component.html',
   styleUrls: ['./crear-tutoria.component.scss']
 })
-export class CrearTutoriaComponent {
-  @Input() estudiante!:DataItem[]
-
+export class CrearTutoriaComponent implements OnInit {
+  fechaHoy=""
   searchValue = '';
   visible = false;
-listOfData: DataItem[] = [
-  {
-    id_tutoria:"1",
-    id_facultad:"ingenieria",
-    id_programa:"sistemas",
-    id_materia: "base de datos",
-    id_sede:"barranquilla",
-    id_salon:"Sala de informatica 18",
-    id_usuario:"Evelio arrieta",
-    id_estado_tutoria:"pendiente",
-    cupos:"25",
-    tema:"consultas SQL",
-    fecha:"17/06/2023",
-    hora_inicial:"7:00 am",
-    hora_final:"10:00 am",
-    fecha_generacion_tutoria:"16/06/2023 8:00 pm"
-  },
-  {
-    id_tutoria:"2",
-    id_facultad:"ingenieria",
-    id_programa:"sistemas",
-    id_materia: "diseño de aplicaciones",
-    id_sede:"barranquilla",
-    id_salon:"Sala de informatica 2",
-    id_usuario:"Lourdes de avila",
-    id_estado_tutoria:"pendiente",
-    cupos:"25",
-    tema:"Documentacion del proyecto",
-    fecha:"18/06/2023",
-    hora_inicial:"7:00 am",
-    hora_final:"10:00 am",
-    fecha_generacion_tutoria:"15/06/2023 5:00 pm"
-  }
-];
-listOfDisplayData = [...this.listOfData];
 
+horarios:any[]=[]
+horario:any={}
+horarioForm!:FormGroup
+horarioAgregar!:FormGroup
+programas:any[]=[]
+facultades:any[]=[]
+salones:any[]=[]
+materias:any[]=[]
+docentes:any[]=[]
+sedes:any[]=[]
+
+listOfDisplayData = [...this.horarios];
+
+constructor(private service:AdminService,public readonly fb:FormBuilder,private docenteService:DocenteService){
+  const dateToday=new Date();
+  this.fechaHoy = dateToday.toISOString().substring(0, 10);
+  console.log(this.fechaHoy);
+  this.horarioForm=this.initForm()
+  this.horarioAgregar=this.initFormAgregar()
+
+}
+initForm():FormGroup{
+return this.fb.group({
+  facultad:[null,Validators.required],
+  tema:[null,Validators.required],
+  capacidad:[null,Validators.required],
+  horaInicio:[null,Validators.required],
+  programa:[null,Validators.required],
+  sede:[null,Validators.required],
+  horaFin:[null,Validators.required],
+  materia:[null,Validators.required],
+  salon:[null,Validators.required],
+  fecha:[null,Validators.required],
+  docente:[null,Validators.required],
+  id_tutoria:[null,Validators.required],
+  
+})
+}
+ngOnInit(): void {
+  forkJoin([
+    this.service.getHorario(),
+    this.service.getProgramas(),
+    this.service.getFacultades(),
+    this.service.getMaterias(),
+    this.service.getSalones(),
+    this.service.getDocente(),
+    this.service.getSedes()
+  ]).subscribe((results:any) => {
+    // Procesa los resultados de cada solicitud
+    console.log(results);
+    
+    this.horarios = results[0].data;
+    this.programas = results[1].data;
+    this.facultades = results[2].data;
+    this.materias = results[3].data;
+    this.salones = results[4].data;
+    this.docentes = results[5].data;
+    this.sedes = results[6].data;
+  });
+
+ 
+
+
+}
+
+onChange(event:any){
+  const salon=event.target.value
+  this.docenteService.obtenerCapacidadPorSalon(salon).pipe(
+    tap((res:any)=>{
+      console.log(res);
+      
+    this.horarioAgregar.patchValue({
+      capacidad:res.data.capacidad,
+      sede:res.data.sede
+    })
+   
+    })
+  ).subscribe()
+
+}
+
+onChangeValue(event:any){
+  const salon=event.target.value
+  this.docenteService.obtenerCapacidadPorSalon(salon).pipe(
+    tap((res:any)=>{
+      console.log(res);
+      
+    this.horarioForm.patchValue({
+      capacidad:res.data.capacidad,
+      sede:res.data.sede
+    })
+   
+    })
+  ).subscribe()
+}
+
+initFormAgregar():FormGroup{
+  return this.fb.group({
+    facultad:[null,Validators.required],
+    tema:[null,Validators.required],
+    capacidad:[null,Validators.required],
+    horaInicio:[null,Validators.required],
+    programa:[null,Validators.required],
+    sede:[null,Validators.required],
+    horaFin:[null,Validators.required],
+    materia:[null,Validators.required],
+    salon:[null,Validators.required],
+    fecha:[null,Validators.required],
+    docente:[null,Validators.required],
+  })
+
+}
+getIdDocente(){
+const docente=""
+}
+
+
+
+agregar(){
+const horario=this.horarioAgregar.value
+this.service.crearHorario(horario).pipe(
+  tap((res:any)=>{
+   this.service.getHorario().pipe(
+    tap((res:any)=>{
+this.horarios=res.data
+    })
+   ).subscribe()
+    
+  })
+).subscribe()
+}
+getHorarioForId(id_horario:string){
+this.docenteService.getHorarioForId(id_horario).pipe(
+  tap((res:any)=>{
+    this.horario=res.data
+    console.log(res.data.id_tutoria);
+    
+    const nombres=`${res.data.nombres} ${res.data.apellidos}-${res.data.id_docente}`
+    console.log(nombres);
+    
+    this.horarioForm.patchValue({
+      facultad:res.data.facultad,
+      tema:res.data.tema,
+      capacidad:res.data.capacidad,
+      horaInicio:res.data.horaInicio,
+      programa:res.data.programa,
+      docente:nombres,
+      horaFin:res.data.horaFin,
+      materia:res.data.materia,
+      fecha:res.data.fecha,
+      salon:res.data.salon,
+      sede:res.data.sede,
+      id_tutoria:res.data.id_tutoria
+    })
+  })
+).subscribe()
+}
+onSubmit(id_tutoria:string){
+  console.log(id_tutoria);
+  
+  const horario=this.horarioForm.value
+this.service.actualizarHorarioAdmin(horario,id_tutoria)
+this.service.getHorario().pipe(
+  tap((res:any)=>{
+this.horarios=res.data
+  })
+ ).subscribe()
+
+}
 reset(): void {
   this.searchValue = '';
   this.search();
@@ -69,7 +191,7 @@ reset(): void {
 
 search(): void {
   this.visible = false;
-  this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.id_usuario.indexOf(this.searchValue) !== -1);
+  this.listOfDisplayData = this.horarios.filter((item: any) => item.facultad.indexOf(this.searchValue) !== -1);
 }
 
 

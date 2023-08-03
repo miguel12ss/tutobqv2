@@ -1,6 +1,6 @@
 <h5 class="text-center">HISTORIAL DE TUTORIAS ACÁDEMICAS</h5>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="listOfDisplayData||estudiante" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="tutorias" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>
@@ -20,15 +20,19 @@
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_facultad}}</td>
-                <td>{{ data.id_programa}}</td>
-                <td>{{data.id_usuario}}</td>
+                
+                <td>{{ data.facultad}}</td>
+                <td>{{ data.programa}}</td>
+                <td>{{data.nombres}} {{data.apellidos}}</td>
                 <td>{{ data.fecha_generacion_tutoria}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modaldescripcion">
+                        data-bs-target="#modaldescripcion"
+                        (click)="descripcion(data.id_tutoria)"
+                        >
                         Descripción
                     </button></td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
+                    (click)="listado(data.id_tutoria)"
                         data-bs-target="#modallista">
                         Lista
                     </button></td>
@@ -60,32 +64,60 @@
                 <div class="modal-body">
                     <form class="row">
                         <div class="table-responsive">
-                            <nz-table #nzTable [nzData]="listOfDisplayData||estudiante" nzTableLayout="fixed">
+                            <nz-table #nzTable [nzData]="datosModal" nzTableLayout="fixed">
                                 <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Descripción</th>
-                                    </tr>
+                                  <tr>
+                                    <th>Item</th>
+                                    <th>Descripción</th>
+                                  </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><b>id tutoria</b></td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Facultad</b></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Materia</b></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Sede</b></td>
-                                        <td></td>
-                                    </tr>
+                                  <tr>
+                                    <td><b>Facultad</b></td>
+                                    <td>{{ datosModal.facultad }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Materia</b></td>
+                                    <td>{{ datosModal.materia }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>programa</b></td>
+                                    <td>{{ datosModal.programa }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Sede</b></td>
+                                    <td>{{ datosModal.sede }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Salon</b></td>
+                                    <td>{{ datosModal.salon }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Capacidad</b></td>
+                                    <td>{{ datosModal.capacidad }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Cupos</b></td>
+                                    <td>{{ datosModal.cupos }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Tema</b></td>
+                                    <td>{{ datosModal.tema }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Fecha</b></td>
+                                    <td>{{ datosModal.fecha }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Hora de inicio</b></td>
+                                    <td>{{ datosModal.horaInicio }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><b>Hora de finalizacion</b></td>
+                                    <td>{{ datosModal.horaFin }}</td>
+                                  </tr>
                                 </tbody>
-                            </nz-table>
+                              </nz-table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="linea btn bmodal btn-danger btn-sm"
@@ -113,23 +145,23 @@
                 <div class="modal-body">
                     <form class="row">
                         <div class="table-responsive">
-                            <nz-table #nzTable [nzData]="listOfDisplayData||estudiante" nzTableLayout="fixed">
+                            <nz-table #headeTable [nzData]="estudiantes" [nzPageSize]="4" >
                                 <thead>
-                                    <tr>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Tipo documento</th>
-                                        <th>Documento</th>
-                                        <th>Facultad</th>
-                                        <th>Programa</th>
-                                        <th>Correo</th>
-                                        <th>Celular</th>
-                                    </tr>
+                                  <tr>
+                                    <th>Nombres</th>
+                                    <th>Documento de identificacion</th>
+                                    <th>Programa</th>
+                                  </tr>
                                 </thead>
                                 <tbody>
-
+                                  <tr *ngFor="let h of headeTable.data">
+                                    <td>{{ h.nombres }}
+                                          {{ h.apellidos }}</td>
+                                    <td>{{ h.identificacion }}</td>
+                                    <td>{{ h.programa }}</td>
+                                  </tr>
                                 </tbody>
-                            </nz-table>
+                              </nz-table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="linea btn bmodal btn-danger btn-sm"

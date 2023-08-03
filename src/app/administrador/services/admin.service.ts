@@ -43,7 +43,16 @@ export class AdminService {
   }
 
 
-
+actualizarSalon(salon:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}actualizarSalon`,salon,httpOptions)
+}
 
   getDataForIdFacultad(id_facultad:string){
     const httpOptions = {
@@ -220,12 +229,8 @@ setSede(sede:any){
 }
 
 setSalon(salon:any){
-  const salonObject={
-    "salon":salon.salon,
-    "sede":salon.sede,
-    "capacidad":salon.capacidad
-  }
-  console.log(salonObject);
+
+
   
   const httpOptions = {
     headers: new HttpHeaders({
@@ -234,7 +239,7 @@ setSalon(salon:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}setSalon`,salonObject,httpOptions)
+  return this.http.post(`${this.url}setSalon`,salon,httpOptions)
 }
 
 
@@ -526,9 +531,64 @@ getDataForIdCapacidad(id_capacidad:string){
 
 
 
+getHorario(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}obtenerHorarioDocente`,httpOptions)
+}
 
+actualizarHorarioAdmin(horario:any,id_tutoria:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  this.http.post(`${this.url}actualizarHorarioAdmin/${id_tutoria}`,horario,httpOptions).pipe(
+    tap((res:any)=>{
+      console.log(res);
+      
+    })
+  ).subscribe()
+}
 
+getDocente(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getDocentes`,httpOptions)
+}
 
+crearHorario(horario:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}crearHorario`,horario,httpOptions)
+}
+getHorarioFinished(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}obtenerHorarioTerminado`,httpOptions)
+}
 }
 
 
