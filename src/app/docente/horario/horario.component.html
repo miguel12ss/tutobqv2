@@ -16,12 +16,6 @@
   </thead>
   <tbody>
     <tr *ngFor="let h of headerTable.data">
-      <!-- <td>{{ data.name }}</td>
-      <td>{{ data.age }}</td>
-      <td>{{ data.address }}</td> -->
-
-      <!-- <td>{{h.fecha}}</td> -->
-
       <td>{{h.horaInicio}}</td>
       <td>{{h.horaFin}}</td>
 
@@ -29,11 +23,11 @@
       <td>{{h.salon}}</td>
 
 
-      <td><button nz-button nzType="primary" data-bs-toggle="modal" data-bs-target="#modaldescripcion"
+      <td><button nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modaldescripcion"
           (click)="descripcion(h.id_tutoria)">Descripcion</button></td>
 
 
-      <td><button nz-button nzType="primary" data-bs-toggle="modal" data-bs-target="#modal"
+      <td><button nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modal"
           (click)="listado(h.id_tutoria)">Listado </button></td>
     </tr>
   </tbody>
@@ -108,9 +102,6 @@
               </tbody>
             </nz-table>
           </div>
-          <div class="modal-footer">
-           
-          </div>
         </form>
       </div>
 
@@ -128,7 +119,7 @@
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>listado de estudiantes de la tutoria acádemica</b>
         </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
       </div>
       <div class="modal-body">
         <form class="row">

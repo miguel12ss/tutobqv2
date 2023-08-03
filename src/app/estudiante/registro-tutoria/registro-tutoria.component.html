@@ -1,32 +1,22 @@
-<h3 class="text-center">HISTORIAL DE TUTORIAS ACÁDEMICAS PENDIENTES</h3>
+<h5 class="text-center">HISTORIAL DE TUTORIAS ACÁDEMICAS PENDIENTES</h5>
 <nz-table #headerTable [nzData]="horario" [nzPageSize]="4" [nzScroll]="{ y: '300px' }">
   <thead>
     <tr  >
-      <!-- <th >fecha</th> -->
-      <th >horaInicio</th>
-
-      <th >horaFin</th>
-      
-      <th >materia</th>
-      <th >salon</th>
+      <th>Fecha</th>
+      <th >Inicio</th>
+      <th >Finalización</th>
+      <th >Materia</th>
       <th>Descripcion</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let h of headerTable.data">
-      <!-- <td>{{ data.name }}</td>
-      <td>{{ data.age }}</td>
-      <td>{{ data.address }}</td> -->
-   
-      <!-- <td>{{h.fecha}}</td> -->
-
+      <td >{{h.fecha}}</td>
       <td>{{h.horaInicio}}</td>
       <td>{{h.horaFin}}</td>
-     
       <td>{{h.materia}}</td>
-      <td>{{h.salon}}</td>
    
-    <td><button nz-button nzType="primary"
+    <td><button nz-button nzType="primary" class="btnfunciones"
       data-bs-toggle="modal"
       data-bs-target="#modaldescripcion"
       (click)="descripcion(h.id_tutoria)"
@@ -39,12 +29,12 @@
 
 <div class="modal fade modal-lg" id="modaldescripcion" data-bs-backdrop="static" data-bs-keyboard="false"
 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<div class="modal-dialog">
+<div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
         <div class="modal-header">
             <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Datos de la tutoria acádemica</b>
             </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
         </div>
         <div class="modal-body">
             <form class="row">
@@ -104,11 +94,6 @@ tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                               </tr>
                         </tbody>
                     </nz-table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="linea btn bmodal btn-danger btn-sm"
-                        data-bs-dismiss="modal">Salir</button>
-                    <button type="button" class="linea btn bmodal btn-primary btn-sm">Cambiar</button>
                 </div>
             </form>
         </div>

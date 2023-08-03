@@ -80,7 +80,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Cambiar contraseña de usuario</b></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body ">
                 <form class="row justify-content-md-center" [formGroup]="passwordForm" (ngSubmit)="cambiarPassword()" >
@@ -126,12 +125,11 @@
 
 
 <!-- modal para cambio de foto-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Cambiar foto</b></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form  >
@@ -143,8 +141,10 @@
 
 
                     <div class="modal-footer d-flex">
-
-                        <button type="button" (click)="subirImagen()"  class="btn btn-primary">Enviar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            Salir
+                          </button>
+                        <button type="button" (click)="subirImagen()"  class="btn btn-success">Cambiar</button>
                     </div>
                 </form>
             </div>
