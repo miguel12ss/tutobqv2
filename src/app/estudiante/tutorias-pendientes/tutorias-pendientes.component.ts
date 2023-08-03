@@ -37,9 +37,10 @@ cancelarTutoria(id_tutoria:any){
     text: "esta accion se puede revertir",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
+    confirmButtonColor: '#198754',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'si, cancelarTutoria'
+    cancelButtonText:'No',
+    confirmButtonText: 'Si'
   }).then((result) => {
     if (result.isConfirmed) {
       this.estudianteService.cancelarTutoria(id_tutoria)

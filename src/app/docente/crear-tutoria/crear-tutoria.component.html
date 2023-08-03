@@ -1,7 +1,5 @@
+<h5 class="text-center">TUTORIAS ACÁDEMICAS PENDIENTES</h5>
 <div class="container">
-  <h3 class="text-center">TUTORIAS ACÁDEMICAS PENDIENTES</h3>
-
-
   <div class="container-button d-flex justify-content-end">
     <!-- Button trigger modal -->
     <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -14,11 +12,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Crear horario tutoria acádemica</b></h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form class="row" [formGroup]="horarioForm" (ngSubmit)="onSubmit()">
             <div class="col-md-4">
+              
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b> </label>
                 <input type="text" class="form-control" id="facultad" formControlName="facultad"
@@ -32,10 +30,10 @@
               </div>
 
               <div class="mb-3">
-                <label for="capacidad" class="form-label"><b>Capacidad</b></label>
-                <input type="text" formControlName="capacidad" class="form-control" id="capacidad" required readonly>
+                <label for="sede" class="form-label"><b>Sede</b> </label>
+                <input type="text" name="sede" readonly id="sede" class="form-control" required formControlName="sede">
               </div>
-
+            
               <div class="mb-3">
                 <label for="hora_inicio" class="form-label"><b> Hora de inicio</b></label>
                 <input type="time" formControlName="horaInicio" class="form-control" id="hora_inicio" required>
@@ -51,12 +49,10 @@
               </div>
 
               <div class="mb-3">
-                <label for="sede" class="form-label"><b>Sede</b> </label>
-                <!-- <select 
-                formControlName="sede"
-                class="form-control" id="sede" required>
-              <option readonly *ngFor="let sede of sedes" [value]="sede">{{sede}}</option></select> -->
-                <input type="text" name="sede" readonly id="sede" class="form-control" required formControlName="sede">
+                <label for="salon" class="form-label"><b>Salón</b></label>
+                <select class="form-control" formControlName="salon" id="salon" (change)="onSelect($event)" required>
+                  <option *ngFor="let salon of salones" [value]="salon">{{salon}}</option>
+                </select>
               </div>
 
               <div class="mb-3">
@@ -79,11 +75,10 @@
               </div>
 
               <div class="mb-3">
-                <label for="salon" class="form-label"><b>Salón</b></label>
-                <select class="form-control" formControlName="salon" id="salon" (change)="onSelect($event)" required>
-                  <option *ngFor="let salon of salones" [value]="salon">{{salon}}</option>
-                </select>
+                <label for="capacidad" class="form-label"><b>Capacidad</b></label>
+                <input type="text" formControlName="capacidad" class="form-control" id="capacidad" required readonly>
               </div>
+             
 
               <div class="mb-3">
                 <label for="fecha" class="form-label"><b>Fecha</b></label>
@@ -94,7 +89,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-              <button type="submit" class="linea btn bmodal btn-primary btn-sm">Crear</button>
+              <button type="submit" class="linea btn bmodal btn-success btn-sm">Crear</button>
             </div>
           </form>
         </div>
@@ -102,46 +97,7 @@
       </div>
     </div>
   </div>
-  <!-- <table class="table">
-    <thead>
-      <tr>
-     
-        <th scope="col">cupos</th>
-        <th scope="col">facultad</th>
-        <th scope="col">fecha</th>
-        <th scope="col">fecha_generacion_tutoria</th>
 
-        <th scope="col">horaInicio</th>
-        <th scope="col">horaFin</th>
-
-        <th scope="col">programa</th>
-        <th scope="col">materia</th>
-
-        <th scope="col">salon</th>
-        <th scope="col">sede</th>
-
-        <th scope="col">tema</th>
-        <th scope="col">estado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let h of horario; let index">
-        <td>{{ h.cupos }}</td>
-        <td>{{h.facultad}}</td>
-        <td>{{h.fecha}}</td>
-        <td>{{h.fecha_generacion_tutoria}}</td>
-        <td>{{h.horaInicio}}</td>
-        <td>{{h.horaFin}}</td>
-        <td>{{h.programa}}</td>
-        <td>{{h.materia}}</td>
-        <td>{{h.salon}}</td>
-        <td>{{h.sede}}</td>
-      <td>{{h.tema}}</td>
-      <td>{{h.id_estado_tutoria}}</td>
-
-      </tr>
-    </tbody>
-  </table> -->
   <nz-table #headerTable [nzData]="horario" [nzPageSize]="4">
     <thead>
       <tr>
@@ -151,26 +107,23 @@
         <th>fecha de generacion</th>
 
         <th>horaInicio</th>
-        <!-- <th >horaFin</th> -->
         <th>Actualizar</th>
         <th>Listado de estudiantes</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let h of headerTable.data">
-        <!-- <td>{{ data.name }}</td>
-        <td>{{ data.age }}</td>
-        <td>{{ data.address }}</td> -->
         <td>{{ h.cupos }}</td>
         <td>{{h.facultad}}</td>
         <td>{{h.fecha}}</td>
         <td>{{h.fecha_generacion_tutoria}}</td>
         <td>{{h.horaInicio}}</td>
-        <td><button type="button" nz-button nzType="primary" data-bs-toggle="modal" data-bs-target="#actualizar"
+        <td><button type="button" nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#actualizar"
             (click)="getData(h.id_tutoria)">
             Actualizar
           </button> </td>
-        <td><button nz-button nzType="primary" data-bs-toggle="modal" data-bs-target="#modallistado" (click)="listado(h.id_tutoria)">listado</button>
+        <td><button nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modallistado"
+            (click)="listado(h.id_tutoria)">listado</button>
         </td>
 
     </tbody>
@@ -189,7 +142,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel"><b> Actualizar horario tutoria acádemica</b></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form class="row" [formGroup]="horarioFormUpdate" (ngSubmit)="onSubmitUpdate()">
@@ -207,14 +159,15 @@
             </div>
 
             <div class="mb-3">
-              <label for="capacidad" class="form-label"><b>Capacidad</b></label>
-              <input type="text" formControlName="capacidad" class="form-control" id="capacidad" required readonly>
+              <label for="sede" class="form-label"><b>Sede</b> </label>
+              <input type="text" name="sede" readonly id="sede" class="form-control" required formControlName="sede">
             </div>
 
             <div class="mb-3">
-              <label for="hora_inicio" class="form-label"><b> Hora de inicio</b></label>
-              <input type="time" formControlName="horaInicio" class="form-control" id="hora_inicio" required>
+              <label for="fecha" class="form-label"><b>Fecha</b></label>
+              <input type="date" formControlName="fecha" class="form-control" [min]="fechaHoy" id="fecha" required>
             </div>
+          
           </div>
 
           <div class="col-md-4">
@@ -226,22 +179,20 @@
             </div>
 
             <div class="mb-3">
-              <label for="sede" class="form-label"><b>Sede</b> </label>
-              <!-- <select 
-              formControlName="sede"
-              class="form-control" id="sede" required>
-            <option readonly *ngFor="let sede of sedes" [value]="sede">{{sede}}</option></select> -->
-              <input type="text" name="sede" readonly id="sede" class="form-control" required formControlName="sede">
+              <label for="salon" class="form-label"><b>Salón</b></label>
+              <select class="form-control" formControlName="salon" id="salon" (change)="onSelectUpdate($event)"
+                required>
+                <option *ngFor="let salon of salones" [value]="salon">{{salon}}</option>
+              </select>
             </div>
 
-
-
             <div class="mb-3">
-              <label for="hora_finalizacion" class="form-label"><b>Hora de finalización</b></label>
-              <input type="time" formControlName="horaFin" class="form-control" id="hora_finalizacion" required>
+              <label for="hora_inicio" class="form-label"><b> Hora de inicio</b></label>
+              <input type="time" formControlName="horaInicio" class="form-control" id="hora_inicio" required>
             </div>
+            
             <div class="mb-3">
-              <label for="estado_tutoria" class="form-label"><b>estado_tutoria</b></label>
+              <label for="estado_tutoria" class="form-label"><b>Estado tutoria</b></label>
               <select name="estado" formControlName="estadoTutoria" id="estado" class="form-control">
                 <option *ngFor="let e of estado">{{e}}</option>
               </select>
@@ -257,16 +208,13 @@
             </div>
 
             <div class="mb-3">
-              <label for="salon" class="form-label"><b>Salón</b></label>
-              <select class="form-control" formControlName="salon" id="salon" (change)="onSelectUpdate($event)"
-                required>
-                <option *ngFor="let salon of salones" [value]="salon">{{salon}}</option>
-              </select>
+              <label for="capacidad" class="form-label"><b>Capacidad</b></label>
+              <input type="text" formControlName="capacidad" class="form-control" id="capacidad" required readonly>
             </div>
 
             <div class="mb-3">
-              <label for="fecha" class="form-label"><b>Fecha</b></label>
-              <input type="date" formControlName="fecha" class="form-control" [min]="fechaHoy" id="fecha" required>
+              <label for="hora_finalizacion" class="form-label"><b>Hora de finalización</b></label>
+              <input type="time" formControlName="horaFin" class="form-control" id="hora_finalizacion" required>
             </div>
 
             <div class="mb-3">
@@ -281,7 +229,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-            <button type="submit" class="linea btn bmodal btn-primary btn-sm"
+            <button type="submit" class="linea btn bmodal btn-success btn-sm"
               data-bs-dismiss="modal">Actualizar</button>
           </div>
         </form>
@@ -295,12 +243,12 @@
 
 <div class="modal fade modal-lg" id="modallistado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>listado de la tutoria acádemica</b>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>listado de estudiantes de la tutoria acádemica</b>
         </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
       </div>
       <div class="modal-body">
         <form class="row">
@@ -311,20 +259,19 @@
                   <th>Nombres</th>
                   <th>Documento de identificacion</th>
                   <th>Programa</th>
-                  
+
                 </tr>
               </thead>
               <tbody>
-               
+
                 <tr *ngFor="let h of headeTable.data">
-                  
                   <td>{{ h.nombres }} {{h.apellidos}}</td>
                   <td>{{h.identificacion}}</td>
-                    <td>{{h.programa}}</td>
-                    </tr>
+                  <td>{{h.programa}}</td>
+                </tr>
               </tbody>
             </nz-table>
-              </div>
+          </div>
         </form>
       </div>
 

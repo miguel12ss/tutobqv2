@@ -1,20 +1,34 @@
 .btnc{
-    padding: 5px 50px 5px 50px;
-    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
 }
 
 
 .bmodal{
-    padding: 10px 90px 10px 90px;
-    border-radius: 20px;
+    padding: 10px 40px 10px 40px;
 }
 
 input,select{
-    border-color: #0d6efd;
+    border-color: #0019fa;
     
 }
 
 .linea
 {
     display: inline-block;
+}
+
+.btnfunciones{
+    background-color: #0d6efd;
+    border: #0d6efd;
+    
+}
+
+.btnagendar{
+    background-color: #198754;
+    border: #198754;
+}
+
+.btndenegar{
+    background-color: #dc3545;
+    border: #dc3545;
 }

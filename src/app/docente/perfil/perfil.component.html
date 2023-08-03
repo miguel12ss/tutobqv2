@@ -1,22 +1,12 @@
-<h3 class="text-center">PERFIL DEL USUARIO</h3>
+<h5 class="text-center">PERFIL DEL USUARIO</h5>
 <div class="container-form">
   <form class="row" [formGroup]="contactForm">
     <div class="col-md-4 text-center d-flex align-items-center">
       <div>
-        <img
-        [src]="foto"
-       
-          class="img-fluid w-75"
-        />
+        <img [src]="foto" class="img-fluid w-75" />
         <div class="container-button d-flex">
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            data-bs-whatever="@mdo"
-            
-          >
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-whatever="@mdo">
             Cambiar foto
           </button>
         </div>
@@ -24,102 +14,51 @@
     </div>
 
     <div class="col-md-4 mt-2">
+      <label for="nombre"><b>Nombres</b></label>
       <div class="form-group">
-        <label for="nombre"><b>Nombres</b></label>
-        <input
-          class="form-control"
-          formControlName="nombres"
-          type="text"
-          name="nombre"
-          id="nombre"
-          readonly
-        />
+        <input class="form-control" formControlName="nombres" type="text" name="nombre" id="nombre" readonly />
       </div>
 
+      <label for="tipo"><b>Tipo de documento</b></label>
       <div class="form-group">
-        <label for="tipo"><b>Tipo de documento</b></label>
-        <input
-          class="form-control"
-          formControlName="tipoDocumento"
-          type="text"
-          name="tipo"
-          id="tipo"
-          readonly
-        />
+        <input class="form-control" formControlName="tipoDocumento" type="text" name="tipo" id="tipo" readonly />
       </div>
 
+      <label for="facultad"><b>Facultad</b></label>
       <div class="form-group">
-        <label for="facultad"><b>Facultad</b></label>
-        <input
-          name="facultad"
-          formControlName="facultad"
-          id="facultad"
-          type="text"
-          class="form-control"
-          readonly
-        />
+        <input name="facultad" formControlName="facultad" id="facultad" type="text" class="form-control" readonly />
       </div>
 
+      <label for="correo"><b>Correo</b></label>
       <div class="form-group">
-        <label for="correo"><b>Correo</b></label>
-        <input
-          readonly
-          class="form-control"
-          type="email"
-          name="correo"
-          id="correo"
-          formControlName="correo"
-          required
-        />
+        <input readonly class="form-control" type="email" name="correo" id="correo" formControlName="correo" required />
       </div>
+
     </div>
+
     <div class="col-md-4 mt-2">
+      <label for="apellido"><b>Apellidos</b></label>
       <div class="form-group">
-        <label for="apellido"><b>Apellidos</b></label>
-        <input
-          class="form-control"
-          type="text"
-          name="apellido"
-          id="apellido"
-          readonly
-          formControlName="apellidos"
-          required
-        />
+        <input class="form-control" type="text" name="apellido" id="apellido" readonly formControlName="apellidos"
+          required />
       </div>
 
+      <label for="tipo"><b>Numero de documento</b></label>
       <div class="form-group">
-        <label for="tipo"><b>Numero de documento</b></label>
-        <input
-          name="numeroDocumento"
-          formControlName="numeroDocumento"
-          id="numeroDocumento"
-          type="number"
-          class="form-control"
-          readonly
-        />
+        <input name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number"
+          class="form-control" readonly />
       </div>
 
+      <label for="telefono"><b>Numero de telefono</b></label>
       <div class="form-group">
-        <label for="telefono"><b>Numero de telefono</b></label>
-        <input
-          readonly
-          class="form-control"
-          type="number"
-          name="numeroTelefono"
-          formControlName="numeroTelefono"
-          id="numeroTelefono"
-          required
-        />
+        <input readonly class="form-control" type="number" name="numeroTelefono" formControlName="numeroTelefono"
+          id="numeroTelefono" required />
       </div>
     </div>
 
     <div class="container-button d-md-flex justify-content-md-center">
-      <button
-        type="button btn-primary "
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
+      <button type="button btn-primary " class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop">
         Cambiar contraseña
       </button>
     </div>
@@ -127,83 +66,41 @@
 </div>
 
 <!-- modal para cambio de contraseña-->
-<div
-  class="modal fade"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">
           <b>Cambiar contraseña de usuario</b>
         </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
       </div>
       <div class="modal-body">
-        <form
-          class="row justify-content-md-center"
-          [formGroup]="passwordForm"
-          (ngSubmit)="onSubmit()"
-        >
+        <form class="row justify-content-md-center" [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
           <div class="col-md-10">
             <div class="mb-2">
-              <label for="contraseña_actual" class="form-label"
-                ><b>Contraseña actual</b></label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="contraseña_actual"
-                aria-describedby="contraseña actual"
-                formControlName="contraseña"
-              />
+              <label for="contraseña_actual" class="form-label"><b>Contraseña actual</b></label>
+              <input type="password" class="form-control" id="contraseña_actual" aria-describedby="contraseña actual"
+                formControlName="contraseña" />
             </div>
 
             <div class="mb-2">
-              <label for="nueva_contraseña" class="form-label"
-                ><b>Nueva contraseña</b></label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="nueva_contraseña"
-                aria-describedby="nueva contraseña"
-                formControlName="nuevaContraseña"
-              />
+              <label for="nueva_contraseña" class="form-label"><b>Nueva contraseña</b></label>
+              <input type="password" class="form-control" id="nueva_contraseña" aria-describedby="nueva contraseña"
+                formControlName="nuevaContraseña" />
             </div>
 
             <div class="mb-2">
-              <label for="confirmar_contraseña" class="form-label"
-                ><b>Confirmar contraseña</b></label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="confirmar_contraseña"
-                aria-describedby="confirmar contraseña"
-                formControlName="confirmarContraseña"
-              />
+              <label for="confirmar_contraseña" class="form-label"><b>Confirmar contraseña</b></label>
+              <input type="password" class="form-control" id="confirmar_contraseña"
+                aria-describedby="confirmar contraseña" formControlName="confirmarContraseña" />
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="linea btn btn-danger btn-sm"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="linea btn btn-danger" data-bs-dismiss="modal">
               Salir
             </button>
-            <button type="submit" class="linea btn btn-primary btn-sm">
+            <button type="submit" class="linea btn btn-success">
               Cambiar
             </button>
           </div>
@@ -214,37 +111,26 @@
 </div>
 
 <!-- modal para cambio de foto-->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">
           <b>Cambiar foto</b>
         </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
       </div>
       <div class="modal-body">
-        <form >
+        <form>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label"
-              ><b>Imagen</b></label
-            >
+            <label for="recipient-name" class="col-form-label"><b>Imagen</b></label>
             <input type="file" (change)="onChange($event)" class="form-control" id="recipient-name" />
           </div>
 
           <div class="modal-footer d-flex">
-            <button (click)="subirFoto($event)" type="button" class="btn btn-primary">Send message</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              Salir
+            </button>
+            <button (click)="subirFoto($event)" type="button" class="btn btn-success">Cambiar</button>
           </div>
         </form>
       </div>
