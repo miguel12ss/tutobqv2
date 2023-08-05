@@ -18,12 +18,7 @@ export class ApiService {
     console.log('entras');
     console.log(estudiante);
 
-    this.httpClient.post(this.url, estudiante).subscribe(
-      (response) => {
-        console.log(response);
-
-      }
-    )
+    return this.httpClient.post(this.url, estudiante)
   }
 
   loginService(correo: string, contraseña: string):Observable<any> {

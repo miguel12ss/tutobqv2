@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 import { ComponentService } from 'src/app/components/services/components.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -91,10 +92,21 @@ this.componentService.getFacultades().pipe(
       }
       console.log('el estudiante es',estudiante);
       
-      this.apiService.insertData(estudiante)
-      // Swal.fire("registro existoso", "el registro ha sido exitoso", "success")
+      this.apiService.insertData(estudiante).subscribe(
+        (response:any) => {
+          if(response.error){
+          Swal.fire("Error", "el correo ya se encuentra registrado en el programa ", "error")
+      
+          }else if(response.errorIdentificacion){
+            Swal.fire("Error", "el numero del documento ya se encuentra registrado en el programa ", "error")
+          }else{
+            this.router.navigate(['/auth/login'])
 
-      this.router.navigate(['/auth/login'])
+          }
+        }
+      )
+      // Swal.fire("registro existoso", "el registro ha sido exitoso", "success")
+      
     } else {
       console.log('invalido');
       
