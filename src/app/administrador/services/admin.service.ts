@@ -589,6 +589,59 @@ getHorarioFinished(){
   };
   return this.http.get(`${this.url}obtenerHorarioTerminado`,httpOptions)
 }
+getEstudiantes(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getEstudiantes`,httpOptions)
+}
+deshabilitar(id_estudiante:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+ this.http.post(`${this.url}modificarEstadoUsuario`,id_estudiante,httpOptions).pipe(
+  tap((res:any)=>{
+console.log(res);
+
+  })
+ ).subscribe()
+}
+getEstudiante(id_usuario:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getEstudiante/${id_usuario}`,httpOptions)
+}
+actualizarEstudiante(id_usuario:string,estudiante:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+   this.http.post(`${this.url}actualizarEstudiante/${id_usuario}`,estudiante,httpOptions,).pipe(
+    tap((res:any)=>{
+  console.log(res);
+  
+    })
+   ).subscribe()
+}
+
+
+
 }
 
 
