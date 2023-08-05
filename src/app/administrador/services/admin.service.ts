@@ -640,6 +640,48 @@ actualizarEstudiante(id_usuario:string,estudiante:any){
    ).subscribe()
 }
 
+getDocentes(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getDocentesFull`,httpOptions)
+}
+
+getDocenteForId(id_usuario:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}getDocente/${id_usuario}`,httpOptions)
+
+
+}
+
+actualizarDocente(id_usuario:string,docente:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+   this.http.post(`${this.url}actualizarDocente/${id_usuario}`,docente,httpOptions,).pipe(
+    tap((res:any)=>{
+  console.log(res);
+  
+    })
+   ).subscribe()
+}
+
+
+
 
 
 }
