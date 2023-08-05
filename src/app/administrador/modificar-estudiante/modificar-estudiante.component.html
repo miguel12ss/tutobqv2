@@ -1,11 +1,11 @@
 <h5 class="text-center">ADMINISTRAR ESTUDIANTES</h5>
 <div class="table-responsive">
-  <nz-table #nzTable [nzData]="listOfDisplayData||estudiante" nzTableLayout="fixed">
+  <nz-table #nzTable [nzData]="estudiante" [nzPageSize]="4" nzTableLayout="fixed">
     <thead>
       <tr>
         <th nzCustomFilter>
           Nombres
-          <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+          <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu" >
             <span nz-icon nzType="search">Buscar </span>
           </nz-filter-trigger>
         </th>
@@ -13,21 +13,21 @@
         <th>Correo</th>
         <th>Telefono</th>
         <th>Modificar</th>
-        <th>Estado</th>
 
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of nzTable.data">
-        <td>{{ data.nombre}}</td>
-        <td>{{ data.programa }}</td>
+        <td>{{ data.nombres}}</td>
+        <td>{{ data.facultad }}</td>
         <td>{{data.correo}}</td>
-        <td>{{ data.telefono }}</td>
+        <td>{{ data.celular }}</td>
        
-        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" (click)="modificar(data.id_usuario)" data-bs-target="#staticBackdrop">
             Modificar
           </button></td>
-        <td><button nz-button nzType="primary" class="btn btnc btn-primary" (click)="deshabilitar()">Deshabilitar</button></td>
+       
+        
       </tr>
     </tbody>
   </nz-table>
@@ -52,21 +52,21 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="row">
+          <form class="row" [formGroup]="estudianteForm" (ngSubmit)="onSubmit()">
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="nombres" class="form-label"><b>Nombres</b></label>
-                <input type="text" class="form-control" id="nombres" autocomplete="off" required>
+                <input formControlName="nombres" type="text" class="form-control" id="nombres" autocomplete="off" required>
               </div>
 
               <div class="mb-3">
                 <label for="numerodocumento" class="form-label"><b>Numero de documento</b></label>
-                <input type="number" class="form-control" id="numerodocumento" autocomplete="off" required>
+                <input type="number" formControlName="numero_documento" class="form-control" id="numerodocumento" autocomplete="off" required>
               </div>
 
               <div class="mb-3">
                 <label for="telefono" class="form-label"><b>Numero de telefono</b></label>
-                <input type="number" class="form-control" id="telefono" autocomplete="off" required>
+                <input type="number" formControlName="celular" class="form-control" id="telefono" autocomplete="off" required>
               </div>
 
             </div>
@@ -74,17 +74,19 @@
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="apellidos" class="form-label"><b>Apellidos</b></label>
-                <input type="text" class="form-control" id="apellidos" autocomplete="off" required>
+                <input type="text" class="form-control" formControlName="apellidos" class="form-control" id="apellidos" autocomplete="off" required>
               </div>
 
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b></label>
-                <input type="text" class="form-control" id="facultad" autocomplete="off" required>
+                <select name="" class="form-control" formControlName="facultad" id="">
+                  <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+                 </select>
               </div>
 
               <div class="mb-3">
                 <label for="correo" class="form-label"><b>Correo</b></label>
-                <input type="email" class="form-control" id="correo" autocomplete="off" required>
+                <input type="email" class="form-control" formControlName="correo" class="form-control" id="correo" autocomplete="off" required>
               </div>
 
             </div>
@@ -92,28 +94,30 @@
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="tipodocumento" class="form-label"><b>Tipo de documento</b></label>
-                <input type="text" class="form-control" id="tipodocumento" autocomplete="off" required>
+                <select name="" class="form-control" formControlName="tipo_documento" id="">
+                  <option [value]="tipo.tipo_documento" *ngFor="let tipo of tipos">{{tipo.tipo_documento}}</option>
+                 </select>
               </div>
 
               <div class="mb-3">
                 <label for="programa" class="form-label"><b>Programa</b></label>
-                <input type="text" class="form-control" id="programa" autocomplete="off" required>
+               <select name="" class="form-control" formControlName="programa" id="">
+                <option [value]="programa.programa"  *ngFor="let programa of programas">{{programa.programa}}</option>
+               </select>
               </div>
 
               <div class="mb-3">
-                <br>
-                <div class="container-button d-md-flex justify-content-md-center p-2">
-                  <button type="button btn-primary " class="btn bcambiar btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop">
-                    Cambiar contraseña
-                  </button>
-                </div>
+                <label for="programa" class="form-label"><b>Estado</b></label>
+                <select name="" class="form-control" formControlName="estado" id="">
+                  <option [value]="estado.estado" *ngFor="let estado of estados">{{estado.estado}}</option>
+                </select>
               </div>
+              <input type="hidden" formControlName="id_usuario">
 
             </div>
             <div class="modal-footer">
               <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="linea btn bmodal btn-primary btn-sm">Guardar</button>
+              <button type="submit" class="linea btn bmodal btn-primary btn-sm">Guardar</button>
             </div>
           </form>
         </div>

@@ -65,7 +65,6 @@ this.componentService.getFacultades().pipe(
       numeroTelefono: [null,],
       correo: [null, Validators.email],
       nuevaContraseña: [null,],
-      politica: [null,],
       numeroDocumento: [null,],
       facultad: [null,]
     })
