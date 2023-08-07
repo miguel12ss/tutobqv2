@@ -214,7 +214,7 @@
             <div class="mb-3">
               <label for="docente"  class="form-label"><b>Docente</b> </label>
               <select name="docente" id="docente"  class="form-control" formControlName="docente">
-                <option value="{{docente.nombres}}{{docente.apellidos}}-{{docente.id_docente}}" *ngFor="let docente of docentes">{{docente.nombres}}{{docente.apellidos}}-{{docente.id_docente}} </option>
+                <option value="{{docente.nombres}} {{docente.apellidos}}-{{docente.id_usuario}}" *ngFor="let docente of docentes">{{docente.nombres}} {{docente.apellidos}}-{{docente.id_usuario}} </option>
               </select>
 
               

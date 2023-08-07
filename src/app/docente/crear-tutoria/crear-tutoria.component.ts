@@ -11,9 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CrearTutoriaComponent implements OnInit  {
   public horario:any
+  horaMinima: string = '07:00';
+horaMaxima: string = '20:00';
+horaFinalMinima:string="08:00"
+horaFinalMaxima:string="21:00"
   horarioForm!: FormGroup;
   horarioFormUpdate!: FormGroup;
-  fechaHoy=''
+  dateNext=''
   salones:string[]=[]
   materias:string[]=[]
   sedes:string[]=[]
@@ -26,11 +30,52 @@ export class CrearTutoriaComponent implements OnInit  {
   constructor(public fb:FormBuilder,private docenteService:DocenteService,
     private componentService:ComponentService){
       const dateToday=new Date();
-      this.fechaHoy = dateToday.toISOString().substring(0, 10);
-      console.log(this.fechaHoy);
+      dateToday.setDate(dateToday.getDate())
+      
+      this.dateNext = dateToday.toISOString().substring(0, 10);
+      console.log(this.dateNext);
+      
+      
       this.horarioForm=this.initForm()
       this.horarioFormUpdate=this.initFormUpdate()
+      this.horarioForm.get('horaInicio')?.valueChanges.subscribe((horaSeleccionada) => {
+        const horaFin=this.horarioForm.get('horaFin')?.value
 
+        if (horaSeleccionada < this.horaMinima) {
+          this.horarioForm.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+        } else if (horaSeleccionada > this.horaMaxima) {
+          
+          this.horarioForm.get('horaInicio')?.setValue(this.horaMaxima, { emitEvent: false });
+        }else if(horaSeleccionada<horaFin){          
+          this.horarioForm.get('horaFin')?.setValue(this.horaFinalMaxima, { emitEvent: false });
+
+        }else if(horaSeleccionada==horaFin){
+          this.horarioForm.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+          this.horarioForm.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+        }
+      });
+
+      this.horarioForm.get('horaFin')?.valueChanges.subscribe((horaSeleccionada) => {
+  
+        const horaInicio=this.horarioForm.get('horaInicio')?.value
+        
+        
+        if (horaSeleccionada < this.horaMinima) {
+          this.horarioForm.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+        } else if (horaSeleccionada > this.horaMaxima) {
+          console.log(this.horaMaxima);
+          
+          this.horarioForm.get('horaFin')?.setValue(this.horaFinalMaxima, { emitEvent: false });
+        }else if(horaSeleccionada<horaInicio){
+          console.log('hm',horaSeleccionada,'hi',horaInicio);
+          
+          this.horarioForm.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+
+        }else if(horaSeleccionada==horaInicio){
+          this.horarioForm.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+          this.horarioForm.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+        }
+      });
 
     }
    initFormUpdate():FormGroup{
@@ -90,6 +135,12 @@ export class CrearTutoriaComponent implements OnInit  {
       ).subscribe()
     
   }
+
+validarHora(horaSeleccionada:any){
+  console.log(horaSeleccionada);
+  
+}
+  
   initForm():FormGroup{
     return this.fb.group({
       facultad:[null,Validators.required],

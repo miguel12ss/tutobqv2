@@ -27,7 +27,7 @@ export class ApiService {
       contraseña: contraseña
     }
 
-    return this.httpClient.post(` ${this.urlGlobal}/login`, login)
+    return this.httpClient.post(` ${this.urlGlobal}login`, login)
   }
 
 

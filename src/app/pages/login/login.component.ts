@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +49,8 @@ export class LoginComponent {
         .loginService(form.email, form.password)
         .subscribe((response: any) => {
           console.log(response);
-          if (response.rol == 1) {
+        if(response.id_estado==1){
+          if (response.rol == 1 ) {
             this.router.navigate(['estudiante']);
             token = response.token;
             localStorage.setItem('token', token);
@@ -61,6 +63,11 @@ export class LoginComponent {
           } else {
             this.showAlertError = true;
           }
+        }else if(response.id_estado==2){
+          Swal.fire('Advertencia ',"el usuario ha sido deshabilitado porfavor comunicarte con el administrador","warning")
+        }else {
+          Swal.fire('Error',"Correo y/o contraseña incorrecto","error")
+        }
         });
     }
   }

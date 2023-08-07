@@ -41,7 +41,7 @@ return this.fb.group({
   facultad:[null,Validators.required],
   tema:[null,Validators.required],
   capacidad:[null,Validators.required],
-  horaInicio:[null,Validators.required],
+  horaInicio:[null,Validators.required,],
   programa:[null,Validators.required],
   sede:[null,Validators.required],
   horaFin:[null,Validators.required],
@@ -60,7 +60,7 @@ ngOnInit(): void {
     this.service.getFacultades(),
     this.service.getMaterias(),
     this.service.getSalones(),
-    this.service.getDocente(),
+    this.service.getDocentes(),
     this.service.getSedes()
   ]).subscribe((results:any) => {
     // Procesa los resultados de cada solicitud
@@ -150,6 +150,8 @@ getHorarioForId(id_horario:string){
 this.docenteService.getHorarioForId(id_horario).pipe(
   tap((res:any)=>{
     this.horario=res.data
+    console.log(res.data);
+    
     console.log(res.data.id_tutoria);
     
     const nombres=`${res.data.nombres} ${res.data.apellidos}-${res.data.id_docente}`
