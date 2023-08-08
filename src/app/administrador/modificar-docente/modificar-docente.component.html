@@ -49,7 +49,6 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos del usuario</b></h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form class="row" [formGroup]="docenteForm" (ngSubmit)="onSubmit()">
@@ -117,7 +116,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="linea btn bmodal btn-primary btn-sm">Guardar</button>
+              <button type="submit" class="linea btn bmodal btn-success btn-sm">Guardar</button>
             </div>
           </form>
         </div>
