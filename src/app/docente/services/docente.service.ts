@@ -12,7 +12,7 @@ export class DocenteService{
     urlGlobal="http://localhost:5000/"
 
     getDataDocente():Observable<Docente>{
-        const token=localStorage.getItem('token')
+        const token=sessionStorage.getItem('token')
         const httpOptions = {
           headers: new HttpHeaders({
             'Authorization': 'Bearer ' + token,
@@ -25,7 +25,7 @@ export class DocenteService{
     }
 
     getSalones(){
-      const token=localStorage.getItem('token')
+      const token=sessionStorage.getItem('token')
       const httpOptions = {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + token,
@@ -38,7 +38,7 @@ export class DocenteService{
   }
 
   getMaterias(){
-    const token=localStorage.getItem('token')
+    const token=sessionStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
@@ -51,7 +51,7 @@ export class DocenteService{
 }
 
 getSedes(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -65,7 +65,7 @@ getSedes(){
 
 
 getDataForId(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -78,7 +78,7 @@ getDataForId(){
 }
 
 getHorarioForId(id_tutoria:string){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -92,7 +92,7 @@ getHorarioForId(id_tutoria:string){
 
 
 crearHorario(horario:any){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -108,7 +108,7 @@ crearHorario(horario:any){
 
 obtenerCapacidadPorSalon(salon:string){
   let salonJson={"salon":salon}
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -120,7 +120,7 @@ obtenerCapacidadPorSalon(salon:string){
   return  this.http.post(`${this.urlGlobal}obtenerCapacidad`,salonJson,httpOptions)
 }
 getHorario(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -133,7 +133,7 @@ getHorario(){
 }
 
 getHorarioForEstado(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -147,7 +147,7 @@ getHorarioForEstado(){
 
 getDataForUpdate(id_tutoria:string){
 
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -160,7 +160,7 @@ getDataForUpdate(id_tutoria:string){
 }
 
 getEstadosTutoria(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -175,7 +175,7 @@ getEstadosTutoria(){
 actualizarHorario(horario:any){
   console.log(horario.id_tutoria);
   
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -193,7 +193,7 @@ actualizarHorario(horario:any){
 }
 
 getListado(id_tutoria:string){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,

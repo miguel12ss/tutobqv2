@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DocenteComponent } from './docente.component';
+import { authGuardGuard } from '../auth/auth-guard.guard';
 
 const routes: Routes = [
   {path:'',component:DocenteComponent,children:[

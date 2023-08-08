@@ -44,6 +44,7 @@ export class LoginComponent {
     let id_usuario = 0;
     this.submitted = true;
     if(form.email==="miguelsuarez@unibarranquilla.edu.co" && form.password==="miguel123"){
+      sessionStorage.setItem("admin","miguel")
       this.router.navigate(['/admin'])
       return
     }
@@ -56,12 +57,12 @@ export class LoginComponent {
           if (response.rol == 1 ) {
             this.router.navigate(['estudiante']);
             token = response.token;
-            localStorage.setItem('token', token);
+            sessionStorage.setItem('token', token);
             id_usuario = response.usuario;
           } else if (response.rol == 2) {
             this.router.navigate(['docente']);
             token = response.token;
-            localStorage.setItem('token', token); 
+            sessionStorage.setItem('token', token); 
             id_usuario = response.usuario;
           } else {
             this.showAlertError = true;

@@ -17,7 +17,7 @@ export class EstudianteService {
  
 
   getDataForId():Observable<any>{
-    const token=localStorage.getItem('token');
+    const token=sessionStorage.getItem('token');
     console.log('entras a getDataForId',token);
     
     const httpOptions = {
@@ -35,7 +35,7 @@ export class EstudianteService {
   }
 
   getPasswordForId(data:any):Observable<any>{
-    const token=localStorage.getItem('token')
+    const token=sessionStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
@@ -58,7 +58,7 @@ export class EstudianteService {
   // }
 
 getHorarios(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
@@ -71,7 +71,7 @@ getHorarios(){
 }
 
 getHorarioForId(id:number){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
@@ -85,7 +85,7 @@ getHorarioForId(id:number){
 
 
 getHorarioForIdEstudiante(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
@@ -99,7 +99,7 @@ getHorarioForIdEstudiante(){
 
 agendarTutorias(id_tutoria:number,id_estado_tutoria:number){
   let id_agendar={"id_tutoria":id_tutoria, "id_estado_tutoria":id_estado_tutoria}
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -112,7 +112,7 @@ return this.httpClient.post(`${this.url}agendar`,id_agendar,httpOptions)
 }
 
 obtenerTutoriasEstudiante(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -126,7 +126,7 @@ return this.httpClient.get(`${this.url}mostrarTutoriasEstudiante`,httpOptions)
 
 
 cancelarTutoria(id_tutoria:string){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -143,7 +143,7 @@ cancelarTutoria(id_tutoria:string){
  ).subscribe()
 }
 obtenerTutoriasPendientes(){
-  const token=localStorage.getItem('token')
+  const token=sessionStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,

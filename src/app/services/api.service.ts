@@ -42,6 +42,11 @@ export class ApiService {
     return this.token
   }
 
+  isLogged():boolean{
+      const authToken = this.getToken();
+      return authToken !== null; // Si hay un token, el usuario está autenticado
+    }
+  
 
   forgot(email:string){
 return this.httpClient.post(`${this.urlGlobal}forgot`,email)
