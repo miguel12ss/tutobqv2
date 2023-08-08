@@ -64,9 +64,7 @@
         <label for="facultad"><b>Facultad</b></label>
         <div class="form-group">
             <select formControlName="facultad" name="facultad" id="facultad" class="form-control">
-                <option selected value="facultad de ingenierias">
-                    Facultad de ingenierias
-                </option>
+                <option [value]="facultad"  *ngFor="let facultad of facultades">{{facultad}}</option>
             </select>
         </div>
 

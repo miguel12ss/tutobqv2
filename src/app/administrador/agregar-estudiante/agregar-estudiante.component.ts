@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { forkJoin, tap } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
 import { AdminService } from '../services/admin.service';
@@ -86,16 +86,25 @@ export class AgregarEstudianteComponent implements OnInit {
           }
           console.log('el estudiante es',estudiante);
           
-          this.apiService.insertData(estudiante)
-         Swal.fire("registro existoso", "el estudiante ha sido agregado ", "success")
-    
+          this.apiService.insertData(estudiante).subscribe(
+            (response:any) => {
+              if(response.error){
+              Swal.fire("Error", "el correo ya se encuentra registrado en el programa ", "error")
+          
+              }else if(response.errorIdentificacion){
+                Swal.fire("Error", "el numero del documento ya se encuentra registrado en el programa ", "error")
+              }else if(response.message){
+                Swal.fire("¡Estudiante creado exitosamente!"," El nuevo estudiante ahora puede acceder al sistema con las credenciales proporcionadas.","success")
+              }
+            }
+          )
+          // Swal.fire("registro existoso", "el registro ha sido exitoso", "success")
+          
         } else {
-          Swal.fire('error',"las contraseñas deben coincidir","error")
-        }       
-  
-       return
-        
-      }
+         Swal.fire("error","Las contraseñas deben coincidir","error")
+          
+        }
+    }
      
   
       

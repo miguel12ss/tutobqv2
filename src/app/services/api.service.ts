@@ -33,12 +33,8 @@ export class ApiService {
 
   insertDocente(docente:Docente){
     const url=this.urlGlobal+`agregar-docente`
-    this.httpClient.post(url, docente).subscribe(
-      (response) => {
-        console.log(response);
-
-      }
-    )
+    return this.httpClient.post(url, docente)
+    
   }
 
   getToken() {

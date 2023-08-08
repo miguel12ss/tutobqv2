@@ -76,6 +76,55 @@ horaFinalMaxima:string="21:00"
           this.horarioForm.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
         }
       });
+//formulario de actualizar 
+
+this.horarioFormUpdate.get('horaInicio')?.valueChanges.subscribe((horaSeleccionada) => {
+  const horaFin=this.horarioFormUpdate.get('horaFin')?.value
+
+  if (horaSeleccionada < this.horaMinima) {
+    this.horarioFormUpdate.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+  } else if (horaSeleccionada > this.horaMaxima) {
+    
+    this.horarioFormUpdate.get('horaInicio')?.setValue(this.horaMaxima, { emitEvent: false });
+  }else if(horaSeleccionada<horaFin){          
+    this.horarioFormUpdate.get('horaFin')?.setValue(this.horaFinalMaxima, { emitEvent: false });
+
+  }else if(horaSeleccionada==horaFin){
+    this.horarioFormUpdate.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+    this.horarioFormUpdate.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+  }
+});
+
+this.horarioFormUpdate.get('horaFin')?.valueChanges.subscribe((horaSeleccionada) => {
+
+  const horaInicio=this.horarioFormUpdate.get('horaInicio')?.value
+  
+  
+  if (horaSeleccionada < this.horaMinima) {
+    this.horarioFormUpdate.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+  } else if (horaSeleccionada > this.horaMaxima) {
+    console.log(this.horaMaxima);
+    
+    this.horarioFormUpdate.get('horaFin')?.setValue(this.horaFinalMaxima, { emitEvent: false });
+  }else if(horaSeleccionada<horaInicio){
+    console.log('hm',horaSeleccionada,'hi',horaInicio);
+    
+    this.horarioFormUpdate.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+
+  }else if(horaSeleccionada==horaInicio){
+    this.horarioFormUpdate.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+    this.horarioFormUpdate.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+  }
+});
+
+
+
+
+
+
+
+
+     
 
     }
    initFormUpdate():FormGroup{

@@ -19,6 +19,10 @@ export class PerfilComponent implements OnInit {
   public showAlertDanger = false;
   submitted = false;
   selectFile:any
+  showAlertPassword=false
+  foto2 = '';
+  alertSuccess = false
+  alertPasswordBd=false
   constructor(public fb: FormBuilder, private docenteService: DocenteService,private estudianteservice:EstudianteService,private http:HttpClient) {}
 
   ngOnInit(): void {
@@ -38,7 +42,8 @@ export class PerfilComponent implements OnInit {
             facultad: docente.facultad,
           });
           this.foto='http://localhost:5000/static/uploads/'+docente.foto
-
+          console.log(this.foto);
+          
         })
       )
       .subscribe();
@@ -126,6 +131,43 @@ export class PerfilComponent implements OnInit {
       )
       .subscribe();
      
+  }
+
+
+  changePassword(){
+    if (
+      this.passwordForm.valid &&
+      this.passwordForm.get('nuevaContraseña')?.value ==
+        this.passwordForm.get('confirmarContraseña')?.value
+    ) {
+      let form = this.passwordForm.value;
+
+      this.estudianteservice
+        .getPasswordForId(form)
+        .pipe(
+          tap((message: any) => {
+            console.log(message);
+
+            if (message.message === 'la contraseña ha sido cambiada') {
+              this.alertSuccess=true    
+              this.showAlertPassword=false 
+              this.alertPasswordBd=false
+        
+            } else {
+              this.alertSuccess=false    
+
+              this.alertPasswordBd=true
+              this.showAlertPassword=false
+
+              
+            }
+          })
+        )
+        .subscribe();
+    } else {
+      this.alertSuccess=false  
+      this.showAlertPassword=true
+    }
   }
     
   }
