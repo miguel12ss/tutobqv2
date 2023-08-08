@@ -1,144 +1,71 @@
 <h5 class="text-center">CREAR USUARIO ESTUDIANTE</h5>
-<form
-  class="row d-md-flex justify-content-md-center"
-  [formGroup]="contactForm"
-  (ngSubmit)="onSubmit()"
->
+<form class="row d-md-flex justify-content-md-center" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
   <div class="col-md-5 col-sm-12">
     <label for="nombre"><b>Nombres</b></label>
     <div class="form-group">
-      <input
-        required
-        class="form-control"
-        formControlName="nombres"
-        type="text"
-        name="nombre"
-        id="nombre"
-        [ngClass]="{
+      <input required class="form-control" formControlName="nombres" type="text" name="nombre" id="nombre" [ngClass]="{
           'is-invalid': submitted && contactForm.get('nombres')?.errors
-        }"
-        autocomplete="off"
-        required
-      />
+        }" autocomplete="off" required />
     </div>
-    <span
-      class="text-danger"
-      *ngIf="submitted && contactForm.get('nombres')?.errors"
-      >no ha cumplido el minimo de caracteres</span
-    >
+    <span class="text-danger" *ngIf="submitted && contactForm.get('nombres')?.errors">no ha cumplido el minimo de
+      caracteres</span>
 
     <label for="tipo"><b>Tipo de documento</b></label>
     <div class="form-group">
-      <select
-        name="tipo"
-        formControlName="tipoDocumento"
-        id="tipo"
-        class="form-control"
-        [ngClass]="{
+      <select name="tipo" formControlName="tipoDocumento" id="tipo" class="form-control" [ngClass]="{
           'is-invalid': submitted && contactForm.get('tipo')?.errors
-        }"
-      >
-        <option *ngFor="let tipo of tipos"  [value]="tipo.tipo_documento">{{tipo.tipo_documento}}
+        }">
+        <option *ngFor="let tipo of tipos" [value]="tipo.tipo_documento">{{tipo.tipo_documento}}
       </select>
     </div>
 
     <label for="facultad"><b>Facultad</b></label>
     <div class="form-group">
-      <select
-        formControlName="facultad"
-        name="facultad"
-        id="facultad"
-        class="form-control"
-      >
-        <option [value]="facultad.facultad"  *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+      <select formControlName="facultad" name="facultad" id="facultad" class="form-control">
+        <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
       </select>
     </div>
 
     <label for="telefono"><b>Numero de telefono</b></label>
     <div class="form-group">
-      <input
-        class="form-control"
-        type="number"
-        name="numeroTelefono"
-        formControlName="numeroTelefono"
-        [ngClass]="{
+      <input class="form-control" type="number" name="numeroTelefono" formControlName="numeroTelefono" [ngClass]="{
           'is-invalid': submitted && contactForm.get('numeroTelefono')?.errors
-        }"
-        id="numeroTelefono"
-        autocomplete="off"
-        required
-      />
+        }" id="numeroTelefono" autocomplete="off" required />
     </div>
-    <span
-      class="text-danger"
-      *ngIf="submitted && contactForm.get('numeroTelefono')?.errors?.['maxlength']"
-      >no ha cumplido el minimo de caracteres</span
-    >
+    <span class="text-danger" *ngIf="submitted && contactForm.get('numeroTelefono')?.errors?.['maxlength']">no ha
+      cumplido el minimo de caracteres</span>
 
     <label for="contraseña"><b>Contraseña</b></label>
     <div class="form-group">
-      <input
-        class="form-control"
-        type="password"
-        name="contraseña"
-        id="contraseña"
-        formControlName="contraseña"
+      <input class="form-control" type="password" name="contraseña" id="contraseña" formControlName="contraseña"
         [ngClass]="{
           'is-invalid': submitted && contactForm.get('contraseña')?.errors
-        }"
-        autocomplete="off"
-        required
-      />
+        }" autocomplete="off" required />
     </div>
   </div>
 
   <div class="col-md-5 col-sm-12">
     <label for="apellido"><b>Apellidos</b></label>
     <div class="form-group">
-      <input
-        class="form-control"
-        type="text"
-        name="apellido"
-        id="apellido"
-        formControlName="apellidos"
-        [ngClass]="{
+      <input class="form-control" type="text" name="apellido" id="apellido" formControlName="apellidos" [ngClass]="{
           'is-invalid': submitted && contactForm.get('apellidos')?.errors
-        }"
-        autocomplete="off"
-        required
-      />
+        }" autocomplete="off" required />
     </div>
-    <span
-      class="text-danger"
-      *ngIf="submitted && contactForm.get('apellidos')?.errors"
-      >no ha cumplido el minimo de caracteres</span
-    >
+    <span class="text-danger" *ngIf="submitted && contactForm.get('apellidos')?.errors">no ha cumplido el minimo de
+      caracteres</span>
 
     <label for="tipo"><b>Numero de documento</b></label>
     <div class="form-group">
-      <input
-        name="numeroDocumento"
-        formControlName="numeroDocumento"
-        id="numeroDocumento"
-        type="number"
-        class="form-control"
-        [ngClass]="{
+      <input name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number"
+        class="form-control" [ngClass]="{
           'is-invalid': submitted && contactForm.get('numeroDocumento')?.errors
-        }"
-        autocomplete="off"
-        required
-      />
+        }" autocomplete="off" required />
     </div>
 
     <label for="programa"><b>Programa perteneciente</b></label>
     <div class="form-group">
-      <select
-        formControlName="programa"
-        name="programa"
-        id="programa"
-        class="form-control"
-      >
-        <option [value]="programa.programa" *ngFor="let programa of programas" >
+      <select formControlName="programa" name="programa" id="programa" class="form-control">
+        <option [value]="programa.programa" *ngFor="let programa of programas">
           {{programa.programa}}
         </option>
       </select>
@@ -146,49 +73,23 @@
 
     <label for="correo"><b>Correo</b></label>
     <div class="form-group">
-      <input
-        class="form-control"
-        type="email"
-        name="correo"
-        id="correo"
-        formControlName="correo"
-        [ngClass]="{
+      <input class="form-control" type="email" name="correo" id="correo" formControlName="correo" [ngClass]="{
           'is-invalid': submitted && contactForm.get('correo')?.errors
-        }"
-        (input)="validarCorreo()"
-        autocomplete="off"
-        required
-      />
+        }" (input)="validarCorreo()" autocomplete="off" required />
     </div>
-    <span
-      class="text-danger"
-      *ngIf="submitted && contactForm.get('correo')?.errors"
-      >debe terminar @unibarranquilla.edu.co</span
-    >
+    <span class="text-danger" *ngIf="submitted && contactForm.get('correo')?.errors">debe terminar
+      @unibarranquilla.edu.co</span>
 
     <label for="contraseña"><b>Confirmar Contraseña</b></label>
     <div class="form-group gap-2">
-      <input
-        class="form-control"
-        type="password"
-        name="contraseña"
-        id="contraseña"
-        #newPassword
-        formControlName="nuevaContraseña"
-        [ngClass]="{
+      <input class="form-control" type="password" name="contraseña" id="contraseña" #newPassword
+        formControlName="nuevaContraseña" [ngClass]="{
           'is-invalid': submitted && contactForm.get('nuevaContraseña')?.errors
-        }"
-        autocomplete="off"
-        required
-      />
+        }" autocomplete="off" required />
     </div>
   </div>
   <div class="container-button">
-    <button
-      class="btn btn-primary"
-      type="submit"
-      [disabled]="contactForm.invalid"
-    >
+    <button class="btn btn-success btnagendar" type="submit" [disabled]="contactForm.invalid">
       Registrar
     </button>
   </div>
