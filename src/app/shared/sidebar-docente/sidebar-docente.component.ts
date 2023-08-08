@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class SidebarDocenteComponent {
 isCollapsed=false
+
+logout(){
+  sessionStorage.removeItem('token')
+}
 }

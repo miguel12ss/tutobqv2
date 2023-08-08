@@ -12,6 +12,8 @@ constructor(private readonly router:Router){
 
 }
 redirect(){
+ 
+  sessionStorage.removeItem('token')
 this.router.navigate(['auth/login'])
 }
 }
