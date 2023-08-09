@@ -9,8 +9,7 @@ img{
     
 }
 .container-img{
-   background: yellow;
-   width: 100%;
+    max-width: 200px;
     border-radius: 30px;
     display: flex;
     justify-content:center;
@@ -21,18 +20,6 @@ img{
 
 
 
-.img{
-    width: 200px;
-    height: 250px;
-    padding-left: 14px;
-}
-
-
-img{
-    width: 200px;
-   
-
-}
 
 
 
