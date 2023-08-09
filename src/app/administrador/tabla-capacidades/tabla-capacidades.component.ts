@@ -70,7 +70,7 @@ export class TablaCapacidadesComponent {
         if (res.error) {
           Swal.fire("Error al agregar la capacidad", res.error, "error")
         } else if (res.data) {
-          Swal.fire("Añadido exitosamente", "la capacidad ha sido Añadido con exito", "success")
+          Swal.fire("Añadido exitosamente", "La capacidad ha sido Añadida con exito", "success")
         }
 
         this.service.getCapacidad().pipe(

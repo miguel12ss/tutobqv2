@@ -70,7 +70,7 @@ this.tipos_documento=res.data
         if(res.error){
           Swal.fire("Error al actualizar",res.error,"error")
       }else if(res.success){
-        Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
+        Swal.fire("Actualizacion exitosa","El tipo de documento ha sido actualizado","success")
         
 
 
@@ -108,7 +108,7 @@ this.tipos_documento=res.data
         if(res.error){
           Swal.fire("Error al agregar el programa",res.error,"error")
       }else if(res.data){
-        Swal.fire("Añadido exitosamente","El programa ha sido Añadido con exito","success")
+        Swal.fire("Añadido exitosamente","El tipo de documento ha sido Añadido con exito","success")
       }
       
       this.service.getTipo().pipe(

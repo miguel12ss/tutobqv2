@@ -77,10 +77,10 @@ this.materias=res.data
     this.service.actualizarMateria(materias).pipe(tap((res:any)=>{
       console.log(res);
       
-        if(res.error=="el nombre de la tabla ya se encuentra registrado en el programa"){
+        if(res.error=="La materia ya se encuentra registrada en el sistema"){
           Swal.fire("Error al actualizar",res.error,"error")
       }else if(res.success){
-        Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
+        Swal.fire("Actualizacion exitosa","La materia ha sido actualizada con exito","success")
         
 
 

@@ -116,7 +116,7 @@ onSubmit(){
       if(res.error){
         Swal.fire("Error al actualizar",res.error,"error")
     }else if(res.success){
-      Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
+      Swal.fire("Actualizacion exitosa","El salón ha sido actualizado con exito","success")
       
 
 
@@ -147,9 +147,9 @@ console.log(salon);
 this.service.setSalon(salon).pipe(
   tap((res:any)=>{
     if (res.error) {
-      Swal.fire("Error al agregar la capacidad", res.error, "error")
+      Swal.fire("Error al agregar el salón", res.error, "error")
     } else if (res.data) {
-      Swal.fire("Añadido exitosamente", "la capacidad ha sido Añadido con exito", "success")
+      Swal.fire("Añadido exitosamente", "El salón ha sido Añadido con exito", "success")
     }
     this.service.getSalones().pipe(
       tap((res: any) => {

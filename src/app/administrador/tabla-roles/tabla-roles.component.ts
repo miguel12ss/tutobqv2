@@ -79,7 +79,7 @@ export class TablaRolesComponent {
         if (res.error) {
           Swal.fire("Error al agregar el rol", res.error, "error")
         } else if (res.data) {
-          Swal.fire("Añadido exitosamente", "El rol ha sido Añadido con exito", "success")
+          Swal.fire("Añadido exitosamente", "El rol ha sido agregado con exito", "success")
         }
 
         this.service.getRoles().pipe(

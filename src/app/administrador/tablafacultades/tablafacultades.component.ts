@@ -90,7 +90,7 @@ this.facultades=res.data
     this.service.actualizarFacultad(facultades).pipe(tap((res:any)=>{
       console.log(res);
       
-        if(res.error=="el nombre de la tabla ya se encuentra registrado en el programa"){
+        if(res.error=="La facultad ya se encuentra registrada en el sistema"){
           Swal.fire("Error al actualizar",res.error,"error")
       }else if(res.success){
         Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
@@ -126,10 +126,10 @@ this.facultades=res.data
       tap((res:any)=>{
         console.log(res);
         
-        if(res.error=="la facultad ya se encuentra registrada en el sistema"){
+        if(res.error=="La facultad ya se encuentra registrada en el sistema"){
           Swal.fire("Error al agregar facultad",res.error,"error")
       }else if(res.data){
-        Swal.fire("Añadido exitosamente","La facultad ha sido Añadido con exito","success")
+        Swal.fire("Añadido exitosamente","La facultad ha sido agregada con exito","success")
       }
       
       this.service.getFacultades().pipe(

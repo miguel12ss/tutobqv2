@@ -67,9 +67,9 @@ estado: any[] = []
         console.log(res);
 
         if (res.error) {
-          Swal.fire("Error al agregar el rol", res.error, "error")
+          Swal.fire("Error al agregar estado de usuario", res.error, "error")
         } else if (res.data) {
-          Swal.fire("Añadido exitosamente", "El rol ha sido Añadido con exito", "success")
+          Swal.fire("Añadido exitosamente", "El estado de usuario ha sido Añadido con exito", "success")
         }
 
         this.service.getEstado().pipe(
