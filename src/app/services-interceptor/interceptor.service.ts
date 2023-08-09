@@ -16,7 +16,6 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    const token = this.api.getToken(); // Obtén el token de autenticación desde tu servicio de autenticación
     
     
       this.spinnerService.callSpinner()

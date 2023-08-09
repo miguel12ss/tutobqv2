@@ -11,9 +11,11 @@ isCollapsed=false
 constructor(private readonly router:Router){
 
 }
-redirect(){
+logout(){
  
-  sessionStorage.removeItem('token')
-this.router.navigate(['auth/login'])
+  sessionStorage.removeItem('admin')
+  this.router.navigate(['/auth/login']); 
+
 }
+
 }
