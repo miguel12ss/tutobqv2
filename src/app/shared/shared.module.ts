@@ -7,7 +7,7 @@ import { AppModule } from '../app.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EstudianteRouting } from '../estudiante/estudiante-routing.module';
 import { NgZorroAntdModule } from '../ngZorroAntdModule';
-import { SidebarDocenteComponent } from './sidebar-docente/sidebar-docente.component';
+import { SidebarDocenteComponent } from './sidebar-admin/sidebar-docente/sidebar-docente.component';
 import { DocenteRoutingModule } from '../docente/docente-routing.module';
 import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
 

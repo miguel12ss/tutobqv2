@@ -41,6 +41,12 @@ export class ApiService {
   
     return this.token
   }
+  renewToken(currentToken: string): Observable<any> {
+    const url = 'http://localhost:5000/renew-token';
+    const body = { token: currentToken };
+
+    return this.httpClient.post(url, body);
+  }
 
   isLogged():boolean{
       const authToken = this.getToken();

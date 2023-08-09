@@ -58,16 +58,17 @@ this.componentService.getFacultades().pipe(
 
   initForm(): FormGroup {
     return this.fb.group({
-      nombres: [null,],
-      apellidos: [null,],
+      nombres: [null,Validators.required],
+      apellidos: [null,Validators.required],
       tipoDocumento: [null, Validators.required],
-      contraseña: [null,],
-      programa: [null,],
-      numeroTelefono: [null,],
+      contraseña: [null,Validators.required],
+      programa: [null,Validators.required],
+      numeroTelefono: [null,Validators.required],
       correo: [null, Validators.email],
-      nuevaContraseña: [null,],
-      numeroDocumento: [null,],
-      facultad: [null,]
+      nuevaContraseña: [null,Validators.required],
+      numeroDocumento: [null,Validators.required],
+      facultad: [null,Validators.required],
+      politica:[null,Validators.required]
     })
   }
   onSubmit(event: Event) {

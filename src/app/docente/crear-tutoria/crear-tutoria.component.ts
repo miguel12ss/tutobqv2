@@ -3,6 +3,7 @@ import { DocenteService } from '../services/docente.service';
 import { tap } from 'rxjs';
 import { ComponentService } from 'src/app/components/services/components.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-tutoria',
@@ -246,8 +247,14 @@ onSubmit(){
   const horario=this.horarioForm.value
   this.docenteService.crearHorario(horario).pipe(
     tap((res:any)=>{
+      console.log(res);
+      if(res.error){
+        Swal.fire("Error",res.error,"warning")
+        return
+      }
       this.docenteService.getHorario().pipe(
         tap((res:any)=>{
+          
           this.horario=res.data
 
         })
