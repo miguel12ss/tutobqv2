@@ -4,13 +4,18 @@
     
     width: 100%;
     height: 100vh;
-    background-image:url("https://th.bing.com/th/id/OIP.afCHSnnZY2q_XJ46SF2NcwAAAA?pid=ImgDet&rs=1");
+    background-image:url("../../../assets/itsa_barranquilla.jpg");
    background-repeat: no-repeat;
    background-size: cover ;
    background-position: center;
    object-fit: cover;
+   
   
 }
+h1{
+    font-size: 24px;
+}
+
 .container-hero{
     width: 100%;
   height: 100%;
@@ -31,13 +36,22 @@
     padding: 10px 40px ;
 }
 
-.text-white{
-   color: #000;
+.text-color{
+   color: #fff;
+   text-shadow: 2px 2px 2px rgba(0,0,0,0.7);
    font-weight: 600;
    font-size: 40px;
 }
 a{
     font-weight: 600;
+}
+
+.description{
+color: #fff;
+font-weight: 600;
+font-size: 21px;
+text-shadow: 2px 2px 2px rgba(0,0,0,0.7);
+
 }
 
 @media screen and (max-width:862px) {
