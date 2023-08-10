@@ -19,6 +19,8 @@ export class TablaMateriasComponent {
   listOfData: DataItem[] = [
    
   ];
+
+  
   
   materias:any[]=[]
   materia:any[]=[]
@@ -55,7 +57,8 @@ export class TablaMateriasComponent {
         console.log(res);
         
 this.materias=res.data
-      }
+this.listOfData=[...res.data]      
+}
     )).subscribe()
   }
 
@@ -151,6 +154,6 @@ this.materias=res.data
   
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.materia.indexOf(this.searchValue) !== -1);
+    this.materias= this.listOfData.filter((item: DataItem) => item.materia.indexOf(this.searchValue) !== -1);
   }
 }

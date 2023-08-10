@@ -67,6 +67,8 @@ ngOnInit(): void {
     console.log(results);
     
     this.horarios = results[0].data;
+    this.listOfDisplayData=[...results[0].data]
+
     this.programas = results[1].data;
     this.facultades = results[2].data;
     this.materias = results[3].data;
@@ -193,7 +195,7 @@ reset(): void {
 
 search(): void {
   this.visible = false;
-  this.listOfDisplayData = this.horarios.filter((item: any) => item.facultad.indexOf(this.searchValue) !== -1);
+  this.listOfDisplayData = this.horarios.filter((item: any) => item.nombres.indexOf(this.searchValue) !== -1);
 }
 
 

@@ -5,8 +5,8 @@ import { tap } from 'rxjs';
 import Swal from 'sweetalert2';
 
 interface DataItem {
-  id_capacidad:String
-  capacidad:String
+  id_capacidad:number
+  capacidad:number
 }
 
 @Component({
@@ -19,7 +19,7 @@ export class TablaCapacidadesComponent {
   visible = false;
   listOfData: DataItem[] = [ ];
 
-  listOfDisplayData = [...this.listOfData];
+  listOfDisplayData:any = [];
 
 
   capacidad: any[] = []
@@ -54,6 +54,7 @@ export class TablaCapacidadesComponent {
         console.log(res);
 
         this.capacidades = res.data
+        this.listOfDisplayData=[...res.data]
       }
       )).subscribe()
   }
@@ -158,7 +159,9 @@ export class TablaCapacidadesComponent {
   }
   
   search(): void {
-    this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.capacidad.indexOf(this.searchValue) !== -1);
+    this.visible = false
+    this.capacidades = this.listOfDisplayData.filter((item: DataItem) => item.capacidad==parseInt(this.searchValue));
+    console.log(this.capacidades);
+
   }
 }

@@ -9,14 +9,16 @@
     <nz-table #nzTable [nzData]="facultades" [nzPageSize]="4" nzTableLayout="fixed">
         <thead>
             <tr>
-                <th nzCustomFilter>
+                <th >
                     Id facultad
+                    
+                </th>
+                <th nzCustomFilter>Facultad
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
                 </th>
-                <th>Facultad</th>
                 <th>Modificar</th>
             </tr>
         </thead>

@@ -21,7 +21,7 @@ export class TablafacultadesComponent implements OnInit {
   ];
   facultades:any[]=[]
   facultad:any[]=[]
-  listOfDisplayData = [...this.listOfData];
+  listOfDisplayData:any = [];
   facultadForm!:FormGroup
   facultadAgregar!:FormGroup
 
@@ -54,7 +54,7 @@ initFormFacultad():FormGroup{
   
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.facultad.indexOf(this.searchValue) !== -1);
+    this.facultades = this.listOfDisplayData.filter((item: DataItem) => item.facultad.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {
@@ -63,6 +63,8 @@ initFormFacultad():FormGroup{
         console.log(res);
         
 this.facultades=res.data
+this.listOfDisplayData = [...this.facultades];
+
       }
     )).subscribe()
   }

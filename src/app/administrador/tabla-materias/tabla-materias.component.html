@@ -9,14 +9,18 @@
     <nz-table #nzTable [nzData]="materias" nzTableLayout="fixed"  [nzPageSize]="4">
         <thead>
             <tr>
-                <th nzCustomFilter>
+                <th >
                     Id materia
+                    
+                </th>
+                <th nzCustomFilter>Materia
+
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
+
                 </th>
-                <th>Materia</th>
                 <th>Modificar</th>
             </tr>
         </thead>

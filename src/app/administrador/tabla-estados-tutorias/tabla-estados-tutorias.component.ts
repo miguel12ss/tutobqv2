@@ -20,7 +20,7 @@ export class TablaEstadosTutoriasComponent {
   listOfData: DataItem[] = [
    
   ];
-  listOfDisplayData = [...this.listOfData];
+
   estadoTutoria: any[] = []
   estadoTutorias: any[] = []
   estadoTutoriaForm!: FormGroup
@@ -53,6 +53,7 @@ export class TablaEstadosTutoriasComponent {
         console.log(res);
 
         this.estadoTutorias = res.data
+        this.listOfData= [...res.data];
       }
       )).subscribe()
   }
@@ -190,6 +191,6 @@ export class TablaEstadosTutoriasComponent {
   
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.estado_tutoria.indexOf(this.searchValue) !== -1);
+    this.estadoTutorias = this.listOfData.filter((item: DataItem) => item.estado_tutoria.indexOf(this.searchValue) !== -1);
   }
 }

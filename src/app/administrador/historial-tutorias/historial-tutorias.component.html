@@ -1,16 +1,20 @@
 <h5 class="text-center">HISTORIAL DE TUTORIAS ACÁDEMICAS</h5>
 <div class="table-responsive">
-  <nz-table #nzTable [nzData]="tutorias" nzTableLayout="fixed" [nzPageSize]="4">
+  <nz-table #nzTable [nzData]="data" nzTableLayout="fixed" [nzPageSize]="4">
     <thead>
       <tr>
         <th nzCustomFilter>
           Facultad
+         
+        </th>
+        <th>Programa</th>
+        <th nzCustomFilter>Docente
+
           <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
             <span nz-icon nzType="search">Buscar </span>
           </nz-filter-trigger>
+
         </th>
-        <th>Programa</th>
-        <th>Docente</th>
         <th>Hora generacion</th>
         <th>Descripción</th>
         <th>Lista Estudiantes</th>

@@ -20,7 +20,7 @@ export class TablaTipoDocumentosComponent {
   visible = false;
   listOfData: DataItem[] = [
   ];
-  listOfDisplayData = [...this.listOfData];
+  listOfDisplayData:any = [];
   tipos_documento:any[]=[]
   tipo:any[]=[]
   tipoForm!:FormGroup
@@ -57,6 +57,7 @@ export class TablaTipoDocumentosComponent {
        
         
 this.tipos_documento=res.data
+this.listOfDisplayData=[...res.data]
       }
     )).subscribe()
   }
@@ -151,6 +152,6 @@ this.tipos_documento=res.data
   
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.tipo_documento.indexOf(this.searchValue) !== -1);
+    this.tipos_documento = this.listOfDisplayData.filter((item: DataItem) => item.tipo_documento.indexOf(this.searchValue) !== -1);
   }
 }

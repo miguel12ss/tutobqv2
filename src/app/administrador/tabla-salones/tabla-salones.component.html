@@ -9,15 +9,18 @@
     <nz-table #nzTable [nzData]="salones" nzTableLayout="fixed" [nzPageSize]="4">
         <thead>
             <tr>
-                <th nzCustomFilter>
+                <th >
                     Id salón
+                    
+                </th>
+                <th>Capacidad</th>
+                <th nzCustomFilter>Salón
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
+
                 </th>
-                <th>Capacidad</th>
-                <th>Salón</th>
                 <th>Sede</th>
                 <th>Modificar</th>
             </tr>

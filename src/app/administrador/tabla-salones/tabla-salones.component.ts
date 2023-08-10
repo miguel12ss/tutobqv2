@@ -19,7 +19,7 @@ interface DataItem {
 export class TablaSalonesComponent implements OnInit  {
   searchValue = '';
   visible = false;
-  listOfData: DataItem[] = [
+  listOfData:any = [
    
   ];
   
@@ -28,7 +28,7 @@ export class TablaSalonesComponent implements OnInit  {
   salonForm!:FormGroup
   salonAgregar!:FormGroup
 
-  listOfDisplayData = [...this.listOfData];
+ 
   capacidades: any[]=[];
   sedes:any[]=[]
   reset(): void {
@@ -39,7 +39,7 @@ export class TablaSalonesComponent implements OnInit  {
   
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.salon.indexOf(this.searchValue) !== -1);
+    this.salones = this.listOfData.filter((item: DataItem) => item.salon.indexOf(this.searchValue) !== -1);
   }
   constructor(private service:AdminService,public fb:FormBuilder){
     this.salonForm=this.initForm()
@@ -90,7 +90,7 @@ ngOnInit(): void {
       console.log(res);
       
 this.salones=res.data
-
+this.listOfData=[...res.data]
     }
   )).subscribe()
 

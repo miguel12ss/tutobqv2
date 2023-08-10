@@ -8,17 +8,17 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="roles" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="roles" nzTableLayout="fixed"  [nzPageSize]="4">
         <thead>
             <tr>
-                <th nzCustomFilter>
+                <th >
                     Id rol
-                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
-                        [nzDropdownMenu]="menu">
-                        <span nz-icon nzType="search">Buscar </span>
-                    </nz-filter-trigger>
+                  
                 </th>
-                <th>Rol</th>
+                <th nzCustomFilter>Rol <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
+                    [nzDropdownMenu]="menu">
+                    <span nz-icon nzType="search">Buscar </span>
+                </nz-filter-trigger></th>
                 <th>Modificar</th>
             </tr>
         </thead>

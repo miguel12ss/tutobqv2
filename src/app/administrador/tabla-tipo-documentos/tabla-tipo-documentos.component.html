@@ -6,17 +6,17 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="tipos_documento" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="tipos_documento"  [nzPageSize]="4" nzTableLayout="fixed">
         <thead>
             <tr>
-                <th nzCustomFilter>
+                <th >
                     Id tipo de documento
-                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
+                    
+                </th>
+                <th nzCustomFilter>Tipo de documento  <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
-                    </nz-filter-trigger>
-                </th>
-                <th>Tipo de documento</th>
+                    </nz-filter-trigger></th>
                 <th>Modificar</th>
             </tr>
         </thead>

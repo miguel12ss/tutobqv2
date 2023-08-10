@@ -149,7 +149,7 @@ export class PerfilComponent implements OnInit {
   subirImagen() {
     const formData = new FormData();
     formData.append('file', this.selectFile);
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,

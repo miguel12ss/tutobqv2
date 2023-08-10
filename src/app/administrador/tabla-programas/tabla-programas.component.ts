@@ -21,7 +21,7 @@ export class TablaProgramasComponent {
   visible = false;
   listOfData: DataItem[] = [
   ];
-  listOfDisplayData = [...this.listOfData];
+  listOfDisplayData:any = [];
 
   programas:any[]=[]
   programa:any[]=[]
@@ -58,6 +58,7 @@ export class TablaProgramasComponent {
         console.log(res);
         
 this.programas=res.data
+this.listOfDisplayData=[...this.programas]
       }
     )).subscribe()
   }
@@ -144,6 +145,6 @@ this.programas=res.data
   
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.programa.indexOf(this.searchValue) !== -1);
+    this.programas = this.listOfDisplayData.filter((item: DataItem) => item.programa.indexOf(this.searchValue) !== -1);
   }
 }

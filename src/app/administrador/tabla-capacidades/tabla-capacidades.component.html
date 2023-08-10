@@ -6,17 +6,21 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="capacidades" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="capacidades" [nzPageSize]="4" nzTableLayout="fixed">
         <thead>
             <tr>
-                <th nzCustomFilter>
+                <th >
                     Id capacidad
+                    
+                </th>
+                <th nzCustomFilter>Capacidad
+
+
                     <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
                 </th>
-                <th>Capacidad</th>
                 <th>Modificar</th>
             </tr>
         </thead>

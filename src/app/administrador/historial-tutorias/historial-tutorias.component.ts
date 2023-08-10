@@ -18,9 +18,9 @@ listOfData: any[] = [
   
 ];
 datosModal:any={}
-data = [...this.listOfData];
 tutorias:any[]=[]
   estudiantes: any[]=[];
+  data:any[]=[]
 constructor(private service:AdminService,private docenteService:DocenteService){
 
 
@@ -36,13 +36,18 @@ reset(): void {
 
 search(): void {
   this.visible = false;
-  this.data = this.listOfData.filter((item: any) => item.id_usuario.indexOf(this.searchValue) !== -1);
+  
+  this.data = this.tutorias.filter((item: any) => item.nombres.indexOf(this.searchValue) !== -1);
+
+  console.log(this.data);
+
 }
 
 ngOnInit(){
   this.service.getHorarioFinished().pipe(
     tap((res:any)=>{
       this.tutorias=res.data
+      this.data = [...res.data];
       
       
     })

@@ -6,17 +6,20 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="estadoTutorias" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="estadoTutorias" nzTableLayout="fixed" [nzPageSize]="4">
         <thead>
             <tr>
-                <th nzCustomFilter>
+                <th >
                     Id estado
-                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
+                   
+                    
+                </th>
+                <th nzCustomFilter>Estado
+ <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
                         [nzDropdownMenu]="menu">
                         <span nz-icon nzType="search">Buscar </span>
-                    </nz-filter-trigger>
+</nz-filter-trigger>
                 </th>
-                <th>Estado</th>
                 <th>Modificar</th>
             </tr>
         </thead>

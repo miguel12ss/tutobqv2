@@ -21,7 +21,7 @@ export class TablaRolesComponent {
   listOfData: DataItem[] = [
 
   ];
-  listOfDisplayData = [...this.listOfData];
+  listOfDisplayData:any = [];
   rol: any[] = []
   roles: any[] = []
   rolForm!: FormGroup
@@ -54,7 +54,7 @@ export class TablaRolesComponent {
 
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.rol.indexOf(this.searchValue) !== -1);
+    this.roles = this.listOfData.filter((item: DataItem) => item.rol.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {
@@ -63,6 +63,7 @@ export class TablaRolesComponent {
         console.log(res);
 
         this.roles = res.data
+        this.listOfData=[...res.data]
       }
       )).subscribe()
   }

@@ -18,7 +18,7 @@ export class TablaSedesComponent {
   searchValue = '';
   visible = false;
   listOfData: DataItem[] = [];
-  listOfDisplayData = [...this.listOfData];
+  listOfDisplayData:any = [];
   sedes:any[]=[]
   sede:any[]=[]
   sedeForm!:FormGroup
@@ -51,7 +51,7 @@ initForm():FormGroup{
   
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.sede.indexOf(this.searchValue) !== -1);
+    this.sedes = this.listOfDisplayData.filter((item: DataItem) => item.sede.indexOf(this.searchValue) !== -1);
   }
 
 
@@ -61,7 +61,8 @@ initForm():FormGroup{
         console.log(res);
         
 this.sedes=res.data
-      }
+this.listOfDisplayData=[...res.data]
+}
     )).subscribe()
   }
   modificar(id_sede:string){

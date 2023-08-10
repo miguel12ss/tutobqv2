@@ -35,6 +35,8 @@ export class ModificarEstudianteComponent implements OnInit {
     console.log(results);
     
     this.estudiante = results[0].data;
+    this.listOfDisplayData=[...results[0].data]
+
     this.programas = results[1].data;
     this.facultades = results[2].data;
     this.tipos=results[3].data;

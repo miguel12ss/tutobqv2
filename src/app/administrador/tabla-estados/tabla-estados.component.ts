@@ -20,7 +20,7 @@ export class TablaEstadosComponent {
   listOfData: DataItem[] = [
     
   ];
-  listOfDisplayData = [...this.listOfData];
+ 
 estado: any[] = []
   estados: any[] = []
   estadoForm!: FormGroup
@@ -53,6 +53,7 @@ estado: any[] = []
         console.log(res);
 
         this.estados = res.data
+       this.listOfData = [...res.data];
       }
       )).subscribe()
   }
@@ -166,6 +167,6 @@ estado: any[] = []
   
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.estado.indexOf(this.searchValue) !== -1);
+    this.estados = this.listOfData.filter((item: DataItem) => item.estado.indexOf(this.searchValue) !== -1);
   }
 }
