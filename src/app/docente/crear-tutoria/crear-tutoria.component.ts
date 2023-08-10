@@ -203,7 +203,7 @@ validarHora(horaSeleccionada:any){
       horaFin:[null,Validators.required],
       materia:[null,Validators.required],
       salon:[null,Validators.required],
-      fecha:[null],
+      fecha:[null,Validators.required],
   
     })
   

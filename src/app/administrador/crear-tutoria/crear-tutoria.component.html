@@ -106,8 +106,8 @@
               <div class="mb-3">
                 <label for="docente" class="form-label"><b>Docente</b> </label>
                 <select class="form-control" formControlName="docente">
-                  <option value="{{docente.nombres}}-{{docente.id_docente}}" *ngFor="let docente of docentes">
-                    {{docente.nombres}}-{{docente.id_docente}}</option>
+                  <option value="{{docente.nombres}}-{{docente.id_usuario}}" *ngFor="let docente of docentes">
+                    {{docente.nombres}}-{{docente.id_usuario}}</option>
                 </select>
               </div>
 
@@ -147,7 +147,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
-              <button type="submit" class="linea btn bmodal btn-success btn-sm">Crear</button>
+              <button type="submit" class="linea btn bmodal btn-success btn-sm " [disabled]="horarioAgregar.invalid">Crear</button>
             </div>
           </form>
         </div>

@@ -14,7 +14,10 @@ export class CrearTutoriaComponent implements OnInit {
   fechaHoy=""
   searchValue = '';
   visible = false;
-
+  horaMinima: string = '07:00';
+  horaMaxima: string = '20:00';
+  horaFinalMinima:string="08:00"
+  horaFinalMaxima:string="21:00"
 horarios:any[]=[]
 horario:any={}
 horarioForm!:FormGroup
@@ -34,6 +37,49 @@ constructor(private service:AdminService,public readonly fb:FormBuilder,private 
   console.log(this.fechaHoy);
   this.horarioForm=this.initForm()
   this.horarioAgregar=this.initFormAgregar()
+
+
+
+  //horarios 
+
+  this.horarioAgregar.get('horaInicio')?.valueChanges.subscribe((horaSeleccionada) => {
+    const horaFin=this.horarioAgregar.get('horaFin')?.value
+
+    if (horaSeleccionada < this.horaMinima) {
+      this.horarioAgregar.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+    } else if (horaSeleccionada > this.horaMaxima) {
+      
+      this.horarioAgregar.get('horaInicio')?.setValue(this.horaMaxima, { emitEvent: false });
+    }else if(horaSeleccionada<horaFin){          
+      this.horarioAgregar.get('horaFin')?.setValue(this.horaFinalMaxima, { emitEvent: false });
+
+    }else if(horaSeleccionada==horaFin){
+      this.horarioForm.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+      this.horarioForm.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+    }
+  });
+
+  this.horarioAgregar.get('horaFin')?.valueChanges.subscribe((horaSeleccionada) => {
+
+    const horaInicio=this.horarioAgregar.get('horaInicio')?.value
+    
+    
+    if (horaSeleccionada < this.horaMinima) {
+      this.horarioAgregar.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+    } else if (horaSeleccionada > this.horaMaxima) {
+      console.log(this.horaMaxima);
+      
+      this.horarioAgregar.get('horaFin')?.setValue(this.horaFinalMaxima, { emitEvent: false });
+    }else if(horaSeleccionada<horaInicio){
+      console.log('hm',horaSeleccionada,'hi',horaInicio);
+      
+      this.horarioAgregar.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+
+    }else if(horaSeleccionada==horaInicio){
+      this.horarioAgregar.get('horaFin')?.setValue(this.horaFinalMinima, { emitEvent: false });
+      this.horarioAgregar.get('horaInicio')?.setValue(this.horaMinima, { emitEvent: false });
+    }
+  });
 
 }
 initForm():FormGroup{
@@ -137,12 +183,20 @@ const docente=""
 
 agregar(){
 const horario=this.horarioAgregar.value
+console.log(horario);
+
 this.service.crearHorario(horario).pipe(
   tap((res:any)=>{
-   this.service.getHorario().pipe(
-    tap((res:any)=>{
-this.horarios=res.data
-    })
+    if(res.error){
+      Swal.fire("Error",res.error,"warning")
+      return
+    }
+    this.service.getHorario().pipe(
+      tap((res:any)=>{
+        
+        this.horario=res.data
+
+      })
    ).subscribe()
     
   })
@@ -183,7 +237,7 @@ onSubmit(id_tutoria:string){
 this.service.actualizarHorarioAdmin(horario,id_tutoria)
 this.service.getHorario().pipe(
   tap((res:any)=>{
-this.horarios=res.data
+this.listOfDisplayData=res.data
   })
  ).subscribe()
 

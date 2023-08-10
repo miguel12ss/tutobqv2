@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { EstudianteService } from '../services/estudiante.service';
 import { tap } from 'rxjs';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-buscar',
   templateUrl: './buscar.component.html',
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2'
 })
 export class BuscarComponent {
 
-  constructor(private estudianteService:EstudianteService){}
+  constructor(private estudianteService:EstudianteService,private router:Router){}
 public datosModal:any={}
   public horarios:any[]=[]
   ngOnInit(): void {
@@ -18,6 +19,14 @@ public datosModal:any={}
         
         
         this.horarios=res.data
+        if(this.horarios.length===0){
+            Swal.fire("Error","No hay tutorias para agendar el dia de hoy porfavor vuelva mas tarde","warning").then(
+              (res:any)=>{
+                this.router.navigate(['/estudiante/perfil'])
+              }
+            )
+            
+        }
       })
     ).subscribe()
   }
