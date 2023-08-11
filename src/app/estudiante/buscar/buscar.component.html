@@ -1,7 +1,8 @@
 <!--<h5 class="text-center">AGENDAMIENTO DE TUTORIAS ACÁDEMICAS</h5>-->
-<nz-table #headerTable [nzData]="horarios" [nzPageSize]="6">
+<nz-table #headerTable [nzData]="horarios" [nzPageSize]="6" >
   <div class="d-flex justify-content-between  gap-3  flex-wrap">
-    <nz-card class="col-4 card-diseño media" *ngFor="let horario of headerTable.data" [nzBordered]="true"
+    <nz-card style="width:300px;" class="col-4 card-diseño media" *ngFor="let horario of headerTable.data" [nzBordered]="true"
+
       nzTitle="{{horario.materia}}">
       <p>Docente: {{ horario.nombres }} {{ horario.apellidos }}</p>
       <p>Tema: {{ horario.tema }}</p>
