@@ -28,11 +28,14 @@ salones:any[]=[]
 materias:any[]=[]
 docentes:any[]=[]
 sedes:any[]=[]
-
+dateNext:any
 listOfDisplayData = [...this.horarios];
 
 constructor(private service:AdminService,public readonly fb:FormBuilder,private docenteService:DocenteService){
   const dateToday=new Date();
+  dateToday.setDate(dateToday.getDate()+1)
+  
+  this.dateNext = dateToday.toISOString().substring(0, 10);
   this.fechaHoy = dateToday.toISOString().substring(0, 10);
   console.log(this.fechaHoy);
   this.horarioForm=this.initForm()

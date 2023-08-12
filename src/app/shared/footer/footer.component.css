@@ -37,7 +37,9 @@ span{
    
 
 }
-
+span{
+    color: #000;
+}
 
 .container-politics{
     display: flex;
@@ -50,6 +52,7 @@ span{
     display: flex;
 }
 
-a{
+a.politics{
     text-decoration: underline;
 }
+

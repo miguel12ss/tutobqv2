@@ -33,7 +33,7 @@ this.apiService.forgot(this.forgot.value).pipe(
 }
 initForm():FormGroup{
   return this.fb.group({
-    email:['',Validators.required]
+    email:['',Validators.email]
   })
 }
 

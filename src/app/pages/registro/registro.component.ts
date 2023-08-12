@@ -16,16 +16,20 @@ export class RegistroComponent implements OnInit {
   contactForm!: FormGroup
   public showAlertDanger = false
   submitted = false
+  
+
   programas:Array<string> =[]
   facultades:Array<string> =[]
   tipoDocumento:Array<string> =[]
   constructor(public fb: FormBuilder, private apiService: ApiService, private router: Router,private componentService:ComponentService) {
-
-
+    
 
 
   }
   ngOnInit(): void {
+
+
+
     this.contactForm = this.initForm()
     this.componentService.getPrograms.pipe(
       tap((res:any)=>{
@@ -47,13 +51,14 @@ this.componentService.getFacultades().pipe(
     this.facultades=res
   })
 ).subscribe()
-  }
-  validarCorreo() {
-    if (!this.contactForm.get('correo')?.invalid) {
-      this.showAlertDanger = false;
-    } else {
-      this.showAlertDanger = true;
-    }
+
+
+this.contactForm.statusChanges.subscribe(status => {
+  console.log('Estado del formulario:', status); // 'VALID', 'INVALID', 'PENDING', 'DISABLED'
+  console.log('Errores:', this.contactForm.errors); // Muestra los errores del formulario
+});
+
+
   }
 
   initForm(): FormGroup {
@@ -61,12 +66,12 @@ this.componentService.getFacultades().pipe(
       nombres: [null,Validators.required],
       apellidos: [null,Validators.required],
       tipoDocumento: [null, Validators.required],
-      contraseña: [null,Validators.required],
+      contraseña: [null,[Validators.required,Validators.maxLength(10),Validators.minLength(7)]],
       programa: [null,Validators.required],
-      numeroTelefono: [null,Validators.required],
+      numeroTelefono: [null,[Validators.required,Validators.minLength(7),Validators.maxLength(10)]],
       correo: [null, Validators.email],
-      nuevaContraseña: [null,Validators.required],
-      numeroDocumento: [null,Validators.required],
+      nuevaContraseña: [null,[Validators.required,Validators.maxLength(10),Validators.minLength(7)]],
+      numeroDocumento: [null,[Validators.required,Validators.maxLength(10)]],
       facultad: [null,Validators.required],
       politica:[null,Validators.required]
     })
@@ -124,9 +129,11 @@ this.componentService.getFacultades().pipe(
 
 
   }
-  showAlert() {
-    alert('la politica es requerida')
+  private createEmailValidator(patterns: RegExp[]) {
+    return Validators.pattern(patterns.map(pattern => pattern.source).join('|'));
   }
+
+
 
 
 

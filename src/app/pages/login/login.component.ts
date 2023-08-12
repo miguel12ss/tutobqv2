@@ -25,8 +25,8 @@ export class LoginComponent {
     private apiservice: ApiService
   ) {
     this.contactForm = fb.group({
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required, Validators.min(6)]],
+      email: ['', [Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(7)]],
     });
   }
   validarInput() {

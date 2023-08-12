@@ -40,9 +40,9 @@
 
         <div class="form-group">
           <label for="correo"><b>Correo Institucional</b></label>
-          <input class="form-control" type="email" name="correo" id="correo" formControlName="correo" [ngClass]="{
+          <input class="form-control" type="email" name="correo" id="correo" formControlName="correo"  pattern=".*@(unibarranquilla\.edu\.co|itsa\.edu\.co)$" [ngClass]="{
               'is-invalid': submitted && contactForm.get('correo')?.errors
-            }" (input)="validarCorreo()" required />
+            }"  required />
         </div>
         <span class="text-danger" *ngIf="submitted && contactForm.get('correo')?.errors">debe terminar
           @unibarranquilla.edu.co</span>
@@ -120,9 +120,12 @@
           de 7</span>
 
       </div>
+
+      {{contactForm.errors}}
       <div class="container-button">
+
         <button class="btn btn-primary"
-          [disabled]="contactForm.invalid || contactForm.get('contraseña')==contactForm.get('nuevaContraseña')  ">Enviar</button>
+          [disabled]="contactForm.invalid">Enviar</button>
       </div>
     </form>
 

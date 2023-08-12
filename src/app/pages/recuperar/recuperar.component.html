@@ -8,12 +8,12 @@
                 <h4>RECUPERAR CONTRASEÑA</h4>
             </div>
             <label for="correo">Correo</label>
-            <input type="email"  formControlName="email"  class="form-control" name="email" id="email" placeholder="email" required
+            <input type="email"  formControlName="email"  class="form-control" name="email" id="email" pattern=".*@(unibarranquilla\.edu\.co|itsa\.edu\.co)$" placeholder="email" required
                 formControlName="email" autocomplete="off">
         </div>
 
         <div class="form-button">
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" [disabled]="forgot.invalid" class="btn btn-primary">Enviar</button>
 
         </div>
         
