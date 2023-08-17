@@ -118,9 +118,11 @@
         <td>{{h.fecha}}</td>
         <td>{{h.fecha_generacion_tutoria}}</td>
         <td>{{h.horaInicio}}</td>
-        <td><button type="button" nz-button class="btndenegar" nzType="primary" nz-danger 
-            (click)="getData(h.id_tutoria)">
-            Cancelar
+        <td><button type="button" nz-button  nzType="primary" nz-danger 
+            (click)="getData(h.id_tutoria)"
+            data-bs-toggle="modal" data-bs-target="#actualizar"
+            >
+            Actualizar
           </button> </td>
         <td><button nz-button nzType="primary"   data-bs-toggle="modal" data-bs-target="#modallistado"
             (click)="listado(h.id_tutoria)">listado</button>

@@ -295,69 +295,70 @@ getData(id_tutoria:string){
 
 
   
-  Swal.fire({
-    title: 'Estas seguro que deseas eliminarlo',
-    text: "no podra ser revertido",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Si,Eliminar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire(
-        'Eliminado!',
-        'La tutoria ha sido eliminada.',
-        'success'
-      )
-    }
+  // Swal.fire({
+  //   title: 'Estas seguro que deseas eliminarlo',
+  //   text: "no podra ser revertido",
+  //   icon: 'warning',
+  //   showCancelButton: true,
+  //   confirmButtonColor: '#3085d6',
+  //   cancelButtonColor: '#d33',
+  //   confirmButtonText: 'Si,Eliminar'
+  // }).then((result) => {
+  //   if (result.isConfirmed) {
+  //     Swal.fire(
+  //       'Eliminado!',
+  //       'La tutoria ha sido eliminada.',
+  //       'success'
+  //     )
+  //   }
+  
+this.docenteService.getEstadosTutoria().pipe(
+  tap((res:any)=>{
+    console.log(res)
+    this.estado=res
+    
   })
-// this.docenteService.getEstadosTutoria().pipe(
-//   tap((res:any)=>{
-//     console.log(res)
-//     this.estado=res
-    
-//   })
-// ).subscribe()
+).subscribe()
 
-// // this.docenteService.getSalones().pipe(
-// //   tap((res:any)=>{
+// this.docenteService.getSalones().pipe(
+//   tap((res:any)=>{
    
     
-// //     this.salonesActualizar=res
+//     this.salonesActualizar=res
     
-// this.docenteService.getDataForUpdate(id_tutoria).pipe(
-//   tap((res:any)=>{
+this.docenteService.getDataForUpdate(id_tutoria).pipe(
+  tap((res:any)=>{
   
     
     
-//   this.horarioFormUpdate.patchValue({
-//     facultad:res.data.facultad,
-//       tema:res.data.tema,
-//       capacidad:res.data.capacidad,
-//       horaInicio:res.data.horaInicio,
-//       programa:res.data.programa,
-//       docente:res.data.nombres,
-//       horaFin:res.data.horaFin,
-//       materia:res.data.materia,
-//       fecha:res.data.fecha,
-//       estadoTutoria:res.data.estado_tutoria,
-//       salon:res.data.salon,
-//       sede:res.data.sede,
-//       id_tutoria:res.data.id_tutoria
+  this.horarioFormUpdate.patchValue({
+    facultad:res.data.facultad,
+      tema:res.data.tema,
+      capacidad:res.data.capacidad,
+      horaInicio:res.data.horaInicio,
+      programa:res.data.programa,
+      docente:res.data.nombres,
+      horaFin:res.data.horaFin,
+      materia:res.data.materia,
+      fecha:res.data.fecha,
+      estadoTutoria:res.data.estado_tutoria,
+      salon:res.data.salon,
+      sede:res.data.sede,
+      id_tutoria:res.data.id_tutoria
       
-//   })
+  })
   
   
    
-//   })
-// ).subscribe()
-
-
-
-// }}
+  })
+).subscribe()
 }
+
+
+
 }
+
+
 
 
 
