@@ -9,7 +9,6 @@ import { HeroComponent } from './components/hero/hero.component';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { SharedModule } from './shared/shared.module';
-import { NavbarServices } from './services/navbar.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesModule } from './pages/pages.module';
 import { IconsProviderModule } from './icons-provider.module';
@@ -39,7 +38,7 @@ import { LocaleModule } from './locale-module.module';
     
   ],
   exports: [],
-  providers: [ApiService, NavbarServices,spinnerService,ComponentService,{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
+  providers: [ApiService,spinnerService,ComponentService,{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
   
   bootstrap: [AppComponent]
 })

@@ -263,20 +263,7 @@ onSubmit(){
   ).subscribe()
 }
 
-onSubmitUpdate(){
-  const horarioActualizar=this.horarioFormUpdate.value
-  this.docenteService.actualizarHorario(horarioActualizar)
-  this.docenteService.getHorario().pipe(
-    tap((res:any)=>{
-      console.log(res);
-      
-      this.horario=res.data
 
-    })
-  ).subscribe()
-
-  
-}
 
 listado(id_tutoria:string){
   this.docenteService.getListado(id_tutoria).pipe(
@@ -293,8 +280,6 @@ listado(id_tutoria:string){
 
 getData(id_tutoria:string){
 
-
-  
   Swal.fire({
     title: 'Estas seguro que deseas eliminarlo',
     text: "no podra ser revertido",
@@ -310,6 +295,14 @@ getData(id_tutoria:string){
         'La tutoria ha sido eliminada.',
         'success'
       )
+      this.docenteService.eliminarTutoria(id_tutoria)
+      this.docenteService.getHorario().pipe(
+        tap((res:any)=>{
+          console.log(res);
+          
+this.horario=res.data
+        })
+      ).subscribe()
     }
   })
 // this.docenteService.getEstadosTutoria().pipe(
