@@ -1,15 +1,16 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { Docente } from "src/app/shared/interfaces/docente.interface";
+import { environment } from "src/environment/environment.prod";
 
 @Injectable()
 export class DocenteService{
 
     constructor(private readonly http:HttpClient){}
 
-    url="http://localhost:5000/perfil-docente"
-    urlGlobal="http://localhost:5000/"
+    public readonly url=environment.apiUrl
+
 
     getDataDocente():Observable<Docente>{
         const token=sessionStorage.getItem('token')
@@ -21,7 +22,7 @@ export class DocenteService{
             'Access-Control-Allow-Credentials': 'true'
           })
         };
-       return  this.http.get<Docente>(this.url,httpOptions)
+       return  this.http.get<Docente>(`${this.url}/docente/perfil-docente`,httpOptions)
     }
 
     getSalones(){
@@ -34,7 +35,7 @@ export class DocenteService{
           'Access-Control-Allow-Credentials': 'true'
         })
       };
-     return  this.http.get(`${this.urlGlobal}salon`,httpOptions)
+     return  this.http.get(`${this.url}/salon`,httpOptions)
   }
 
   getMaterias(){
@@ -47,7 +48,7 @@ export class DocenteService{
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-   return  this.http.get(`${this.urlGlobal}materias`,httpOptions)
+   return  this.http.get(`${this.url}/materias`,httpOptions)
 }
 
 getSedes(){
@@ -60,7 +61,7 @@ getSedes(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
- return  this.http.get(`${this.urlGlobal}sedes`,httpOptions)
+ return  this.http.get(`${this.url}/sedes`,httpOptions)
 }
 
 
@@ -74,7 +75,7 @@ getDataForId(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
- return  this.http.get(`${this.urlGlobal}horario`,httpOptions)
+ return  this.http.get(`${this.url}/docente/horario`,httpOptions)
 }
 
 getHorarioForId(id_tutoria:string){
@@ -87,7 +88,7 @@ getHorarioForId(id_tutoria:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.get(`${this.urlGlobal}obtenerTutoria/${id_tutoria}`,httpOptions)
+  return  this.http.get(`${this.url}/obtenerTutoria/${id_tutoria}`,httpOptions)
 }
 
 
@@ -102,7 +103,7 @@ crearHorario(horario:any){
     })
   };
   
-  return  this.http.post(`${this.urlGlobal}agregarHorario`,horario,httpOptions)
+  return  this.http.post(`${this.url}/docente/agregarHorario`,horario,httpOptions)
 
 }
 
@@ -117,7 +118,7 @@ obtenerCapacidadPorSalon(salon:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.post(`${this.urlGlobal}obtenerCapacidad`,salonJson,httpOptions)
+  return  this.http.post(`${this.url}/obtenerCapacidad`,salonJson,httpOptions)
 }
 getHorario(){
   const token=sessionStorage.getItem('token')
@@ -129,7 +130,7 @@ getHorario(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.get(`${this.urlGlobal}mostrarHorario`,httpOptions)
+  return  this.http.get(`${this.url}/docente/mostrarHorario`,httpOptions)
 }
 
 getHorarioForEstado(){
@@ -142,7 +143,7 @@ getHorarioForEstado(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.get(`${this.urlGlobal}mostrarHorarioEstado`,httpOptions)
+  return  this.http.get(`${this.url}/docente/mostrarHorarioEstado`,httpOptions)
 }
 
 getDataForUpdate(id_tutoria:string){
@@ -156,7 +157,7 @@ getDataForUpdate(id_tutoria:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.get(`${this.urlGlobal}obtenerTutoria/${id_tutoria}`,httpOptions)
+  return  this.http.get(`${this.url}/docente/obtenerTutoria/${id_tutoria}`,httpOptions)
 }
 
 getEstadosTutoria(){
@@ -169,28 +170,9 @@ getEstadosTutoria(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.get(`${this.urlGlobal}estadoTutoria`,httpOptions)
+  return  this.http.get(`${this.url}/docente/estadoTutoria`,httpOptions)
 }
 
-actualizarHorario(horario:any){
-  console.log(horario.id_tutoria);
-  
-  const token=sessionStorage.getItem('token')
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': 'Bearer ' + token,
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'Access-Control-Allow-Credentials': 'true'
-    })
-  };
-  this.http.post(`${this.urlGlobal}/actualizar/${horario.id_tutoria}`,horario,httpOptions).subscribe(
-    res=>{
-      console.log(res);
-      
-    }
-  )
-}
 
 getListado(id_tutoria:string){
   const token=sessionStorage.getItem('token')
@@ -202,7 +184,25 @@ getListado(id_tutoria:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
- return this.http.get(`${this.urlGlobal}/listado/${id_tutoria}`,httpOptions)
+ return this.http.get(`${this.url}/docente/listado/${id_tutoria}`,httpOptions)
+}
+
+eliminarTutoria(id_tutoria:string){
+  const token=sessionStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+ return this.http.delete(`${this.url}/docente/eliminarTutoria/${id_tutoria}`,httpOptions).pipe(
+  tap((res:any)=>{
+    console.log(res);
+    
+  })
+ ).subscribe()
 }
 
 

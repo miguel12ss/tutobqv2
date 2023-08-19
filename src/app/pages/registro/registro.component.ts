@@ -31,12 +31,7 @@ export class RegistroComponent implements OnInit {
 
 
     this.contactForm = this.initForm()
-    this.componentService.getPrograms.pipe(
-      tap((res:any)=>{
-        
-this.programas=res
-      })
-    ).subscribe()
+   
 
     this.componentService.getTipoDocumento.pipe(
       tap((res:any)=>{
@@ -53,13 +48,28 @@ this.componentService.getFacultades().pipe(
 ).subscribe()
 
 
-this.contactForm.statusChanges.subscribe(status => {
-  console.log('Estado del formulario:', status); // 'VALID', 'INVALID', 'PENDING', 'DISABLED'
-  console.log('Errores:', this.contactForm.errors); // Muestra los errores del formulario
-});
 
 
   }
+
+  onSelect(event:any){
+   
+    
+    this.programas=[]
+    const facultad=event.target.value
+  
+    this.apiService.getProgramas(facultad).pipe(
+      tap((res:any)=>{
+        this.programas=res.data
+      })
+    ).subscribe()
+    
+  }
+  
+  
+  
+  
+
 
   initForm(): FormGroup {
     return this.fb.group({
@@ -129,12 +139,6 @@ this.contactForm.statusChanges.subscribe(status => {
 
 
   }
-  private createEmailValidator(patterns: RegExp[]) {
-    return Validators.pattern(patterns.map(pattern => pattern.source).join('|'));
-  }
-
-
-
 
 
 

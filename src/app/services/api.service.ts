@@ -5,20 +5,17 @@ import { Estudiante } from "../shared/interfaces/Estudiante.interface";
 import { Router } from "@angular/router";
 import { ComponentService } from "../components/services/components.service";
 import { Docente } from "../shared/interfaces/docente.interface";
+import { environment } from "src/environment/environment.prod";
 @Injectable()
 export class ApiService {
-  private urlGlobal = 'http://127.0.0.1:5000/'
-  private url = "http://127.0.0.1:5000/registro"
+  private url =environment.apiUrl
   private token = ""
-  private id_usuario: number = 0
   constructor(private readonly httpClient: HttpClient, private componentService: ComponentService, private router: Router) {
 
   }
   insertData(estudiante: Estudiante) {
-    console.log('entras');
-    console.log(estudiante);
-
-    return this.httpClient.post(this.url, estudiante)
+    
+    return this.httpClient.post(`${this.url}/estudiante/registro`, estudiante)
   }
 
   loginService(correo: string, contraseña: string):Observable<any> {
@@ -27,13 +24,12 @@ export class ApiService {
       contraseña: contraseña
     }
 
-    return this.httpClient.post(` ${this.urlGlobal}login`, login)
+    return this.httpClient.post(` ${this.url}/login`, login)
   }
 
 
   insertDocente(docente:Docente){
-    const url=this.urlGlobal+`agregar-docente`
-    return this.httpClient.post(url, docente)
+    return this.httpClient.post(`${this.url}/admin/agregar-docente`, docente)
     
   }
 
@@ -42,10 +38,9 @@ export class ApiService {
     return this.token
   }
   renewToken(currentToken: string): Observable<any> {
-    const url = 'http://localhost:5000/renew-token';
     const body = { token: currentToken };
 
-    return this.httpClient.post(url, body);
+    return this.httpClient.post(`${this.url}/renew-token`, body);
   }
 
   isLogged():boolean{
@@ -55,7 +50,14 @@ export class ApiService {
   
 
   forgot(email:string){
-return this.httpClient.post(`${this.urlGlobal}forgot`,email)
+return this.httpClient.post(`${this.url}/forgot`,email)
+  }
+
+
+  getProgramas(facultad:string){
+    console.log(facultad);
+    
+    return this.httpClient.get(`${this.url}/buscarPrograma/${facultad}`)
   }
 
 
