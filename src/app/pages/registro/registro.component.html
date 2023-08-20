@@ -125,7 +125,7 @@
       <div class="container-button">
 
         <button class="btn btn-primary"
-          [disabled]="contactForm.invalid">Enviar</button>
+          [disabled]="contactForm.invalid && contactForm.get('programa')?.value===null">Enviar</button>
       </div>
     </form>
 

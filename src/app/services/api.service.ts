@@ -24,7 +24,7 @@ export class ApiService {
       contraseña: contraseña
     }
 
-    return this.httpClient.post(` ${this.url}/login`, login)
+    return this.httpClient.post(` ${this.url}/auth/login`, login)
   }
 
 
@@ -50,7 +50,7 @@ export class ApiService {
   
 
   forgot(email:string){
-return this.httpClient.post(`${this.url}/forgot`,email)
+return this.httpClient.post(`${this.url}/auth/forgot`,email)
   }
 
 

@@ -61,6 +61,10 @@ this.componentService.getFacultades().pipe(
     this.apiService.getProgramas(facultad).pipe(
       tap((res:any)=>{
         this.programas=res.data
+        this.contactForm.patchValue({
+          programa:null
+        })
+        
       })
     ).subscribe()
     

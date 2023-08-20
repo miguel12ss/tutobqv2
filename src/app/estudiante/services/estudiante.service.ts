@@ -42,7 +42,7 @@ export class EstudianteService {
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.httpClient.post(`${this.url}/cambiar-contraseña`,data,httpOptions)
+    return this.httpClient.post(`${this.url}/auth/cambiar-contraseña`,data,httpOptions)
   }
 
   // subirFoto(file:any){
