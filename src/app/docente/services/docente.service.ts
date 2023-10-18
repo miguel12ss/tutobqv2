@@ -13,7 +13,7 @@ export class DocenteService{
 
 
     getDataDocente():Observable<Docente>{
-        const token=sessionStorage.getItem('token')
+        const token=localStorage.getItem('token')
         const httpOptions = {
           headers: new HttpHeaders({
             'Authorization': 'Bearer ' + token,
@@ -26,7 +26,7 @@ export class DocenteService{
     }
 
     getSalones(){
-      const token=sessionStorage.getItem('token')
+      const token=localStorage.getItem('token')
       const httpOptions = {
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + token,
@@ -39,7 +39,7 @@ export class DocenteService{
   }
 
   getMaterias(){
-    const token=sessionStorage.getItem('token')
+    const token=localStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
@@ -52,7 +52,7 @@ export class DocenteService{
 }
 
 getSedes(){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -66,7 +66,7 @@ getSedes(){
 
 
 getDataForId(){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -79,7 +79,7 @@ getDataForId(){
 }
 
 getHorarioForId(id_tutoria:string){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -93,7 +93,7 @@ getHorarioForId(id_tutoria:string){
 
 
 crearHorario(horario:any){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -109,7 +109,7 @@ crearHorario(horario:any){
 
 obtenerCapacidadPorSalon(salon:string){
   let salonJson={"salon":salon}
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -121,7 +121,7 @@ obtenerCapacidadPorSalon(salon:string){
   return  this.http.post(`${this.url}/obtenerCapacidad`,salonJson,httpOptions)
 }
 getHorario(){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -134,7 +134,7 @@ getHorario(){
 }
 
 getHorarioForEstado(){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -148,7 +148,7 @@ getHorarioForEstado(){
 
 getDataForUpdate(id_tutoria:string){
 
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -161,7 +161,7 @@ getDataForUpdate(id_tutoria:string){
 }
 
 getEstadosTutoria(){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -175,7 +175,7 @@ getEstadosTutoria(){
 
 
 getListado(id_tutoria:string){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -188,7 +188,7 @@ getListado(id_tutoria:string){
 }
 
 eliminarTutoria(id_tutoria:string){
-  const token=sessionStorage.getItem('token')
+  const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Bearer ' + token,
@@ -205,5 +205,22 @@ eliminarTutoria(id_tutoria:string){
  ).subscribe()
 }
 
+pasarLista(data:any){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  this.http.post(`${this.url}/docente/pasarLista`,data,httpOptions).pipe(
+  tap((res:any)=>{
+    console.log(res);
+    
+  })
+ ).subscribe()
+}
 
 }

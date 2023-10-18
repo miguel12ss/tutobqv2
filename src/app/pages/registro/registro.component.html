@@ -10,7 +10,7 @@
       <div class="col-md-4 mt-2">
         <div class="form-group">
           <label for="nombre"><b>Nombres</b></label>
-          <input required class="form-control" formControlName="nombres" type="text" name="nombres" id="nombres"
+          <input  class="form-control" formControlName="nombres" type="text" name="nombres" id="nombres"
             [ngClass]="{
               'is-invalid': submitted && contactForm.get('nombres')?.errors
             }" />
@@ -26,7 +26,7 @@
             [ngClass]="{
               'is-invalid': submitted && contactForm.get('tipo')?.errors
             }">
-            <option value="{{tipo}}" *ngFor="let tipo of tipoDocumento">{{tipo}}</option>
+            <option value="{{tipo}}" [ngValue]="tipo.id" *ngFor="let tipo of tipoDocumento">{{tipo.tipo_documento}}</option>
            
           </select>
         </div>
@@ -34,7 +34,7 @@
         <div class="form-group">
           <label for="facultad"><b>Facultad</b></label>
           <select formControlName="facultad" (change)="onSelect($event)" name="facultad" id="facultad" class="form-control">
-            <option *ngFor="let facultad of facultades" selected value="{{facultad}}">{{facultad}}</option>
+            <option *ngFor="let facultad of facultades" [ngValue]="facultad.id">{{facultad.facultad}} </option>
           </select>
         </div>
 
@@ -42,7 +42,7 @@
           <label for="correo"><b>Correo Institucional</b></label>
           <input class="form-control" type="email" name="correo" id="correo" formControlName="correo"  pattern=".*@(unibarranquilla\.edu\.co|itsa\.edu\.co)$" [ngClass]="{
               'is-invalid': submitted && contactForm.get('correo')?.errors
-            }"  required />
+            }"   />
         </div>
         <span class="text-danger" *ngIf="submitted && contactForm.get('correo')?.errors">debe terminar
           @unibarranquilla.edu.co</span>
@@ -52,7 +52,7 @@
           <input class="form-control" type="password" name="contraseña" id="contraseña" formControlName="contraseña"
             [ngClass]="{
                 'is-invalid': submitted && contactForm.get('contraseña')?.errors
-              }" required />
+              }"  />
         </div>
 
       </div>
@@ -63,14 +63,14 @@
           <label for="apellido"><b>Apellidos</b></label>
           <input class="form-control" type="text" name="apellidos" id="apellidos" formControlName="apellidos" [ngClass]="{
               'is-invalid': submitted && contactForm.get('apellidos')?.errors
-            }" required />
+            }"  />
         </div>
         <span class="text-danger" *ngIf="submitted && contactForm.get('apellidos')?.errors">no ha cumplido el minimo de
           caracteres</span>
 
         <div class="form-group">
           <label for="tipo"><b>Numero de documento</b></label>
-          <input name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number"
+          <input name="numeroDocumento" formControlName="numeroDocumento" id="numeroDocumento" type="number" 
             class="form-control" [ngClass]="{
               'is-invalid':
                 submitted && contactForm.get('numeroDocumento')?.errors
@@ -79,21 +79,21 @@
 
         <div class="form-group">
           <label for="programa"><b>Programa perteneciente</b></label>
-          <select formControlName="programa" name="programa" id="programa" class="form-control">
-            <option value="{{programaa}}" *ngFor="let programaa of programas">
-            {{programaa}}
+          <select [disabled]="showProgram" formControlName="programa" name="programa" id="programa" class="form-control">
+            <option value="{{programa.programa}}" *ngFor="let programa of programas">
+            {{programa.programa}}
             </option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="telefono"><b>Numero de telefono</b></label>
-          <input class="form-control" type="number" name="numeroTelefono" formControlName="numeroTelefono" [ngClass]="{
+          <input class="form-control" type="number" name="numeroTelefono" formControlName="numeroTelefono" (change)="verifyNumber($event)"   [ngClass]="{
                 'is-invalid':
-                  submitted && contactForm.get('numeroTelefono')?.errors
-              }" id="numeroTelefono" required />
+                  submitted && contactForm.controls['numeroTelefono'].errors
+              }" id="numeroTelefono"  />
         </div>
-        <span class="text-danger" *ngIf="submitted && contactForm.get('numeroTelefono')?.errors?.['maxlength']">no ha
+        <span class="text-danger" *ngIf="submitted && contactForm.controls['numeroTelefono'].errors?.['maxlength']">no ha
           cumplido el minimo de caracteres</span>
 
         <div class="form-group gap-2">
@@ -102,10 +102,10 @@
             formControlName="nuevaContraseña" [ngClass]="{
               'is-invalid':
                 submitted && contactForm.get('nuevaContraseña')?.errors
-            }" required />
+            }"  />
         </div>
         <div class="form-group" style="display: flex; flex-direction: row">
-          <input required type="checkbox" name="politica" formControlName="politica" [ngClass]="{
+          <input  type="checkbox" name="politica" formControlName="politica" [ngClass]="{
               'is-invalid': submitted && contactForm.get('politica')?.errors
             }" />
           <a target="_blank"
@@ -118,14 +118,16 @@
             contactForm.get('nuevaContraseña')?.value
           ">las contraseñas deben coincidir y deben tener un minimo de longitud
           de 7</span>
+         
 
       </div>
 
-      {{contactForm.errors}}
+
+
       <div class="container-button">
 
         <button class="btn btn-primary"
-          [disabled]="contactForm.invalid && contactForm.get('programa')?.value===null">Enviar</button>
+          [disabled]="contactForm.invalid">Enviar</button>
       </div>
     </form>
 

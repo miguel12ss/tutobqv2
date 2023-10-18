@@ -9,7 +9,7 @@ import { environment } from "src/environment/environment.prod";
 @Injectable()
 export class ApiService {
   private url =environment.apiUrl
-  private token = ""
+   token=""
   constructor(private readonly httpClient: HttpClient, private componentService: ComponentService, private router: Router) {
 
   }
@@ -35,7 +35,7 @@ export class ApiService {
 
   getToken() {
   
-    return this.token
+    return sessionStorage.getItem('token')
   }
   renewToken(currentToken: string): Observable<any> {
     const body = { token: currentToken };
@@ -45,7 +45,7 @@ export class ApiService {
 
   isLogged():boolean{
       const authToken = this.getToken();
-      return authToken !== null; // Si hay un token, el usuario está autenticado
+      return authToken !== ""; // Si hay un token, el usuario está autenticado
     }
   
 
@@ -54,11 +54,12 @@ return this.httpClient.post(`${this.url}/auth/forgot`,email)
   }
 
 
-  getProgramas(facultad:string){
-    console.log(facultad);
+  getProgramas(id_facultad:any){
+    console.log(id_facultad);
     
-    return this.httpClient.get(`${this.url}/buscarPrograma/${facultad}`)
+    return this.httpClient.get(`${this.url}facultadxprograma/${id_facultad}`)
   }
+
 
 
 

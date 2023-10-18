@@ -60,11 +60,7 @@ public datosModal:any={}
     confirmButtonText: 'Si,Agendar'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Agendado!',
-        'La tutoria ha sido agendada.',
-        'success'
-      )
+      
       this.estudianteService.agendarTutorias(id_tutoria,id_estado_tutoria).pipe(
         tap((res:any)=>{
           console.log(res);

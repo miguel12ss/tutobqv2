@@ -1,12 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Facultad } from "src/app/shared/interfaces/Facultad.interface";
+import { environment } from "src/environment/environment.prod";
 
 
 @Injectable()
 export class ComponentService{
 
-private url="http://127.0.0.1:5000/"
+private url=environment.apiUrl
 private indice=0
 
 constructor(private httpClient:HttpClient){}
@@ -16,12 +18,12 @@ get getPrograms():Observable<Object>{
 }
 
 getFacultades(){
-    return this.httpClient.get(`${this.url}facultades`)
+    return this.httpClient.get<Facultad[]>(`${this.url}facultades`)
   }
 
 
 get getTipoDocumento():Observable<Object>{
-    return this.httpClient.get(`${this.url}tipo-documento`)
+    return this.httpClient.get(`${this.url}tipoDocumento`)
 
 }
 

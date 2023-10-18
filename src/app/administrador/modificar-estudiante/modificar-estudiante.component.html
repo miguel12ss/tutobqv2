@@ -1,4 +1,9 @@
 <h5 class="text-center">ADMINISTRAR ESTUDIANTES</h5>
+
+<div class="add-user d-flex justify-content-end mb-3">
+     <button class="btn btn-warning d-flex justify-space-between align-items-center gap-3">Add User <span style="font-size: 18px;" nz-icon nzType="user-add" nzTheme="outline"></span ></button>
+</div>
+
 <div class="table-responsive">
   <nz-table #nzTable [nzData]="listOfDisplayData" [nzPageSize]="4" nzTableLayout="fixed">
     <thead>
@@ -12,7 +17,7 @@
         <th>Facultad</th>
         <th>Correo</th>
         <th>Telefono</th>
-        <th>Modificar</th>
+        <th>Acciones</th>
 
       </tr>
     </thead>
@@ -25,7 +30,9 @@
        
         <td><button type="button" class="btn btnc btn-primary btnfunciones" data-bs-toggle="modal" (click)="modificar(data.id_usuario)" data-bs-target="#staticBackdrop">
             Modificar
-          </button></td>
+          </button> 
+        
+        </td>
        
         
       </tr>

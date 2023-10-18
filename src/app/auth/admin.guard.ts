@@ -1,7 +1,7 @@
 import { CanActivateFn, Router } from '@angular/router';
 
 export const adminGuard: CanActivateFn = (route, state) => {
-  if(sessionStorage.getItem('admin')==="miguel"){
+  if(localStorage.getItem('admin')==="miguel"){
     return true
   }else{
     const router=new Router()
@@ -9,4 +9,10 @@ export const adminGuard: CanActivateFn = (route, state) => {
       return false
   }
 
+
+
+
 };
+
+
+
