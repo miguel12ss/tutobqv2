@@ -15,7 +15,7 @@ export class ApiService {
   }
   insertData(estudiante: Estudiante) {
     
-    return this.httpClient.post(`${this.url}/estudiante/registro`, estudiante)
+    return this.httpClient.post(`${this.url}create_user`, estudiante)
   }
 
   loginService(correo: string, contraseña: string):Observable<any> {

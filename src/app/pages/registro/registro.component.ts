@@ -94,7 +94,7 @@ export class RegistroComponent implements OnInit {
       apellidos: [null,Validators.required],
       tipoDocumento: [null, Validators.required],
       contraseña: [null,Validators.required],
-      programa: [null,Validators.required],
+      programa: [null ,Validators.required],
       numeroTelefono: [null,[Validators.required,Validators.minLength(10)]],
       correo: [null, Validators.email],
       nuevaContraseña: [null,Validators.required],
@@ -113,7 +113,7 @@ export class RegistroComponent implements OnInit {
     
 
   }
-  onSubmit(event: Event) {
+  onSubmit() {
     this.submitted=true
 if(this.contactForm.invalid){return}
     console.log(this.contactForm.get('contraseña'),this.contactForm.get('nuevaContraseña'));
@@ -123,16 +123,18 @@ if(this.contactForm.invalid){return}
 
 
       let estudiante: Estudiante = {
-        
-        nombre: this.contactForm.value.nombres,
-        apellido: this.contactForm.value.apellidos,
-        tipoDocumento: this.contactForm.value.tipoDocumento,
-        numeroDocumento: this.contactForm.value.numeroDocumento,
-        numeroTelefono: this.contactForm.value.numeroTelefono,
-        facultad: this.contactForm.value.facultad,
-        programa: this.contactForm.value.programa,
+        id:undefined,
+        nombres: this.contactForm.value.nombres,
+        apellidos: this.contactForm.value.apellidos,
+        id_tipo_documento: this.contactForm.value.tipoDocumento,
+        numero_documento: this.contactForm.value.numeroDocumento,
+        celular:this.contactForm.value.numeroTelefono.toString(),
+        id_facultad: this.contactForm.value.facultad,
+        id_programa: this.contactForm.value.programa,
         correo: this.contactForm.value.correo,
         contraseña: this.contactForm.value.contraseña,
+        id_rol:1,
+        id_estado:1
       }
       console.log('el estudiante es',estudiante);
       

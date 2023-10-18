@@ -72,20 +72,20 @@ export class AgregarEstudianteComponent implements OnInit {
     
     
     
-          let estudiante: Estudiante = {
+          // let estudiante: Estudiante = {
             
-            nombre: this.contactForm.value.nombres,
-            apellido: this.contactForm.value.apellidos,
-            tipoDocumento: this.contactForm.value.tipoDocumento,
-            numeroDocumento: this.contactForm.value.numeroDocumento,
-            numeroTelefono: this.contactForm.value.numeroTelefono,
-            facultad: this.contactForm.value.facultad,
-            programa: this.contactForm.value.programa,
-            correo: this.contactForm.value.correo,
-            contraseña: this.contactForm.value.contraseña,
-          }
-          console.log('el estudiante es',estudiante);
-          
+          //   nombre: this.contactForm.value.nombres,
+          //   apellido: this.contactForm.value.apellidos,
+          //   tipoDocumento: this.contactForm.value.tipoDocumento,
+          //   numeroDocumento: this.contactForm.value.numeroDocumento,
+          //   numeroTelefono: this.contactForm.value.numeroTelefono,
+          //   facultad: this.contactForm.value.facultad,
+          //   programa: this.contactForm.value.programa,
+          //   correo: this.contactForm.value.correo,
+          //   contraseña: this.contactForm.value.contraseña,
+          // }
+          // console.log('el estudiante es',estudiante);
+          let estudiante!:Estudiante
           this.apiService.insertData(estudiante).subscribe(
             (response:any) => {
               if(response.error){
