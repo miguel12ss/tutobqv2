@@ -49,22 +49,23 @@ export class LoginComponent {
         .loginService(form.email, form.password)
         .subscribe((response: any) => {
           console.log(response);
-        if(response.id_estado==1){
-          if (response.rol == 1 ) {
+        if(response.id_estado==4){
+          if (response.id_rol == 1 ) {
             this.router.navigate(['/estudiante']);
             token = response.token;
            localStorage.setItem('token', token);
+           localStorage.setItem('id_usuario',response.id_usuario);
             LoginComponent.rol=response.rol
-           localStorage.setItem('rol', response.rol);
+           localStorage.setItem('rol', response.id_rol);
 
             id_usuario = response.usuario;
-          } else if (response.rol == 2) {
+          } else if (response.id_rol == 2) {
             this.router.navigate(['/docente']);
             token = response.token;
            localStorage.setItem('token', token);
-            LoginComponent.rol=response.rol
+            LoginComponent.rol=response.id_rol
 
-           localStorage.setItem('rol', response.rol);
+           localStorage.setItem('rol', response.id_rol);
 
             id_usuario = response.usuario;
           } else {

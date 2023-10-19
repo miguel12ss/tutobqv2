@@ -1,4 +1,4 @@
-<h5 class="text-center">ADMINISTRAR ESTUDIANTES</h5>
+<h5 class="text-center">ADMINISTRAR USUARIOS</h5>
 
 <div class="add-user d-flex justify-content-end mb-3">
      <button class="btn btn-warning d-flex justify-space-between align-items-center gap-3">Add User <span style="font-size: 18px;" nz-icon nzType="user-add" nzTheme="outline"></span ></button>
@@ -23,12 +23,12 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of nzTable.data">
-        <td>{{ data.nombres}}</td>
+        <td>{{ data.nombre}}</td>
         <td>{{ data.facultad }}</td>
         <td>{{data.correo}}</td>
         <td>{{ data.celular }}</td>
        
-        <td><button type="button" class="btn btnc btn-primary btnfunciones" data-bs-toggle="modal" (click)="modificar(data.id_usuario)" data-bs-target="#staticBackdrop">
+        <td><button type="button" class="btn btnc btn-primary btnfunciones" data-bs-toggle="modal" (click)="modificar(data.id)" data-bs-target="#staticBackdrop">
             Modificar
           </button> 
         

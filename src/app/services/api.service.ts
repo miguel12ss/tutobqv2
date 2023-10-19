@@ -20,11 +20,11 @@ export class ApiService {
 
   loginService(correo: string, contraseña: string):Observable<any> {
     let login: Object = {
-      correo: correo,
-      contraseña: contraseña
+      email: correo,
+      password: contraseña
     }
 
-    return this.httpClient.post(` ${this.url}/auth/login`, login)
+    return this.httpClient.post(` ${this.url}auth/login`, login)
   }
 
 

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders}from '@angular/common/http'
 import { tap } from 'rxjs';
+import { environment } from 'src/environment/environment.prod';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
   constructor(private http:HttpClient) { }
-  url="http://localhost:5000/admin/"
-  url2="http://localhost:5000/"
+  url=environment.apiUrl
 
   getFacultades(){
     const httpOptions = {
@@ -597,7 +597,7 @@ getEstudiantes(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getEstudiantes`,httpOptions)
+  return this.http.get(`${this.url}user/get_users`,httpOptions)
 }
 deshabilitar(id_estudiante:string){
   const httpOptions = {

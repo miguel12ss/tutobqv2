@@ -5,12 +5,12 @@ import { forkJoin, tap } from 'rxjs';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocenteService } from 'src/app/docente/services/docente.service';
 interface DataEstudiante {
-  nombres:string
+  nombre:string
   facultad:string
   celular:string
   correo:string
   id_estado:string
-  id_usuario:string
+  id:string
 }
 @Component({
   selector: 'app-modificar-estudiante',
@@ -26,21 +26,21 @@ export class ModificarEstudianteComponent implements OnInit {
 
   forkJoin([
     this.service.getEstudiantes(),
-    this.service.getProgramas(),
-    this.service.getFacultades(),
-    this.service.getTipo(),
-    this.service.getEstado()
+    // this.service.getProgramas(),
+    // this.service.getFacultades(),
+    // this.service.getTipo(),
+    // this.service.getEstado()
   ]).subscribe((results:any) => {
     // Procesa los resultados de cada solicitud
     console.log(results);
     
-    this.estudiante = results[0].data;
-    this.listOfDisplayData=[...results[0].data]
+    this.estudiante = results[0].resultado;
+    this.listOfDisplayData=[...results[0].resultado]
 
-    this.programas = results[1].data;
-    this.facultades = results[2].data;
-    this.tipos=results[3].data;
-    this.estados=results[4].data;
+    // this.programas = results[1].data;
+    // this.facultades = results[2].data;
+    // this.tipos=results[3].data;
+    // this.estados=results[4].data;
   });
 
 
@@ -106,7 +106,7 @@ reset(): void {
 
 search(): void {
   this.visible = false;
-  this.listOfDisplayData = this.estudiante.filter((item: DataEstudiante) => item.nombres.indexOf(this.searchValue) !== -1);
+  this.listOfDisplayData = this.estudiante.filter((item: DataEstudiante) => item.nombre.indexOf(this.searchValue) !== -1);
 }
 
 

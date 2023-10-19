@@ -42,19 +42,21 @@ export class PerfilComponent implements OnInit {
       .getDataForId()
       .pipe(
         tap((res: any) => {
-          
+          console.log(res)
           this.contactForm.patchValue({
             nombres: res.nombre,
             apellidos: res.apellido,
-            tipoDocumento: res.tipoDocumento,
+            tipoDocumento: res.tipo_documento,
             contraseña: res.contraseña,
             programa: res.programa,
-            numeroTelefono: res.numeroTelefono,
+            numeroTelefono: res.celular,
             correo: res.correo,
-            numeroDocumento: res.numeroDocumento,
+            numeroDocumento: res.numero_documento,
             facultad: res.facultad,
           });
-          this.foto='http://localhost:5000/static/uploads/'+res.foto
+          // this.foto='http://localhost:5000/static/uploads/'+res.foto
+            this.foto=res.foto
+        
         })
         
       )
