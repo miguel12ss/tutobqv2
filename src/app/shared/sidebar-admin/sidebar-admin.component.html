@@ -22,29 +22,27 @@
     </li>
       <li nz-submenu nzOpen nzTitle="Usuarios" nzIcon="user">
         <ul>
-          <li nz-submenu nzClose nzTitle="Estudiante" nzIcon="user">
-            <ul>
-              <li nz-menu-item>
-                <a routerLink="agregar/estudiante">Agregar Estudiante</a>
-              </li>
-              <li nz-menu-item>
-                <a routerLink="modificar-estudiante">Administrar Estudiante</a>
-              </li>
-            </ul>
+
+          <li nz-menu-item>
+            <a routerLink="modificar-estudiante">Usuarios</a>
           </li>
 
-          <li nz-submenu nzClose nzTitle="Docente" nzIcon="user">
-            <ul>
-              <li nz-menu-item>
-                <a routerLink="agregar/docente">Agregar Docente</a>
-              </li>
-              <li nz-menu-item>
-                <a routerLink="modificar-docente">Administrar Docente</a>
-              </li>
-            </ul>
+          <li nz-menu-item>
+            <a routerLink="modificar-docente">Facultades De Usuarios</a>
           </li>
+
+          <li nz-menu-item>
+            <a routerLink="agregar/estudiante">Permisos De Usuarios</a>
+          </li>
+
+          <li nz-menu-item>
+            <a routerLink="agregar/docente"> Campos Adicionales</a>
+          </li>
+
+         
         </ul>
       </li>
+
 
       <li nz-submenu nzOpen nzTitle="Tutorias" nzIcon="calendar">
         <ul>
@@ -81,7 +79,7 @@
               <li nz-menu-item>
                 <a routerLink="tabla-tipo-documentos">Tipos de documentos</a>
               </li>
-              
+
             </ul>
           </li>
           <li nz-submenu nzClose nzTitle="Tablas salones" nzIcon="table">
@@ -111,17 +109,17 @@
 
       <div class="sidebar-cerrar">
         <a (click)="logout()">
-        <img src="../../../assets/logout.png"  alt="cerrar">
-      </a>
-      <a (click)="logout()" >
-        <h1>Cerrar sesión</h1>
+          <img src="../../../assets/logout.png" alt="cerrar">
+        </a>
+        <a (click)="logout()">
+          <h1>Cerrar sesión</h1>
 
-      </a>
+        </a>
       </div>
 
     </ul>
   </nz-sider>
-  <nz-layout >
+  <nz-layout>
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
