@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AdminService } from '../services/admin.service';
 import { forkJoin, map, tap } from 'rxjs';
@@ -8,6 +8,8 @@ import { Rol } from 'src/app/shared/interfaces/roles.interface';
 import { Programa } from 'src/app/shared/interfaces/Programa.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
+import { NzTabPosition } from 'ng-zorro-antd/tabs';
+import { Router } from '@angular/router';
 interface DataEstudiante {
   nombre:string
   facultad:string
@@ -24,11 +26,19 @@ interface DataEstudiante {
 export class ModificarEstudianteComponent implements OnInit {
   
   roles:Rol[]=[]
+  router=inject(Router)
   constructor(private service:AdminService,public fb:FormBuilder,private apiservice:ApiService){
     this.estudianteForm=this.initForm()
     this.agregarEstudiante=this.initFormTwo()
   }
   ngOnInit(): void {
+    for (let i = 0; i < 30; i++) {
+      this.tabs.push({
+        name: `Tab ${i}`,
+        disabled: i === 28,
+        content: `Content of tab ${i}`
+      });
+    }
 
   forkJoin([
     this.service.getEstudiantes(),
@@ -232,7 +242,20 @@ agregar(){
   ).subscribe()
 }
 
+//tabs
+tabs: Array<{ name: string; content: string; disabled: boolean }> = [];
+  nzTabPosition: NzTabPosition = 'top';
+  selectedIndex = 27;
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  log(args: any[]): void {  
+    console.log(args);
+    // this.router.navigate(['//modificar-docente'])
+  }
 
 
 }
+
+
+
+
