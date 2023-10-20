@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: AdministradorComponent,
     children: [
-      { path: '', redirectTo: 'deshabilitar-docente', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: 'agregar',
         loadChildren: () =>
