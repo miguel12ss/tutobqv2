@@ -14,6 +14,12 @@ const routes: Routes = [
           import('./usuarios/usuarios.module').then((m) => m.UsuariosModule),
       },
       {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+      
+      {
         path: 'agregar/estudiante',
         loadChildren: () =>
           import('./agregar-estudiante/agregar-estudiante.module').then(

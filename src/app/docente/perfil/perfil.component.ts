@@ -35,13 +35,13 @@ export class PerfilComponent implements OnInit {
           this.contactForm.patchValue({
             nombres: docente.nombre,
             apellidos: docente.apellido,
-            tipoDocumento: docente.tipoDocumento,
-            numeroTelefono: docente.numeroTelefono,
+            tipoDocumento: docente.tipo_documento,
+            numeroTelefono: docente.celular,
             correo: docente.correo,
-            numeroDocumento: docente.numeroDocumento,
+            numeroDocumento: docente.numero_documento,
             facultad: docente.facultad,
           });
-          this.foto='http://localhost:5000/static/uploads/'+docente.foto
+          this.foto=docente.foto
           console.log(this.foto);
           
         })

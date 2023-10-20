@@ -11,7 +11,7 @@ import {
   
 } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { es, id } from 'date-fns/locale';
+import { Salon } from 'src/app/shared/interfaces/salones.interface';
 
 @Component({
   selector: 'app-crear-tutoria',
@@ -28,7 +28,7 @@ export class CrearTutoriaComponent implements OnInit {
   horarioFormUpdate!: FormGroup;
   pasarListaForm!: FormGroup;
   dateNext = '';
-  salones: string[] = [];
+  salones: Salon[] = [];
   materias: string[] = [];
   sedes: string[] = [];
   programas: string[] = [];
@@ -177,7 +177,8 @@ this.docenteService.pasarLista(this.asistencias)
       .getSalones()
       .pipe(
         tap((res: any) => {
-          this.salones = res;
+          console.log(res.resultado)
+          this.salones = res.resultado;
         })
       )
       .subscribe();

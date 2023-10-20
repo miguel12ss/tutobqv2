@@ -14,6 +14,7 @@ export class DocenteService{
 
     getDataDocente():Observable<Docente>{
         const token=localStorage.getItem('token')
+        const id=localStorage.getItem('id_usuario')
         const httpOptions = {
           headers: new HttpHeaders({
             'Authorization': 'Bearer ' + token,
@@ -22,7 +23,7 @@ export class DocenteService{
             'Access-Control-Allow-Credentials': 'true'
           })
         };
-       return  this.http.get<Docente>(`${this.url}/docente/perfil-docente`,httpOptions)
+       return  this.http.get<Docente>(`${this.url}user/get_user/${id}`,httpOptions)
     }
 
     getSalones(){
@@ -35,7 +36,7 @@ export class DocenteService{
           'Access-Control-Allow-Credentials': 'true'
         })
       };
-     return  this.http.get(`${this.url}/salon`,httpOptions)
+     return  this.http.get(`${this.url}salones`,httpOptions)
   }
 
   getMaterias(){

@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class SidebarAdminComponent {
 isCollapsed=false
+
+
 constructor(private readonly router:Router){
 
 }
@@ -17,5 +19,7 @@ logout(){
   this.router.navigate(['/auth/login']); 
 
 }
+
+
 
 }

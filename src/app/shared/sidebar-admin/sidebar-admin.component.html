@@ -6,6 +6,20 @@
       <h1>TUTOBQ</h1>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+
+      <!-- <li nz-menu-item >
+        <a  routerLink="dashboard"><span nz-icon nzType="dashboard" nzTheme="outline"></span>     Dashboard</a>
+      </li> -->
+      <li
+      nz-menu-item
+      nz-tooltip
+      nzTooltipPlacement="right"
+      [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+      
+    >
+      <span nz-icon nzType="dashboard"></span>
+      <span>Dashboard</span>
+    </li>
       <li nz-submenu nzOpen nzTitle="Usuarios" nzIcon="user">
         <ul>
           <li nz-submenu nzClose nzTitle="Estudiante" nzIcon="user">
@@ -116,7 +130,9 @@
       </div>
     </nz-header>
     <nz-content>
+      
       <div class="inner-content ">
+       
         <router-outlet></router-outlet>
       </div>
     </nz-content>

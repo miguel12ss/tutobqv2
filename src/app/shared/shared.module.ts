@@ -10,6 +10,7 @@ import { NgZorroAntdModule } from '../ngZorroAntdModule';
 import { SidebarDocenteComponent } from './sidebar-admin/sidebar-docente/sidebar-docente.component';
 import { DocenteRoutingModule } from '../docente/docente-routing.module';
 import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -17,7 +18,7 @@ import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
   declarations: [FooterComponent,HeaderComponent, SidebarComponent, SidebarDocenteComponent, SidebarAdminComponent],
   imports: [
     CommonModule,EstudianteRouting,NgZorroAntdModule
-    ,DocenteRoutingModule,
+    ,DocenteRoutingModule,NgChartsModule
   ],
   exports:[
     FooterComponent,HeaderComponent,SidebarComponent,SidebarDocenteComponent,SidebarAdminComponent

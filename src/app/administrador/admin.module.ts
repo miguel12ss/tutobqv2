@@ -24,17 +24,21 @@ import { TablaCapacidadesComponent } from './tabla-capacidades/tabla-capacidades
 import { TablaSalonesComponent } from './tabla-salones/tabla-salones.component';
 import { TablaEstadosComponent } from './tabla-estados/tabla-estados.component';
 import { TablaEstadosTutoriasComponent } from './tabla-estados-tutorias/tabla-estados-tutorias.component';
-import { AgregarModalComponent } from './components/agregar-modal/agregar-modal.component';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChartsComponent } from './components/charts/charts.component';
+import { NgChartsModule,NgChartsConfiguration } from 'ng2-charts';
+import { ChartsBarComponent } from './components/charts-bar/charts-bar.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, AgregarModalComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent
   ],
   imports: [
-    CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule
+    CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule,NgChartsModule
   ]
 })
 export class AdminModule { }

@@ -623,7 +623,7 @@ getEstudiante(id_usuario:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getEstudiante/${id_usuario}`,httpOptions)
+  return this.http.get(`${this.url}user/get_user/${id_usuario}`,httpOptions)
 }
 actualizarEstudiante(id_usuario:string,estudiante:any){
   const httpOptions = {
@@ -681,6 +681,29 @@ actualizarDocente(id_usuario:string,docente:any){
    ).subscribe()
 }
 
+getEstadisticas(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}stadistics/contar-usuarios`,httpOptions)
+
+}
+
+getTutorias(){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}stadistics/contar-tutorias`,httpOptions)
+
+}
 
 
 

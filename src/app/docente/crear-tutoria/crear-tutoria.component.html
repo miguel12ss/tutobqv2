@@ -302,8 +302,8 @@ tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
               <div class="mb-3">
                 <label for="salon" class="form-label"><b>Salón</b></label>
-                <select class="form-control" formControlName="salon" id="salon" (change)="onSelect($event)" required>
-                  <option *ngFor="let salon of salones" [value]="salon">{{salon}}</option>
+                <select class="form-control" formControlName="salon" id="salon"  required>
+                  <option *ngFor="let salon of salones" [ngValue]="salon.id_salon">{{salon.salon|json}} hey</option>
                 </select>
               </div>
 

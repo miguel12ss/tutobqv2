@@ -142,7 +142,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Agregar Usuario</b></h1>
     </div>
     <div class="modal-body">
-      <form class="row" [formGroup]="agregarEstudiante" (ngSubmit)="agregar()" >
+      <form class="row" [formGroup]="agregarEstudiante" (ngSubmit)="agregar()" autocomplete="off" >
         <div class="col-md-4">
           <div class="mb-3">
 
@@ -171,7 +171,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="mb-3">
 
             <label for="nombres" class="form-label"><b>Nombres</b></label>
@@ -225,7 +225,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
         </div>
         <div class="modal-footer">
           <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="linea btn bmodal btn-success btn-sm">Guardar</button>
+          <button type="submit" [disabled]="agregarEstudiante.invalid" class="linea btn bmodal btn-success btn-sm">Guardar</button>
         </div>
       </form>
     </div>
