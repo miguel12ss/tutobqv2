@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AdminService } from '../services/admin.service';
-import { forkJoin, tap } from 'rxjs';
+import { forkJoin, map, tap } from 'rxjs';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocenteService } from 'src/app/docente/services/docente.service';
+import { Rol } from 'src/app/shared/interfaces/roles.interface';
+import { Programa } from 'src/app/shared/interfaces/Programa.interface';
+import { ApiService } from 'src/app/services/api.service';
+import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
 interface DataEstudiante {
   nombre:string
   facultad:string
@@ -19,26 +23,34 @@ interface DataEstudiante {
 })
 export class ModificarEstudianteComponent implements OnInit {
   
-  constructor(private service:AdminService,public fb:FormBuilder,private ds:DocenteService){
+  roles:Rol[]=[]
+  constructor(private service:AdminService,public fb:FormBuilder,private apiservice:ApiService){
     this.estudianteForm=this.initForm()
+    this.agregarEstudiante=this.initFormTwo()
   }
   ngOnInit(): void {
 
   forkJoin([
     this.service.getEstudiantes(),
     // this.service.getProgramas(),
-    // this.service.getFacultades(),
-    // this.service.getTipo(),
+    
     // this.service.getEstado()
+    this.service.getRoles(),
+    this.service.getTipo(),
+    this.service.getFacultades()
+
   ]).subscribe((results:any) => {
     // Procesa los resultados de cada solicitud
     console.log(results);
     
     this.estudiante = results[0].resultado;
+    this.roles=results[1]
+    this.tipos=results[2].resultado
+    console.log(this.tipos)
     this.listOfDisplayData=[...results[0].resultado]
 
     // this.programas = results[1].data;
-    // this.facultades = results[2].data;
+    this.facultades = results[3].resultado;
     // this.tipos=results[3].data;
     // this.estados=results[4].data;
   });
@@ -50,7 +62,7 @@ export class ModificarEstudianteComponent implements OnInit {
   estudiante: DataEstudiante[] = [
     
   ];
-
+agregarEstudiante!:FormGroup
 estudianteForm!:FormGroup
 searchValue = '';
 visible = false;
@@ -97,7 +109,48 @@ initForm():FormGroup{
 
 
   })
+
+
 }
+initFormTwo():FormGroup{
+  return this.fb.group({
+    id_rol:['',Validators.required],
+    nombres:['',Validators.required],
+    numero_documento:['',Validators.required],
+    celular:['',Validators.required],
+    apellidos:['',Validators.required],
+    id_facultad:['',Validators.required],
+    correo:['',Validators.required],
+    id_tipo_documento:['',Validators.required],
+    id_programa:['',Validators.required],
+    contraseña:['',Validators.required]
+
+
+
+  })
+}
+onSelect(event:any){
+   
+   console.log(event)
+  this.programas=[]
+  const id_facultad=parseInt(event.target.value.split(':')[1])
+  console.log(id_facultad)
+
+  this.apiservice.getProgramas(id_facultad).pipe(
+    
+      map((programas:any)=>programas.resultado)
+      
+     
+      
+    
+  ).subscribe((programas:Programa[])=>{
+  console.log(programas)
+    this.programas=programas
+    
+
+  })
+}
+
 
 reset(): void {
   this.searchValue = '';
@@ -153,6 +206,30 @@ this.service.actualizarEstudiante(id,estudiante)
 
 
 
+}
+
+agregar(){
+  const usuario=this.agregarEstudiante.value
+  let usuarios: Estudiante = {
+    id:undefined,
+    nombres: this.agregarEstudiante.value.nombres,
+    apellidos: this.agregarEstudiante.value.apellidos,
+    id_tipo_documento: this.agregarEstudiante.value.id_tipo_documento,
+    numero_documento: this.agregarEstudiante.value.numero_documento,
+    celular:this.agregarEstudiante.value.celular.toString(),
+    id_facultad: this.agregarEstudiante.value.id_facultad,
+    id_programa: this.agregarEstudiante.value.id_programa,
+    correo: this.agregarEstudiante.value.correo,
+    contraseña: this.agregarEstudiante.value.contraseña,
+    id_rol:this.agregarEstudiante.value.id_rol,
+    id_estado:1
+  }
+  console.log(usuario)
+  this.apiservice.insertData(usuarios).pipe(
+    tap((res:any)=>{
+      console.log(res)
+    })
+  ).subscribe()
 }
 
 

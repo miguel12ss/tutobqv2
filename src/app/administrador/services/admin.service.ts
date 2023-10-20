@@ -18,7 +18,7 @@ export class AdminService {
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.get(`${this.url}obtenerFacultades`,httpOptions)
+    return this.http.get(`${this.url}facultades`,httpOptions)
   }
   actualizarFacultad(facultad:any){
     const httpOptions = {
@@ -273,7 +273,7 @@ getRoles(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getRoles`,httpOptions)
+  return this.http.get(`${this.url}roles`,httpOptions)
 }
 
 getDataForIdRol(id_rol:string){
@@ -324,7 +324,8 @@ getTipo(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getTipo`,httpOptions)
+  return this.http.get(`${this.url}tipoDocumento
+  `,httpOptions)
 }
 
 

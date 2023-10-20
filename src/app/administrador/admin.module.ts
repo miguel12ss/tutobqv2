@@ -24,13 +24,14 @@ import { TablaCapacidadesComponent } from './tabla-capacidades/tabla-capacidades
 import { TablaSalonesComponent } from './tabla-salones/tabla-salones.component';
 import { TablaEstadosComponent } from './tabla-estados/tabla-estados.component';
 import { TablaEstadosTutoriasComponent } from './tabla-estados-tutorias/tabla-estados-tutorias.component';
+import { AgregarModalComponent } from './components/agregar-modal/agregar-modal.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, AgregarModalComponent
   ],
   imports: [
     CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule
