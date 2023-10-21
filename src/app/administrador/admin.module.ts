@@ -29,13 +29,18 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartsComponent } from './components/charts/charts.component';
 import { NgChartsModule,NgChartsConfiguration } from 'ng2-charts';
 import { ChartsBarComponent } from './components/charts-bar/charts-bar.component';
+import { FacultadxmateriaComponent } from './facultadxmateria/facultadxmateria.component';
+import { FacultadxprogramaComponent } from './facultadxprograma/facultadxprograma.component';
+import { RegistroActividadComponent } from './registro-actividad/registro-actividad.component';
+import { TipoRegistroActividadComponent } from './tipo-registro-actividad/tipo-registro-actividad.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent, FacultadxmateriaComponent, FacultadxprogramaComponent, RegistroActividadComponent, TipoRegistroActividadComponent, NotificacionesComponent
   ],
   imports: [
     CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule,NgChartsModule

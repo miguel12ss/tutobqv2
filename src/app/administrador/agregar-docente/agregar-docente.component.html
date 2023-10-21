@@ -62,11 +62,6 @@
                     <form class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label for="Usuario" class="form-label"><b>Usuario</b></label>
-                                <input type="text" formControlName="Usuario" class="form-control" id="Usuario"
-                                    autocomplete="off" required>
-                            </div>
-                            <div class="mb-3">
                                 <label for="nombres" class="form-label"><b>Nombres</b></label>
                                 <input type="text" formControlName="nombres" class="form-control" id="nombres"
                                     autocomplete="off" required>
@@ -88,8 +83,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="facultad" class="form-label"><b>Facultad</b></label>
-                                <select name="" class="form-control" formControlName="facultad" id="">
+                                <label for="campoad" class="form-label"><b>Campo</b></label>
+                                <select name="" class="form-control" formControlName="campoad" id="">
                                     <option [value]="facultad.facultad" *ngFor="let facultad of facultades">
                                         {{facultad.facultad}}</option>
                                 </select>
@@ -106,11 +101,11 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="programa" class="form-label"><b>Programa</b></label>
-                                <select name="" class="form-control" formControlName="programa" id="">
-                                    <option [value]="facultad.facultad" *ngFor="let facultad of facultades">
-                                        {{facultad.facultad}}</option>
-                                </select>
+                                <div class="mb-3">
+                                    <label for="info" class="form-label"><b>Información</b></label>
+                                    <input type="text" formControlName="rol" class="form-control" id="info"
+                                        autocomplete="off" required>
+                                </div>
 
                             </div>
                         </div>

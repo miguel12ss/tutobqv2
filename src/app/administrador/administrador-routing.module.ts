@@ -118,6 +118,36 @@ const routes: Routes = [
           import('./tabla-estados-tutorias/tabla-estados-tutorias.module').then(
             (m) => m.TablaEstadosTutoriasModule
           ),
+      },{
+        path: 'facultadxmateria',
+        loadChildren: () =>
+          import('./facultadxmateria/facultadxmateria.module').then(
+            (m) => m.FacultadxmateriaModule
+          ),
+      },{
+        path: 'facultadxprograma',
+        loadChildren: () =>
+          import('./facultadxprograma/facultadxprograma.module').then(
+            (m) => m.FacultadxprogramaModule
+          ),
+      },{
+        path: 'registro-actividad',
+        loadChildren: () =>
+          import('./registro-actividad/registro-actividad.module').then(
+            (m) => m.RegistroActividadModule
+          ),
+      },{
+        path: 'tipo-registro-actividad',
+        loadChildren: () =>
+          import('./tipo-registro-actividad/tipo-registro-actividad.module').then(
+            (m) => m.TipoRegistroActividadModule
+          ),
+      },{
+        path: 'notificaciones',
+        loadChildren: () =>
+          import('./notificaciones/notificaciones.module').then(
+            (m) => m.NotificacionesModule
+          ),
       },
       {path:'crear-tutoria',loadChildren:()=>import('./crear-tutoria/crear-tutoria.module').then(m=>m.CrearTutoriaModule)},
       {path:'**',redirectTo:'deshabilitar-docente'}
