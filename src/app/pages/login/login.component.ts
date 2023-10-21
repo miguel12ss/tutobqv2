@@ -66,8 +66,7 @@ export class LoginComponent {
             LoginComponent.rol=response.id_rol
 
            localStorage.setItem('rol', response.id_rol);
-
-            id_usuario = response.usuario;
+            localStorage.setItem('id_usuario',response.id_usuario)
           } else {
             this.showAlertError = true;
           }

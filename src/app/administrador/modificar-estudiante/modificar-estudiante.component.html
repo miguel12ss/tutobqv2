@@ -1,6 +1,6 @@
 <h5 class="text-center">ADMINISTRAR USUARIOS</h5>
 
-<div>
+<!-- <div>
  
   <nz-input-number style="float:right;" [nzMin]="0" [nzMax]="29" [(ngModel)]="selectedIndex"></nz-input-number>
 
@@ -23,10 +23,11 @@
       <a href="/modificar-docente">{{tab.name}}</a>
     </nz-tab>
   </nz-tabset>
-</div>
+</div> -->
 
-<div class="add-user d-flex justify-content-end mb-3">
+<div class="add-user d-flex justify-content-end mb-3 gap-3">
   <button type="button" class="btn btn-warning d-flex justify-space-between align-items-center gap-3"  data-bs-toggle="modal" data-bs-target="#modalagregar">Add User <span style="font-size: 18px;" nz-icon nzType="user-add" nzTheme="outline"></span ></button>
+    <button (click)="downloadPDF()" class="btn btn-success d-flex justify-space-between align-items-center gap-3" > <span nz-icon nzType="download" nzTheme="outline"></span>Descargar Listado</button>
 </div>
 
 <div class="table-responsive">

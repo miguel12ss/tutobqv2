@@ -2,21 +2,27 @@ import { Component, OnInit, inject } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AdminService } from '../services/admin.service';
 import { forkJoin, map, tap } from 'rxjs';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DocenteService } from 'src/app/docente/services/docente.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Rol } from 'src/app/shared/interfaces/roles.interface';
 import { Programa } from 'src/app/shared/interfaces/Programa.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
 import { NzTabPosition } from 'ng-zorro-antd/tabs';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 import { Router } from '@angular/router';
 interface DataEstudiante {
-  nombre:string
+  nombre:string,
+  apellido:string,
   facultad:string
   celular:string
   correo:string
   id_estado:string
   id:string
+  numero_documento:string
+  tipo_documento:string
+  programa:string
+  
 }
 @Component({
   selector: 'app-modificar-estudiante',
@@ -246,6 +252,46 @@ agregar(){
 tabs: Array<{ name: string; content: string; disabled: boolean }> = [];
   nzTabPosition: NzTabPosition = 'top';
   selectedIndex = 27;
+downloadPDF(){
+  const doc=new jsPDF()
+  doc.text('Listado de estudiantes',10,10)
+
+  //generar contenido del pdf
+  const columns=['ID','Nombres','Apellidos','Telefono', 'tipo_documento', 'numero_documento' ,'Programa', 'Correo']
+  const content=this.estudiante.map((student,index)=>[index+1,student.nombre,student.apellido,student.celular,student.tipo_documento,student.numero_documento,student.programa,student.correo])
+  
+ 
+  console.log(content)
+  const tableWidth = 300; // Ancho de la tabla en unidades (mm por defecto)
+    const startY = 20; // Posición vertical inicial de la tabla en unidades
+
+    // Configura el ancho de las columnas
+    const columnWidths = [10, 40, 40, 30, 35, 40, 40, 45]; // Ancho de cada columna en unidades
+
+    // Crea la tabla en el PDF utilizando jspdf-autotable
+    (doc as any).autoTable({
+      head: [columns],
+      body: content,
+      startY: startY,
+      tableWidth: tableWidth,
+      columnStyles: {
+        0: { cellWidth: columnWidths[0] },
+        1: { cellWidth: columnWidths[1] },
+        2: { cellWidth: columnWidths[2] },
+        3: { cellWidth: columnWidths[3] },
+        4: { cellWidth: columnWidths[4] },
+        5: { cellWidth: columnWidths[5] },
+        6: { cellWidth: columnWidths[6] },
+        7: { cellWidth: columnWidths[7] },
+      },
+      styles: { 
+        
+        fontSize:10,
+        valign: 'middle', halign: 'center' },
+    });
+  // Guarda o descarga el PDF
+  doc.save('listado_estudiantes.pdf');
+}
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   log(args: any[]): void {  
