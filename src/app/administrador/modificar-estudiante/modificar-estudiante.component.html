@@ -1,7 +1,8 @@
 <h5 class="text-center">ADMINISTRAR USUARIOS</h5>
 
-<div class="add-user d-flex justify-content-end mb-3">
+<div class="add-user d-flex justify-content-end gap-3 mb-3">
   <button type="button" class="btn btn-warning d-flex justify-space-between align-items-center gap-3"  data-bs-toggle="modal" data-bs-target="#modalagregar">Add User <span style="font-size: 18px;" nz-icon nzType="user-add" nzTheme="outline"></span ></button>
+    <button (click)="downloadPDF()" class="btn btn-success d-flex justify-space-between align-items-center gap-3" > <span nz-icon nzType="download" nzTheme="outline"></span>Descargar Listado</button>
 </div>
 
 <div class="table-responsive">
