@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DocenteService } from '../services/docente.service';
-import { tap } from 'rxjs';
+import { forkJoin, map, tap } from 'rxjs';
 import { ComponentService } from 'src/app/components/services/components.service';
 import {
   FormArray,
@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Salon } from 'src/app/shared/interfaces/salones.interface';
+import { Facultad } from 'src/app/shared/interfaces/Facultad.interface';
 
 @Component({
   selector: 'app-crear-tutoria',
@@ -19,7 +20,10 @@ import { Salon } from 'src/app/shared/interfaces/salones.interface';
   styleUrls: ['./crear-tutoria.component.scss'],
 })
 export class CrearTutoriaComponent implements OnInit {
-  public horario: any;
+  public selectedFile!:File
+  public horario: any
+  public fileForm:FormGroup
+  public facultades:Facultad[]=[]
   horaMinima: string = '07:00';
   horaMaxima: string = '20:00';
   horaFinalMinima: string = '08:00';
@@ -28,21 +32,21 @@ export class CrearTutoriaComponent implements OnInit {
   horarioFormUpdate!: FormGroup;
   pasarListaForm!: FormGroup;
   dateNext = '';
-  salones: Salon[] = [];
-  materias: string[] = [];
+  salones!:any;
+  materias: any[] = [];
   sedes: string[] = [];
-  programas: string[] = [];
+  programas!:any;
   data: string[] = [];
   salonesActualizar: string[] = [];
   select = '';
   estado: any;
   asistencias:any[]=[]
   public estudiantes: any = [];
+  id_usuario!: number;
   constructor(
     public fb: FormBuilder,
     private docenteService: DocenteService,
     private componentService: ComponentService,
-    private cd:ChangeDetectorRef
   ) {
     const dateToday = new Date();
     dateToday.setDate(dateToday.getDate() + 1);
@@ -52,6 +56,7 @@ export class CrearTutoriaComponent implements OnInit {
 
     this.pasarListaForm = this.initPasarListaForm();
     this.horarioForm = this.initForm();
+    this.fileForm=this.initFormtwo()
     this.horarioForm
       .get('horaInicio')
       ?.valueChanges.subscribe((horaSeleccionada) => {
@@ -164,58 +169,57 @@ this.docenteService.pasarLista(this.asistencias)
   }
 
   ngOnInit(): void {
+    // let id_user=localStorage.getItem("id_usuario")
+    
+    this.fileForm=this.initFormtwo()
+    forkJoin([
+      this.docenteService.getSalones(),
+      this.docenteService.getHorario(),
+      this.componentService.getFacultadesUser(),
+    ]
+      
+    ).subscribe((res:any)=>{
+      console.log(res)
+      this.salones=res[0].resultado
+      console.log(this.salones)
+      // this.facultades=res[1].resultado
+     this.horario=res[1].resultado
+     console.log(this.facultades)
+     this.facultades=res[2].resultado
+    })
+
+  }
+
+  selectedFaculty(event:any){
+    const facultad = event.target.value;
+    console.log(facultad)
+    const id_facultad:string=facultad.split(':')[1]
+    
+    console.log(id_facultad)
     this.docenteService
-      .getHorario()
+      .getProgramsForFaculty(id_facultad)
       .pipe(
         tap((res: any) => {
-          this.horario = res.data;
-          console.log(this.horario);
-        })
+        console.log(res)
+
+         this.programas=res.resultado})
       )
       .subscribe();
-    this.docenteService
-      .getSalones()
-      .pipe(
-        tap((res: any) => {
-          console.log(res.resultado)
-          this.salones = res.resultado;
-        })
-      )
-      .subscribe();
+  }
+
+
+  selectedMateria(event:any){
+    const id_facultad:string=this.horarioForm.value.facultad.toString()
+    const id_programa = event.target.value;
+    console.log(id_facultad,id_programa)
 
     this.docenteService
-      .getMaterias()
+      .getMateriasForPrograms(id_facultad,id_programa)
       .pipe(
         tap((res: any) => {
-          this.materias = res;
-        })
-      )
-      .subscribe();
+        console.log(res)
 
-    this.docenteService
-      .getSedes()
-      .pipe(
-        tap((res: any) => {
-          this.sedes = res;
-        })
-      )
-      .subscribe();
-    this.componentService.getPrograms
-      .pipe(
-        tap((res: any) => {
-          this.programas = res;
-        })
-      )
-      .subscribe();
-    this.docenteService
-      .getDataForId()
-      .pipe(
-        tap((res: any) => {
-          this.horarioForm.patchValue({
-            facultad: res.data.facultad,
-            docente: res.data.nombre,
-          });
-        })
+         this.materias=res.resultado})
       )
       .subscribe();
   }
@@ -235,19 +239,25 @@ this.docenteService.pasarLista(this.asistencias)
       fecha: [null, Validators.required],
     });
   }
+
+  initFormtwo():FormGroup{
+    return this.fb.group({
+    id_usuario: [null, Validators.required],
+    })
+  }
   onSelect(event: any) {
     const salon = event.target.value;
+    const id_salon=salon.split(':')[1]
+    console.log(id_salon)
     this.docenteService
-      .obtenerCapacidadPorSalon(salon)
+      .obtenerCapacidadPorSalon(id_salon)
       .pipe(
         tap((res: any) => {
-          console.log(res);
-
-          console.log(res.data.capacidad);
+        
 
           this.horarioForm.patchValue({
-            capacidad: res.data.capacidad,
-            sede: res.data.sede,
+            capacidad: res.capacidad,
+            sede: res.sede,
           });
         })
       )
@@ -352,5 +362,34 @@ this.docenteService.pasarLista(this.asistencias)
           .subscribe();
       }
     });
+  }
+
+  uploadFile(){
+    if (!this.selectedFile) {
+      return;
+    }
+    const id_user=this.fileForm.value.id_usuario
+    const formData = new FormData();
+    console.log(this.selectedFile)
+    formData.append('file', this.selectedFile);
+    console.log(formData)
+    
+    this.docenteService.uploadFile(formData,id_user).pipe(
+      tap((res:any)=>{
+console.log(res.resultado )
+      })
+    ).subscribe()
+
+  }
+  selectFile(event:any){
+    this.selectedFile=event.target.files[0]
+    
+  }
+
+  observacion(id_user:number){
+    console.log(id_user)
+    this.fileForm.patchValue({
+      id_usuario:id_user
+    })
   }
 }

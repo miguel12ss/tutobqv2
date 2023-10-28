@@ -22,7 +22,7 @@ import { RecuperarComponent } from './recuperar/recuperar.component';
     imports: [
         CommonModule,
         PagesRoutingModule,SharedModule
-        ,FormsModule
+        ,FormsModule,ReactiveFormsModule
     ]
 })
 export class PagesModule { }

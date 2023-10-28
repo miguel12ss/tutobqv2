@@ -25,8 +25,6 @@
 
 
 
-
-
   <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -40,8 +38,10 @@
               
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                <input type="text" class="form-control" id="facultad" formControlName="facultad"
-                  aria-describedby="facultad" readonly>
+               <select (change)="selectedFaculty($event)" class="form-control" id="" formControlName="facultad" >
+
+                <option [ngValue]="facultad.id" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+               </select>
               </div>
 
               <div class="mb-3">
@@ -64,15 +64,18 @@
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="programa" class="form-label"><b>Programa</b></label>
-                <select class="form-control" formControlName="programa" id="programa" required>
-                  <option [value]="programa" *ngFor="let programa of programas">{{programa}}</option>
+                <select (change)="selectedMateria($event)" class="form-control" formControlName="programa" id="programa" required>
+                  <option value=""></option>
+                  <option [value]="programa.id" *ngFor="let programa of programas">{{programa.programa}}</option>
                 </select>
               </div>
 
               <div class="mb-3">
                 <label for="salon" class="form-label"><b>Salón</b></label>
                 <select class="form-control" formControlName="salon" id="salon" (change)="onSelect($event)" required>
-                  <option *ngFor="let salon of salones" [value]="salon">{{salon}}</option>
+                  <option value=""></option>
+
+                  <option *ngFor="let salon of salones" [ngValue]="salon.id_salon">{{salon.salon}}</option>
                 </select>
               </div>
 
@@ -91,7 +94,9 @@
               <div class="mb-3">
                 <label for="materia" class="form-label"><b>Materia</b></label>
                 <select formControlName="materia" class="form-control" id="materia" required>
-                  <option *ngFor="let materia of materias" [value]="materia">{{materia}}</option>
+                  <option value=""></option>
+
+                  <option *ngFor="let materia of materias" [value]="materia.id">{{materia.materia}}</option>
                 </select>
               </div>
 
@@ -125,11 +130,12 @@
         <th>cupos</th>
         <th>facultad</th>
         <th>fecha</th>
-        <th>fecha de generacion</th>
 
         <th>horaInicio</th>
+        <th>horaFin</th>
+
         <th>Eliminar</th>
-        <th>Listado de estudiantes</th>
+<th>Observacion</th>
       </tr>
     </thead>
     <tbody>
@@ -137,17 +143,17 @@
         <td>{{ h.cupos }}</td>
         <td>{{h.facultad}}</td>
         <td>{{h.fecha}}</td>
-        <td>{{h.fecha_generacion_tutoria}}</td>
-        <td>{{h.horaInicio}}</td>
+        <td>{{h.hora_inicial}}</td>
+        <td>{{h.hora_final}}</td>
+
         <td><button type="button" class="btndenegar" nz-button
             (click)="getData(h.id_tutoria)"
             
             >
             Eliminar
           </button> </td>
-        <td><button nz-button nzType="primary"    data-bs-toggle="modal" data-bs-target="#modallistado"
-            (click)="listado(h.id_tutoria)">listado</button>
-        </td>
+        
+        <td><button class="btn btn-primary" type="submit"  data-bs-toggle="modal" data-bs-target="#modallistado" (click)="observacion(h.id_usuario)" > <span nz-icon nzType="download" nzTheme="outline"></span>   Subir observacion</button></td>
 
     </tbody>
   </nz-table>
@@ -197,13 +203,15 @@ tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>listado de estudiantes de la tutoria acádemica</b>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Observaciones de la tutoria</b>
         </h1>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
       </div>
       <div class="modal-body"> 
-        <form class="row" [formGroup]="pasarListaForm" (ngSubmit)="pasarLista()" >
-          <div class="table-responsive">
+        <form class="row" [formGroup]="fileForm" (ngSubmit)="uploadFile()" >
+          <input type="file" name="" (change)="selectFile($event)" class="form-control mb-4"  id="">
+          <input type="hidden" formControlName="id_usuario">
+          <!-- <div class="table-responsive">
             <nz-table #headeTable [nzData]="estudiantes" [nzPageSize]="4">
               <thead>
                 <tr>
@@ -246,10 +254,10 @@ tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             </nz-table>
 
 
-          </div>
+          </div> -->
 
           <div class="container w-100  d-flex justify-content-center">
-            <input class="btn btn-success" type="button" (click)="pasarLista()" value="Pasar Lista">
+            <button class="btn btn-success" type="submit" formControlName="file" value="Enviar observacion">Enviar observacion</button>
           </div>
         </form>
       </div>
@@ -303,7 +311,7 @@ tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="mb-3">
                 <label for="salon" class="form-label"><b>Salón</b></label>
                 <select class="form-control" formControlName="salon" id="salon"  required>
-                  <option *ngFor="let salon of salones" [ngValue]="salon.id_salon">{{salon.salon|json}} hey</option>
+                  <option *ngFor="let salon of salones" [ngValue]="salon.id_salon">{{salon.salon}}</option>
                 </select>
               </div>
 

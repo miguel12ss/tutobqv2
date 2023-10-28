@@ -60,6 +60,7 @@ export class LoginComponent {
 
             id_usuario = response.usuario;
           } else if (response.id_rol == 2) {
+            console.log(response)
             this.router.navigate(['/docente']);
             token = response.token;
            localStorage.setItem('token', token);

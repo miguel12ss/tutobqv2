@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Facultad } from "src/app/shared/interfaces/Facultad.interface";
@@ -20,6 +20,19 @@ get getPrograms():Observable<Object>{
 getFacultades(){
     return this.httpClient.get<Facultad[]>(`${this.url}facultades`)
   }
+
+  getFacultadesUser(){
+    const token=localStorage.getItem('token')
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:4200',
+          'Access-Control-Allow-Credentials': 'true'
+        })
+      };
+
+    return this.httpClient.get(`${this.url}facultad-user`,httpOptions)}
 
 
 get getTipoDocumento():Observable<Object>{

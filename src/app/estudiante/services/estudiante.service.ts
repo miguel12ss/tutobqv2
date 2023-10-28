@@ -19,7 +19,6 @@ export class EstudianteService {
 
   getDataForId():Observable<any>{
     const token=localStorage.getItem('token'); 
-    const id_usuario=localStorage.getItem('id_usuario')   
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
@@ -30,7 +29,7 @@ export class EstudianteService {
     };
     
     
-    return this.httpClient.get<any>(`${this.url}user/get_user/${id_usuario}`,httpOptions)
+    return this.httpClient.get<any>(`${this.url}user/get_user`,httpOptions)
   }
 
   getPasswordForId(data:any):Observable<any>{

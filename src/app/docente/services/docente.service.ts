@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { Docente } from "src/app/shared/interfaces/docente.interface";
+import { Salon } from "src/app/shared/interfaces/salones.interface";
 import { environment } from "src/environment/environment.prod";
 
 @Injectable()
@@ -14,7 +15,6 @@ export class DocenteService{
 
     getDataDocente():Observable<Docente>{
         const token=localStorage.getItem('token')
-        const id=localStorage.getItem('id_usuario')
         const httpOptions = {
           headers: new HttpHeaders({
             'Authorization': 'Bearer ' + token,
@@ -23,7 +23,7 @@ export class DocenteService{
             'Access-Control-Allow-Credentials': 'true'
           })
         };
-       return  this.http.get<Docente>(`${this.url}user/get_user/${id}`,httpOptions)
+       return  this.http.get<Docente>(`${this.url}user/get_user`,httpOptions)
     }
 
     getSalones(){
@@ -36,7 +36,7 @@ export class DocenteService{
           'Access-Control-Allow-Credentials': 'true'
         })
       };
-     return  this.http.get(`${this.url}salones`,httpOptions)
+     return  this.http.get<Salon[]>(`${this.url}salones`,httpOptions)
   }
 
   getMaterias(){
@@ -108,8 +108,8 @@ crearHorario(horario:any){
 
 }
 
-obtenerCapacidadPorSalon(salon:string){
-  let salonJson={"salon":salon}
+obtenerCapacidadPorSalon(id_salon:number){
+  
   const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
@@ -119,7 +119,7 @@ obtenerCapacidadPorSalon(salon:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.post(`${this.url}/obtenerCapacidad`,salonJson,httpOptions)
+  return  this.http.get(`${this.url}salones/${id_salon}`,httpOptions)
 }
 getHorario(){
   const token=localStorage.getItem('token')
@@ -131,7 +131,7 @@ getHorario(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.get(`${this.url}/docente/mostrarHorario`,httpOptions)
+  return  this.http.get(`${this.url}horario-usuario`,httpOptions)
 }
 
 getHorarioForEstado(){
@@ -224,4 +224,32 @@ pasarLista(data:any){
  ).subscribe()
 }
 
+uploadFile(formdata:FormData,id_usuario:number){
+  console.log(formdata)
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      
+
+      'Authorization': 'Bearer ' + token,
+
+    })
+  };
+  return this.http.post(`${this.url}observacion/${id_usuario}`,formdata,httpOptions)
 }
+
+getProgramsForFaculty(id_facultad:string){
+
+  return this.http.get(`${this.url}facxpro/${id_facultad}`)
+
+}
+
+
+getMateriasForPrograms(id_facultad:string,id_programa:number){
+
+
+  return this.http.get(`${this.url}matxpro/${id_facultad}/${id_programa}`)
+
+}
+}
+

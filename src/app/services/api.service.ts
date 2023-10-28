@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { ComponentService } from "../components/services/components.service";
 import { Docente } from "../shared/interfaces/docente.interface";
 import { environment } from "src/environment/environment.prod";
+import { Contact } from "../shared/interfaces/contact.interface";
 @Injectable()
 export class ApiService {
   private url =environment.apiUrl
@@ -60,8 +61,12 @@ return this.httpClient.post(`${this.url}/auth/forgot`,email)
     return this.httpClient.get(`${this.url}facultadxprograma/${id_facultad}`)
   }
 
+  createNotification(contactForm:Contact){
+        return this.httpClient.post(`${this.url}admin/create-notification`,contactForm)
+    }
+  }
 
 
 
 
-}
+
