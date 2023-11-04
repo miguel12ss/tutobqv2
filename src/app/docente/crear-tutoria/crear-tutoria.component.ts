@@ -11,8 +11,8 @@ import {
   
 } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Salon } from 'src/app/shared/interfaces/salones.interface';
 import { Facultad } from 'src/app/shared/interfaces/Facultad.interface';
+import { Horario } from 'src/app/shared/interfaces/horario.interface';
 
 @Component({
   selector: 'app-crear-tutoria',
@@ -58,59 +58,59 @@ export class CrearTutoriaComponent implements OnInit {
     this.horarioForm = this.initForm();
     this.fileForm=this.initFormtwo()
     this.horarioForm
-      .get('horaInicio')
+      .get('hora_inicial')
       ?.valueChanges.subscribe((horaSeleccionada) => {
-        const horaFin = this.horarioForm.get('horaFin')?.value;
+        const horaFin = this.horarioForm.get('hora_final')?.value;
 
         if (horaSeleccionada < this.horaMinima) {
           this.horarioForm
-            .get('horaInicio')
+            .get('hora_inicial')
             ?.setValue(this.horaMinima, { emitEvent: false });
         } else if (horaSeleccionada > this.horaMaxima) {
           this.horarioForm
-            .get('horaInicio')
+            .get('hora_inicial')
             ?.setValue(this.horaMaxima, { emitEvent: false });
         } else if (horaSeleccionada < horaFin) {
           this.horarioForm
-            .get('horaFin')
+            .get('hora_final')
             ?.setValue(this.horaFinalMaxima, { emitEvent: false });
         } else if (horaSeleccionada == horaFin) {
           this.horarioForm
-            .get('horaFin')
+            .get('hora_final')
             ?.setValue(this.horaFinalMinima, { emitEvent: false });
           this.horarioForm
-            .get('horaInicio')
+            .get('hora_inicial')
             ?.setValue(this.horaMinima, { emitEvent: false });
         }
       });
 
     this.horarioForm
-      .get('horaFin')
+      .get('hora_final')
       ?.valueChanges.subscribe((horaSeleccionada) => {
-        const horaInicio = this.horarioForm.get('horaInicio')?.value;
+        const horaInicio = this.horarioForm.get('hora_inicial')?.value;
 
         if (horaSeleccionada < this.horaMinima) {
           this.horarioForm
-            .get('horaFin')
+            .get('hora_final')
             ?.setValue(this.horaFinalMinima, { emitEvent: false });
         } else if (horaSeleccionada > this.horaMaxima) {
           console.log(this.horaMaxima);
 
           this.horarioForm
-            .get('horaFin')
+            .get('hora_final')
             ?.setValue(this.horaFinalMaxima, { emitEvent: false });
         } else if (horaSeleccionada < horaInicio) {
           console.log('hm', horaSeleccionada, 'hi', horaInicio);
 
           this.horarioForm
-            .get('horaInicio')
+            .get('hora_inicial')
             ?.setValue(this.horaMinima, { emitEvent: false });
         } else if (horaSeleccionada == horaInicio) {
           this.horarioForm
-            .get('horaFin')
+            .get('hora_final')
             ?.setValue(this.horaFinalMinima, { emitEvent: false });
           this.horarioForm
-            .get('horaInicio')
+            .get('hora_inicial')
             ?.setValue(this.horaMinima, { emitEvent: false });
         }
       });
@@ -209,7 +209,7 @@ this.docenteService.pasarLista(this.asistencias)
 
 
   selectedMateria(event:any){
-    const id_facultad:string=this.horarioForm.value.facultad.toString()
+    const id_facultad:string=this.horarioForm.value.id_facultad.toString()
     const id_programa = event.target.value;
     console.log(id_facultad,id_programa)
 
@@ -226,16 +226,16 @@ this.docenteService.pasarLista(this.asistencias)
 
   initForm(): FormGroup {
     return this.fb.group({
-      facultad: [null, Validators.required],
+      id_facultad: [null, Validators.required],
       tema: [null, Validators.required],
-      capacidad: [null, Validators.required],
-      horaInicio: [null, Validators.required],
-      programa: [null, Validators.required],
-      sede: [null, Validators.required],
-      docente: [null, Validators.required],
-      horaFin: [null, Validators.required],
-      materia: [null, Validators.required],
-      salon: [null, Validators.required],
+      id_capacidad: [null, Validators.required],
+      hora_final: [null, Validators.required],
+      id_programa: [null, Validators.required],
+      id_sede: [null, Validators.required],
+      cupos:[null,Validators.required],
+      hora_inicial: [null, Validators.required],
+      id_materia: [null, Validators.required],
+      id_salon: [null, Validators.required],
       fecha: [null, Validators.required],
     });
   }
@@ -256,8 +256,8 @@ this.docenteService.pasarLista(this.asistencias)
         
 
           this.horarioForm.patchValue({
-            capacidad: res.capacidad,
-            sede: res.sede,
+            id_capacidad: res.capacidad,
+            id_sede: res.sede,
           });
         })
       )
@@ -265,7 +265,7 @@ this.docenteService.pasarLista(this.asistencias)
   }
 
   onSubmit() {
-    const horario = this.horarioForm.value;
+    const horario:Horario = this.horarioForm.value;
     this.docenteService
       .crearHorario(horario)
       .pipe(
@@ -274,12 +274,14 @@ this.docenteService.pasarLista(this.asistencias)
           if (res.error) {
             Swal.fire('Error', res.error, 'warning');
             return;
+          }else{
+            Swal.fire('Success',res.success,'success')
           }
           this.docenteService
             .getHorario()
             .pipe(
               tap((res: any) => {
-                this.horario = res.data;
+                this.horario=res.resultado
               })
             )
             .subscribe();
@@ -338,6 +340,7 @@ this.docenteService.pasarLista(this.asistencias)
 
 
   getData(id_tutoria: string) {
+    console.log(id_tutoria)
     Swal.fire({
       title: 'Estas seguro que deseas eliminarlo',
       text: 'no podra ser revertido',
@@ -349,17 +352,22 @@ this.docenteService.pasarLista(this.asistencias)
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire('Eliminado!', 'La tutoria ha sido eliminada.', 'success');
-        this.docenteService.eliminarTutoria(id_tutoria);
-        this.docenteService
+        this.docenteService.eliminarTutoria(id_tutoria).pipe(
+          tap((res:any)=>{
+            console.log(res)
+            this.docenteService
           .getHorario()
           .pipe(
             tap((res: any) => {
               console.log(res);
 
-              this.horario = res.data;
+              this.horario = res.resultado;
             })
           )
           .subscribe();
+          })
+        ).subscribe()
+        
       }
     });
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { EstudianteService } from '../services/estudiante.service';
 import { tap } from 'rxjs';
 import Swal from 'sweetalert2'
@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./buscar.component.scss']
 })
 export class BuscarComponent {
-
+  materias: any[]=[];
+  materiaSelected='all'
   constructor(private estudianteService:EstudianteService,private router:Router){}
 public datosModal:any={}
   public horarios:any[]=[]
@@ -18,7 +19,7 @@ public datosModal:any={}
       tap((res:any)=>{
         
         
-        this.horarios=res.data
+        this.horarios=res
         if(this.horarios.length===0){
             Swal.fire("Error","No hay tutorias para agendar el dia de hoy porfavor vuelva mas tarde","warning").then(
               (res:any)=>{
@@ -29,14 +30,20 @@ public datosModal:any={}
         }
       })
     ).subscribe()
+
+    this.estudianteService.getMaterias().pipe(
+      tap((res:any)=>{
+this.materias=res.resultado
+      })
+    ).subscribe()
   }
    descripcion(horario: any) {
  console.log(horario);
  
     this.estudianteService.getHorarioForId(horario).pipe(
       tap((res:any)=>{
-       
-        this.datosModal =res.data; 
+       console.log(res)
+        this.datosModal =res; 
         
       })
     ).subscribe()
@@ -81,6 +88,14 @@ public datosModal:any={}
     ).subscribe()    
   }
     })
+  }
+
+
+  onChange(event:any){
+    
+const materia=event.target.value
+console.log(materia)
+this.materiaSelected=materia
   }
 }
        

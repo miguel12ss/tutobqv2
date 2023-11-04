@@ -15,7 +15,9 @@ export class EstudianteService {
   private url=environment.apiUrl
   constructor(private httpClient:HttpClient,private loginservice:ApiService) { }
 
- 
+ getMaterias():Observable<any>{
+  return this.httpClient.get(`${this.url}materia`)
+ }
 
   getDataForId():Observable<any>{
     const token=localStorage.getItem('token'); 
@@ -63,7 +65,7 @@ getHorarios(){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-  return this.httpClient.get(`${this.url}/estudiante/mostrarHorarios`,httpOptions)
+  return this.httpClient.get(`${this.url}horario`,httpOptions)
 }
 
 getHorarioForId(id:number){
@@ -76,7 +78,7 @@ getHorarioForId(id:number){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
- return this.httpClient.get(`${this.url}/obtenerTutoria/${id}`,httpOptions)
+ return this.httpClient.get(`${this.url}horario/${id}`,httpOptions)
 }
 
 

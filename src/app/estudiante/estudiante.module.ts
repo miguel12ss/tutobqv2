@@ -12,6 +12,7 @@ import { RegistroTutoriaComponent } from './registro-tutoria/registro-tutoria.co
 import { NgZorroAntdModule } from '../ngZorroAntdModule';
 import { CardComponent } from './components/card/card.component';
 import { ModalDescripcionComponent } from './components/modal-descripcion/modal-descripcion.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [ 
@@ -23,6 +24,7 @@ import { ModalDescripcionComponent } from './components/modal-descripcion/modal-
     RegistroTutoriaComponent,
     CardComponent,
     ModalDescripcionComponent,
+    FilterPipe,
     
   ],
   imports: [

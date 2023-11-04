@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { Docente } from "src/app/shared/interfaces/docente.interface";
+import { Horario } from "src/app/shared/interfaces/horario.interface";
 import { Salon } from "src/app/shared/interfaces/salones.interface";
 import { environment } from "src/environment/environment.prod";
 
@@ -93,7 +94,8 @@ getHorarioForId(id_tutoria:string){
 }
 
 
-crearHorario(horario:any){
+crearHorario(horario:Horario){
+  console.log(horario)
   const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
@@ -104,7 +106,7 @@ crearHorario(horario:any){
     })
   };
   
-  return  this.http.post(`${this.url}/docente/agregarHorario`,horario,httpOptions)
+  return  this.http.post(`${this.url}horario`,horario,httpOptions)
 
 }
 
@@ -198,12 +200,7 @@ eliminarTutoria(id_tutoria:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
- return this.http.delete(`${this.url}/docente/eliminarTutoria/${id_tutoria}`,httpOptions).pipe(
-  tap((res:any)=>{
-    console.log(res);
-    
-  })
- ).subscribe()
+ return this.http.delete(`${this.url}horario/${id_tutoria}`,httpOptions)
 }
 
 pasarLista(data:any){

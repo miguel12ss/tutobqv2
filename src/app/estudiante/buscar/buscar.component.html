@@ -1,7 +1,18 @@
 <!--<h5 class="text-center">AGENDAMIENTO DE TUTORIAS ACÁDEMICAS</h5>-->
+<div class="container w-25 d-flex mb-3">
+  <select *ngIf="false" (change)="onChange($event)" class="form-control" name="facultad" id="facultad">
+    <option value="all">Escoge alguna materia</option>
+    <option  [value]="materia.materia" *ngFor="let materia of materias">{{materia.materia}}</option>
+  </select>
+</div>
+
 <nz-table #headerTable [nzData]="horarios" [nzPageSize]="6" >
+
   <div class="d-flex justify-content-between  gap-3  flex-wrap">
-    <nz-card style="width:300px;" class="col-4 card-diseño media" *ngFor="let horario of headerTable.data" [nzBordered]="true"
+    
+
+   
+    <nz-card style="width:270px;" class="col-4 card-diseño media" *ngFor="let horario of headerTable.data|filter:materiaSelected:horarios " [nzBordered]="true"
 
       nzTitle="{{horario.materia}}">
       <p>Docente: {{ horario.nombres }} {{ horario.apellidos }}</p>
@@ -13,7 +24,7 @@
           Agendar
         </button>
         <button nz-button data-bs-toggle="modal" class="btnfunciones" type="button" data-bs-target="#modaldescripcion" nzType="primary"
-          (click)="descripcion(horario.id_tutoria)">
+          (click)="descripcion(horario.id)">
           Descripcion
         </button>
       </div>
@@ -47,13 +58,14 @@
                     <td>{{ datosModal.facultad }}</td>
                   </tr>
                   <tr>
-                    <td><b>Materia</b></td>
-                    <td>{{ datosModal.materia }}</td>
-                  </tr>
-                  <tr>
                     <td><b>programa</b></td>
                     <td>{{ datosModal.programa }}</td>
                   </tr>
+                  <tr>
+                    <td><b>Materia</b></td>
+                    <td>{{ datosModal.materia }}</td>
+                  </tr>
+                 
                   <tr>
                     <td><b>Sede</b></td>
                     <td>{{ datosModal.sede }}</td>
@@ -62,10 +74,7 @@
                     <td><b>Salon</b></td>
                     <td>{{ datosModal.salon }}</td>
                   </tr>
-                  <tr>
-                    <td><b>Capacidad</b></td>
-                    <td>{{ datosModal.capacidad }}</td>
-                  </tr>
+                
                   <tr>
                     <td><b>Cupos</b></td>
                     <td>{{ datosModal.cupos }}</td>
@@ -80,11 +89,11 @@
                   </tr>
                   <tr>
                     <td><b>Hora de inicio</b></td>
-                    <td>{{ datosModal.horaInicio }}</td>
+                    <td>{{ datosModal.hora_inicial }}</td>
                   </tr>
                   <tr>
                     <td><b>Hora de finalizacion</b></td>
-                    <td>{{ datosModal.horaFin }}</td>
+                    <td>{{ datosModal.hora_final }}</td>
                   </tr>
                 </tbody>
               </nz-table>

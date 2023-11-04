@@ -11,6 +11,7 @@ import { NzTabPosition } from 'ng-zorro-antd/tabs';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Router } from '@angular/router';
+import { DocenteService } from 'src/app/docente/services/docente.service';
 interface DataEstudiante {
   nombre:string,
   apellido:string,
@@ -30,9 +31,11 @@ interface DataEstudiante {
   styleUrls: ['./modificar-estudiante.component.scss']
 })
 export class ModificarEstudianteComponent implements OnInit {
-  
+  public selectedFile!:File
+  public fileForm!:FormGroup
   roles:Rol[]=[]
   router=inject(Router)
+  docenteService=inject(DocenteService);
   constructor(private service:AdminService,public fb:FormBuilder,private apiservice:ApiService){
     this.estudianteForm=this.initForm()
     this.agregarEstudiante=this.initFormTwo()
@@ -147,12 +150,12 @@ initFormTwo():FormGroup{
 }
 onSelect(event:any){
    
-   console.log(event)
+   
   this.programas=[]
   const id_facultad=parseInt(event.target.value.split(':')[1])
   console.log(id_facultad)
 
-  this.apiservice.getProgramas(id_facultad).pipe(
+  this.docenteService.getProgramsForFaculty(id_facultad.toString()).pipe(
     
       map((programas:any)=>programas.resultado)
       
@@ -300,7 +303,45 @@ downloadPDF(){
   }
 
 
+  onChange(event:any){
+    const facultad = event.target.value;
+    console.log(facultad)
+    const id_facultad:string=facultad.split(':')[1]
+    
+    console.log(id_facultad)
+    this.docenteService
+      .getProgramsForFaculty(id_facultad)
+      .pipe(
+        tap((res: any) => {
+        console.log(res)
+
+         this.programas=res.resultado})
+      )
+      .subscribe();
+  }
+  uploadFile(){
+    if (!this.selectedFile) {
+      return;
+    }
+      this.service.uploadFile(this.selectedFile).pipe(
+        tap((res:any)=>{
+  console.log(res)
+        })
+      ).subscribe()
+
+    }
+    
+  
+
+  selectFile(event:any){
+    this.selectedFile=event.target.files[0]
+    
+  }
+
 }
+  
+
+
 
 
 

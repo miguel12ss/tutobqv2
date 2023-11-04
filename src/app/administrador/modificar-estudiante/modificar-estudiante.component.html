@@ -27,6 +27,7 @@
 
 <div class="add-user d-flex justify-content-end mb-3 gap-3">
   <button type="button" class="btn btn-warning d-flex justify-space-between align-items-center gap-3"  data-bs-toggle="modal" data-bs-target="#modalagregar">Add User <span style="font-size: 18px;" nz-icon nzType="user-add" nzTheme="outline"></span ></button>
+    <button type="button" class="btn btn-warning d-flex justify-space-between align-items-center gap-3"  data-bs-toggle="modal" data-bs-target="#modallistado">Add Multiple User <span style="font-size: 18px;" nz-icon nzType="user-add" nzTheme="outline"></span ></button>
     <button (click)="downloadPDF()" class="btn btn-success d-flex justify-space-between align-items-center gap-3" > <span nz-icon nzType="download" nzTheme="outline"></span>Descargar Listado</button>
 </div>
 
@@ -111,8 +112,8 @@
 
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b></label>
-                <select name="" class="form-control" formControlName="facultad" id="">
-                  <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+                <select name="" (change)="onChange($event)" class="form-control" formControlName="facultad" id="">
+                  <option [ngValue]="facultad.id_facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
                  </select>
               </div>
 
@@ -262,4 +263,71 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
 </div>
 
+
+
+<div class="modal fade modal-lg" id="modallistado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Observaciones de la tutoria</b>
+        </h1>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+      </div>
+      <div class="modal-body"> 
+        <form class="row"  (ngSubmit)="uploadFile()" enctype="multipart/form-data" >
+          <input type="file" accept=".csv,.xlsx" name="file" (change)="selectFile($event)" class="form-control mb-4"  id="file">
+          <!-- <div class="table-responsive">
+            <nz-table #headeTable [nzData]="estudiantes" [nzPageSize]="4">
+              <thead>
+                <tr>
+                  <th>Nombres</th>
+                  <th>Documento de identificacion</th>
+                  <th>Programa</th>
+                  <th>Asistencia</th>
+                  <th>Observaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let h of headeTable.data;let i=index">
+                  
+                  <td>{{ h.nombres }} {{h.apellidos}}</td>
+                  <td>{{h.identificacion}}</td>
+                  <td>{{h.programa}}</td>
+                  <td class="text-center">
+                    <input type="checkbox" (change)="changeValue(i)"
+                    [checked]="h.asistencia==1"
+                    formControlName="{{asistenciasArray.at(i)}}" >
+                    
+
+
+                  </td>
+                  
+                  <td><button type="button" nz-button nzType="primary"
+                    data-bs-toggle="modal" data-bs-target="#modalobservaciones"
+                    
+                    >Observaciones</button></td>
+                  <td>
+                    <input type="hidden"  formControlName="{{idUsuarioArray.at(i)}}" [value]="h.id_usuario">
+                   
+                  </td>
+                </tr>
+                
+
+              </tbody>
+              
+            </nz-table>
+
+
+          </div> -->
+
+          <div class="container w-100  d-flex justify-content-center">
+            <button class="btn btn-success" type="submit">Enviar Archivo de excel</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
 
