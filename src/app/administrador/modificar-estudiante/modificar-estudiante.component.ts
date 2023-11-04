@@ -325,8 +325,20 @@ downloadPDF(){
     }
       this.service.uploadFile(this.selectedFile).pipe(
         tap((res:any)=>{
-  console.log(res)
+          console.log(res)
+        if(res.message.resultado){
+          Swal.fire("Carga masiva","los usuarios han sido registrados con exito","success")
+          this.service.getEstudiantes().pipe(
+            tap((res:any)=>{
+              this.estudiante=res.resultado
+              this.listOfDisplayData=[...res.resultado]
+
+            })
+          )
+
+          }
         })
+  
       ).subscribe()
 
     }

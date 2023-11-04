@@ -34,13 +34,14 @@ import { FacultadxprogramaComponent } from './facultadxprograma/facultadxprogram
 import { RegistroActividadComponent } from './registro-actividad/registro-actividad.component';
 import { TipoRegistroActividadComponent } from './tipo-registro-actividad/tipo-registro-actividad.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
+import { ChartsLineComponent } from './components/charts-line/charts-line.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent, FacultadxmateriaComponent, FacultadxprogramaComponent, RegistroActividadComponent, TipoRegistroActividadComponent, NotificacionesComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent, FacultadxmateriaComponent, FacultadxprogramaComponent, RegistroActividadComponent, TipoRegistroActividadComponent, NotificacionesComponent, ChartsLineComponent
   ],
   imports: [
     CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule,NgChartsModule

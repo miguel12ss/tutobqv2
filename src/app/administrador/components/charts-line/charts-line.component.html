@@ -1,0 +1,11 @@
+<canvas
+style="display:flex;max-width:500px;"
+  class="justify-content-center align-items-center"
+  baseChart
+  [data]="barChartData"
+  [options]="barChartOptions"
+  [type]="barChartType"
+  (chartHover)="chartHovered($event)"
+  (chartClick)="chartClicked($event)"
+>
+</canvas>

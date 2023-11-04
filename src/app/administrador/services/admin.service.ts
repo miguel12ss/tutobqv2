@@ -707,9 +707,9 @@ getTutorias(){
 
 uploadFile(file:File){
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append('formdata', file);
   
-
+console.log(formData)
   return this.http.post(`${this.url}user/multiple-users`,formData)
 
 }
