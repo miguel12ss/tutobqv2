@@ -24,6 +24,10 @@ const routes: Routes = [
         path: 'recuperar',
         loadChildren: () =>
           import('./recuperar/recuperar.module').then((m) => m.RecuperarModule),
+      },{
+        path: 'chat-bot',
+        loadChildren: () =>
+          import('./chat-bot/chat-bot.module').then((m) => m.ChatBotModule),
       },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
