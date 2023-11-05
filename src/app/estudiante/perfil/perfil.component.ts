@@ -115,7 +115,10 @@ export class PerfilComponent implements OnInit {
       this.passwordForm.get('nuevaContraseña')?.value ==
         this.passwordForm.get('confirmarContraseña')?.value
     ) {
-      let form = this.passwordForm.value;
+      let form = {
+        "contraseña_actual":this.passwordForm.get('contraseña')?.value,
+        "contraseña_nueva":this.passwordForm.get('nuevaContraseña')?.value
+      };
 
       this.estudianteservice
         .getPasswordForId(form)

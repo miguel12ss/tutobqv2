@@ -1,7 +1,8 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit, inject } from '@angular/core';
 import { tap } from 'rxjs';
 import { Estudiante } from 'src/app/shared/interfaces/Estudiante.interface';
 import { EstudianteService } from '../services/estudiante.service';
+import { DocenteService } from 'src/app/docente/services/docente.service';
 
 @Component({
   selector: 'app-registro-tutoria',
@@ -14,7 +15,7 @@ export class RegistroTutoriaComponent implements OnInit {
   constructor(private estudianteService:EstudianteService){}
 ngOnInit(): void {
 
-this.estudianteService.obtenerTutoriasPendientes().pipe(
+this.estudianteService.obtenerTutoriasTerminadas().pipe(
   tap((res:any)=>{
     console.log(res.data);
     
@@ -35,6 +36,8 @@ this.estudianteService.getHorarioForId(id_tutoria).pipe(
   
 
 }
+
+
 
 
 }

@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { EstudianteService } from '../services/estudiante.service';
-import { tap } from 'rxjs';
+import { catchError, of, tap, throwError } from 'rxjs';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 @Component({
@@ -17,17 +17,20 @@ public datosModal:any={}
   ngOnInit(): void {
     this.estudianteService.getHorarios().pipe(
       tap((res:any)=>{
-        
+        console.log(res)
         
         this.horarios=res
-        if(this.horarios.length===0){
-            Swal.fire("Error","No hay tutorias para agendar el dia de hoy porfavor vuelva mas tarde","warning").then(
+        
+        
+      }),
+      catchError(err=>{
+
+        Swal.fire("Error","No hay tutorias para agendar el dia de hoy porfavor vuelva mas tarde","warning").then(
               (res:any)=>{
                 this.router.navigate(['/estudiante/perfil'])
-              }
-            )
+              })
             
-        }
+            return throwError(err)
       })
     ).subscribe()
 

@@ -78,26 +78,7 @@ export class PerfilComponent implements OnInit {
 
   }
 
-  onSubmit() {
-    if (this.contactForm.valid && this.passwordForm.get('nuevaContraseña')?.value===this.passwordForm.get('confirmarContraseña')?.value) {
-     const form=this.passwordForm.value
-     this.estudianteservice.getPasswordForId(form).pipe(
-      tap((message:any)=>{
-        if(message.message==="la contraseña ha sido cambiada"){
-          return alert("La contraseña ha sido cambiada")
-        }else{
-          return alert("La contraseña no ha sido cambiada")
-        }
-        
-      })
-     ).subscribe()
-      
-
-      return;
-    }
-
-    alert('las contraseñas no coinciden ')
-  }
+  
 
   onChange(event:any){
       this.selectFile = event.target.files[0];
@@ -140,7 +121,10 @@ export class PerfilComponent implements OnInit {
       this.passwordForm.get('nuevaContraseña')?.value ==
         this.passwordForm.get('confirmarContraseña')?.value
     ) {
-      let form = this.passwordForm.value;
+      let form = {
+        "contraseña_actual":this.passwordForm.get('contraseña')?.value,
+        "contraseña_nueva":this.passwordForm.get('nuevaContraseña')?.value
+      };
 
       this.estudianteservice
         .getPasswordForId(form)

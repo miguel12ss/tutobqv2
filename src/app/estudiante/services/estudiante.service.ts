@@ -44,7 +44,8 @@ export class EstudianteService {
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.httpClient.post(`${this.url}/auth/cambiar-contraseña`,data,httpOptions)
+    console.log(data)
+    return this.httpClient.post(`${this.url}user/cambiar-password`,data,httpOptions)
   }
 
   // subirFoto(file:any){
@@ -153,6 +154,21 @@ obtenerTutoriasPendientes(){
 
 return this.httpClient.get(`${this.url}obtenerTutoriaFinalizadasDocente`,httpOptions)
 
+
+}
+
+obtenerTutoriasTerminadas(){
+  const token=localStorage.getItem('token')
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+
+return this.httpClient.get(`${this.url}obtenerTutoriaFinalizadas`,httpOptions)
 
 }
 
