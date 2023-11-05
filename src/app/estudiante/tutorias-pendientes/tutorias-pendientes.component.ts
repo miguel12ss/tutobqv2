@@ -15,7 +15,7 @@ public datosModal:any={}
 
     this.estudianteService.obtenerTutoriasEstudiante().pipe(
       tap((res:any)=>{
-this.horario=res.data
+this.horario=res.resultado
 
       })
     ).subscribe()
@@ -26,7 +26,7 @@ this.horario=res.data
 this.estudianteService.getHorarioForId(id_tutoria).pipe(
   tap((res:any)=>{
     
-  this.datosModal=res.data
+  this.datosModal=res
   
   }  )
 ).subscribe()
@@ -51,7 +51,7 @@ cancelarTutoria(id_tutoria:any){
       )
       this.estudianteService.obtenerTutoriasEstudiante().pipe(
         tap((res:any)=>{
-  this.horario=res.data
+  this.horario=res.resultado
   
         })
       ).subscribe()

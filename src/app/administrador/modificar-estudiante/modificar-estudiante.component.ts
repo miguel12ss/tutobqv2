@@ -336,6 +336,9 @@ downloadPDF(){
             })
           )
 
+          }else{
+            console.log(res)
+            Swal.fire("Error en la carga masiva",res.message.error,'error')
           }
         })
   

@@ -52,7 +52,7 @@ this.materias=res.resultado
 
   }
 
-  agendarTutoria(id_tutoria:number,id_estado_tutoria:number){
+  agendarTutoria(id_tutoria:number){
    
         
 
@@ -68,19 +68,19 @@ this.materias=res.resultado
   }).then((result) => {
     if (result.isConfirmed) {
       
-      this.estudianteService.agendarTutorias(id_tutoria,id_estado_tutoria).pipe(
+      this.estudianteService.agendarTutorias(id_tutoria).pipe(
         tap((res:any)=>{
           console.log(res);
-      if(res.error=="Ya ha agendado esta tutoria"){
-        Swal.fire('agendamiento de tutorias', 'ya ha agendado esta tutoria recientemente', 'error');
-        }else if(res.message=="agendamiento creado con exito"){
-          Swal.fire('agendamiento de tutorias',"agendamiento creado con exito", 'success');
+      if(res.error){
+        Swal.fire('agendamiento de tutorias', res.error, 'error');
+        }else if(res.message){
+          Swal.fire('agendamiento de tutorias',res.message, 'success');
         }
         this.estudianteService.getHorarios().pipe(
           tap((res:any)=>{
             
             
-            this.horarios=res.data
+            this.horarios=res
           })
         ).subscribe()
 

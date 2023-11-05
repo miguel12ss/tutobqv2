@@ -12,7 +12,7 @@
     
 
    
-    <nz-card style="width:270px;" class="col-4 card-diseño media" *ngFor="let horario of headerTable.data|filter:materiaSelected:horarios " [nzBordered]="true"
+    <nz-card style="width:270px;" class="col-4 card-diseño media" *ngFor="let horario of headerTable.data " [nzBordered]="true"
 
       nzTitle="{{horario.materia}}">
       <p>Docente: {{ horario.nombres }} {{ horario.apellidos }}</p>
@@ -20,7 +20,7 @@
       <p>Cupos: {{ horario.cupos }}</p>
 
       <div class="container-actions d-flex justify-content-around gap-3">
-        <button nz-button nzType="primary" class="btnagendar" (click)="agendarTutoria(horario.id_tutoria,horario.id_estado_tutoria)">
+        <button nz-button nzType="primary" class="btnagendar" (click)="agendarTutoria(horario.id)">
           Agendar
         </button>
         <button nz-button data-bs-toggle="modal" class="btnfunciones" type="button" data-bs-target="#modaldescripcion" nzType="primary"

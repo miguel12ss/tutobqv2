@@ -18,7 +18,7 @@ this.estudianteService.obtenerTutoriasPendientes().pipe(
   tap((res:any)=>{
     console.log(res.data);
     
-    this.horario=res.data
+    this.horario=res.resultado
   })
 ).subscribe()
 
@@ -28,7 +28,7 @@ this.estudianteService.obtenerTutoriasPendientes().pipe(
 descripcion(id_tutoria:any){
 this.estudianteService.getHorarioForId(id_tutoria).pipe(
   tap((res:any)=>{
-    this.datosModal=res.data
+    this.datosModal=res
   })
 ).subscribe()
 

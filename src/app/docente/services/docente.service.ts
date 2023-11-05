@@ -187,7 +187,7 @@ getListado(id_tutoria:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
- return this.http.get(`${this.url}/docente/listado/${id_tutoria}`,httpOptions)
+ return this.http.get(`${this.url}listado/${id_tutoria}`,httpOptions)
 }
 
 eliminarTutoria(id_tutoria:string){

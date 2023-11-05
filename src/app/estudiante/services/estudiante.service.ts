@@ -55,7 +55,7 @@ export class EstudianteService {
 
   // }
 
-getHorarios(){
+  getHorarios(){
   const token=localStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
@@ -95,8 +95,8 @@ getHorarioForIdEstudiante(){
  return this.httpClient.get(`${this.url}/estudiante/mostrarHorariosEstudiante`,httpOptions)
 }
 
-agendarTutorias(id_tutoria:number,id_estado_tutoria:number){
-  let id_agendar={"id_tutoria":id_tutoria, "id_estado_tutoria":id_estado_tutoria}
+agendarTutorias(id_tutoria:number){
+  const tutoria={"id":id_tutoria}
   const token=localStorage.getItem('token')
   const httpOptions = {
     headers: new HttpHeaders({
@@ -106,7 +106,7 @@ agendarTutorias(id_tutoria:number,id_estado_tutoria:number){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-return this.httpClient.post(`${this.url}/estudiante/agendar`,id_agendar,httpOptions)
+return this.httpClient.post(`${this.url}agendar`,tutoria,httpOptions)
 }
 
 obtenerTutoriasEstudiante(){
@@ -119,7 +119,7 @@ obtenerTutoriasEstudiante(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-return this.httpClient.get(`${this.url}/estudiante/mostrarTutoriasEstudiante`,httpOptions)
+return this.httpClient.get(`${this.url}mostrarTutoriasEstudiante`,httpOptions)
 }
 
 
@@ -133,7 +133,7 @@ cancelarTutoria(id_tutoria:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
- this.httpClient.post(`${this.url}/estudiante/cancelarTutoria`,id_tutoria,httpOptions).pipe(
+ this.httpClient.delete(`${this.url}cancelarTutoria/${id_tutoria}`,httpOptions).pipe(
   tap((res:any)=>{
     console.log(res);
     
@@ -151,7 +151,7 @@ obtenerTutoriasPendientes(){
     })
   };
 
-return this.httpClient.get(`${this.url}/estudiante/obtenerTutoriasPendientes`,httpOptions)
+return this.httpClient.get(`${this.url}obtenerTutoriaFinalizadasDocente`,httpOptions)
 
 
 }

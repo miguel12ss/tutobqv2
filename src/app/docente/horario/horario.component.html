@@ -14,20 +14,20 @@
   <tbody>
     <tr *ngFor="let h of headerTable.data">
       <td >{{h.fecha}}</td>
-      <td>{{h.horaInicio}}</td>
-      <td>{{h.horaFin}}</td>
+      <td>{{h.hora_inicial}}</td>
+      <td>{{h.hora_final}}</td>
       <td>{{h.materia}}</td>
 
       <td>
         <button nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modaldescripcion"
-          (click)="descripcion(h.id_tutoria)">
+          (click)="descripcion(h.id)">
           Descripcion
         </button>
       </td>
 
       <td>
         <button nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modal"
-          (click)="listado(h.id_tutoria)">
+          (click)="listado(h.id)">
           Listado
         </button>
       </td>
@@ -78,10 +78,7 @@
                   <td><b>Salon</b></td>
                   <td>{{ datosModal.salon }}</td>
                 </tr>
-                <tr>
-                  <td><b>Capacidad</b></td>
-                  <td>{{ datosModal.capacidad }}</td>
-                </tr>
+              
                 <tr>
                   <td><b>Cupos</b></td>
                   <td>{{ datosModal.cupos }}</td>
@@ -96,11 +93,11 @@
                 </tr>
                 <tr>
                   <td><b>Hora de inicio</b></td>
-                  <td>{{ datosModal.horaInicio }}</td>
+                  <td>{{ datosModal.hora_inicial }}</td>
                 </tr>
                 <tr>
                   <td><b>Hora de finalizacion</b></td>
-                  <td>{{ datosModal.horaFin }}</td>
+                  <td>{{ datosModal.hora_final }}</td>
                 </tr>
               </tbody>
             </nz-table>
@@ -132,16 +129,27 @@
                   <th>Nombres</th>
                   <th>Documento de identificacion</th>
                   <th>Programa</th>
+                  <th>Asistencia</th>
+                  <th>Observacion</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let h of headeTable.data">
-                  <td>{{ h.nombres }} {{ h.apellidos }}</td>
-                  <td>{{ h.identificacion }}</td>
+                  
+                  <td>{{ h.nombre_estudiante }}</td>
+                  <td>{{ h.numero_documento }}</td>
                   <td>{{ h.programa }}</td>
+                  <td><input type="checkbox" name="asistencia" id="asistencia"></td>
+                  <td><input type="text" name="observacion" id="observacion" class="form-control"></td>
                 </tr>
+                
               </tbody>
+
+              
             </nz-table>
+            <div class="d-flex justify-content-center align-items-center ">
+              <button nz-button nzType="primary" type="submit">Pasar lista</button>
+            </div>
           </div>
         </form>
       </div>
