@@ -213,7 +213,7 @@ pasarLista(data:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  this.http.post(`${this.url}/docente/pasarLista`,data,httpOptions).pipe(
+  this.http.put(`${this.url}pasar-lista`,data,httpOptions).pipe(
   tap((res:any)=>{
     console.log(res);
     

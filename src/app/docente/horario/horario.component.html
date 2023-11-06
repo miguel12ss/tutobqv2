@@ -134,13 +134,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let h of headeTable.data">
+                <tr *ngFor="let h of headeTable.data;let i=index">
                   
                   <td>{{ h.nombre_estudiante }}</td>
                   <td>{{ h.numero_documento }}</td>
                   <td>{{ h.programa }}</td>
-                  <td><input type="checkbox" name="asistencia" id="asistencia"></td>
-                  <td><input type="text" name="observacion" id="observacion" class="form-control"></td>
+                  <td><input type="checkbox" (change)="changeValue(i)"
+                    [checked]="h.asistencia==1"
+                    formControlName="{{asistenciasArray.at(i)}}"  name="asistencia" id="asistencia"></td>
+                  <td><input type="text" (input)="changeInput(i,$event)"  formControlName="{{observacionArray.at(i)}}"  name="observacion" id="observacion" class="form-control"></td>
+                  <input type="hidden"  formControlName="{{idUsuarioArray.at(i)}}" [value]="h.id_usuario">
                 </tr>
                 
               </tbody>
@@ -148,7 +151,7 @@
               
             </nz-table>
             <div class="d-flex justify-content-center align-items-center ">
-              <button nz-button nzType="primary" type="submit">Pasar lista</button>
+              <button type="button" nz-button nzType="primary" (click)="pasarLista()" >Pasar lista</button>
             </div>
           </div>
         </form>
