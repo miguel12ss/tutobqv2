@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { DocenteService } from '../services/docente.service';
 import { forkJoin, map, tap } from 'rxjs';
 import { ComponentService } from 'src/app/components/services/components.service';
@@ -13,6 +13,7 @@ import {
 import Swal from 'sweetalert2';
 import { Facultad } from 'src/app/shared/interfaces/Facultad.interface';
 import { Horario } from 'src/app/shared/interfaces/horario.interface';
+import { EstudianteService } from 'src/app/estudiante/services/estudiante.service';
 
 @Component({
   selector: 'app-crear-tutoria',
@@ -20,17 +21,15 @@ import { Horario } from 'src/app/shared/interfaces/horario.interface';
   styleUrls: ['./crear-tutoria.component.scss'],
 })
 export class CrearTutoriaComponent implements OnInit {
-  public selectedFile!:File
-  public horario: any
-  public fileForm:FormGroup
+
+  private estudianteService=inject(EstudianteService)
+  private fb=inject(FormBuilder)
   public facultades:Facultad[]=[]
   horaMinima: string = '07:00';
   horaMaxima: string = '20:00';
   horaFinalMinima: string = '08:00';
   horaFinalMaxima: string = '21:00';
   horarioForm!: FormGroup;
-  horarioFormUpdate!: FormGroup;
-  pasarListaForm!: FormGroup;
   dateNext = '';
   salones!:any;
   materias: any[] = [];
@@ -38,13 +37,14 @@ export class CrearTutoriaComponent implements OnInit {
   programas!:any;
   data: string[] = [];
   salonesActualizar: string[] = [];
-  select = '';
-  estado: any;
-  asistencias:any[]=[]
-  public estudiantes: any = [];
   id_usuario!: number;
+  datosModal: any={}
+horario:any
+estudiantes:any[]=[]
+pasarListaForm!: FormGroup;
+asistencias:any[]=[]
   constructor(
-    public fb: FormBuilder,
+  
     private docenteService: DocenteService,
     private componentService: ComponentService,
   ) {
@@ -52,11 +52,12 @@ export class CrearTutoriaComponent implements OnInit {
     dateToday.setDate(dateToday.getDate() + 1);
 
     this.dateNext = dateToday.toISOString().substring(0, 10);
-    console.log(this.dateNext);
+    
 
     this.pasarListaForm = this.initPasarListaForm();
+    console.log(this.pasarListaForm)
     this.horarioForm = this.initForm();
-    this.fileForm=this.initFormtwo()
+
     this.horarioForm
       .get('hora_inicial')
       ?.valueChanges.subscribe((horaSeleccionada) => {
@@ -123,55 +124,14 @@ export class CrearTutoriaComponent implements OnInit {
       id_usuario: this.fb.array([]),
       asistencia: this.fb.array([]),
       id_tutoria: this.fb.array([]),
+      observacion:this.fb.array([])
     });
   }
-changeValue(index:number){
-  const value=this.pasarListaForm?.value.asistencia.at(index)
- if(value){
-  
-  this.asistenciasArray.at(index).setValue(false)
- }else{
-  this.asistenciasArray.at(index).setValue(true)
-
- }
-}
-
-
-  pasarLista() {
-    this.asistencias=[]
-    const estudiantes = this.pasarListaForm?.value;
-
-    for (let index = 0; index < estudiantes.id_usuario.length; index++) {
-      const id_usuario = estudiantes.id_usuario[index];
-      const asistencia=estudiantes.asistencia[index]===false?0:1
-      const id_tutoria = estudiantes.id_tutoria[index];
-
-      const estudiante={
-        "id_usuario": id_usuario,
-        "asistencia": asistencia,
-        "id_tutoria":id_tutoria
-      }
-      this.asistencias.push(estudiante)
-    }
-this.docenteService.pasarLista(this.asistencias)  
-    
-  }
-  get idUsuarioArray() {
-    return this.pasarListaForm.get('id_usuario') as FormArray;
-  }
-
-  get asistenciasArray() {
-    return this.pasarListaForm.get('asistencia') as FormArray;
-  }
-
-  get idTutoriaArray() {
-    return this.pasarListaForm.get('id_tutoria') as FormArray;
-  }
+ 
 
   ngOnInit(): void {
     // let id_user=localStorage.getItem("id_usuario")
     
-    this.fileForm=this.initFormtwo()
     forkJoin([
       this.docenteService.getSalones(),
       this.docenteService.getHorario(),
@@ -189,7 +149,103 @@ this.docenteService.pasarLista(this.asistencias)
     })
 
   }
+  listado(id_tutoria:string){
 
+    this.idUsuarioArray.clear();
+    this.asistenciasArray.clear();
+    this.docenteService.getListado(id_tutoria).pipe(
+      tap((res:any)=>{
+      
+        console.log(res)
+  
+        this.estudiantes=res.resultado
+        console.log(this.estudiantes)
+        this.estudiantes.forEach((estudiante: any) => {
+              this.idUsuarioArray.push(new FormControl(estudiante.id_estudiante));
+              this.asistenciasArray.push(
+                new FormControl(estudiante.asistencia===1)
+              );
+              this.idTutoriaArray.push(
+                new FormControl(estudiante.id_tutoria)
+              );
+              this.observacionArray.push(
+                new FormControl(estudiante.comentario)
+              )
+        })
+        console.log(this.pasarListaForm.value)
+  
+        
+      })
+    ).subscribe()
+  }
+  get idUsuarioArray() {
+    return this.pasarListaForm.get('id_usuario') as FormArray;
+  }
+  
+  get asistenciasArray() {
+    return this.pasarListaForm.get('asistencia') as FormArray;
+  }
+  
+  get idTutoriaArray() {
+    return this.pasarListaForm.get('id_tutoria') as FormArray;
+  }
+  
+  get observacionArray(){
+    return this.pasarListaForm.get('observacion') as FormArray
+  }
+  changeValue(index:number){
+    const value=this.pasarListaForm?.value.asistencia.at(index)
+   if(value){
+    
+    this.asistenciasArray.at(index).setValue(false)
+   }else{
+    this.asistenciasArray.at(index).setValue(true)
+  
+   }
+  }
+  
+  changeInput(index:number,event:any){
+    const observacionFragmento=event.target.value
+    while (this.observacionArray.length <= index) {
+      this.observacionArray.push(this.fb.control(''));
+    }
+  
+    // Obtiene la observación actual
+    const observacionActual = this.observacionArray.at(index).value;
+  
+    // Agrega el fragmento al final de la observación actual
+    const nuevaObservacion =  observacionFragmento;
+  
+    // Actualiza el valor del control en el FormArray
+    this.observacionArray.at(index).setValue(nuevaObservacion);
+  }
+  
+  
+    pasarLista() {
+      this.asistencias=[]
+    const estudiantes = this.pasarListaForm?.value;
+    console.log(estudiantes)
+  
+    for (let index = 0; index < estudiantes.id_usuario.length; index++) {
+      const id_usuario = estudiantes.id_usuario[index];
+      const asistencia=estudiantes.asistencia[index]===false?0:1
+      const id_tutoria = estudiantes.id_tutoria[index];
+      const observacion=estudiantes.observacion[index]
+  
+      const estudiante={
+        "id_usuario": id_usuario,
+        "asistencia": asistencia,
+        "id_tutoria":id_tutoria,
+        "observacion":observacion
+      }
+      this.asistencias.push(estudiante)
+      console.log(this.asistencias)
+    }
+  this.docenteService.pasarLista(this.asistencias)  
+    
+  
+      
+    }
   selectedFaculty(event:any){
     const facultad = event.target.value;
     console.log(facultad)
@@ -290,32 +346,7 @@ this.docenteService.pasarLista(this.asistencias)
       .subscribe();
   }
 
-  listado(id_tutoria: string) {
-    
-    this.idUsuarioArray.clear();
-    this.asistenciasArray.clear();
-    this.docenteService
-      .getListado(id_tutoria)
-      .pipe(
-        tap((res: any) => {
-         
-          console.log(res.estudiante);
-          
-          this.estudiantes = res.estudiante;
-
-           this.estudiantes.forEach((estudiante: any) => {
-            this.idUsuarioArray.push(new FormControl(estudiante.id_usuario));
-            this.asistenciasArray.push(
-              new FormControl(estudiante.asistencia===1)
-            );
-            this.idTutoriaArray.push(
-              new FormControl(estudiante.id_tutoria)
-            );
-          });
-        })
-      )
-      .subscribe();
-  }
+  
 
 
 
@@ -372,32 +403,29 @@ this.docenteService.pasarLista(this.asistencias)
     });
   }
 
-  uploadFile(){
-    if (!this.selectedFile) {
-      return;
-    }
-    const id_user=this.fileForm.value.id_usuario
-    const formData = new FormData();
-    console.log(this.selectedFile)
-    formData.append('file', this.selectedFile);
-    console.log(formData)
-    
-    this.docenteService.uploadFile(formData,id_user).pipe(
+ 
+ 
+
+  
+
+  descripcion(id_tutoria:any){
+    this.estudianteService.getHorarioForId(id_tutoria).pipe(
       tap((res:any)=>{
-console.log(res.resultado )
+        this.datosModal=res
       })
     ).subscribe()
-
-  }
-  selectFile(event:any){
-    this.selectedFile=event.target.files[0]
     
-  }
+      
+    
+    }
 
-  observacion(id_user:number){
-    console.log(id_user)
-    this.fileForm.patchValue({
-      id_usuario:id_user
-    })
-  }
+
+
+    
+
+
+
+
+
+
 }

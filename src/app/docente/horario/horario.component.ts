@@ -34,6 +34,7 @@ private fb=inject(FormBuilder)
 constructor(){
 
 this.pasarListaForm=this.initPasarListaForm()
+console.log(this.pasarListaForm)
 }
 
 ngOnInit(): void {

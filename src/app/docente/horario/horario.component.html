@@ -1,49 +1,71 @@
 <h3 class="text-center">HISTORIAL DE TUTORIAS ACÁDEMICAS</h3>
 
-<nz-table #headerTable [nzData]="horario" [nzPageSize]="4" [nzScroll]="{ y: '300px' }">
+<nz-table
+  #headerTable
+  [nzData]="horario"
+  [nzPageSize]="4"
+  [nzScroll]="{ y: '300px' }"
+>
   <thead>
     <tr>
       <th>Fecha</th>
-      <th >Inicio</th>
-      <th >Finalización</th>
-      <th >Materia</th>
+      <th>Inicio</th>
+      <th>Finalización</th>
+      <th>Materia</th>
       <th>Descripcion</th>
-      <th>Listado</th>
+      <!-- <th>Listado</th> -->
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let h of headerTable.data">
-      <td >{{h.fecha}}</td>
-      <td>{{h.hora_inicial}}</td>
-      <td>{{h.hora_final}}</td>
-      <td>{{h.materia}}</td>
+      <td>{{ h.fecha }}</td>
+      <td>{{ h.hora_inicial }}</td>
+      <td>{{ h.hora_final }}</td>
+      <td>{{ h.materia }}</td>
 
       <td>
-        <button nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modaldescripcion"
-          (click)="descripcion(h.id)">
+        <button
+          nz-button
+          nzType="primary"
+          class="btnfunciones"
+          data-bs-toggle="modal"
+          data-bs-target="#modaldescripcion"
+          (click)="descripcion(h.id)"
+        >
           Descripcion
         </button>
       </td>
 
-      <td>
+      <!-- <td>
         <button nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modal"
           (click)="listado(h.id)">
           Listado
         </button>
-      </td>
+      </td> -->
     </tr>
   </tbody>
 </nz-table>
 
-<div class="modal fade modal-lg" id="modaldescripcion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade modal-lg"
+  id="modaldescripcion"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">
           <b>Datos de la tutoria acádemica</b>
         </h1>
-        <button type="button" class="linea btn bmodal btn-danger btn-md" data-bs-dismiss="modal">
+        <button
+          type="button"
+          class="linea btn bmodal btn-danger btn-md"
+          data-bs-dismiss="modal"
+        >
           Salir
         </button>
       </div>
@@ -78,7 +100,7 @@
                   <td><b>Salon</b></td>
                   <td>{{ datosModal.salon }}</td>
                 </tr>
-              
+
                 <tr>
                   <td><b>Cupos</b></td>
                   <td>{{ datosModal.cupos }}</td>
@@ -108,15 +130,26 @@
   </div>
 </div>
 
-<div class="modal fade modal-lg" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade modal-lg"
+  id="modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">
           <b>listado de la tutoria acádemica</b>
         </h1>
-        <button type="button" class="linea btn bmodal btn-danger btn-md" data-bs-dismiss="modal">
+        <button
+          type="button"
+          class="linea btn bmodal btn-danger btn-md"
+          data-bs-dismiss="modal"
+        >
           Salir
         </button>
       </div>
@@ -134,24 +167,47 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let h of headeTable.data;let i=index">
-                  
+                <tr *ngFor="let h of headeTable.data; let i = index">
                   <td>{{ h.nombre_estudiante }}</td>
                   <td>{{ h.numero_documento }}</td>
                   <td>{{ h.programa }}</td>
-                  <td><input type="checkbox" (change)="changeValue(i)"
-                    [checked]="h.asistencia==1"
-                    formControlName="{{asistenciasArray.at(i)}}"  name="asistencia" id="asistencia"></td>
-                  <td><input type="text" (input)="changeInput(i,$event)"  formControlName="{{observacionArray.at(i)}}"  name="observacion" id="observacion" class="form-control"></td>
-                  <input type="hidden"  formControlName="{{idUsuarioArray.at(i)}}" [value]="h.id_usuario">
+                  <td>
+                    <input
+                      type="checkbox"
+                      (change)="changeValue(i)"
+                      [checked]="h.asistencia == 1"
+                      formControlName="{{ asistenciasArray.at(i) }}"
+                      name="asistencia"
+                      id="asistencia"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      (input)="changeInput(i, $event)"
+                      formControlName="{{ observacionArray.at(i) }}"
+                      name="observacion"
+                      id="observacion"
+                      class="form-control"
+                    />
+                  </td>
+                  <input
+                    type="hidden"
+                    formControlName="{{ idUsuarioArray.at(i) }}"
+                    [value]="h.id_usuario"
+                  />
                 </tr>
-                
               </tbody>
-
-              
             </nz-table>
-            <div class="d-flex justify-content-center align-items-center ">
-              <button type="button" nz-button nzType="primary" (click)="pasarLista()" >Pasar lista</button>
+            <div class="d-flex justify-content-center align-items-center">
+              <button
+                type="button"
+                nz-button
+                nzType="primary"
+                (click)="pasarLista()"
+              >
+                Pasar lista
+              </button>
             </div>
           </div>
         </form>
