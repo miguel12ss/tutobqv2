@@ -1,25 +1,16 @@
-<form id="report-form">
+<form [formGroup]="reportForm"  id="report-form">
     <label for="date-range">Rango de Fechas:</label>
-    <input type="date" id="start-date">
+    <input formControlName="start_date" type="date" id="start-date">
     <span> - </span>
-    <input type="date"   id="end-date">
+    <input formControlName="end_date" type="date"   id="end-date">
     <br>
 
     <label for="category">Categoría:</label>
-    <select id="category">
-        <option value="categoria1">Categoría 1</option>
-        <option value="categoria2">Categoría 2</option>
+    <select id="category" formControlName="type_report">
+        <option [value]="report" *ngFor="let report of reports">{{report}}</option>
         <!-- Agrega más opciones según tus necesidades -->
     </select>
-    <br>
+    
 
-    <label for="show-columns">Mostrar Columnas:</label>
-    <input type="checkbox" id="column1" checked>
-    <label for="column1">Columna 1</label>
-    <input type="checkbox" id="column2" checked>
-    <label for="column2">Columna 2</label>
-    <!-- Agrega más columnas según tus necesidades -->
-    <br>
-
-    <button type="button" onclick="generarInforme()">Generar Informe</button>
+    <button type="button" [disabled]="reportForm.invalid" (click)="generarInforme()">Generar Informe</button>
 </form>

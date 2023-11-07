@@ -71,7 +71,7 @@ export class LoginComponent {
           } else {
             this.showAlertError = true;
           }
-        }else if(response.id_estado==2){
+        }else if(response.id_estado==14){
           Swal.fire('Advertencia ',"el usuario ha sido deshabilitado porfavor comunicarte con el administrador","warning")
         }else {
           Swal.fire('Error',"Correo y/o contraseña incorrecto","error")
