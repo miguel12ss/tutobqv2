@@ -35,13 +35,14 @@ import { RegistroActividadComponent } from './registro-actividad/registro-activi
 import { TipoRegistroActividadComponent } from './tipo-registro-actividad/tipo-registro-actividad.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 import { ChartsLineComponent } from './components/charts-line/charts-line.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent, FacultadxmateriaComponent, FacultadxprogramaComponent, RegistroActividadComponent, TipoRegistroActividadComponent, NotificacionesComponent, ChartsLineComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent, FacultadxmateriaComponent, FacultadxprogramaComponent, RegistroActividadComponent, TipoRegistroActividadComponent, NotificacionesComponent, ChartsLineComponent, ReportesComponent
   ],
   imports: [
     CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule,NgChartsModule

@@ -50,26 +50,27 @@ export class ModificarEstudianteComponent implements OnInit {
     }
 
   forkJoin([
-    this.service.getEstudiantes(),
-    // this.service.getProgramas(),
-    
-    // this.service.getEstado()
+   
     this.service.getRoles(),
     this.service.getTipo(),
-    this.service.getFacultades()
+    this.service.getFacultades(),
+    this.service.getEstudiantes(),
+   
 
   ]).subscribe((results:any) => {
     // Procesa los resultados de cada solicitud
     console.log(results);
     
-    this.estudiante = results[0].resultado;
-    this.roles=results[1]
-    this.tipos=results[2].resultado
+    this.roles=results[0]
+    this.tipos=results[1].resultado
     console.log(this.tipos)
-    this.listOfDisplayData=[...results[0].resultado]
+    this.listOfDisplayData=[...results[3].resultado]
 
     // this.programas = results[1].data;
-    this.facultades = results[3].resultado;
+    this.facultades = results[2].resultado;
+    this.estudiante = results[3 ].resultado;
+
+    console.log(this.facultades)
     // this.tipos=results[3].data;
     // this.estados=results[4].data;
   });
