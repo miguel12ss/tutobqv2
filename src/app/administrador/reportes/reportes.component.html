@@ -1,16 +1,17 @@
-<form [formGroup]="reportForm"  id="report-form">
+
+<form class="form" [formGroup]="reportForm"  id="report-form">
     <label for="date-range">Rango de Fechas:</label>
-    <input formControlName="start_date" type="date" id="start-date">
+    <input formControlName="start_date" class="form-control" type="date" id="start-date">
     <span> - </span>
-    <input formControlName="end_date" type="date"   id="end-date">
+    <input formControlName="end_date" class="form-control" type="date"   id="end-date">
     <br>
 
     <label for="category">Categoría:</label>
-    <select id="category" formControlName="type_report">
+    <select id="category" class="form-control" formControlName="type_report">
         <option [value]="report" *ngFor="let report of reports">{{report}}</option>
         <!-- Agrega más opciones según tus necesidades -->
     </select>
     
 
-    <button type="button" [disabled]="reportForm.invalid" (click)="generarInforme()">Generar Informe</button>
+    <button type="button" nz-button nzType="primary"  [disabled]="reportForm.invalid" (click)="generarInforme()">Generar Informe</button>
 </form>

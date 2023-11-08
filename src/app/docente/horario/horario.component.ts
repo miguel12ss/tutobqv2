@@ -168,8 +168,38 @@ changeInput(index:number,event:any){
   // Actualiza el valor del control en el FormArray
   this.observacionArray.at(index).setValue(nuevaObservacion);
 }
- 
+
+descargarListado(id:number){
+  this.docenteService.getlistadoForDownload(id).pipe(
+    tap((data:any)=>{
+      const blob = new Blob([data], { type: 'application/octet-stream' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'nombre-del-archivo.xlsx'; // Puedes darle el nombre que quieras
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+  ).subscribe()
 }
+ 
+
+descargarArchivo(data:Blob){
+  const nombreArchivo = 'nombre_del_archivo.xlsx'; // Nombre del archivo que coincide con el proporcionado en el servidor
+
+  const url = window.URL.createObjectURL(data);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = nombreArchivo;
+
+  // Simula un clic en el enlace para descargar el archivo
+  a.click();
+
+  // Libera los recursos
+  window.URL.revokeObjectURL(url);
+}
+}
+
 
 
 

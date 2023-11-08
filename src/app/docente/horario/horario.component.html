@@ -13,6 +13,7 @@
       <th>Finalización</th>
       <th>Materia</th>
       <th>Descripcion</th>
+      <th>Descargar Listado</th>
       <!-- <th>Listado</th> -->
     </tr>
   </thead>
@@ -35,6 +36,9 @@
           Descripcion
         </button>
       </td>
+      <td><button nz-button
+        nzType="primary"
+        class="btnfunciones" (click)="descargarListado(h.id)" >Descargar Listado</button></td>
 
       <!-- <td>
         <button nz-button nzType="primary" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modal"

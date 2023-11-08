@@ -14,6 +14,17 @@ export class DocenteService{
     public readonly url=environment.apiUrl
 
 
+    getlistadoForDownload(id:number){
+      const headers = new HttpHeaders()
+      .set('Accept', 'application/octet-stream'); // Indica que esperamos una respuesta binaria
+
+    return this.http.get(`${this.url}reporte/horario/${id}`, {
+      headers,
+      responseType: 'blob' as 'json' // Indica que la respuesta es un blob (archivo binario)
+    });
+    
+    }
+
     getDataDocente():Observable<Docente>{
         const token=localStorage.getItem('token')
         const httpOptions = {
