@@ -68,15 +68,13 @@ modificar(id_salon:string){
 
   this.service.getDataForIdSalon(id_salon).pipe(
     tap((res:any)=>{
-      console.log(res.data);
-      
-      console.log(res.data.sede);
+     
       
       this.salonForm.patchValue({
-        salon:res.data.salon,
-        sede:res.data.sede,
-        capacidad:res.data.capacidad,
-        id_salon:res.data.id_salon
+        salon:res.salon,
+        sede:res.sede,
+        capacidad:res.capacidad,
+        id_salon:res.id_salon
       })
     })
   ).subscribe()
@@ -89,20 +87,20 @@ ngOnInit(): void {
     tap((res:any)=>{
       console.log(res);
       
-this.salones=res.data
-this.listOfData=[...res.data]
+this.salones=res
+this.listOfData=[...res]
     }
   )).subscribe()
 
   this.service.getSedes().pipe(
     tap((res:any)=>{
-this.sedes=res.data      
+this.sedes=res      
     }
   )).subscribe()
   
   this.service.getCapacidad().pipe(
     tap((res:any)=>{
-this.capacidades=res.data      
+this.capacidades=res     
     }
   )).subscribe()
 }
@@ -126,7 +124,7 @@ onSubmit(){
 
     this.service.getSalones().pipe(
       tap((res:any)=>{
-        this.salones=res.data
+        this.salones=res
       })
     ).subscribe()
 
@@ -148,12 +146,12 @@ this.service.setSalon(salon).pipe(
   tap((res:any)=>{
     if (res.error) {
       Swal.fire("Error al agregar el salón", res.error, "error")
-    } else if (res.data) {
+    } else if (res.success) {
       Swal.fire("Añadido exitosamente", "El salón ha sido Añadido con exito", "success")
     }
     this.service.getSalones().pipe(
       tap((res: any) => {
-        this.salones= res.data
+        this.salones= res
       })
     ).subscribe()
 

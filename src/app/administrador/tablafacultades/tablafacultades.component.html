@@ -24,11 +24,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let f of nzTable.data">
-                <td>{{ f.id_facultad}}</td>
+                <td>{{ f.id}}</td>
                 <td>{{ f.facultad}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar"
-                        (click)="modificar(f.id_facultad)">
+                        (click)="modificar(f.id)">
                         Modificar 
                     </button></td>
             </tr>

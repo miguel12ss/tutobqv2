@@ -30,12 +30,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_programa}}</td>
+                <td>{{ data.id}}</td>
                 <td>{{ data.programa}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar"
                         
-                        (click)="modificar(data.id_programa)">
+                        (click)="modificar(data.id)">
                         
                         Modificar
                     </button></td>

@@ -57,7 +57,7 @@ export class TablaProgramasComponent {
       tap((res:any)=>{
         console.log(res);
         
-this.programas=res.data
+this.programas=res
 this.listOfDisplayData=[...this.programas]
       }
     )).subscribe()
@@ -66,8 +66,8 @@ this.listOfDisplayData=[...this.programas]
     this.service.getDataForIdPrograma(id_programa).pipe(
       tap((res:any)=>{
         this.programaForm.patchValue({
-          programa:res.data.programa,
-          id_programa:res.data.id_programa
+          programa:res.programa,
+          id_programa:res.id
         })
       })
     ).subscribe()
@@ -78,7 +78,7 @@ this.listOfDisplayData=[...this.programas]
     this.service.actualizarPrograma(facultades).pipe(tap((res:any)=>{
       console.log(res);
       
-        if(res.error=="El programa ya se encuentra registrado en el sistema"){
+        if(res.error){
           Swal.fire("Error al actualizar",res.error,"error")
       }else if(res.success){
         Swal.fire("Actualizacion exitosa","El programa ha sido actualizado con exito","success")
@@ -91,7 +91,7 @@ this.listOfDisplayData=[...this.programas]
 
       this.service.getProgramas().pipe(
         tap((res:any)=>{
-          this.programas=res.data
+          this.programas=res
         })
       ).subscribe()
 
@@ -106,22 +106,21 @@ this.listOfDisplayData=[...this.programas]
   }
 
   agregar(){
-    const facultad=this.programaAgregar.value
-    console.log(facultad);
+    const programa=this.programaAgregar.value
     
-    this.service.setPrograma(facultad).pipe(
+    this.service.setPrograma(programa).pipe(
       tap((res:any)=>{
         console.log(res);
         
         if(res.error){
           Swal.fire("Error al agregar el programa",res.error,"error")
-      }else if(res.data){
+      }else if(res.success){
         Swal.fire("Añadido exitosamente","El programa ha sido Añadido con exito","success")
       }
       
       this.service.getProgramas().pipe(
         tap((res:any)=>{
-          this.programas=res.data
+          this.programas=res
         })
       ).subscribe()
 

@@ -62,7 +62,7 @@ initFormFacultad():FormGroup{
       tap((res:any)=>{
         console.log(res);
         
-this.facultades=res.data
+this.facultades=res.resultado
 this.listOfDisplayData = [...this.facultades];
 
       }
@@ -70,19 +70,12 @@ this.listOfDisplayData = [...this.facultades];
   }
 
 
-  actualizar(id_tutoria:string){
-    // this.service.actualizarFacultad(id_tutoria).pipe(
-    //   tap((res:any)=>{
-    //     if(res.message=="success"){Swal.fire("Actualizar facultad",'la facultad se ha actualizado','success')}
-    //   })
-    // ).subscribe()
-  }
   modificar(id_facultad:string){
     this.service.getDataForIdFacultad(id_facultad).pipe(
       tap((res:any)=>{
         this.facultadForm.patchValue({
-          facultad:res.data.facultad,
-          id_facultad:res.data.id_facultad
+          facultad:res.facultad,
+          id_facultad:res.id
         })
       })
     ).subscribe()
@@ -92,10 +85,10 @@ this.listOfDisplayData = [...this.facultades];
     this.service.actualizarFacultad(facultades).pipe(tap((res:any)=>{
       console.log(res);
       
-        if(res.error=="La facultad ya se encuentra registrada en el sistema"){
+        if(res.error){
           Swal.fire("Error al actualizar",res.error,"error")
       }else if(res.success){
-        Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
+        Swal.fire("Actualizacion exitosa",res.success,"success")
         
 
 
@@ -105,7 +98,7 @@ this.listOfDisplayData = [...this.facultades];
 
       this.service.getFacultades().pipe(
         tap((res:any)=>{
-          this.facultades=res.data
+          this.facultades=res.resultado
         })
       ).subscribe()
 
@@ -128,15 +121,15 @@ this.listOfDisplayData = [...this.facultades];
       tap((res:any)=>{
         console.log(res);
         
-        if(res.error=="La facultad ya se encuentra registrada en el sistema"){
-          Swal.fire("Error al agregar facultad",res.error,"error")
-      }else if(res.data){
+        if(res.error){
+          Swal.fire("Error al agregar facultad ",res.error,"error")
+      }else if(res.resultado){
         Swal.fire("Añadido exitosamente","La facultad ha sido agregada con exito","success")
       }
       
       this.service.getFacultades().pipe(
         tap((res:any)=>{
-          this.facultades=res.data
+          this.facultades=res.resultado
         })
       ).subscribe()
 

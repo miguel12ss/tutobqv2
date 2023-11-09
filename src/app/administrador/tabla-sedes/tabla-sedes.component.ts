@@ -60,7 +60,7 @@ initForm():FormGroup{
       tap((res:any)=>{
         console.log(res);
         
-this.sedes=res.data
+this.sedes=res
 this.listOfDisplayData=[...res.data]
 }
     )).subscribe()
@@ -69,8 +69,8 @@ this.listOfDisplayData=[...res.data]
     this.service.getDataForIdSede(id_sede).pipe(
       tap((res:any)=>{
         this.sedeForm.patchValue({
-          sede:res.data.sede,
-          id_sede:res.data.id_sede
+          sede:res.sede,
+          id_sede:res.id
         })
       })
     ).subscribe()
@@ -87,13 +87,13 @@ agregar(){
         
         if(res.error){
           Swal.fire("Error al agregar el programa",res.error,"error")
-      }else if(res.data){
+      }else if(res.success){
         Swal.fire("Añadido exitosamente",res.data,"success")
       }
       
       this.service.getSedes().pipe(
         tap((res:any)=>{
-          this.sedes=res.data
+          this.sedes=res
         })
       ).subscribe()
 
@@ -133,7 +133,7 @@ this.service.actualizarSedes(sedes).pipe(tap((res:any)=>{
 
   this.service.getSedes().pipe(
     tap((res:any)=>{
-      this.sedes=res.data
+      this.sedes=res
     })
   ).subscribe()
 

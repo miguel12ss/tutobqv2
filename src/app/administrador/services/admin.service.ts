@@ -28,7 +28,7 @@ export class AdminService {
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.post(`${this.url}actualizar`,facultad,httpOptions)
+    return this.http.put(`${this.url}facultad/${facultad.id_facultad}`,facultad,httpOptions)
   }
 
   actualizarSedes(sedes:any){
@@ -39,7 +39,7 @@ export class AdminService {
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.post(`${this.url}actualizarSede`,sedes,httpOptions)
+    return this.http.put(`${this.url}sede/${sedes.id_sede}`,sedes,httpOptions)
   }
 
 
@@ -51,7 +51,7 @@ actualizarSalon(salon:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}actualizarSalon`,salon,httpOptions)
+  return this.http.put(`${this.url}salones/${salon.id_salon}`,salon,httpOptions)
 }
 
   getDataForIdFacultad(id_facultad:string){
@@ -62,7 +62,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.get(`${this.url}getFacultadForId/${id_facultad}`,httpOptions)
+    return this.http.get(`${this.url}facultad/${id_facultad}`,httpOptions)
   }
 
   
@@ -77,7 +77,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.post(`${this.url}setFacultad`,facultade,httpOptions)
+    return this.http.post(`${this.url}facultad`,facultade,httpOptions)
   }
 
 
@@ -91,7 +91,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.get(`${this.url}obtenerProgramas`,httpOptions)
+    return this.http.get(`${this.url}programa`,httpOptions)
   }
 
   getSedes(){
@@ -102,7 +102,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.get(`${this.url}getSedes`,httpOptions)
+    return this.http.get(`${this.url}sede`,httpOptions)
   }
 
   getDataForIdSede(id_sede:string){
@@ -113,7 +113,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.get(`${this.url}getDataForIdSede/${id_sede}`,httpOptions)
+    return this.http.get(`${this.url}sede/${id_sede}`,httpOptions)
 
   }
 
@@ -132,7 +132,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.post(`${this.url}actualizarPrograma`,programa,httpOptions)
+    return this.http.put(`${this.url}programa/${programa.id_programa}`,programa,httpOptions)
   }
 
 
@@ -144,14 +144,12 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.get(`${this.url}getProgramaForId/${id_programa}`,httpOptions)
+    return this.http.get(`${this.url}programa/${id_programa}`,httpOptions)
   }
 
   
-  setPrograma(facultad:any){
-    const programa={
-      "programa":facultad.programa
-    }
+  setPrograma(programa:any){
+    
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -159,7 +157,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.post(`${this.url}setPrograma`,programa,httpOptions)
+    return this.http.post(`${this.url}programa`,programa,httpOptions)
   }
 
 
@@ -215,9 +213,7 @@ actualizarSalon(salon:any){
   }
 
 setSede(sede:any){
-  const sedeObject={
-    "sede":sede.sede
-  }
+  
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -225,7 +221,7 @@ setSede(sede:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}setSede`,sedeObject,httpOptions)
+  return this.http.post(`${this.url}sede`,sede,httpOptions)
 }
 
 setSalon(salon:any){
@@ -239,7 +235,7 @@ setSalon(salon:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}setSalon`,salon,httpOptions)
+  return this.http.post(`${this.url}salones`,salon,httpOptions)
 }
 
 
@@ -251,7 +247,7 @@ getSalones(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getSalones`,httpOptions)
+  return this.http.get(`${this.url}salones`,httpOptions)
 }
 
 
@@ -263,7 +259,7 @@ getDataForIdSalon(id_salon:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getSalonForId/${id_salon}`,httpOptions)
+  return this.http.get(`${this.url}salones/${id_salon}`,httpOptions)
 }
 getRoles(){
   const httpOptions = {
@@ -486,7 +482,7 @@ getCapacidad(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getCapacidad`,httpOptions)
+  return this.http.get(`${this.url}capacidad`,httpOptions)
 }
 
 
@@ -498,7 +494,7 @@ actualizarCapacidad(capacidad:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}actualizarCapacidad`,capacidad,httpOptions)
+  return this.http.put(`${this.url}capacidad/${capacidad.id_capacidad}`,capacidad,httpOptions)
 
 
 }
@@ -515,7 +511,7 @@ setCapacidad(capacidad:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}setCapacidad`,capacidades,httpOptions)
+  return this.http.post(`${this.url}capacidad`,capacidades,httpOptions)
 }
 
 getDataForIdCapacidad(id_capacidad:string){
@@ -526,7 +522,7 @@ getDataForIdCapacidad(id_capacidad:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getCapacidadForId/${id_capacidad}`,httpOptions)
+  return this.http.get(`${this.url}capacidad/${id_capacidad}`,httpOptions)
 }
 
 

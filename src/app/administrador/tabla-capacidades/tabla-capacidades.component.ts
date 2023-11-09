@@ -53,8 +53,8 @@ export class TablaCapacidadesComponent {
       tap((res: any) => {
         console.log(res);
 
-        this.capacidades = res.data
-        this.listOfDisplayData=[...res.data]
+        this.capacidades = res
+        this.listOfDisplayData=[...res]
       }
       )).subscribe()
   }
@@ -70,13 +70,13 @@ export class TablaCapacidadesComponent {
 
         if (res.error) {
           Swal.fire("Error al agregar la capacidad", res.error, "error")
-        } else if (res.data) {
+        } else if (res.success) {
           Swal.fire("Añadido exitosamente", "La capacidad ha sido Añadida con exito", "success")
         }
 
         this.service.getCapacidad().pipe(
           tap((res: any) => {
-            this.capacidades= res.data
+            this.capacidades= res
           })
         ).subscribe()
 
@@ -104,8 +104,8 @@ export class TablaCapacidadesComponent {
         console.log(res);
 
         this.capacidadForm.patchValue({
-          capacidad: res.data.capacidad,
-          id_capacidad: res.data.id_capacidad
+          capacidad: res.capacidad,
+          id_capacidad: res.id
         })
       })
     ).subscribe()
@@ -132,7 +132,7 @@ export class TablaCapacidadesComponent {
 
       this.service.getCapacidad().pipe(
         tap((res: any) => {
-          this.capacidades = res.data
+          this.capacidades = res
         })
       ).subscribe()
 
