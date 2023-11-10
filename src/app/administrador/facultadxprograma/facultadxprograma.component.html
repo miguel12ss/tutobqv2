@@ -6,7 +6,7 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="facultades" [nzPageSize]="4" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="facxpro" [nzPageSize]="4" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>Facultad
@@ -21,11 +21,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let f of nzTable.data">
-                <td>{{ f.id_facultad}}</td>
                 <td>{{ f.facultad}}</td>
+                <td>{{ f.programa}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar"
-                        (click)="modificar(f.id_facultad)">
+                        (click)="modificar(f.id)">
                         Modificar 
                     </button></td>
             </tr>
@@ -56,13 +56,17 @@
                         <div class="col-md-4 ">
                             <div class="mb-4">
                                 <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                                <input type="text" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" formControlName="facultad">
+                                <select class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" formControlName="facultad">
+                                    <option [value]="fac.facultad" *ngFor="let fac of facultad">{{fac.facultad}}</option>
+                                    </select>
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="mb-4">
                                 <label for="programa" class="form-label"><b>Programa</b> </label>
-                                <input type="text" class="form-control" id="programa" aria-describedby="programa" autocomplete="off" formControlName="programa">
+                                <select class="form-control" id="programa" aria-describedby="programa" autocomplete="off" formControlName="programa">
+                                    <option [value]="programa.programa" *ngFor="let programa of programas">{{programa.programa}}</option>
+                                    </select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -90,12 +94,21 @@
                         <div class="col-md-5">
                             <div class="mb-4">
                                 <label for="id_facultad" class="form-label"><b>Id facultad</b> </label>
-                                <input type="number" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" formControlName="id_facultad" readonly >
+                                <input type="number" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" formControlName="id" readonly >
                             </div>
                             <div class="mb-4">
                                 <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                                <input type="text" class="form-control" id="facultad" formControlName="facultad" aria-describedby="facultad" autocomplete="off">
+                                <select  class="form-control" id="facultad" formControlName="facultad" aria-describedby="facultad" autocomplete="off">
+                                    <option [value]="f.facultad" *ngFor="let f of facultad">{{f.facultad}}</option>
+                                    </select>
                             </div>
+                            <div class="mb-4">
+                                <label for="facultad" class="form-label"><b>Facultad</b> </label>
+                            <select  class="form-control" id="programa" formControlName="programa" aria-describedby="programa" autocomplete="off">
+                                <option [value]="programa.programa" *ngFor="let programa of programas">{{programa.programa}}</option>
+                                </select>
+                                </div>
+                        
                         </div>
 
 

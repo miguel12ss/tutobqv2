@@ -333,16 +333,14 @@ actualizarTipo(tipo:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}actualizarTipo`,tipo,httpOptions)
+  return this.http.put(`${this.url}tipoDocumento/${tipo.id_tipo_documento}`,tipo,httpOptions)
 
 
 }
 
 
 setTipo(tipo:any){
-  const tipos={
-    "tipo_documento":tipo.tipo_documento
-  }
+  
   const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -350,7 +348,7 @@ setTipo(tipo:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}setTipo`,tipos,httpOptions)
+  return this.http.post(`${this.url}tipoDocumento`,tipo,httpOptions)
 }
 
 getDataForIdTipo(id_tipo:string){
@@ -361,7 +359,7 @@ getDataForIdTipo(id_tipo:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getTipoForId/${id_tipo}`,httpOptions)
+  return this.http.get(`${this.url}tipoDocumento/${id_tipo}`,httpOptions)
 }
 
 
@@ -710,7 +708,23 @@ console.log(formData)
 
 }
 
+getFacultadxprograma(){
+  return this.http.get(`${this.url}facultadxprograma`)
+}
 
+getForIdFacultadxPrograma(id_fxp:number){
+  return this.http.get(`${this.url}facxpro/${id_fxp}`)
+
+}
+
+agregarFacultadxPrograma(data:any){
+  return this.http.post(`${this.url}facultadxprograma`,data)
+
+}
+updateFacultadxPrograma(data:any){
+  return this.http.put(`${this.url}facultadxprograma/${data.id}`,data)
+
+}
 
 
 }

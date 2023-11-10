@@ -3,6 +3,7 @@ import { AdminService } from '../services/admin.service';
 import { tap } from 'rxjs';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Programa } from 'src/app/shared/interfaces/Programa.interface';
 interface DataItem {
   id_facultad:String
   facultad:String
@@ -13,12 +14,12 @@ interface DataItem {
   styleUrls: ['./facultadxprograma.component.scss']
 })
 export class FacultadxprogramaComponent {
-  @Input() tablafacultades!:DataItem[]
   searchValue = '';
   visible = false;
   listOfData: any[] = [
   ];
-  facultades:any[]=[]
+  programas:Programa[]=[]
+  facxpro:any[]=[]
   facultad:any[]=[]
   listOfDisplayData:any = [];
   facultadForm!:FormGroup
@@ -34,6 +35,7 @@ export class FacultadxprogramaComponent {
 initFormFacultad():FormGroup{
   return this.fb.group({
     facultad:['',Validators.required],
+    programa:['',Validators.required]
     
   })
 }
@@ -41,8 +43,9 @@ initFormFacultad():FormGroup{
 
   initForm():FormGroup{
     return this.fb.group({
+      id:['',Validators.required],
       facultad:['',Validators.required],
-      id_facultad:['',Validators.required]
+      programa:['',Validators.required]
     })
   }
 
@@ -53,19 +56,31 @@ initFormFacultad():FormGroup{
   
   search(): void {
     this.visible = false;
-    this.facultades = this.listOfDisplayData.filter((item: DataItem) => item.facultad.indexOf(this.searchValue) !== -1);
+    this.facxpro = this.listOfDisplayData.filter((item: DataItem) => item.facultad.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {
-    this.service.getFacultades().pipe(
+    this.service.getFacultadxprograma().pipe(
       tap((res:any)=>{
         console.log(res);
         
-this.facultades=res.data
-this.listOfDisplayData = [...this.facultades];
+this.facxpro=res
+this.listOfDisplayData = [...this.facxpro];
 
       }
     )).subscribe()
+
+    this.service.getProgramas().pipe(
+      tap((res:any)=>{
+        this.programas=res
+      })
+    ).subscribe()
+
+    this.service.getFacultades().pipe(
+      tap((res:any)=>{
+        this.facultad=res.resultado
+      })
+    ).subscribe()
   }
 
 
@@ -76,22 +91,23 @@ this.listOfDisplayData = [...this.facultades];
     //   })
     // ).subscribe()
   }
-  modificar(id_facultad:string){
-    this.service.getDataForIdFacultad(id_facultad).pipe(
+  modificar(id_facultad:number){
+    this.service.getForIdFacultadxPrograma(id_facultad).pipe(
       tap((res:any)=>{
         this.facultadForm.patchValue({
-          facultad:res.data.facultad,
-          id_facultad:res.data.id_facultad
+          id:res.resultado.id,
+          programa:res.resultado.programa,
+          facultad:res.resultado.facultad,
         })
       })
     ).subscribe()
   }
   onSubmit(){
     const facultades=this.facultadForm.value
-    this.service.actualizarFacultad(facultades).pipe(tap((res:any)=>{
+    this.service.updateFacultadxPrograma(facultades).pipe(tap((res:any)=>{
       console.log(res);
       
-        if(res.error=="La facultad ya se encuentra registrada en el sistema"){
+        if(res.error){
           Swal.fire("Error al actualizar",res.error,"error")
       }else if(res.success){
         Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
@@ -102,9 +118,9 @@ this.listOfDisplayData = [...this.facultades];
       }
 
 
-      this.service.getFacultades().pipe(
+      this.service.getFacultadxprograma().pipe(
         tap((res:any)=>{
-          this.facultades=res.data
+          this.facxpro=res
         })
       ).subscribe()
 
@@ -123,19 +139,19 @@ this.listOfDisplayData = [...this.facultades];
     const facultad=this.facultadAgregar.value
     console.log(facultad);
     
-    this.service.setFacultad(facultad).pipe(
+    this.service.agregarFacultadxPrograma(facultad).pipe(
       tap((res:any)=>{
         console.log(res);
         
         if(res.error=="La facultad ya se encuentra registrada en el sistema"){
-          Swal.fire("Error al agregar facultad",res.error,"error")
-      }else if(res.data){
-        Swal.fire("Añadido exitosamente","La facultad ha sido agregada con exito","success")
+          Swal.fire("Error al agregar facultadxprograma",res.error,"error")
+      }else if(res.success){
+        Swal.fire("Añadido exitosamente",res.success,"success")
       }
       
-      this.service.getFacultades().pipe(
+      this.service.getFacultadxprograma().pipe(
         tap((res:any)=>{
-          this.facultades=res.data
+          this.facxpro=res
         })
       ).subscribe()
 

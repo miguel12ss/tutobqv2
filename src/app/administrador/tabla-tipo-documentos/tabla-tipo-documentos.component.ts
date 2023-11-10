@@ -56,8 +56,8 @@ export class TablaTipoDocumentosComponent {
       tap((res:any)=>{
        
         
-this.tipos_documento=res.data
-this.listOfDisplayData=[...res.data]
+this.tipos_documento=res.resultado
+this.listOfDisplayData=[...res.resultado]
       }
     )).subscribe()
   }
@@ -81,7 +81,7 @@ this.listOfDisplayData=[...res.data]
 
       this.service.getTipo().pipe(
         tap((res:any)=>{
-          this.tipos_documento=res.data
+          this.tipos_documento=res.resultado
         })
       ).subscribe()
 
@@ -108,13 +108,13 @@ this.listOfDisplayData=[...res.data]
         
         if(res.error){
           Swal.fire("Error al agregar el programa",res.error,"error")
-      }else if(res.data){
+      }else if(res.success){
         Swal.fire("Añadido exitosamente","El tipo de documento ha sido Añadido con exito","success")
       }
       
       this.service.getTipo().pipe(
         tap((res:any)=>{
-          this.tipos_documento=res.data
+          this.tipos_documento=res.resultado
         })
       ).subscribe()
 
@@ -139,8 +139,8 @@ this.listOfDisplayData=[...res.data]
     this.service.getDataForIdTipo(id_tipo_documento).pipe(
       tap((res:any)=>{
         this.tipoForm.patchValue({
-          tipo_documento:res.data.tipo_documento,
-          id_tipo_documento:res.data.id_tipo_documento
+          tipo_documento:res.tipo_documento,
+          id_tipo_documento:res.id
         })
       })
     ).subscribe()

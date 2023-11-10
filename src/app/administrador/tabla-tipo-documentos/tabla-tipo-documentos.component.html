@@ -22,10 +22,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_tipo_documento}}</td>
+                <td>{{ data.id}}</td>
                 <td>{{ data.tipo_documento}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalmodificar" (click)="modificar(data.id_tipo_documento)">
+                        data-bs-target="#modalmodificar" (click)="modificar(data.id)">
                         Modificar
                     </button></td>
             </tr>

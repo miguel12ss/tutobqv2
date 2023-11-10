@@ -50,8 +50,9 @@ export class ApiService {
     }
   
 
-  forgot(email:string){
-return this.httpClient.post(`${this.url}/auth/forgot`,email)
+  forgot(email:any){
+    console.log(email)
+return this.httpClient.post(`${this.url}auth/send-email`,email)
   }
 
 
