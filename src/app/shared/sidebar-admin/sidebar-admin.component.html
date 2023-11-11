@@ -9,17 +9,17 @@
 
       <!-- <li nz-menu-item >
         <a  routerLink="dashboard"><span nz-icon nzType="dashboard" nzTheme="outline"></span>     Dashboard</a>
-      </li> -->
-      <li
-      nz-menu-item
-      nz-tooltip
-      nzTooltipPlacement="right"
-      [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+      </li> fund-projection-screen-->
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+        <span nz-icon nzType="dashboard"></span>
+        <span routerLink="dashboard">Dashboard</span>
+
+      </li>
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+        <span nz-icon nzType="book"></span>
+        <span routerLink="reportes">Reportes</span>
+      </li>
       
-    >
-      <span nz-icon nzType="dashboard"></span>
-      <span routerLink="dashboard">Dashboard</span>
-    </li>
       <li nz-submenu nzOpen nzTitle="Usuarios" nzIcon="user">
         <ul>
 
@@ -28,18 +28,17 @@
           </li>
 
           <li nz-menu-item>
-            <a routerLink="modificar-docente">Facultades De Usuarios</a>
+            <a routerLink="agregar/estudiante">Permisos De Usuarios</a>
           </li>
 
           <li nz-menu-item>
-            <a routerLink="agregar/estudiante">Permisos De Usuarios</a>
+            <a routerLink="modificar-docente">Facultades De Usuarios</a>
           </li>
 
           <li nz-menu-item>
             <a routerLink="agregar/docente"> Campos Adicionales</a>
           </li>
 
-         
         </ul>
       </li>
 
@@ -53,10 +52,20 @@
             <li nz-menu-item>
               <a routerLink="historial-tutorias">Historial Tutorias</a>
             </li>
-            <li nz-menu-item>
-              <a routerLink="notificaciones">Notificaciones</a>
-            </li>
+
           </ul>
+        </ul>
+      </li>
+
+      <li nz-submenu nzOpen nzTitle="Contactenos" nzIcon="notification">
+        <ul>
+          <li nz-menu-item>
+            <a routerLink="notificaciones">Notificaciones</a>
+          </li>
+
+          <li nz-menu-item>
+            <a routerLink="notificaciones-historial">Historial</a>
+          </li>
         </ul>
       </li>
 
@@ -64,9 +73,6 @@
         <ul>
           <li nz-submenu nzClose nzTitle="Modulo de administración" nzIcon="table">
             <ul>
-              <li nz-menu-item>
-                <a routerLink="reportes">Reportes</a>
-              </li>
               <li nz-menu-item>
                 <a routerLink="tablafacultades">Facultades</a>
               </li>
@@ -96,7 +102,7 @@
               </li>
               <li nz-menu-item>
                 <a routerLink="tipo-registro-actividad">Tipo Registro Actividad</a>
-              </li>          
+              </li>
             </ul>
           </li>
           <li nz-submenu nzClose nzTitle="Tablas salones" nzIcon="table">
@@ -145,9 +151,9 @@
       </div>
     </nz-header>
     <nz-content>
-      
+
       <div class="inner-content ">
-       
+
         <router-outlet></router-outlet>
       </div>
     </nz-content>

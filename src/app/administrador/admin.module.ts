@@ -36,13 +36,14 @@ import { TipoRegistroActividadComponent } from './tipo-registro-actividad/tipo-r
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 import { ChartsLineComponent } from './components/charts-line/charts-line.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { NotificacionesHistorialComponent } from './notificaciones-historial/notificaciones-historial.component';
 
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent, FacultadxmateriaComponent, FacultadxprogramaComponent, RegistroActividadComponent, TipoRegistroActividadComponent, NotificacionesComponent, ChartsLineComponent, ReportesComponent
+    UsuariosComponent,AdministradorComponent, AgregarDocenteComponent,AgregarEstudianteComponent, CrearTutoriaComponent, ModificarEstudianteComponent, ModificarDocenteComponent, TablafacultadesComponent, HistorialTutoriasComponent, TablaRolesComponent, TablaTipoDocumentosComponent, TablaHorasComponent, TablaProgramasComponent, TablaMateriasComponent, TablaSedesComponent, TablaCapacidadesComponent, TablaSalonesComponent, TablaEstadosComponent, TablaEstadosTutoriasComponent, DashboardComponent, ChartsComponent, ChartsBarComponent, FacultadxmateriaComponent, FacultadxprogramaComponent, RegistroActividadComponent, TipoRegistroActividadComponent, NotificacionesComponent, ChartsLineComponent, ReportesComponent, NotificacionesHistorialComponent
   ],
   imports: [
     CommonModule,AdministradorRoutingModule,SharedModule,ReactiveFormsModule,RegistroModule,NgZorroAntdModule,FormsModule,NgChartsModule

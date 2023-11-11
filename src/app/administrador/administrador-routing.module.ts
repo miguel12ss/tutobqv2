@@ -152,6 +152,12 @@ import('./reportes/reportes.module').then((m)=>m.ReportesModule)
           import('./notificaciones/notificaciones.module').then(
             (m) => m.NotificacionesModule
           ),
+      },{
+        path: 'notificaciones-historial',
+        loadChildren: () =>
+          import('./notificaciones-historial/notificaciones-historial.module').then(
+            (m) => m.NotificacionesHistorialModule
+          ),
       },
       {path:'crear-tutoria',loadChildren:()=>import('./crear-tutoria/crear-tutoria.module').then(m=>m.CrearTutoriaModule)},
       {path:'**',redirectTo:'deshabilitar-docente'}
