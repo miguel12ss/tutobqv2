@@ -1,7 +1,8 @@
-import { Component,Input,OnInit } from '@angular/core';
+import { Component,Input,OnInit, inject } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 import { tap } from 'rxjs';
 import { DocenteService } from 'src/app/docente/services/docente.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-notificaciones-historial',
@@ -9,21 +10,34 @@ import { DocenteService } from 'src/app/docente/services/docente.service';
   styleUrls: ['./notificaciones-historial.component.scss']
 })
 
-export class NotificacionesHistorialComponent {
+export class NotificacionesHistorialComponent implements OnInit {
   searchValue = '';
   visible = false;
   listOfData: any[] = [
     
   ];
   datosModal:any={}
-  tutorias:any[]=[]
+  notificaciones:any[]=[]
     estudiantes: any[]=[];
+    notificationForm!:FormGroup
     data:any[]=[]
-  constructor(private service:AdminService,private docenteService:DocenteService){
+    private fb=inject(FormBuilder)
+    constructor(private service:AdminService){
+  this.notificationForm=this.initForm()
   
   
   
-  
+    }
+    initForm():FormGroup{
+      return this.fb.group({
+        id:['',Validators.required],
+        nombre_completo:['',Validators.required],
+        correo:['',Validators.email],
+        celular:['',Validators.required],
+        mensaje:['',Validators.required],
+        respuesta:['',Validators.required]
+
+      })
     }
   
   
@@ -35,45 +49,49 @@ export class NotificacionesHistorialComponent {
   search(): void {
     this.visible = false;
     
-    this.data = this.tutorias.filter((item: any) => item.nombres.indexOf(this.searchValue) !== -1);
+    this.data = this.notificaciones.filter((item: any) => item.nombres.indexOf(this.searchValue) !== -1);
   
     console.log(this.data);
   
   }
   
   ngOnInit(){
-    this.service.getHorarioFinished().pipe(
+    this.service.getNotificationsFinished().pipe(
       tap((res:any)=>{
-        this.tutorias=res.data
-        this.data = [...res.data];
+        this.notificaciones=res.resultado
+        this.data = [...res.resultado];
         
         
       })
     ).subscribe()
   }
-  descripcion(id_tutoria:string){
-    console.log(id_tutoria)
-    this.docenteService.getHorarioForId(id_tutoria).pipe(
+
+  
+  listado(id:number){
+    this.service.getNotificationFinished(id).pipe(
       tap((res:any)=>{
-        this.datosModal=res.data
-      })
-    ).subscribe()
-    
-  
-  
-  }
-  
-  listado(id_tutoria:string){
-    this.docenteService.getListado(id_tutoria).pipe(
-      tap((res:any)=>{
-      
+        console.log(res);
+        
+        this.notificationForm.patchValue(
+          
+          {
+            id:res.id,
+            nombre_completo:res.nombre_completo,
+            correo:res.correo,
+            celular:res.celular,
+            mensaje:res.mensaje,
+            respuesta:res.respuesta
+
+          }
+        )
         
   
-        this.estudiantes=res.estudiante
-        console.log(this.estudiantes);
+        
         
       })
     ).subscribe()
   }
+
+  
 }
 

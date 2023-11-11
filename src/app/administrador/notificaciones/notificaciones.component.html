@@ -14,20 +14,17 @@
                 <th>Correo</th>
                 <th>Celular</th>
                 <th>Enviar Respuesta</th>
-                <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#modallista">
-                    Información
-                </button></td>
+                
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
 
-                <td>{{data.nombres}} {{data.apellidos}}</td>
+                <td>{{data.nombre_completo}}</td>
                 <td>{{ data.correo}}</td>
                 <td>{{ data.celular}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
-                        (click)="listado(data.id_tutoria)" data-bs-target="#modallista">
+                        (click)="listado(data.id)" data-bs-target="#modallista">
                         Información
                     </button></td>
             </tr>
@@ -58,12 +55,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="row">
+                    <form class="row" [formGroup]="notificationForm" (ngSubmit)="onSubmit()">
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="nombres" class="form-label"><b>Nombre Completo</b></label>
-                                    <input type="text" formControlName="nombres" class="form-control" id="nombres"
+                                    <input type="text" formControlName="nombre_completo" class="form-control" id="nombres"
                                         autocomplete="off" readonly>
                                 </div>
 
@@ -77,7 +74,7 @@
 
                             <div class="col-md-4">
                                 <label for="celular" class="form-label"><b>Celular</b></label>
-                                <input type="text" formControlName="celular" class="form-control" id="celular"
+                                <input type="number" formControlName="celular" class="form-control" id="celular"
                                     autocomplete="off" readonly>
                             </div>                        
 
@@ -89,9 +86,15 @@
 
                             <div class="form-group col-md-6">
                                 <label for="msj_remitente"><b>Respuesta</b></label>
-                                <textarea formControlName="mensaje" name="msj_remitente" class="msj_remitente" col="2"
+                                <textarea formControlName="respuesta" name="msj_remitente" class="msj_remitente" col="2"
                                     rows="4" id="mensaje"></textarea>
                             </div>
+
+                            <input type="hidden" formControlName="id">
+                            <div class="content d-flex justify-content-center mt-3">
+                                <button [disabled]="notificationForm.invalid" class="btn btn-primary " type="submit" >Enviar correo</button>
+                            </div>
+                            
                         </div>
                     </form>
                 </div>

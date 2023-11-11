@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../services/admin.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-reportes',
@@ -33,6 +34,17 @@ export class ReportesComponent implements OnInit {
     
   }
   generarInforme(){
-    console.log(this.reportForm.value)
+    let dataReport=this.reportForm.value
+    this.adminService.getReportForDownload(dataReport).pipe(
+      tap((data:any)=>{
+        const blob = new Blob([data], { type: 'application/octet-stream' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'nombre-del-archivo.xlsx'; // Puedes darle el nombre que quieras
+          a.click();
+          window.URL.revokeObjectURL(url);
+      })
+    ).subscribe()
   }
 }

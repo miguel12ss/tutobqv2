@@ -726,6 +726,40 @@ updateFacultadxPrograma(data:any){
 
 }
 
+getNotifications(){
+  return this.http.get(`${this.url}admin/get-notifications`)
+
+}
+getNotificationFinished(id:number){
+  return this.http.get(`${this.url}admin/get-notifications-finish/${id}`)
+
+}
+
+getNotificationsFinished(){
+  return this.http.get(`${this.url}admin/get-notifications-finish`)
+
+}
+getNotification(id:number){
+  return this.http.get(`${this.url}admin/get-notifications/${id}`)
+
+}
+
+
+updateNotification(data:any){
+  return this.http.post(`${this.url}admin/send-response/${data.id}`,data)
+
+}
+
+getReportForDownload(data:any){
+  const headers = new HttpHeaders()
+  .set('Accept', 'application/octet-stream'); // Indica que esperamos una respuesta binaria
+
+return this.http.post(`${this.url}reporte/usuarios`,data, {
+  headers,
+  responseType: 'blob' as 'json' // Indica que la respuesta es un blob (archivo binario)
+});
+}
+
 
 }
 
