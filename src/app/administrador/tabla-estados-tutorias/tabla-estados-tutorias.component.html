@@ -20,15 +20,18 @@
                         <span nz-icon nzType="search">Buscar </span>
                     </nz-filter-trigger>
                 </th>
+                <th>estado</th>
                 <th>Modificar</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_estado_tutoria}}</td>
-                <td>{{ data.estado_tutoria}}</td>
+                <td>{{ data.id}}</td>
+                <td>{{ data.tipoxestado}}</td>
+                <td>{{ data.estado}}</td>
+
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalmodificar" (click)="modificar(data.id_estado_tutoria)">
+                        data-bs-target="#modalmodificar" (click)="modificar(data.id)">
                         Modificar
 
                     </button></td>
@@ -62,12 +65,13 @@
                         <div class="col-md-5 ">
                             <div class="mb-4">
                                 <label for="estado_tutoria" class="form-label"><b>Tipo de Estado</b> </label>
-                                <input type="text" formControlName="estado_tutoria" class="form-control"
-                                    id="estado_tutoria" aria-describedby="estado_tutoria" autocomplete="off">
+                                <select class="form-control" formControlName="tipoxestado">
+                                    <option [value]="tipo.tipoEstado" *ngFor="let tipo of tipoestado">{{tipo.tipoEstado}}</option>
+                                </select>
                             </div>
                             <div class="mb-4">
                                 <label for="estado_tutoria" class="form-label"><b>Estado</b> </label>
-                                <input type="text" formControlName="estado_tutoria" class="form-control"
+                                <input type="text" formControlName="estado" class="form-control"
                                     id="estado_tutoria" aria-describedby="estado_tutoria" autocomplete="off">
                             </div>
                         </div>
@@ -97,16 +101,18 @@
                         (ngSubmit)="onSubmit()">
                         <div class="col-md-5">
                             <div class="mb-4">
-                                <label for="id_estado_tutoria" class="form-label"><b>Id estado tutoria</b> </label>
-                                <input type="number" formControlName="id_estado_tutoria" class="form-control"
-                                    id="id_estado_tutoria" aria-describedby="id_estado_tutoria" autocomplete="off"
-                                    readonly>
+                                <label for="id_estado_tutoria" class="form-label"><b>tipoxestado</b> </label>
+                                <select class="form-control" formControlName="tipoxestado">
+
+                                    <option [value]="tipo.tipoEstado" *ngFor="let tipo of tipoestado">{{tipo.tipoEstado}}</option>
+                                </select>
                             </div>
                             <div class="mb-4">
                                 <label for="estado_tutoria" class="form-label"><b>Estado tutoria</b> </label>
-                                <input type="text" class="form-control" formControlName="estado_tutoria"
+                                <input type="text" class="form-control" formControlName="estado"
                                     id="estado_tutoria" aria-describedby="estado_tutoria" autocomplete="off">
                             </div>
+                            <input type="text" formControlName="id" hidden>
                         </div>
 
 

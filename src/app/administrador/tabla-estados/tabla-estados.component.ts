@@ -34,26 +34,26 @@ estado: any[] = []
 
   initForm(): FormGroup {
     return this.fb.group({
-      estado: ['', Validators.required],
-      id_estado: ['', Validators.required]
+      tipoEstado: ['', Validators.required],
+      id: ['', Validators.required]
     })
   }
 
   initFormEstado(): FormGroup {
     return this.fb.group({
-      estado: ['', Validators.required],
+      tipoEstado: ['', Validators.required],
 
     })
   }
 
 
   ngOnInit(): void {
-    this.service.getEstado().pipe(
+    this.service.getTipoEstado().pipe(
       tap((res: any) => {
         console.log(res);
 
-        this.estados = res.data
-       this.listOfData = [...res.data];
+        this.estados = res
+       this.listOfData = [...res];
       }
       )).subscribe()
   }
@@ -63,19 +63,19 @@ estado: any[] = []
     const estado = this.estadoAgregar.value
     console.log(estado);
 
-    this.service.setEstado(estado).pipe(
+    this.service.setTipoEstado(estado).pipe(
       tap((res: any) => {
         console.log(res);
 
         if (res.error) {
           Swal.fire("Error al agregar estado de usuario", res.error, "error")
-        } else if (res.data) {
-          Swal.fire("Añadido exitosamente", "El estado de usuario ha sido Añadido con exito", "success")
+        } else if (res.success) {
+          Swal.fire("Añadido exitosamente", res.success, "success")
         }
 
         this.service.getEstado().pipe(
           tap((res: any) => {
-            this.estados= res.data
+            this.estados= res
           })
         ).subscribe()
 
@@ -96,15 +96,15 @@ estado: any[] = []
     ).subscribe()
   }
 
-  modificar(id_estado: string) {
+  modificar(id_estado: number) {
 
-    this.service.getDataForIdEstado(id_estado).pipe(
+    this.service.getTipoEstadoForId(id_estado).pipe(
       tap((res: any) => {
         console.log(res);
 
         this.estadoForm.patchValue({
-          estado: res.data.estado,
-          id_estado: res.data.id_estado
+          tipoEstado: res.tipoEstado,
+          id: res.id
         })
       })
     ).subscribe()
@@ -115,7 +115,7 @@ estado: any[] = []
 
   onSubmit() {
     const estados = this.estadoForm.value
-    this.service.actualizarEstado(estados).pipe(tap((res: any) => {
+    this.service.updateTipoEstadoForId(estados).pipe(tap((res: any) => {
       console.log(res);
 
       if (res.error) {

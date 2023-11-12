@@ -1,5 +1,4 @@
 <h5 class="text-center">ADMINISTRAR USUARIOS</h5>
-
 <!-- <div>
  
   <nz-input-number style="float:right;" [nzMin]="0" [nzMax]="29" [(ngModel)]="selectedIndex"></nz-input-number>
@@ -49,13 +48,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of nzTable.data">
-        <td>{{ data.nombre}}</td>
-        <td>{{ data.facultad }}</td>
-        <td>{{data.correo}}</td>
-        <td>{{ data.celular }}</td>
+      <tr *ngFor="let user of nzTable.data">
+        <td>{{ user.nombre}}</td>
+        <td>{{ user.facultad }}</td>
+        <td>{{user.correo}}</td>
+        <td>{{ user.celular }}</td>
        
-        <td><button type="button" class="btn btnc btn-primary btnfunciones" data-bs-toggle="modal" (click)="modificar(data.id)" data-bs-target="#staticBackdrop">
+        <td><button type="button" class="btn btnc btn-primary btnfunciones" data-bs-toggle="modal" (click)="modificar(user.id)" data-bs-target="#staticBackdrop">
             Modificar
           </button> 
         

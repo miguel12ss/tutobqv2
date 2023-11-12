@@ -30,11 +30,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_estado}}</td>
-                <td>{{ data.estado}}</td>
+                <td>{{ data.id}}</td>
+                <td>{{ data.tipoEstado}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar"
-                        (click)="modificar(data.id_estado)"
+                        (click)="modificar(data.id)"
                         >
                         Modificar
                         
@@ -68,7 +68,7 @@
                             <div class="mb-4">
                                 <label for="estado" class="form-label"><b>Estado</b> </label>
                                 <input type="text"  
-                                formControlName="estado"
+                                formControlName="tipoEstado"
                                 class="form-control" id="estado" aria-describedby="estado" autocomplete="off">
                             </div>
                         </div>
@@ -98,13 +98,13 @@
                             <div class="mb-4">
                                 <label for="id_estado" class="form-label"><b>Id estado</b> </label>
                                 <input type="number" 
-                                formControlName="id_estado"
+                                formControlName="id"
                                 class="form-control" id="id_estado" aria-describedby="id_estado" autocomplete="off" readonly>
                             </div>
                             <div class="mb-4">
                                 <label for="estado" class="form-label"><b>Estado</b> </label>
                                 <input type="text" 
-                                formControlName="estado"
+                                formControlName="tipoEstado"
                                 class="form-control" id="estado" aria-describedby="estado" autocomplete="off">
                             </div>
                         </div>

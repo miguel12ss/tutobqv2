@@ -777,6 +777,66 @@ actualizarMateriaxPrograma(data:any){
   return this.http.put(`${this.url}materia-pro-fac/${data.id_fpxm}`,data)
 
 }
+
+getRegistroActividad(){
+  return this.http.get(`${this.url}registro_actividad`)
+
+}
+
+getTipoRegistroActividad(){
+  return this.http.get(`${this.url}tipo_registro`)
+
+}
+
+setTipoRegistroActividad(data:any){
+  return this.http.post(`${this.url}tipo_registro`,data)
+
+}
+updateTipoRegistroActividadForId(data:any){
+  return this.http.put(`${this.url}tipo_registro/${data.id}`,data)
+
+}
+getTipoRegistroActividadForId(id:number){
+  return this.http.get(`${this.url}tipo_registro/${id}`)
+
+}
+
+getTipoEstado(){
+  return this.http.get(`${this.url}tipo_estado`)
+
+}
+
+setTipoEstado(data:any){
+  return this.http.post(`${this.url}tipo_estado`,data)
+
+}
+updateTipoEstadoForId(data:any){
+  return this.http.put(`${this.url}tipo_estado/${data.id}`,data)
+
+}
+getTipoEstadoForId(id:number){
+  return this.http.get(`${this.url}tipo_estado/${id}`)
+
+}
+
+getTipoxEstado(){
+  return this.http.get(`${this.url}tipoxestado`)
+
+}
+
+setTipoxEstado(data:any){
+  return this.http.post(`${this.url}tipoxestado`,data)
+
+}
+updateTipoxEstadoForId(data:any){
+  return this.http.put(`${this.url}tipoxestado/${data.id}`,data)
+
+}
+getTipoxEstadoForId(id:number){
+  return this.http.get(`${this.url}tipoxestado/${id}`)
+
+}
+
 }
 
 

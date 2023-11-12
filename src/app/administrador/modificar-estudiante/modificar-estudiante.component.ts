@@ -35,63 +35,81 @@ export class ModificarEstudianteComponent implements OnInit {
   public fileForm!:FormGroup
   roles:Rol[]=[]
   router=inject(Router)
+  estudiante:any[] = [
+    
+  ];
+  listOfDisplayData:any=[];
+  agregarEstudiante!:FormGroup
+  estudianteForm!:FormGroup
+  searchValue = '';
+  visible = false;
+  facultades:any[]=[]
+  programas:any[]=[]
+  tipos:any[]=[]
+  estados:any[]=[]
+  usuarioForm=[]
   docenteService=inject(DocenteService);
   constructor(private service:AdminService,public fb:FormBuilder,private apiservice:ApiService){
     this.estudianteForm=this.initForm()
     this.agregarEstudiante=this.initFormTwo()
   }
   ngOnInit(): void {
-    for (let i = 0; i < 30; i++) {
-      this.tabs.push({
-        name: `Tab ${i}`,
-        disabled: i === 28,
-        content: `Content of tab ${i}`
-      });
-    }
-
-  forkJoin([
-   
-    this.service.getRoles(),
-    this.service.getTipo(),
-    this.service.getFacultades(),
-    this.service.getEstudiantes(),
-   
-
-  ]).subscribe((results:any) => {
-    // Procesa los resultados de cada solicitud
-    console.log(results);
     
-    this.roles=results[0]
-    this.tipos=results[1].resultado
-    console.log(this.tipos)
-    this.listOfDisplayData=[...results[3].resultado]
+this.service.getEstudiantes().pipe(
+  tap((res:any)=>{
+    this.estudiante=res
+this.listOfDisplayData=[...this.estudiante]
+  })
+).subscribe()
+this.service.getTipo().pipe(
+  tap((res:any)=>{
+    this.tipos=res.resultado
+  })
+).subscribe()
+this.service.getFacultades().pipe(
+  tap((res:any)=>{
+this.facultades=res.resultado
+  })
+).subscribe()
+this.service.getRoles().pipe(
+  tap((res:any)=>{
+this.roles=res.resultado
+  })
+).subscribe()
 
-    // this.programas = results[1].data;
-    this.facultades = results[2].resultado;
-    this.estudiante = results[3 ].resultado;
 
-    console.log(this.facultades)
-    // this.tipos=results[3].data;
-    // this.estados=results[4].data;
-  });
+  // forkJoin([
+   
+  //   this.service.getRoles(),
+  //   this.service.getTipo(),
+  //   this.service.getFacultades(),
+  //   this.service.getEstudiantes()
+   
+
+  // ]).subscribe((results:any) => {
+  //   // Procesa los resultados de cada solicitud
+  //   console.log(results);
+    
+  //   this.roles=results[0]
+  //   this.tipos=results[1].resultado
+
+  //   // this.programas = results[1].data;
+  //   this.facultades = results[2].resultado;
+  //   this.estudiante = results[3];
+  //   this.listOfDisplayData=[...results[3]]
+
+
+  //   console.log(this.listOfDisplayData)
+  //   // this.tipos=results[3].data;
+  //   // this.estados=results[4].data;
+  // });
 
 
 
 
   }
-  estudiante: DataEstudiante[] = [
-    
-  ];
-agregarEstudiante!:FormGroup
-estudianteForm!:FormGroup
-searchValue = '';
-visible = false;
-facultades:any[]=[]
-programas:any[]=[]
-tipos:any[]=[]
-estados:any[]=[]
-listOfDisplayData = [...this.estudiante];
-usuarioForm=[]
+ 
+
 modificar(id_usuario:string){
   this.service.getEstudiante(id_usuario).pipe(
     tap((res:any)=>{

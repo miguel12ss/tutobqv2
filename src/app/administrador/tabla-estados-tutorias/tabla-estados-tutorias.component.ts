@@ -20,7 +20,7 @@ export class TablaEstadosTutoriasComponent {
   listOfData: DataItem[] = [
    
   ];
-
+  tipoestado:any[]=[]
   estadoTutoria: any[] = []
   estadoTutorias: any[] = []
   estadoTutoriaForm!: FormGroup
@@ -34,28 +34,35 @@ export class TablaEstadosTutoriasComponent {
 
   initForm(): FormGroup {
     return this.fb.group({
-      estado_tutoria: ['', Validators.required],
-      id_estado_tutoria: ['', Validators.required]
+      id: ['', Validators.required],
+      tipoxestado: ['', Validators.required],
+      estado:['',Validators.required]
     })
   }
 
   initFormEstadoTutoria(): FormGroup {
     return this.fb.group({
-      estado_tutoria: ['', Validators.required],
-
+      tipoxestado: ['', Validators.required],
+      estado:['',Validators.required]
     })
   }
 
 
   ngOnInit(): void {
-    this.service.getEstadoTutoria().pipe(
+    this.service.getTipoxEstado().pipe(
       tap((res: any) => {
         console.log(res);
 
-        this.estadoTutorias = res.data
-        this.listOfData= [...res.data];
+        this.estadoTutorias = res
+        this.listOfData= [...res];
       }
       )).subscribe()
+
+      this.service.getTipoEstado().pipe(
+        tap((res:any)=>{
+          this.tipoestado=res
+        })
+      ).subscribe()
   }
 
 
@@ -64,14 +71,14 @@ export class TablaEstadosTutoriasComponent {
     const estado = this.estadoTutoriaAgregar.value
     console.log(estado);
 
-    this.service.setEstadoTutoria(estado).pipe(
+    this.service.setTipoxEstado(estado).pipe(
       tap((res: any) => {
         console.log(res);
 
         if (res.error) {
           Swal.fire("Error al agregar el rol", res.error, "error")
-        } else if (res.data) {
-          Swal.fire("Añadido exitosamente", res.data, "success")
+        } else if (res.success) {
+          Swal.fire("Añadido exitosamente", res.success, "success")
         }
 
         this.service.getEstadoTutoria().pipe(
@@ -97,15 +104,16 @@ export class TablaEstadosTutoriasComponent {
     ).subscribe()
   }
 
-  modificar(id_estado_tutoria: string) {
+  modificar(id_estado_tutoria:number) {
 
-    this.service.getDataForIdEstadoTutoria(id_estado_tutoria).pipe(
+    this.service.getTipoxEstadoForId(id_estado_tutoria).pipe(
       tap((res: any) => {
         console.log(res);
 
         this.estadoTutoriaForm.patchValue({
-          estado_tutoria: res.data.estado_tutoria,
-          id_estado_tutoria: res.data.id_estado_tutoria
+          id:res.id,
+          tipoxestado: res.tipoxestado,
+          estado: res.estado
         })
       })
     ).subscribe()
@@ -116,7 +124,7 @@ export class TablaEstadosTutoriasComponent {
 
   onSubmit() {
     const estados = this.estadoTutoriaForm.value
-    this.service.actualizarEstadoTutoria(estados).pipe(tap((res: any) => {
+    this.service.updateTipoxEstadoForId(estados).pipe(tap((res: any) => {
       console.log(res);
 
       if (res.error) {

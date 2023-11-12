@@ -246,13 +246,17 @@ uploadFile(formdata:FormData,id_usuario:number){
   return this.http.post(`${this.url}observacion/${id_usuario}`,formdata,httpOptions)
 }
 
-getProgramsForFaculty(id_facultad:string){
+// getProgramsForFaculty(id_facultad:string){
 
-  return this.http.get(`${this.url}facxpro/${id_facultad}`)
+//   return this.http.get(`${this.url}facxpro/${id_facultad}`)
 
-}
+// }
 
+ getProgramsForFaculty(id_facultad:string){
 
+   return this.http.get(`${this.url}facultadxprograma/${id_facultad}`)
+
+ }
 getMateriasForPrograms(id_facultad:string,id_programa:number){
 
 

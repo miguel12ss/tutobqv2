@@ -10,14 +10,10 @@ import { DocenteService } from 'src/app/docente/services/docente.service';
 export class RegistroActividadComponent {
   searchValue = '';
   visible = false;
-  listOfData: any[] = [
-    
-  ];
-  datosModal:any={}
-  tutorias:any[]=[]
-    estudiantes: any[]=[];
+ 
+  registro_actividad:any[]=[]
     data:any[]=[]
-  constructor(private service:AdminService,private docenteService:DocenteService){
+  constructor(private service:AdminService){
   
   
   
@@ -33,44 +29,21 @@ export class RegistroActividadComponent {
   search(): void {
     this.visible = false;
     
-    this.data = this.tutorias.filter((item: any) => item.nombres.indexOf(this.searchValue) !== -1);
+    this.data = this.registro_actividad.filter((item: any) => item.nombres.indexOf(this.searchValue) !== -1);
   
     console.log(this.data);
   
   }
   
   ngOnInit(){
-    this.service.getHorarioFinished().pipe(
+    this.service.getRegistroActividad().pipe(
       tap((res:any)=>{
-        this.tutorias=res.data
-        this.data = [...res.data];
+        this.registro_actividad=res.resultado
+        this.data = [...res.resultado];
         
         
       })
     ).subscribe()
   }
-  descripcion(id_tutoria:string){
-    console.log(id_tutoria)
-    this.docenteService.getHorarioForId(id_tutoria).pipe(
-      tap((res:any)=>{
-        this.datosModal=res.data
-      })
-    ).subscribe()
-    
   
-  
-  }
-  
-  listado(id_tutoria:string){
-    this.docenteService.getListado(id_tutoria).pipe(
-      tap((res:any)=>{
-      
-        
-  
-        this.estudiantes=res.estudiante
-        console.log(this.estudiantes);
-        
-      })
-    ).subscribe()
-  }
 }

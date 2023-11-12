@@ -16,9 +16,8 @@ export class TipoRegistroActividadComponent {
   @Input() tablafacultades!:DataItem[]
   searchValue = '';
   visible = false;
-  listOfData: any[] = [
-  ];
-  facultades:any[]=[]
+  
+  tipo:any[]=[]
   facultad:any[]=[]
   listOfDisplayData:any = [];
   facultadForm!:FormGroup
@@ -33,7 +32,7 @@ export class TipoRegistroActividadComponent {
  
 initFormFacultad():FormGroup{
   return this.fb.group({
-    facultad:['',Validators.required],
+    tipoRegistro:['',Validators.required],
     
   })
 }
@@ -41,8 +40,8 @@ initFormFacultad():FormGroup{
 
   initForm():FormGroup{
     return this.fb.group({
-      facultad:['',Validators.required],
-      id_facultad:['',Validators.required]
+      tipoRegistro:['',Validators.required],
+      id:['',Validators.required]
     })
   }
 
@@ -53,16 +52,16 @@ initFormFacultad():FormGroup{
   
   search(): void {
     this.visible = false;
-    this.facultades = this.listOfDisplayData.filter((item: DataItem) => item.facultad.indexOf(this.searchValue) !== -1);
+    this.tipo = this.listOfDisplayData.filter((item: DataItem) => item.facultad.indexOf(this.searchValue) !== -1);
   }
 
   ngOnInit(): void {
-    this.service.getFacultades().pipe(
+    this.service.getTipoRegistroActividad().pipe(
       tap((res:any)=>{
         console.log(res);
         
-this.facultades=res.data
-this.listOfDisplayData = [...this.facultades];
+this.tipo=res
+this.listOfDisplayData =[...this.tipo];
 
       }
     )).subscribe()
@@ -76,25 +75,26 @@ this.listOfDisplayData = [...this.facultades];
     //   })
     // ).subscribe()
   }
-  modificar(id_facultad:string){
-    this.service.getDataForIdFacultad(id_facultad).pipe(
+  modificar(id_facultad:number){
+    this.service.getTipoRegistroActividadForId(id_facultad).pipe(
       tap((res:any)=>{
+        console.log(res)
         this.facultadForm.patchValue({
-          facultad:res.data.facultad,
-          id_facultad:res.data.id_facultad
+          tipoRegistro:res.tipoRegistro,
+          id:res.id
         })
       })
     ).subscribe()
   }
   onSubmit(){
     const facultades=this.facultadForm.value
-    this.service.actualizarFacultad(facultades).pipe(tap((res:any)=>{
+    this.service.updateTipoRegistroActividadForId(facultades).pipe(tap((res:any)=>{
       console.log(res);
       
-        if(res.error=="La facultad ya se encuentra registrada en el sistema"){
+        if(res.error){
           Swal.fire("Error al actualizar",res.error,"error")
       }else if(res.success){
-        Swal.fire("Actualizacion exitosa","La facultad ha sido actualizada con exito","success")
+        Swal.fire("Actualizacion exitosa",res.success,"success")
         
 
 
@@ -102,9 +102,11 @@ this.listOfDisplayData = [...this.facultades];
       }
 
 
-      this.service.getFacultades().pipe(
+      this.service.getTipoRegistroActividad().pipe(
         tap((res:any)=>{
-          this.facultades=res.data
+          
+          this.listOfDisplayData = res;
+          
         })
       ).subscribe()
 
@@ -123,19 +125,20 @@ this.listOfDisplayData = [...this.facultades];
     const facultad=this.facultadAgregar.value
     console.log(facultad);
     
-    this.service.setFacultad(facultad).pipe(
+    this.service.setTipoRegistroActividad(facultad).pipe(
       tap((res:any)=>{
         console.log(res);
         
-        if(res.error=="La facultad ya se encuentra registrada en el sistema"){
+        if(res.error){
           Swal.fire("Error al agregar facultad",res.error,"error")
-      }else if(res.data){
+      }else if(res.success){
         Swal.fire("Añadido exitosamente","La facultad ha sido agregada con exito","success")
       }
       
-      this.service.getFacultades().pipe(
+      this.service.getTipoRegistroActividad().pipe(
         tap((res:any)=>{
-          this.facultades=res.data
+          this.tipo=res
+          this.listOfDisplayData =[...this.tipo];
         })
       ).subscribe()
 
