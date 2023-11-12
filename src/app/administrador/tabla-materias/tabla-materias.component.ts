@@ -4,8 +4,8 @@ import { AdminService } from '../services/admin.service';
 import { tap } from 'rxjs';
 import Swal from 'sweetalert2';
 interface DataItem {
-  id_materia:String
-  materia:String
+  id:number
+  materia:string
 }
 @Component({
   selector: 'app-tabla-materias',
@@ -56,8 +56,8 @@ export class TablaMateriasComponent {
       tap((res:any)=>{
         console.log(res);
         
-this.materias=res.data
-this.listOfData=[...res.data]      
+this.materias=res.resultado
+this.listOfData=[...res.resultado]      
 }
     )).subscribe()
   }
@@ -68,8 +68,8 @@ this.listOfData=[...res.data]
     this.service.getDataForIdMateria(id_materia).pipe(
       tap((res:any)=>{
         this.materiaForm.patchValue({
-          materia:res.data.materia,
-          id_materia:res.data.id_materia
+          materia:res.materia,
+          id_materia:res.id
         })
       })
     ).subscribe()
@@ -80,7 +80,7 @@ this.listOfData=[...res.data]
     this.service.actualizarMateria(materias).pipe(tap((res:any)=>{
       console.log(res);
       
-        if(res.error=="La materia ya se encuentra registrada en el sistema"){
+        if(res.error){
           Swal.fire("Error al actualizar",res.error,"error")
       }else if(res.success){
         Swal.fire("Actualizacion exitosa","La materia ha sido actualizada con exito","success")
@@ -93,7 +93,7 @@ this.listOfData=[...res.data]
 
        this.service.getMaterias().pipe(
         tap((res:any)=>{
-          this.materias=res.data
+          this.materias=res.resultado
         })
       ).subscribe()
 
@@ -118,13 +118,13 @@ this.listOfData=[...res.data]
         
         if(res.error){
           Swal.fire("Error al agregar la materia",res.error,"error")
-      }else if(res.data){
-        Swal.fire("Añadido exitosamente",res.data,"success")
+      }else if(res.success){
+        Swal.fire("Añadido exitosamente",res.success,"success")
       }
       
       this.service.getMaterias().pipe(
         tap((res:any)=>{
-          this.materias=res.data
+          this.materias=res.resultado
         })
       ).subscribe()
 

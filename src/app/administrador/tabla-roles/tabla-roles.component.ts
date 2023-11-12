@@ -62,8 +62,8 @@ export class TablaRolesComponent {
       tap((res: any) => {
         console.log(res);
 
-        this.roles = res.data
-        this.listOfData=[...res.data]
+        this.roles = res.resultado
+        this.listOfData=[...res.resultado]
       }
       )).subscribe()
   }
@@ -79,13 +79,13 @@ export class TablaRolesComponent {
 
         if (res.error) {
           Swal.fire("Error al agregar el rol", res.error, "error")
-        } else if (res.data) {
+        } else if (res.success) {
           Swal.fire("Añadido exitosamente", "El rol ha sido agregado con exito", "success")
         }
 
         this.service.getRoles().pipe(
           tap((res: any) => {
-            this.roles = res.data
+            this.roles = res.resultado
           })
         ).subscribe()
 
@@ -113,8 +113,8 @@ export class TablaRolesComponent {
         console.log(res);
 
         this.rolForm.patchValue({
-          rol: res.data.rol,
-          id_rol: res.data.id_rol
+          rol: res.rol,
+          id_rol: res.id
         })
       })
     ).subscribe()
@@ -141,7 +141,7 @@ export class TablaRolesComponent {
 
       this.service.getRoles().pipe(
         tap((res: any) => {
-          this.roles = res.data
+          this.roles = res.resultado
         })
       ).subscribe()
 

@@ -6,7 +6,7 @@
     </button>
 </div>
 <div class="table-responsive">
-    <nz-table #nzTable [nzData]="facultades" [nzPageSize]="4" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="facultadxprograma" [nzPageSize]="4" nzTableLayout="fixed">
         <thead>
             <tr>
                 <th nzCustomFilter>Facultad
@@ -22,11 +22,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let f of nzTable.data">
-                <td>{{ f.id_facultad}}</td>
                 <td>{{ f.facultad}}</td>
+                <td>{{ f.programa}}</td>
+                <td>{{f.materia}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar"
-                        (click)="modificar(f.id_facultad)">
+                        (click)="modificar(f.id)">
                         Modificar 
                     </button></td>
             </tr>
@@ -57,19 +58,34 @@
                         <div class="col-md-4 ">
                             <div class="mb-4">
                                 <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                                <input type="text" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" formControlName="facultad">
+                                <select (change)="onChange($event)"  class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" formControlName="facultad">
+                                    
+                                    <option [ngValue]="facultad.id" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="mb-4">
                                 <label for="programa" class="form-label"><b>Programa</b> </label>
-                                <input type="text" class="form-control" id="programa" aria-describedby="programa" autocomplete="off" formControlName="programa">
+                                <select  class="form-control" id="programa" aria-describedby="programa" autocomplete="off" formControlName="programa">
+                                   
+                                    <option [value]="programa.id" *ngFor="let programa of programas">
+                                    
+                                    {{programa.programa}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4 ">
                             <div class="mb-4">
                                 <label for="materia" class="form-label"><b>Materia</b> </label>
-                                <input type="text" class="form-control" id="materia" aria-describedby="materia" autocomplete="off" formControlName="materia">
+                                <select class="form-control" id="materia" aria-describedby="materia" autocomplete="off" formControlName="materia">
+                                
+                                <option [value]="materia.id" *ngFor="let materia of materias">
+                                
+                                {{materia.materia}}
+                                </option>
+                            </select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -96,12 +112,20 @@
                     <form class="row d-flex justify-content-center" [formGroup]="facultadForm" (ngSubmit)="onSubmit()">
                         <div class="col-md-5">
                             <div class="mb-4">
-                                <label for="id_facultad" class="form-label"><b>Id facultad</b> </label>
-                                <input type="number" class="form-control" id="facultad" aria-describedby="facultad" autocomplete="off" formControlName="id_facultad" readonly >
+                                <label for="id_facultad" class="form-label"><b>Facultad</b> </label>
+                                <input type="text" class="form-control" id="facultad"  readonly aria-describedby="facultad" autocomplete="off" formControlName="facultad" readonly >
                             </div>
                             <div class="mb-4">
-                                <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                                <input type="text" class="form-control" id="facultad" formControlName="facultad" aria-describedby="facultad" autocomplete="off">
+                                <label for="facultad" class="form-label"><b>Programa</b> </label>
+                                <input type="text" readonly class="form-control" id="facultad" formControlName="programa" aria-describedby="facultad" autocomplete="off">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="facultad" class="form-label"><b>Materia</b> </label>
+                                <select class="form-control" formControlName="materia">
+                                    <option [value]="materia.id" *ngFor="let materia of materias">
+                                    {{materia.materia}}</option>
+                                </select>
                             </div>
                         </div>
 

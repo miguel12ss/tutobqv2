@@ -172,7 +172,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.get(`${this.url}obtenerMaterias`,httpOptions)
+    return this.http.get(`${this.url}materia`,httpOptions)
   }
   actualizarMateria(materia:any){
     const httpOptions = {
@@ -182,7 +182,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.post(`${this.url}actualizarMateria`,materia,httpOptions)
+    return this.http.put(`${this.url}materia/${materia.id_materia}`,materia,httpOptions)
   }
 
 
@@ -194,7 +194,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.get(`${this.url}getMateriaForId/${id_materia}`,httpOptions)
+    return this.http.get(`${this.url}materia/${id_materia}`,httpOptions)
   }
 
   
@@ -209,7 +209,7 @@ actualizarSalon(salon:any){
         'Access-Control-Allow-Credentials': 'true'
       })
     };
-    return this.http.post(`${this.url}agregarMateria`,materia,httpOptions)
+    return this.http.post(`${this.url}materia`,materia,httpOptions)
   }
 
 setSede(sede:any){
@@ -280,13 +280,11 @@ getDataForIdRol(id_rol:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getRolForId/${id_rol}`,httpOptions)
+  return this.http.get(`${this.url}roles/${id_rol}`,httpOptions)
 }
 
 setRol(rol:any){
-  const rolObject={
-    "rol":rol.rol,
-      }
+  
   
   const httpOptions = {
     headers: new HttpHeaders({
@@ -295,7 +293,7 @@ setRol(rol:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}setRol`,rolObject,httpOptions)
+  return this.http.post(`${this.url}roles`,rol,httpOptions)
 }
 
 
@@ -307,7 +305,7 @@ actualizarRol(roles:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}actualizarRol`,roles,httpOptions)
+  return this.http.put(`${this.url}roles/${roles.id_rol}`,roles,httpOptions)
 
 
 }
@@ -760,6 +758,19 @@ return this.http.post(`${this.url}reporte/usuarios`,data, {
 });
 }
 
+getFacultadxProgramaxMateria(){
+  return this.http.get(`${this.url}materia-pro-fac`)
+
+}
+
+getFacultadxProgramaxMateriaForId(id:number){
+  return this.http.get(`${this.url}materia-pro-fac/${id}`)
+
+}
+createFacultadxProgramaxMateria(data:any){
+  return this.http.post(`${this.url}materia-pro-fac`,data)
+
+}
 
 }
 

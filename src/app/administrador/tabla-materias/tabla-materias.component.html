@@ -26,11 +26,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let data of nzTable.data">
-                <td>{{ data.id_materia}}</td>
+                <td>{{ data.id}}</td>
                 <td>{{ data.materia}}</td>
                 <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
                         data-bs-target="#modalmodificar"
-                        (click)="modificar(data.id_materia)"
+                        (click)="modificar(data.id)"
                         >
                         Modificar
                     </button></td>
@@ -90,7 +90,7 @@
                         <div class="col-md-5 ">
                             <div class="mb-4">
                                 <label for="id_materia" class="form-label"><b>Id materia</b> </label>
-                                <input type="number" class="form-control" id="id_programa" aria-describedby="id_programa" autocomplete="off"  formControlName="id_materia">
+                                <input type="number" class="form-control" readonly id="id_programa" aria-describedby="id_programa" autocomplete="off"  formControlName="id_materia">
                             </div>
                             <div class="mb-4">
                                 <label for="materia" class="form-label"><b>Materia</b> </label>
