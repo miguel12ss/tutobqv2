@@ -46,6 +46,7 @@ export class FacultadxmateriaComponent {
 
   initForm(): FormGroup {
     return this.fb.group({
+      id_fpxm:['',Validators.required],
       facultad: ['', Validators.required],
       programa: ['', Validators.required],
       materia: ['', Validators.required],
@@ -91,9 +92,10 @@ export class FacultadxmateriaComponent {
         tap((res: any) => {
           console.log(res)
           this.facultadForm.patchValue({
+            id_fpxm:res.id,
             facultad: res.facultad,
             programa: res.programa,
-            materia:res.materia
+            materia:res.materia,
           });
         })
       )
@@ -101,32 +103,34 @@ export class FacultadxmateriaComponent {
   }
   onSubmit() {
     const facultades = this.facultadForm.value;
+    console.log(facultades);
+    
     this.service
-      .actualizarFacultad(facultades)
+      .actualizarMateriaxPrograma(facultades)
       .pipe(
         tap((res: any) => {
           console.log(res);
 
           if (
-            res.error == 'La facultad ya se encuentra registrada en el sistema'
+            res.error
           ) {
             Swal.fire('Error al actualizar', res.error, 'error');
           } else if (res.success) {
             Swal.fire(
               'Actualizacion exitosa',
-              'La facultad ha sido actualizada con exito',
+              res.success,
               'success'
             );
           }
 
-          this.service
-            .getFacultades()
-            .pipe(
-              tap((res: any) => {
-                this.facultadxprograma = res.data;
-              })
-            )
-            .subscribe();
+        //   this.service
+        //     .getFacultades()
+        //     .pipe(
+        //       tap((res: any) => {
+        //         this.facultadxprograma = res.resultado;
+        //       })
+        //     )
+        //     .subscribe();
         })
       )
       .subscribe();

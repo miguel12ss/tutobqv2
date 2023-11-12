@@ -123,11 +123,12 @@
                             <div class="mb-4">
                                 <label for="facultad" class="form-label"><b>Materia</b> </label>
                                 <select class="form-control" formControlName="materia">
-                                    <option [value]="materia.id" *ngFor="let materia of materias">
+                                    <option [value]="materia.materia" *ngFor="let materia of materias">
                                     {{materia.materia}}</option>
                                 </select>
                             </div>
                         </div>
+                        <input type="hidden" formControlName="id_fpxm">
 
 
                         <div class="modal-footer">

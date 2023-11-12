@@ -772,6 +772,11 @@ createFacultadxProgramaxMateria(data:any){
 
 }
 
+actualizarMateriaxPrograma(data:any){
+
+  return this.http.put(`${this.url}materia-pro-fac/${data.id_fpxm}`,data)
+
+}
 }
 
 
