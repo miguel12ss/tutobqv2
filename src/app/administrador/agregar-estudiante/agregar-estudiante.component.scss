@@ -56,8 +56,8 @@ label{
     
 }
 
-.btn{
-    padding: 10px 30px 10px 30px;
+.bmodal{
+    padding: 10px 40px 10px 40px;
 }
 
 input,select{
@@ -87,7 +87,19 @@ input,select{
       }
 }
 
+.btnfunciones{
+    background-color: #0d6efd;
+    border: #0d6efd;
+    color: white;
+}
+
 .btnagendar{
     background-color: #198754;
     border: #198754;
+}
+
+.btndenegar{
+    background-color: #dc3545;
+    border: #dc3545;
+    color: #fff;
 }

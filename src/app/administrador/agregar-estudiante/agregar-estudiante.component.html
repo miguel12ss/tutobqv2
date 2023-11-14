@@ -1,7 +1,7 @@
 <h5 class="text-center">ADMINISTRAR MATERIAS DEL USUARIO</h5>
 
 <div class="add-user d-flex justify-content-end mb-3">
-  <button type="button" class="btn btn-warning d-flex justify-space-between align-items-center gap-3"
+  <button type="button" class="btn btnfunciones d-flex justify-space-between align-items-center gap-3"
     data-bs-toggle="modal" data-bs-target="#modalagregar">Agregar<span style="font-size: 18px;" nz-icon
       nzType="user-add" nzTheme="outline"></span></button>
 </div>
@@ -11,16 +11,13 @@
     <thead>
       <tr>
         <th nzCustomFilter>
-          Nombres
+          Nombre Completo
           <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
             <span nz-icon nzType="search">Buscar </span>
           </nz-filter-trigger>
         </th>
-        <th>Apellidos</th>
-        <th>Ver Informacion</th>
-        <th>Modificar</th>
+        <th>Ver materias</th>
         <th>Habilitar o Deshabilitar</th>
-
       </tr>
     </thead>
     <tbody>
@@ -28,11 +25,16 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
-        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-            (click)="modificar(data.id_usuario)">
-            Modificar
-          </button></td>
+        <td>
+          <button type="button" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modaldescripcion"
+            (click)="modificar(data.id_usuario)">Ver
+            materias</button>
+        </td>
+        <td>
+          <button type="button" class="btnfunciones" data-bs-toggle="modal" data-bs-target="#modalestado"
+            (click)="modificar(data.id_usuario)">Ver
+            estado</button>
+        </td>
 
       </tr>
     </tbody>
@@ -59,62 +61,41 @@
           <form class="row">
             <div class="col-md-4">
               <div class="mb-3">
-                <label for="nombres" class="form-label"><b>Nombres</b></label>
-                <input type="text" formControlName="nombres" class="form-control" id="nombres" autocomplete="off"
-                  required >
-              </div>
-
-              <div class="mb-3">
-                <label for="rol" class="form-label"><b>Rol</b></label>
-                <input type="text" formControlName="rol" class="form-control" id="rol" autocomplete="off" required>
-              </div>
-                       
-            </div>
-          
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="apellidos" class="form-label"><b>Apellidos</b></label>
-                <input type="text" formControlName="apellidos" class="form-control" id="apellidos" autocomplete="off"
+                <label for="usuario" class="form-label"><b>Usuario</b></label>
+                <input type="text" formControlName="usuario" class="form-control" id="usuario" autocomplete="off"
                   required>
               </div>
+              <div class="mb-3">
+                <label for="materia" class="form-label"><b>Materia</b></label>
+                <input type="text" formControlName="materia" class="form-control" id="materia" autocomplete="off"
+                  required readonly>
+              </div>
 
+            </div>
+
+            <div class="col-md-4">
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b></label>
                 <select name="" class="form-control" formControlName="facultad" id="">
                   <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
-                 </select>
-                
+                </select>
+
               </div>
-              
+
             </div>
 
             <div class="col-md-4">
               <div class="mb-3">
-                <label for="correo" class="form-label"><b>Correo</b></label>
-                <input type="text" formControlName="rol" class="form-control" id="correo" autocomplete="off"  required >
-              </div>
-
-              <div class="mb-3">
                 <label for="programa" class="form-label"><b>Programa</b></label>
                 <select name="" class="form-control" formControlName="programa" id="">
                   <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
-                 </select>
-                
+                </select>
+
               </div>
             </div>
 
-            
+
           </form>
-
-
-
-
-
-
-
-
-
-
           <div class="modal-footer">
             <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="linea btn bmodal btn-success btn-sm">Guardar</button>
@@ -124,5 +105,80 @@
 
       </div>
     </div>
-  </div>s
-</div>
+  </div>
+
+
+  <!--modal de materias del usuario-->
+  <div class="modal fade modal-lg" id="modaldescripcion" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Materias del usuario</b>
+          </h1>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+        </div>
+        <div class="modal-body">
+          <form class="row">
+            <div class="table-responsive">
+              <nz-table nzTableLayout="fixed">
+                <thead>
+                  <tr>
+                    <th>Facultad</th>
+                    <th>Programa</th>
+                    <th>Materia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--Habilitar y deshabilitar modal-->
+  <div class="modal fade modal-lg" id="modalestado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Estado Materias</b>
+          </h1>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+        </div>
+        <div class="modal-body">
+          <form class="row">
+            <div class="table-responsive">
+              <nz-table nzTableLayout="fixed">
+                <thead>
+                  <tr>
+                    <th>Facultad</th>
+                    <th>Programa</th>
+                    <th>Materia</th>
+                    <th>estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </nz-table>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
