@@ -133,7 +133,7 @@
 
               <div class="mb-3">
                 <label for="programa" class="form-label"><b>Programa</b></label>
-               <select  name="" class="form-control" formControlName="programa"  id="">
+               <select  name="" class="form-control" formControlName="programa" [disabled]="true"   id="">
                 <option *ngFor="let programa of programas">{{programa.programa}}</option>
                </select>
               </div>

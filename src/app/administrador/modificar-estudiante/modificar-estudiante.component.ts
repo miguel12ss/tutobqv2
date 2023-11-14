@@ -54,6 +54,8 @@ export class ModificarEstudianteComponent implements OnInit {
   constructor(private service:AdminService,public fb:FormBuilder,private apiservice:ApiService){
     this.estudianteForm=this.initForm()
     this.agregarEstudiante=this.initFormTwo()
+    this.estudianteForm.get('programa')?.disable();
+
   }
   ngOnInit(): void {
     
@@ -120,6 +122,7 @@ this.service.getTipoxEstadoForUser().pipe(
  
 
 modificar(id_usuario:string){
+
   this.service.getUser(id_usuario).pipe(
     tap((res:any)=>{
       console.log(res);
@@ -140,6 +143,7 @@ modificar(id_usuario:string){
     
       this.service.getProgramasForFaculty(res.facultad).pipe(
         tap((res:any)=>{
+
            this.programas=res.resultado
            this.programasCargados = true;
         })
@@ -162,6 +166,7 @@ initForm():FormGroup{
     programa:['',Validators.required],
     estado:['',Validators.required],
     id_usuario:['',Validators.required]
+
 
 
 
@@ -256,7 +261,7 @@ habilitar(id_usuario:string){
 onSubmit(){
  const estudiante=this.estudianteForm.value
 
- 
+ console.log(estudiante)
  const id=this.estudianteForm.get('id_usuario')?.value
  console.log(id);
  
@@ -364,6 +369,10 @@ downloadPDF(){
       .pipe(
         tap((res: any) => {
         console.log(res)
+        this.estudianteForm.get('programa')?.enable();
+        this.estudianteForm.patchValue({
+          programa:res.resultado[0].programa
+        })
 
          this.programas=res.resultado})
       )
