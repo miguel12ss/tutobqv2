@@ -111,8 +111,8 @@
 
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b></label>
-                <select name="" (change)="onChange($event)" class="form-control" formControlName="facultad" id="">
-                  <option [ngValue]="facultad.id_facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+                <select  name="" (change)="onChange($event)" class="form-control" formControlName="facultad" id="">
+                  <option [ngValue]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
                  </select>
               </div>
 
@@ -133,8 +133,8 @@
 
               <div class="mb-3">
                 <label for="programa" class="form-label"><b>Programa</b></label>
-               <select name="" class="form-control" formControlName="programa" id="">
-                <option [value]="programa.programa"  *ngFor="let programa of programas">{{programa.programa}}</option>
+               <select  name="" class="form-control" formControlName="programa"  id="">
+                <option *ngFor="let programa of programas">{{programa.programa}}</option>
                </select>
               </div>
 

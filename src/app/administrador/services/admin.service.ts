@@ -617,6 +617,19 @@ getEstudiante(id_usuario:string){
   };
   return this.http.get(`${this.url}user/get_user/${id_usuario}`,httpOptions)
 }
+
+getUser(id_usuario:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.get(`${this.url}user/${id_usuario}`,httpOptions)
+}
+
+
 actualizarEstudiante(id_usuario:string,estudiante:any){
   const httpOptions = {
     headers: new HttpHeaders({
@@ -625,12 +638,7 @@ actualizarEstudiante(id_usuario:string,estudiante:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-   this.http.post(`${this.url}actualizarEstudiante/${id_usuario}`,estudiante,httpOptions,).pipe(
-    tap((res:any)=>{
-  console.log(res);
-  
-    })
-   ).subscribe()
+   return this.http.put(`${this.url}user/${id_usuario}`,estudiante,httpOptions)
 }
 
 getDocentes(){
@@ -823,6 +831,10 @@ getTipoxEstado(){
   return this.http.get(`${this.url}tipoxestado`)
 
 }
+getTipoxEstadoForUser(){
+  return this.http.get(`${this.url}tipoxestado-user`)
+
+}
 
 setTipoxEstado(data:any){
   return this.http.post(`${this.url}tipoxestado`,data)
@@ -837,6 +849,10 @@ getTipoxEstadoForId(id:number){
 
 }
 
+getProgramasForFaculty(facultad:string){
+  return this.http.get(`${this.url}facultad-programa/${facultad}`)
+
+}
 }
 
 

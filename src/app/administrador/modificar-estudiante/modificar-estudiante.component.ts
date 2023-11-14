@@ -38,6 +38,8 @@ export class ModificarEstudianteComponent implements OnInit {
   estudiante:any[] = [
     
   ];
+  programasCargados: boolean = false;
+
   listOfDisplayData:any=[];
   agregarEstudiante!:FormGroup
   estudianteForm!:FormGroup
@@ -76,6 +78,13 @@ this.service.getRoles().pipe(
 this.roles=res.resultado
   })
 ).subscribe()
+this.service.getTipoxEstadoForUser().pipe(
+  
+  tap((res:any)=>{
+    console.log(res)
+    this.estados=res
+      })
+    ).subscribe()
 
 
   // forkJoin([
@@ -111,24 +120,34 @@ this.roles=res.resultado
  
 
 modificar(id_usuario:string){
-  this.service.getEstudiante(id_usuario).pipe(
+  this.service.getUser(id_usuario).pipe(
     tap((res:any)=>{
-      console.log(res.data.tipo_documento);
+      console.log(res);
       
       this.estudianteForm.patchValue({
-        nombres:res.data.nombres,
-        apellidos:res.data.apellidos,
-        numero_documento:res.data.numero_documento,
-        celular:res.data.celular,
-        facultad:res.data.facultad,
-        correo:res.data.correo,
-        programa:res.data.programa,
-        tipo_documento:res.data.tipo_documento,
-        estado:res.data.estado,
-        id_usuario:res.data.id_usuario
+        nombres:res.nombres,
+        apellidos:res.apellidos,
+        numero_documento:res.numero_documento,
+        celular:res.celular,
+        facultad:res.facultad,
+        programa:res.programa,
+        correo:res.correo,
+        tipo_documento:res.tipo_documento,
+        estado:res.estado,
+        id_usuario:res.id
         
       })
+    
+      this.service.getProgramasForFaculty(res.facultad).pipe(
+        tap((res:any)=>{
+           this.programas=res.resultado
+           this.programasCargados = true;
+        })
+      ).subscribe()
+
     })
+
+
   ).subscribe()
 }
 initForm():FormGroup{
@@ -170,7 +189,6 @@ initFormTwo():FormGroup{
 onSelect(event:any){
    
    
-  this.programas=[]
   const id_facultad=parseInt(event.target.value.split(':')[1])
   console.log(id_facultad)
 
@@ -183,6 +201,7 @@ onSelect(event:any){
     
   ).subscribe((programas:Programa[])=>{
   console.log(programas)
+  this.programas=[]
     this.programas=programas
     
 
@@ -236,10 +255,22 @@ habilitar(id_usuario:string){
 
 onSubmit(){
  const estudiante=this.estudianteForm.value
+
+ 
  const id=this.estudianteForm.get('id_usuario')?.value
  console.log(id);
  
-this.service.actualizarEstudiante(id,estudiante)
+this.service.actualizarEstudiante(id,estudiante).pipe(
+  tap((res:any)=>{
+if(res.success){
+Swal.fire('usuario actualizado',res.success,'success')
+}else{
+  Swal.fire('error al actualizar el usuario',res.error,'success')
+
+}
+
+  })
+ ).subscribe()
 
 
 
@@ -323,13 +354,13 @@ downloadPDF(){
 
 
   onChange(event:any){
+    this.programas=[]
     const facultad = event.target.value;
     console.log(facultad)
     const id_facultad:string=facultad.split(':')[1]
-    
     console.log(id_facultad)
-    this.docenteService
-      .getProgramsForFaculty(id_facultad)
+    this.service
+      .getProgramasForFaculty(id_facultad)
       .pipe(
         tap((res: any) => {
         console.log(res)
