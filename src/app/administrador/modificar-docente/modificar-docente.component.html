@@ -1,7 +1,7 @@
 <h5 class="text-center">ADMINISTRAR FACULTADES DE USUARIOS</h5>
 
 <div class="add-user d-flex justify-content-end mb-3">
-  <button type="button" class="btn btn-warning d-flex justify-space-between align-items-center gap-3"
+  <button type="button" class="btn btnfunciones d-flex justify-space-between align-items-center gap-3"
     data-bs-toggle="modal" data-bs-target="#modalagregar">Agregar Facultad <span style="font-size: 18px;" nz-icon
       nzType="user-add" nzTheme="outline"></span></button>
 </div>
@@ -11,40 +11,26 @@
     <thead>
       <tr>
         <th nzCustomFilter>
-          Nombres
+          Nombre completo
           <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
             <span nz-icon nzType="search">Buscar </span>
           </nz-filter-trigger>
         </th>
-        <th>Ver Informacion</th>
-        <th>Agregar Facultad</th>
+        <th>Ver información</th>
         <th>Modificar</th>
-        <th>Habilitar o Deshabilitar</th>
-
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of nzTable.data">
         <td>{{ data.nombres}}</td>
         <td>
-          <button type="button" class="btn btnc btn-primary"data-bs-toggle="modal" data-bs-target="#modalagregar">Agregar Facultad</button>
+          <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
+            data-bs-target="#modaldescripcion">Ver</button>
         </td>
-       
-
-        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-            (click)="modificar(data.id_usuario)">
-            Modificar
-          </button></td>
-
-        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-            (click)="modificar(data.id_usuario)">
-            Modificar
-          </button></td>
-
-        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-            (click)="modificar(data.id_usuario)">
-            Modificar
-          </button></td>
+        <td>
+          <button type="button" class="btn btnc btn-primary" data-bs-toggle="modal"
+            data-bs-target="#modificar">Modificar</button>
+        </td>
 
       </tr>
     </tbody>
@@ -73,25 +59,15 @@
           <form class="row">
             <div class="col-md-4">
               <div class="mb-3">
-                <label for="nombres" class="form-label"><b>Nombres</b></label>
-                <input type="text" formControlName="nombres" class="form-control" id="nombres" autocomplete="off"
+                <label for="usuario" class="form-label"><b>Usuario</b></label>
+                <input type="text" formControlName="usuario" class="form-control" id="usuario" autocomplete="off"
                   required>
               </div>
 
-              <div class="mb-3">
-                <label for="rol" class="form-label"><b>Rol</b></label>
-                <input type="text" formControlName="rol" class="form-control" id="rol" autocomplete="off" required>
-              </div>
 
             </div>
 
             <div class="col-md-4">
-              <div class="mb-3">
-                <label for="apellidos" class="form-label"><b>Apellidos</b></label>
-                <input type="text" formControlName="apellidos" class="form-control" id="apellidos" autocomplete="off"
-                  required>
-              </div>
-
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b></label>
                 <select name="" class="form-control" formControlName="facultad" id="">
@@ -103,11 +79,6 @@
             </div>
 
             <div class="col-md-4">
-              <div class="mb-3">
-                <label for="correo" class="form-label"><b>Correo</b></label>
-                <input type="text" formControlName="rol" class="form-control" id="correo" autocomplete="off" required>
-              </div>
-
               <div class="mb-3">
                 <label for="programa" class="form-label"><b>Programa</b></label>
                 <select name="" class="form-control" formControlName="programa" id="">
@@ -120,14 +91,59 @@
 
           </form>
 
+          <div class="modal-footer">
+            <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="linea btn bmodal btn-success btn-sm">Guardar</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-lg" id="modificar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar Facultades Usuario</b></h1>
+        </div>
+        <div class="modal-body">
+          <form class="row">
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="usuario" class="form-label"><b>Usuario</b></label>
+                <input type="text" formControlName="usuario" class="form-control" id="usuario" autocomplete="off"
+                  required>
+              </div>
 
 
+            </div>
+
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="facultad" class="form-label"><b>Facultad</b></label>
+                <select name="" class="form-control" formControlName="facultad" id="">
+                  <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div class="col-md-4">
+              <div class="mb-3">
+                <label for="programa" class="form-label"><b>Programa</b></label>
+                <select name="" class="form-control" formControlName="programa" id="">
+                  <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+                </select>
+
+              </div>
+            </div>
 
 
-
-
-
-
+          </form>
 
           <div class="modal-footer">
             <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
@@ -140,90 +156,40 @@
     </div>
   </div>
 
-  <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Modificar datos del usuario</b></h1>
-        </div>
-        <div class="modal-body">
-          <form class="row" [formGroup]="docenteForm" (ngSubmit)="onSubmit()">
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="nombres" class="form-label"><b>Nombres</b></label>
-                <input type="text" formControlName="nombres" class="form-control" id="nombres" autocomplete="off"
-                  required>
-              </div>
 
-              <div class="mb-3">
-                <label for="numerodocumento" class="form-label"><b>Numero de documento</b></label>
-                <input type="number" formControlName="numero_documento" class="form-control" id="numerodocumento"
-                  autocomplete="off" required>
-              </div>
+   <!--modal de materias del usuario-->
+   <div class="modal fade modal-lg" id="modaldescripcion" data-bs-backdrop="static" data-bs-keyboard="false"
+   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-scrollable">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Facultad Y Programas Del Usuario</b>
+         </h1>
+         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+       </div>
+       <div class="modal-body">
+         <form class="row">
+           <div class="table-responsive">
+             <nz-table nzTableLayout="fixed">
+               <thead>
+                 <tr>
+                   <th>Facultad</th>
+                   <th>Programa</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td></td>
+                   <td></td>
+                 </tr>
+               </tbody>
+             </nz-table>
+           </div>
+         </form>
+       </div>
 
-              <div class="mb-3">
-                <label for="correo" class="form-label"><b>Correo</b></label>
-                <input formControlName="correo" type="email" class="form-control" id="correo" autocomplete="off"
-                  required>
-              </div>
-
-            </div>
-
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="apellidos" class="form-label"><b>Apellidos</b></label>
-                <input type="text" formControlName="apellidos" class="form-control" id="apellidos" autocomplete="off"
-                  required>
-              </div>
-
-              <div class="mb-3">
-                <label for="facultad" class="form-label"><b>Facultad</b></label>
-                <select name="" class="form-control" formControlName="facultad" id="">
-                  <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
-                </select>
-              </div>
-
-              <div class="mb-3">
-
-
-                <label for=""><b>estado</b></label>
-                <select name="" class="form-control" formControlName="estado" id="">
-                  <option [value]="estado.estado" *ngFor="let estado of estados">{{estado.estado}}</option>
-                </select>
-              </div>
-
-
-
-            </div>
-
-            <div class="col-md-4">
-              <div class="mb-3">
-                <label for="tipodocumento" class="form-label"><b>Tipo de documento</b></label>
-                <select name="" class="form-control" formControlName="tipo_documento" id="">
-                  <option [value]="tipo.tipo_documento" *ngFor="let tipo of tipos">{{tipo.tipo_documento}}</option>
-
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label for="telefono" class="form-label"><b>Numero de telefono</b></label>
-                <input type="number" formControlName="celular" class="form-control" id="telefono" autocomplete="off"
-                  required>
-              </div>
-
-
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="linea btn bmodal btn-success btn-sm">Guardar</button>
-            </div>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
+     </div>
+   </div>
+ </div>
 
 </div>
