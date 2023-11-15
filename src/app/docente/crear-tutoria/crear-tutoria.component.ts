@@ -55,7 +55,6 @@ asistencias:any[]=[]
     
 
     this.pasarListaForm = this.initPasarListaForm();
-    console.log(this.pasarListaForm)
     this.horarioForm = this.initForm();
 
     this.horarioForm
@@ -140,11 +139,9 @@ asistencias:any[]=[]
       
     ).subscribe((res:any)=>{
       console.log(res)
-      this.salones=res[0].resultado
-      console.log(this.salones)
+      this.salones=res[0]
       // this.facultades=res[1].resultado
      this.horario=res[1].resultado
-     console.log(this.facultades)
      this.facultades=res[2].resultado
     })
 
@@ -249,7 +246,7 @@ asistencias:any[]=[]
   selectedFaculty(event:any){
     const facultad = event.target.value;
     console.log(facultad)
-    const id_facultad:string=facultad.split(':')[1]
+    const id_facultad:string=facultad.split(':')[1].trim()
     
     console.log(id_facultad)
     this.docenteService

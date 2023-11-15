@@ -570,7 +570,19 @@ crearHorario(horario:any){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.post(`${this.url}crearHorario`,horario,httpOptions)
+  return this.http.post(`${this.url}horario`,horario,httpOptions)
+}
+
+
+crearHorarioAdmin(horario:any,id_user:number){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Credentials': 'true'
+    })
+  };
+  return this.http.post(`${this.url}horario-admin/${id_user}`,horario,httpOptions)
 }
 getHorarioFinished(){
   const httpOptions = {
@@ -649,7 +661,7 @@ getDocentes(){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return this.http.get(`${this.url}getDocentesFull`,httpOptions)
+  return this.http.get(`${this.url}user/get_docentes`,httpOptions)
 }
 
 getDocenteForId(id_usuario:string){
@@ -851,6 +863,18 @@ getTipoxEstadoForId(id:number){
 
 getProgramasForFaculty(facultad:string){
   return this.http.get(`${this.url}facultad-programa/${facultad}`)
+
+}
+
+
+getTutoriasPendientes(){
+  return this.http.get(`${this.url}horario`)
+
+}
+
+getFacultadesForUser(id_user:number){
+  return this.http.get(`${this.url}facultad-user-docente/${id_user}`)
+
 
 }
 }

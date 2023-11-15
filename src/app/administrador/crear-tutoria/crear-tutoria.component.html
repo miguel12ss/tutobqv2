@@ -32,7 +32,7 @@
         <td>{{data.tema}}</td>
         <td>{{data.nombres}} {{data.apellidos}}</td>
         <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#modalmodificar"
-            (click)="getHorarioForId(data.id_tutoria)">
+            (click)="getHorarioForId(data.id)">
             Modificar
           </button></td>
         <!-- <td><button nz-button nzType="primary" class="btn btnc btn-primary"
@@ -64,8 +64,8 @@
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="facultad" class="form-label"><b>Facultad</b> </label>
-                <select class="form-control" formControlName="facultad">
-                  <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+                <select (change)="select($event)"  class="form-control" formControlName="facultad">
+                  <option [ngValue]="facultad.id" *ngFor="let facultad of facultadesUsuario">{{facultad.facultad}}</option>
                 </select>
               </div>
 
@@ -93,8 +93,8 @@
             <div class="col-md-4">
               <div class="mb-3">
                 <label for="programa" class="form-label"><b>Programa</b></label>
-                <select name="" id="" class="form-control" formControlName="programa">
-                  <option [value]="programa.programa" *ngFor="let programa of programas">{{programa.programa}}</option>
+                <select  (change)="selectedMateria($event)" name="" id="" class="form-control" formControlName="programa">
+                  <option [ngValue]="programa.id_programa" *ngFor="let programa of programas">{{programa.programa}}</option>
                 </select>
               </div>
 
@@ -105,9 +105,9 @@
 
               <div class="mb-3">
                 <label for="docente" class="form-label"><b>Docente</b> </label>
-                <select class="form-control" formControlName="docente">
-                  <option value="{{docente.nombres}}-{{docente.id_usuario}}" *ngFor="let docente of docentes">
-                    {{docente.nombres}}-{{docente.id_usuario}}</option>
+              
+                <select (change)="onSelect($event)" class="form-control" formControlName="docente">
+                  <option  value="{{docente.nombre}}-{{docente.id}}" *ngFor="let docente of docentes">{{docente.nombre}}-{{docente.id}}</option>
                 </select>
               </div>
 
@@ -122,14 +122,14 @@
               <div class="mb-3">
                 <label for="materia" class="form-label"><b>Materia</b></label>
                 <select name="" id="" class="form-control" formControlName="materia">
-                  <option [value]="materia.materia" *ngFor="let materia of materias">{{materia.materia}}</option>
+                  <option [value]="materia.id" *ngFor="let materia of materias">{{materia.materia}}</option>
                 </select>
               </div>
 
               <div class="mb-3">
                 <label for="salon" class="form-label"><b>Salón</b></label>
                 <select name="" id="" class="form-control" formControlName="salon" (change)="onChange($event)">
-                  <option [value]="salon.salon" *ngFor="let salon of salones">{{salon.salon}}</option>
+                  <option [value]="salon.id_salon" *ngFor="let salon of salones">{{salon.salon}}</option>
                 </select>
               </div>
 
@@ -138,13 +138,18 @@
                 <input type="date" class="form-control" id="fecha" formControlName="fecha" autocomplete="off"
                   [min]="fechaHoy" required>
               </div>
-              <input type="hidden" name="id" formControlName="id_tutoria">
+              
+                        
               <!-- <div class="mb-3">
               <label for="cupos" class="form-label"><b>Cupos</b></label>
               <input type="number" class="form-control" id="cupos" autocomplete="off" required>
             </div> -->
-
+            <div class="mb-3">
+              <label for="hora_finalizacion" class="form-label"><b>Cupos</b></label>
+              <input type="number" class="form-control" formControlName="cupos" id="hora_finalizacion"
+                autocomplete="off" required>
             </div>
+          </div>
             <div class="modal-footer">
               <button type="button" class="linea btn bmodal btn-danger btn-sm" data-bs-dismiss="modal">Salir</button>
               <button type="submit" class="linea btn bmodal btn-success btn-sm " [disabled]="horarioAgregar.invalid">Crear</button>
@@ -171,8 +176,8 @@
                 <label for="facultad" class="form-label"><b>Facultad</b> </label>
 
                 <!-- <input type="text" class="form-control" id="facultad" aria-describedby="facultad" formControlName="facultad"  readonly> -->
-                <select name="" id="" class="form-control" formControlName="facultad">
-                  <option [value]="facultad.facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
+                <select  name="" id="" class="form-control" formControlName="facultad">
+                  <option [ngValue]="facultad.id_facultad" *ngFor="let facultad of facultades">{{facultad.facultad}}</option>
                 </select>
               </div>
 
@@ -237,7 +242,7 @@
               <div class="mb-3">
                 <label for="salon" class="form-label"><b>Salón</b></label>
                 <select name="" id="" class="form-control" (change)="onChangeValue($event)" formControlName="salon">
-                  <option [value]="salon.salon" *ngFor="let salon of salones">{{salon.salon}}</option>
+                  <option [value]="salon.id_salon" *ngFor="let salon of salones">{{salon.salon}}</option>
                 </select>
               </div>
 

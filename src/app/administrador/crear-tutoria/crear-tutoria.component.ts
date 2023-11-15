@@ -11,6 +11,7 @@ import { DocenteService } from 'src/app/docente/services/docente.service';
   styleUrls: ['./crear-tutoria.component.scss']
 })
 export class CrearTutoriaComponent implements OnInit {
+  private id_facultad!:string
   fechaHoy=""
   searchValue = '';
   visible = false;
@@ -30,6 +31,7 @@ docentes:any[]=[]
 sedes:any[]=[]
 dateNext:any
 listOfDisplayData = [...this.horarios];
+facultadesUsuario:any[]=[]
 
 constructor(private service:AdminService,public readonly fb:FormBuilder,private docenteService:DocenteService){
   const dateToday=new Date();
@@ -87,43 +89,52 @@ constructor(private service:AdminService,public readonly fb:FormBuilder,private 
 }
 initForm():FormGroup{
 return this.fb.group({
-  facultad:[null,Validators.required],
-  tema:[null,Validators.required],
-  capacidad:[null,Validators.required],
-  horaInicio:[null,Validators.required,],
-  programa:[null,Validators.required],
-  sede:[null,Validators.required],
-  horaFin:[null,Validators.required],
-  materia:[null,Validators.required],
-  salon:[null,Validators.required],
-  fecha:[null,Validators.required],
-  docente:[null,Validators.required],
-  id_tutoria:[null,Validators.required],
+
+  
+  // facultad:[null,Validators.required],
+  // tema:[null,Validators.required],
+  // capacidad:[null,Validators.required],
+  // horaInicio:[null,Validators.required,],
+  // programa:[null,Validators.required],
+  // sede:[null,Validators.required],
+  // horaFin:[null,Validators.required],
+  // materia:[null,Validators.required],
+  // salon:[null,Validators.required],
+  // fecha:[null,Validators.required],
+  // docente:[null,Validators.required],
+  // id_tutoria:[null,Validators.required],
+  id_facultad: [null, Validators.required],
+  tema: [null, Validators.required],
+  id_capacidad: [null, Validators.required],
+  hora_inicial: [null, Validators.required],
+  hora_final: [null, Validators.required],
+  id_programa: [null, Validators.required],
+  id_sede: [null, Validators.required],
+  cupos:[null,Validators.required],
+  id_materia: [null, Validators.required],
+  id_salon: [null, Validators.required],
+  fecha: [null, Validators.required],
   
 })
 }
 ngOnInit(): void {
   forkJoin([
-    this.service.getHorario(),
-    this.service.getProgramas(),
+    this.service.getTutoriasPendientes(),
     this.service.getFacultades(),
-    this.service.getMaterias(),
     this.service.getSalones(),
     this.service.getDocentes(),
-    this.service.getSedes()
+    // this.service.getSedes()
   ]).subscribe((results:any) => {
     // Procesa los resultados de cada solicitud
     console.log(results);
     
-    this.horarios = results[0].data;
-    this.listOfDisplayData=[...results[0].data]
+    this.horarios = results[0];
+    this.listOfDisplayData=[...results[0]]
 
-    this.programas = results[1].data;
-    this.facultades = results[2].data;
-    this.materias = results[3].data;
-    this.salones = results[4].data;
-    this.docentes = results[5].data;
-    this.sedes = results[6].data;
+    this.facultades = results[1].resultado;
+    this.salones = results[2];
+    this.docentes=results[3];
+
   });
 
  
@@ -138,8 +149,8 @@ onChange(event:any){
       console.log(res);
       
     this.horarioAgregar.patchValue({
-      capacidad:res.data.capacidad,
-      sede:res.data.sede
+      capacidad:res.capacidad,
+      sede:res.sede
     })
    
     })
@@ -154,13 +165,14 @@ onChangeValue(event:any){
       console.log(res);
       
     this.horarioForm.patchValue({
-      capacidad:res.data.capacidad,
-      sede:res.data.sede
+      capacidad:res.capacidad,
+      sede:res.sede
     })
    
     })
   ).subscribe()
 }
+
 
 initFormAgregar():FormGroup{
   return this.fb.group({
@@ -174,21 +186,34 @@ initFormAgregar():FormGroup{
     materia:[null,Validators.required],
     salon:[null,Validators.required],
     fecha:[null,Validators.required],
+    cupos:[null,Validators.required],
     docente:[null,Validators.required],
   })
 
 }
-getIdDocente(){
-const docente=""
-}
+
 
 
 
 agregar(){
 const horario=this.horarioAgregar.value
-console.log(horario);
+const id_usuario=horario.docente.split('-')[1]
+const newHorario={
+    id_facultad:horario.facultad,
+    id_programa:horario.programa,
+    id_materia:horario.materia,
+    id_salon:horario.salon,
+    id_capacidad:horario.capacidad,
+    id_sede:horario.sede,
+    cupos:horario.cupos,
+    tema:horario.tema,
+    fecha:horario.fecha,
+    hora_inicial:horario.horaInicio,
+    hora_final:horario.horaFin,
+}
+console.log(newHorario)
 
-this.service.crearHorario(horario).pipe(
+this.service.crearHorarioAdmin(newHorario,id_usuario).pipe(
   tap((res:any)=>{
     if(res.error){
       Swal.fire("Error",res.error,"warning")
@@ -213,22 +238,22 @@ this.docenteService.getHorarioForId(id_horario).pipe(
     
     console.log(res.data.id_tutoria);
     
-    const nombres=`${res.data.nombres} ${res.data.apellidos}-${res.data.id_docente}`
+    const nombres=`${res.data.nombres} ${res.data.apellidos}-${res.data.id_usuario}`
     console.log(nombres);
     
     this.horarioForm.patchValue({
-      facultad:res.data.facultad,
-      tema:res.data.tema,
-      capacidad:res.data.capacidad,
-      horaInicio:res.data.horaInicio,
-      programa:res.data.programa,
+      facultad:res.facultad,
+      tema:res.tema,
+      capacidad:res.capacidad,
+      horaInicio:res.horaInicio,
+      programa:res.programa,
       docente:nombres,
-      horaFin:res.data.horaFin,
-      materia:res.data.materia,
-      fecha:res.data.fecha,
-      salon:res.data.salon,
-      sede:res.data.sede,
-      id_tutoria:res.data.id_tutoria
+      horaFin:res.horaFin,
+      materia:res.materia,
+      fecha:res.fecha,
+      salon:res.salon,
+      sede:res.sede,
+      id_tutoria:res.id
     })
   })
 ).subscribe()
@@ -237,6 +262,7 @@ onSubmit(id_tutoria:string){
   console.log(id_tutoria);
   
   const horario=this.horarioForm.value
+  
 this.service.actualizarHorarioAdmin(horario,id_tutoria)
 this.service.getHorario().pipe(
   tap((res:any)=>{
@@ -274,7 +300,57 @@ deshabilitar(){
       )
     }
   })
-}}
+}
+onSelect(event:any){
+  const data=event.target.value
+  const id_usuario=data.split('-')[1]
+  this.service.getFacultadesForUser(id_usuario).pipe(
+    tap((res:any)=>{
+      console.log(res)
+      this.facultadesUsuario=res.resultado
+    })
+  ).subscribe()
+
+}
+
+select(event:any){
+  const facultad = event.target.value;
+  console.log(facultad)
+  this.id_facultad=facultad.split(':')[1].trim()
+
+  this.docenteService
+    .getProgramsForFaculty(this.id_facultad)
+    .pipe(
+      tap((res: any) => {
+      console.log(res)
+
+       this.programas=res.resultado})
+    )
+    .subscribe();
+}
+
+selectedMateria(event:any){
+
+  const programa = event.target.value;
+  console.log(programa)
+  const id_programa=programa.split(':')[1].trim()
+
+  console.log(this.id_facultad)
+  console.log(this.id_facultad,id_programa)
+  this.docenteService
+    .getMateriasForPrograms(this.id_facultad,id_programa)
+    .pipe(
+      tap((res: any) => {
+      console.log(res)
+
+       this.materias=res.resultado})
+    )
+    .subscribe();
+}
+
+
+
+}
   
 
 

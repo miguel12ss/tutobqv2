@@ -52,7 +52,7 @@
                 <label for="programa" class="form-label"><b>Programa</b></label>
                 <select (change)="selectedMateria($event)" class="form-control" formControlName="id_programa"
                   id="programa" required>
-                  <option [value]="programa.id" *ngFor="let programa of programas">
+                  <option [value]="programa.id_programa" *ngFor="let programa of programas">
                     {{ programa.programa }}
                   </option>
                 </select>
