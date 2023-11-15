@@ -101,7 +101,7 @@ getHorarioForId(id_tutoria:string){
       'Access-Control-Allow-Credentials': 'true'
     })
   };
-  return  this.http.get(`${this.url}/obtenerTutoria/${id_tutoria}`,httpOptions)
+  return  this.http.get(`${this.url}horario/${id_tutoria}`,httpOptions)
 }
 
 

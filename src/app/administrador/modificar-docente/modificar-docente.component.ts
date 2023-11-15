@@ -48,28 +48,28 @@ listOfData: DataItem[] = [
 listOfDisplayData:any[] = [];
 docenteForm!:FormGroup
 ngOnInit(): void {
-  this.service.getDocentes().pipe(
-    tap((res:any)=>{
-      console.log(res.data);
+//   this.service.getDocentes().pipe(
+//     tap((res:any)=>{
+//       console.log(res.data);
       
-this.listOfData=res.data
-this.listOfDisplayData=[...res.data]
-    })
-  ).subscribe()
+// this.listOfData=res.data
+// this.listOfDisplayData=[...res.data]
+//     })
+//   ).subscribe()
 
   forkJoin([
 
-    this.service.getDocentes(),
-    this.service.getFacultades(),
-    this.service.getTipo(),
-    this.service.getEstado()
+    this.service.getTutorias(),
+    // this.service.getFacultades(),
+    // this.service.getTipo(),
+    // this.service.getEstado()
   ]
     
   ).subscribe((results:any) => {
     // Procesa los resultados de cada solicitud
     console.log(results);
     
-    this.listOfData = results[0].data;
+    this.listOfData = results[0];
     this.listOfDisplayData=[...this.listOfData]
     this.facultades = results[1].data;
     this.tipos=results[2].data;
