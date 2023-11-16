@@ -347,7 +347,37 @@ selectedMateria(event:any){
     )
     .subscribe();
 }
-
+cancelar(id_tutoria: number,id_usuario:number) {
+  console.log(id_tutoria)
+  Swal.fire({
+    title: 'Estas seguro que deseas eliminarlo',
+    text: 'no podra ser revertido',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si,Eliminar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire('Eliminado!', 'La tutoria ha sido eliminada.', 'success');
+      this.service.eliminarTutoria(id_tutoria,id_usuario).pipe(
+        tap((res:any)=>{
+          console.log(res)
+          this.service.getTutoriasPendientes()
+        .pipe(
+          tap((res: any) => {
+            console.log(res);
+            this.horarios = res.resultado;
+            this.listOfDisplayData=[...res.resultado]
+          })
+        )
+        .subscribe();
+        })
+      ).subscribe()
+      
+    }
+  });
+}
 
 
 }

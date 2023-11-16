@@ -10,6 +10,15 @@ export class AdminService {
   constructor(private http:HttpClient) { }
   url=environment.apiUrl
 
+
+  getFacultadUser(){
+    return this.http.get(`${this.url}facultad-users`)
+  }
+  eliminarTutoria(id_tutoria:number,id_usuario:number){
+    return this.http.delete(`${this.url}horario/eliminar-tutoria/${id_tutoria}/${id_usuario}`,)
+
+  }
+
   getFacultades(){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -585,14 +594,8 @@ crearHorarioAdmin(horario:any,id_user:number){
   return this.http.post(`${this.url}horario-admin/${id_user}`,horario,httpOptions)
 }
 getHorarioFinished(){
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'Access-Control-Allow-Credentials': 'true'
-    })
-  };
-  return this.http.get(`${this.url}obtenerHorarioTerminado`,httpOptions)
+;  
+  return this.http.get(`${this.url}horario-terminado`)
 }
 getEstudiantes(){
   const httpOptions = {
@@ -866,6 +869,11 @@ getProgramasForFaculty(facultad:string){
 
 }
 
+createFacultadUsuario(facultad:any){
+  return this.http.post(`${this.url}facultad-usuario`,facultad)
+
+}
+
 
 getTutoriasPendientes(){
   return this.http.get(`${this.url}horario`)
@@ -877,6 +885,20 @@ getFacultadesForUser(id_user:number){
 
 
 }
+
+obtenerFacultadxPrograma(id_fxp:number){
+  return this.http.get(`${this.url}facultadxusuario/${id_fxp}`)
+}
+
+
+getFacultadxUsuarioForId(id_fxp:number){
+  return this.http.get(`${this.url}facultadxusuarios/${id_fxp}`)
+}
+updateFacultadProgramaxUsuario(data:any){
+  return this.http.put(`${this.url}facultadxusuarios/${data.id_fpxusuario}`,data)
+
+}
+
 }
 
 

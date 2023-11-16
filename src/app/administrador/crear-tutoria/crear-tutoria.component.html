@@ -22,8 +22,7 @@
           </nz-filter-trigger>
 
         </th>
-        <th>Modificar</th>
-      </tr>
+<th>Eliminar</th>      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of nzTable.data">
@@ -31,10 +30,11 @@
         <td>{{ data.fecha}}</td>
         <td>{{data.tema}}</td>
         <td>{{data.nombres}} {{data.apellidos}}</td>
-        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#modalmodificar"
-            (click)="getHorarioForId(data.id)">
-            Modificar
-          </button></td>
+        <td>
+          <button type="button" class="btndenegar" nz-button (click)="cancelar(data.id,data.id_usuario)">
+            Eliminar
+          </button>
+        </td>
         <!-- <td><button nz-button nzType="primary" class="btn btnc btn-primary"
                         (click)="deshabilitar()">Deshabilitar</button></td> -->
       </tr>

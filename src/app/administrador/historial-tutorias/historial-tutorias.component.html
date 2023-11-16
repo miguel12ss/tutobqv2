@@ -15,7 +15,7 @@
           </nz-filter-trigger>
 
         </th>
-        <th>Hora generacion</th>
+        <th>fecha</th>
         <th>Descripción</th>
         <th>Lista Estudiantes</th>
 
@@ -27,14 +27,14 @@
         <td>{{ data.facultad}}</td>
         <td>{{ data.programa}}</td>
         <td>{{data.nombres}} {{data.apellidos}}</td>
-        <td>{{ data.fecha_generacion_tutoria}}</td>
+        <td>{{ data.fecha}}</td>
         <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" data-bs-target="#modaldescripcion"
-            (click)="descripcion(data.id_tutoria)">
+            (click)="descripcion(data.id)">
             Descripción
           </button></td>
-        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" (click)="listado(data.id_tutoria)"
+        <td><button type="button" class="btn btnc btn-primary" data-bs-toggle="modal" (click)="listado(data.id)"
             data-bs-target="#modallista">
-            Lista
+            Descargar
           </button></td>
       </tr>
     </tbody>
@@ -94,10 +94,6 @@
                     <td>{{ datosModal.salon }}</td>
                   </tr>
                   <tr>
-                    <td><b>Capacidad</b></td>
-                    <td>{{ datosModal.capacidad }}</td>
-                  </tr>
-                  <tr>
                     <td><b>Cupos</b></td>
                     <td>{{ datosModal.cupos }}</td>
                   </tr>
@@ -111,11 +107,11 @@
                   </tr>
                   <tr>
                     <td><b>Hora de inicio</b></td>
-                    <td>{{ datosModal.horaInicio }}</td>
+                    <td>{{ datosModal.hora_inicial }}</td>
                   </tr>
                   <tr>
                     <td><b>Hora de finalizacion</b></td>
-                    <td>{{ datosModal.horaFin }}</td>
+                    <td>{{ datosModal.hora_final }}</td>
                   </tr>
                 </tbody>
               </nz-table>
@@ -128,7 +124,7 @@
   </div>
 
   <!-- modal lista estudiantes-->
-  <div class="modal fade modal-xl" id="modallista" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <!-- <div class="modal fade modal-xl" id="modallista" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -168,4 +164,4 @@
     </div>
   </div>
 
-</div>
+</div> -->
