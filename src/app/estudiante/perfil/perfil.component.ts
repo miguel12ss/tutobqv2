@@ -44,8 +44,8 @@ export class PerfilComponent implements OnInit {
         tap((res: any) => {
           console.log(res)
           this.contactForm.patchValue({
-            nombres: res.nombre,
-            apellidos: res.apellido,
+            nombres: res.nombres,
+            apellidos: res.apellidos,
             tipoDocumento: res.tipo_documento,
             contraseña: res.contraseña,
             programa: res.programa,

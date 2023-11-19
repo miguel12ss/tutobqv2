@@ -33,8 +33,8 @@ export class PerfilComponent implements OnInit {
       .pipe(
         tap((docente:any) => {
           this.contactForm.patchValue({
-            nombres: docente.nombre,
-            apellidos: docente.apellido,
+            nombres: docente.nombres,
+            apellidos: docente.apellidos,
             tipoDocumento: docente.tipo_documento,
             numeroTelefono: docente.celular,
             correo: docente.correo,

@@ -73,10 +73,20 @@ export class LoginComponent {
           }
         }else if(response.id_estado==14){
           Swal.fire('Advertencia ',"el usuario ha sido deshabilitado porfavor comunicarte con el administrador","warning")
-        }else {
+        }else if(response.error) {
           Swal.fire('Error',"Correo y/o contraseña incorrecto","error")
+        }else{
+          
+          Swal.fire('Error',"Usuario no encontrado","error")
         }
-        });
+        
+        }),(error:any)=>{
+
+          if(error.status===0){
+          Swal.fire("error","ocurrio un error en el servidor vuelva mas tarde","error")
+          }
+        }
+
     }
   }
 }

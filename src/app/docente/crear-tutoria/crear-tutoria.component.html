@@ -69,7 +69,7 @@
 
               <div class="mb-3">
                 <label for="cupos" class="form-label"><b>Cupos</b></label>
-                <input type="text" formControlName="cupos" class="form-control" id="cupos" required />
+                <input #cupos type="number" formControlName="cupos" class="form-control" id="cupos" required />
               </div>
 
               <div class="mb-3">
@@ -90,7 +90,7 @@
 
               <div class="mb-3">
                 <label for="capacidad" class="form-label"><b>Capacidad</b></label>
-                <input type="text" formControlName="id_capacidad" class="form-control" id="capacidad" required
+                <input #capacidad type="number" formControlName="id_capacidad" class="form-control" id="capacidad" required
                   readonly />
               </div>
 
@@ -100,12 +100,15 @@
                 <label for="fecha" class="form-label"><b>Fecha</b></label>
                 <input type="date" formControlName="fecha" class="form-control" [min]="dateNext" id="fecha" required />
               </div>
+
+
+              <div class="alert alert-danger" *ngIf="horarioForm.get('cupos')?.hasError('cuposExcedidos')">los cupos deben ser menores o iguales a la capacidad del salon</div>
             </div>
             <div class="modal-footer">
               <button type="button" class="linea btn bmodal btn-danger btn-sm btn-md" data-bs-dismiss="modal">
                 Salir
               </button>
-              <button type="submit" class="linea btn bmodal btn-success btn-sm" [disabled]="horarioForm.invalid">
+              <button type="submit" class="linea btn bmodal btn-success btn-sm" [disabled]="horarioForm.invalid ">
                 Crear
               </button>
             </div>

@@ -285,7 +285,7 @@ asistencias:any[]=[]
       hora_final: [null, Validators.required],
       id_programa: [null, Validators.required],
       id_sede: [null, Validators.required],
-      cupos:[null,Validators.required],
+      cupos:[null,Validators.required,,this.cuposValidator.bind(this)],
       hora_inicial: [null, Validators.required],
       id_materia: [null, Validators.required],
       id_salon: [null, Validators.required],
@@ -418,7 +418,13 @@ asistencias:any[]=[]
 
 
 
-    
+    cuposValidator(control:any) {
+      const capacidad = this.horarioForm.get('capacidad')?.value;
+      const cupos = control.value;
+      console.log(capacidad,cupos);
+      
+      return cupos <= capacidad ? null : { cuposExcedidos: true };
+    }
 
 
 
